@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    @keyframes lgAnimation {
+
+      /* 3s 1s 2s red yellow green */
+      0% {
+        background-color: red;
+      }
+
+      50% {
+        background-color: yellow;
+      }
+
+      66.67% {
+        background-color: green;
+      }
+
+      100% {
+        background-color: red;
+      }
+    }
+
+    .light {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: red;
+      animation: lgAnimation 16s infinite;
+    }
+
+    .light2 {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+    }
+
+
+    .ul-light {
+      width: 200px;
+      height: 200px;
+
+    }
+
+    .ul-light>li {
+      opacity: .2;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: inline-block;
+      outline: none;
+    }
+
+    .red {
+      background-color: red;
+    }
+
+    .yellow {
+      background-color: yellow;
+    }
+
+    .green {
+      background-color: green;
+    }
+
+    .ul-light.redShow>.red,
+    .ul-light.yellowShow>.yellow,
+    .ul-light.greenShow>.green {
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="light"></div>
+  <div class="light2" id="lgId"></div>
+
+  <ul class="ul-light">
+    <li class="red"></li>
+    <li class="yellow"></li>
+    <li class="green"></li>
+  </ul>
+  <script>
+    const element = document.querySelector('#lgId');
+
+    function setRed() {
+      element.setAttribute('style', 'background-color: red')
+      setTimeout(() => {
+        setYellow()
+      }, 3000);
+    }
+
+    function setGreen() {
+      element.setAttribute('style', 'background-color: green')
+      setTimeout(() => {
+        setRed()
+      }, 2000);
+    }
+
+    function setYellow() {
+      element.setAttribute('style', 'background-color: yellow')
+      setTimeout(() => {
+        setGreen()
+      }, 1000);
+    }
+    setRed();
+  </script>
+
+
+  <script>
+    const ulElement = document.querySelector('.ul-light')
+
+    function timerPromise(time) {
+      return new Promise((resolve, reject) => {
+        setTimeout(resolve, time);
+      })
+    }
+    // const redPromise = timerPromise(3000);
+    // const yellowPromise = timerPromise(1000);
+    // const greenPromise = timerPromise(2000);
+
+    function startLight() {
+      // timerPromise(3000).then(() => {
+      //   console.log(111);
+      //   return timerPromise(1000);
+      // }).then(() => {
+      //   console.log(22);
+      // })
+
+      // ulElement.className = ''
+      ulElement.className = 'ul-light redShow';
+      timerPromise(3000).then(() => {
+        ulElement.className = 'ul-light yellowShow';
+        console.log(11);
+        return timerPromise(1000)
+      }).then(() => {
+        ulElement.className = 'ul-light greenShow';
+        console.log(22);
+        return timerPromise(2000)
+      }).then(() => {
+        console.log(33);
+        startLight();
+      })
+    }
+    startLight();
+  </script>
+</body>
+
+</html>

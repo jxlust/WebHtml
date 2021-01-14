@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link href="css/city-picker.css" type="text/css" rel="stylesheet" />
+		<script src="js/jquery-2.2.2.min.js"></script>
+		<script src="js/jquery.city-picker.data.js"></script>
+		<script src="js/jquery.city-picker.js"></script>
+	</head>
+	<body>
+		<div style="position: relative;">
+			<!-- container -->
+			<input id="city-picker2" readonly type="text">
+		</div>
+		<script>
+			$("#city-picker2").citypicker({
+				province: "江苏省",
+				city: "常州市",
+				district: "溧阳市",
+				onChange: function(picker, values, displayValues) { //选择后触发的事件
+					console.log(values, displayValues);
+				}
+			});
+// 			$('#city-picker2').on('change', function() {
+// 				console.log('222');
+// 			});
+			$('#city-picker2').on('cp:updated',function(){
+				var t = $(this).data('citypicker');
+				console.log('111', $('#city-picker2').val());
+			});
+			$('#city-picker2').bind("input propertychange", function(event) {
+				console.log('11', $('#city-picker2').val())
+			});
+			$(document).on("change", "#city-picker2", function(event) {
+				console.log(event.target.value);
+			});
+		</script>
+	</body>
+</html>

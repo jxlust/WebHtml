@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="../js/jquery-2.2.2.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <iframe id="iframe1" src="zindex探索.html"></iframe>
+    </div>
+
+    <script>
+        $('#iframe1').load(function () {
+            console.log(2);
+            $(this).contents().find('.p-test').text('aaaa');
+        })
+        var iframeDoc = document.getElementById('app').getElementsByTagName('iframe')[0].contentWindow.document;
+        document.getElementById('iframe1').onload = function () {
+            console.log('this', this);
+            var idoc = this.contentWindow.document;
+            console.log('idoc', idoc);
+            idoc.getElementsByClassName('p-test')[0].innerText = '哈哈哈';
+            // console.log('d',iframeDoc.getElementsByClassName('p-test')[0]);
+            // iframeDoc.getElementsByClassName('p-test')[0].innerText = '哈哈哈哈';
+        }
+    </script>
+</body>
+
+</html>

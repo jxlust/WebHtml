@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+	</body>
+
+</html>
+<script>
+	function formatBasicAuth(userName, password) {
+		var basicAuthCredential = userName + ":" + password;
+		var bace64 = btoa(basicAuthCredential);
+		return 'Basic ' + bace64;
+	}
+	
+	// then in your post
+var basic = formatBasicAuth('userName', 'password');
+</script>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			body {
+				background: url(../images/d8iNm.png) bottom left repeat;
+			}
+
+			.contaner {
+				background: #FFFFFF;
+				margin: 10px 50px;
+			}
+
+			.gray {
+				-webkit-filter: grayscale(100%);
+				-moz-filter: grayscale(100%);
+				-ms-filter: grayscale(100%);
+				-o-filter: grayscale(100%);
+				filter: grayscale(100%);
+				filter: gray;
+				opacity: 0.3;
+				-webkit-transition: all 0.3s;
+				-moz-transition: all 0.3s; 
+				transition: all 0.3s;
+				
+				/* filter: url(gray.svg#grayscale); */
+			}
+
+			.img-bg {
+				background: url(../images/test22.png) no-repeat center;
+				display: inline-block;
+				height: 200px;
+				width: 200px;
+			}
+
+
+			.gray:hover {
+				filter: none;
+				opacity: 1;
+			}
+
+			.bg-copy-limit {
+				width: 100%;
+				height: 100%;
+				position: absolute;
+			}
+
+			.content {
+			}
+			.limit-content {
+				-moz-user-select: none;
+				/*火狐*/
+				-webkit-user-select: none;
+				/*webkit浏览器*/
+				-ms-user-select: none;
+				/*IE10*/
+				-khtml-user-select: none;
+				/*早期浏览器*/
+				user-select: none;
+			}
+			.testa{
+				
+			}
+			.testa a[href]{
+				cursor: pointer;
+			}
+			.testa a[href]:hover{
+				color: #C39449;
+			}
+			.testa a{
+				cursor: default;
+			}
+			.testa a:hover{
+				color: #999999;
+			}
+			
+		/* 	div{  position: relative; }
+			input {  position: absolute;   top: 0;    left: 0;   opacity: 0;  cursor: pointer;    height: 40px;  width: 88px; } */
+
+		</style>
+	</head>
+	<body>
+		<div class="testa">
+			<a href="https://coding.net/?utm_source=layui">有链接</a>
+			<a>没有链接</a>
+		</div>
+		<div class="contaner" style="background: url(../images/test1_1.png) no-repeat center;">
+			<img src="../images/test1_1.png" />
+			<img src="../images/test1_1.png" class="gray" />
+			<div class="img-bg gray" oncontextmenu='self.event.returnValue=false'></div>
+
+			<!-- <div class="bg-copy-limit"></div> -->
+			<input value="测试复制权限" type="button" id="inputBtn" />
+			<div class="content " id="testLimit">
+				<p>s啥砥砺奋进爱上了撒打飞机拉数据沙发里，阿萨德发链接啊收代理费就是大方，啊ss</p>
+				<p>sssss</p>
+				<p>s啥砥砺奋进爱上了撒打飞机拉数据沙发里，阿萨德发链接啊收代理费就是大方，啊ss</p>
+				<p>s啥砥砺奋进爱上了撒打飞机拉数据沙发里，阿萨德发链接啊收代理费就是大方，啊ss</p>
+				<p><img src="../images/majors_back.jpg" /> </p>
+				<p>s啥砥砺奋进爱上了撒打飞机拉数据沙发里，阿萨德发链接啊收代理费就是大方，啊ss</p>
+				<p>s啥砥砺奋进爱上了撒打飞机拉数据沙发里，阿萨德发链接啊收代理费就是大方，啊ss</p>
+				<p>s啥砥砺奋进爱上了撒打飞机拉数据沙发里，阿萨德发链接啊收代理费就是大方，啊ss</p>
+				<p>s啥砥砺奋进爱上了撒打飞机拉数据沙发里，阿萨德发链接啊收代理费就是大方，啊ss</p>
+			</div>
+			<input value="测试登录" type="button" id="loginBtn" />
+			<div class="btn btn-lg btn-outline-primary change-photo">更换头像
+				<label class="change-photo-btn">
+					<input class="change-photo-btn" type="file" accept="image/jpg,image/png,image/jpeg,image/bmp" style="
+visibility:hidden;">
+				</label>
+			</div>
+
+		</div>
+		<script src="../js/jquery-2.2.2.min.js"></script>
+
+		<script>
+			var ZixueCommon = function() {
+				this.limiCopy = false;
+			};
+
+			function click() {
+				if (event.button == 2) {
+					//alert('本网站欢迎您 !!');
+					//return false
+				}
+			}
+			document.onmousedown = click;
+
+			function limitEvent() {
+				return false;
+			}
+
+			function checkLimitEvent() {
+				if (isLogin) {
+					//发送请求
+					console.log('发送请求判断是否可以复制copy');
+					setTimeout(function() {
+						//不能复制
+						console.log('不能复制');
+						$('#testLimit').addClass('limit-content');
+						$('#testLimit').on('contextmenu', limitEvent);
+						$('#testLimit').on('selectstart', limitEvent);
+						$('#testLimit').on('drag', limitEvent);
+						$('#testLimit').on('copy', limitEvent);
+						//可以复制
+						//console.log('可以复制');
+						// 						$('#testLimit').removeClass('limit-content');
+						// 						$('#testLimit').off('contextmenu', limitEvent);
+						// 						$('#testLimit').off('selectstart', limitEvent);
+						// 						$('#testLimit').off('drag', limitEvent);
+					}, 1000)
+				} else {
+					//alert('弹出登录！');
+					console.log('请先登录...');
+					return false;
+				}
+				// /return false;
+			}
+
+			function addLimitEvent() {
+
+			}
+
+
+
+			var flag = false;
+			$('#inputBtn').on('click', function() {
+				flag = !flag;
+				if (flag) {
+					$(this).val('已开启');
+					$('#testLimit').addClass('limit-content');
+					$('#testLimit').on('contextmenu', limitEvent);
+					$('#testLimit').on('selectstart', limitEvent);
+					$('#testLimit').on('drag', limitEvent);
+					$('#testLimit').on('copy', limitEvent);
+				} else {
+					$(this).val('已关闭');
+					$('#testLimit').removeClass('limit-content');
+					$('#testLimit').off('contextmenu', limitEvent);
+					$('#testLimit').off('selectstart', limitEvent);
+					$('#testLimit').off('drag', limitEvent);
+					$('#testLimit').off('copy', limitEvent);
+				}
+			});
+			$('#testLimit').on('contextmenu', checkLimitEvent);
+			$('#testLimit').on('copy', checkLimitEvent);
+
+			function addLink() {
+				var body_element = document.body;
+				var selection;
+				selection = window.getSelection();
+
+				var locationHref = document.location.href;
+				var appendLink = "\r\n\r\n 原文出自[ 范文皓的个人博客 ] 转载请保留原文链接: <a href='" + locationHref + "'>" + locationHref + "</a>";
+				if (window.clipboardData) { // Internet Explorer
+					var copytext = selection + appendLink;
+					window.clipboardData.setData("Text", copytext);
+					return false;
+				} else {
+					var copytext = selection + appendLink;
+					var newdiv = document.createElement('div');
+					newdiv.style.position = 'absolute';
+					newdiv.style.left = '-99999px';
+					body_element.appendChild(newdiv);
+					newdiv.innerHTML = copytext;
+					selection.selectAllChildren(newdiv);
+					window.setTimeout(function() {
+						body_element.removeChild(newdiv);
+					}, 0);
+				}
+			}
+			var isLogin = false;
+			$("#loginBtn").on('click', function() {
+				isLogin = !isLogin;
+			});
+
+			function copyLimit() {
+				if (isLogin) {
+					//发送请求
+					console.log('发送请求判断是否可以复制copy');
+				} else {
+					//alert('弹出登录！');
+					console.log('请先登录...');
+					return false;
+				}
+			}
+			//document.oncopy = copyLimit;
+		</script>
+	</body>
+</html>

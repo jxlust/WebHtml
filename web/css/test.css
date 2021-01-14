@@ -1,0 +1,19 @@
+.box {
+  overflow: hidden;
+  position: relative;
+  margin: .25em auto;
+  min-width: 40px;
+  max-width: 40px;
+  min-height: 80px;
+  border-radius: 1px;
+  z-index: 99; }
+  .box:before {
+    z-index: 1;
+    position: absolute;
+    margin: calc(20px * -1);
+    padding: 20px;
+    box-shadow: 0 0 0 60px rgba(255, 0, 0, 0.75);
+    content: '';
+    left: 20px;
+    bottom: 0;
+    transform: rotate(-45deg); }

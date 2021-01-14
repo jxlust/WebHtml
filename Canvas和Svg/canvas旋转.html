@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            margin: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <canvas id="canvas" width="500px" height="500px" style="background-color: #f8f8f8;"></canvas>
+    </div>
+    <div> <input type="button" value="旋转45" id="btn1">
+        <input type="button" value="旋转动画" id="btn2">
+    </div>
+    <script>
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#ff00ff';
+        ctx.fillRect(0, 0, 20, 20);
+
+
+        // ctx.rotate();
+        function rotateAnim() {
+            ctx.save();
+            ctx.clearRect(0, 0, 500, 500);
+            // 平移原点，因为旋转是以原点为中心来旋转的
+            ctx.translate(100, 100);
+            ctx.beginPath();
+            ctx.fillStyle = "#333";
+            ctx.arc(0, 0, 1, 0, 2 * Math.PI);
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.strokeStyle = '#555';
+            ctx.lineWidth = 1;
+            ctx.arc(0, 0, 30, 0, 2 * Math.PI, false);
+            ctx.stroke();
+            // ctx.stroke();
+            let time = new Date();
+            ctx.rotate(time.getSeconds() * 2 * Math.PI / 60 + 2 * Math.PI / 60000 * time.getMilliseconds());
+            // ctx.translate(-0, -30);
+            ctx.beginPath();
+            ctx.fillStyle = '#ff00ff';
+            ctx.arc(30, 0, 6, 0, 2 * Math.PI);
+            // ctx.translate(-30, 0);
+            // ctx.arc(0, 0, 6, 0, 2 * Math.PI);
+            ctx.fill();
+            // ctx.fillRect(0, 0, 30, 30);
+            //平移回去，不影响其他绘制
+            ctx.restore();
+            requestAnimationFrame(rotateAnim);
+        }
+        document.querySelector('#btn2').addEventListener('click', function (e) {
+            rotateAnim();
+        })
+
+
+
+        document.querySelector('#btn1').addEventListener('click', function (e) {
+            ctx.clearRect(0, 0, 500, 500);
+            // 平移原点，因为旋转是以原点为中心来旋转的
+            ctx.translate(100, 100);
+            ctx.beginPath();
+            ctx.strokeStyle = "#333";
+            ctx.arc(0, 0, 1, 0, 2 * Math.PI);
+            ctx.fill();
+            // ctx.stroke();
+            ctx.rotate(45 * 2 * Math.PI / 360);
+            ctx.beginPath();
+            ctx.fillRect(0, 0, 20, 20);
+            //平移回去，不影响其他绘制
+            ctx.translate(-100, -100);
+        });
+    </script>
+</body>
+
+</html>

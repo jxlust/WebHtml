@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<style>
+	.slidein {
+		-moz-animation-duration: 3s;
+		-webkit-animation-duration: 3s;
+		animation-duration: 3s;
+		-moz-animation-name: slidein;
+		-webkit-animation-name: slidein;
+		animation-name: slidein;
+		-moz-animation-iteration-count: 3;
+		-webkit-animation-iteration-count: 3;
+		animation-iteration-count: 3;
+		-moz-animation-direction: alternate;
+		-webkit-animation-direction: alternate;
+		animation-direction: alternate;
+	}
+
+	@-moz-keyframes slidein {
+		from {
+			margin-left: 100%;
+			width: 300%
+		}
+
+		to {
+			margin-left: 0%;
+			width: 100%;
+		}
+	}
+
+	@-webkit-keyframes slidein {
+		from {
+			margin-left: 100%;
+			width: 300%
+		}
+
+		to {
+			margin-left: 0%;
+			width: 100%;
+		}
+	}
+
+	@keyframes slidein {
+		from {
+			margin-left: 100%;
+			width: 300%
+		}
+
+		to {
+			margin-left: 0%;
+			width: 100%;
+		}
+	}
+
+	.fadeIn {
+		animation-name: fadeIn;
+		animation-duration: 2s;
+		animation-fill-mode: both;
+	}
+
+	@keyframes fadeIn {
+		0% {
+			opacity: 0;
+			transform: scale3d(0, 0, 0);
+		}
+
+		80% {
+			transform: scale3d(1.1, 1.1, 1.1);
+		}
+
+		100% {
+			opacity: 1;
+			transform: scale3d(1, 1, 1);
+
+		}
+	}
+
+	.ani-block {
+		display: flex;
+	}
+
+	.ani-btn {
+		width: 100px;
+		height: 30px;
+		text-align: center;
+	}
+</style>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+
+<body>
+	<h1 id="watchme">Watch me move</h1>
+	<p>This example shows how to use CSS animations to make <code>h1</code> elements move across the page.</p>
+	<p>In addition, we output some text each time an animation event fires, so you can see them in action.</p>
+	<ul id="output"></ul>
+
+
+	<div class="ani-block">
+		<button id="aniBtn" class="ani-btn">点击效果</button>
+	</div>
+
+
+</body>
+
+</html>
+
+<script>
+	var e = document.getElementById("watchme");
+	e.addEventListener("animationstart", listener, false);
+	e.addEventListener("animationend", listener, false);
+	e.addEventListener("animationiteration", listener, false);
+
+	e.className = "slidein";
+
+	function listener(e) {
+		var l = document.createElement("li");
+		switch (e.type) {
+			case "animationstart":
+				l.innerHTML = "Started: elapsed time is " + e.elapsedTime;
+				break;
+			case "animationend":
+				l.innerHTML = "Ended: elapsed time is " + e.elapsedTime;
+				break;
+			case "animationiteration":
+				l.innerHTML = "New loop started at time " + e.elapsedTime;
+				break;
+		}
+		document.getElementById("output").appendChild(l);
+	}
+</script>
+<script>
+	let aniBtn = document.getElementById('aniBtn');
+	aniBtn.addEventListener('click', function (e) {
+		aniBtn.classList.add('fadeIn')
+	})
+	aniBtn.addEventListener("animationend", function (e) {
+		aniBtn.classList.remove('fadeIn')
+	}, false);
+</script>
+<script>
+	//"webkitTransitionEnd" "transitionEnd" 监听transition动画
+</script>

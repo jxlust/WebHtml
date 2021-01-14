@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>js 图片 hover动态显示另外一张图片特效 - 懒人之家</title>
+		<link type="text/css" href="../css/lanrenzhijia.css" rel="stylesheet" />
+		<link type="text/css" href="../css/animation.css" rel="stylesheet" />
+		<style>
+			.js-add-image li {
+				display: inline-block;
+				height: 200px;
+				width: 200px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<script src="../js/googlegg.js"></script>
+		<!-- 代码 开始 -->
+		
+		<ul class="js-add-image">
+
+		</ul>
+		<!-- 代码 结束 -->
+		<script src="../js/public.js"></script>
+		<script src="../js/lanrenzhijia.js"></script>
+		<script src="../js/jquery-2.2.2.min.js"></script>
+		<script src="../js/hoverAdd.js">
+		
+		</script>
+	</body>
+</html>

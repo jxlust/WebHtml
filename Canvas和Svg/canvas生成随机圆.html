@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .test {
+            display: block;
+        }
+
+        body {
+            margin: 0;
+            border: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        input {
+            border: none;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas width="300" height="200" id="clock" style="background-color: #888;">不支持canvas！</canvas>
+
+    <input type="button" class="test" id="start" value="随机圆" style="position: relative;">
+    <script>
+        // let width = window.innerWidth;
+        // let height = window.innerHeight;
+        let canvas = document.querySelector('#clock');
+        const PI = Math.PI;
+        let width = 300;
+        let height = 200;
+        if (!canvas.getContext) throw new Error('不支持canvas');
+        let ctx = canvas.getContext('2d');
+
+        function createCircle(r) {
+            let half = (Math.min(width, height) / 2);
+            if (r) {
+                if (r > half) {
+                    console.log('不可能绘制内部圆！');
+                    return;
+                }
+            } else {
+                r = Math.floor(Math.random() * (half + 1));
+            }
+
+            ctx.clearRect(0, 0, width, height);
+            ctx.save();
+            //绘制圆
+            ctx.beginPath();
+            // ctx.fillStyle = "red";
+            ctx.strokeStyle = 'red';
+            // 圆心（x,y）的满足 x+r < width;x-r>=0 且 y+r <= height; y-r >=0;
+            // x: [r,width-r],y:[r,height-r];
+            let x = Math.floor((width - 2 * r) * Math.random()) + r;
+            let y = Math.floor((height - 2 * r) * Math.random()) + r;
+            ctx.arc(x, y, r, 0, 2 * Math.PI, false);
+            ctx.stroke();
+        }
+        document.querySelector('#start').addEventListener('click', function (e) {
+            // ctx.clearRect(0, 0, width, height); //清空所有的内容
+            // createCircle(80);
+            createCircle();
+        });
+    </script>
+
+
+
+
+
+
+</body>
+
+</html>

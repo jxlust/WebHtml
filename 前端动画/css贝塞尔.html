@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<style>
+	.animation {
+		width: 150px;
+		height: 150px;
+		background-color: #ed3;
+		-webkit-transition: all 2s cubic-bezier(.42, 0, 1, 1);
+		-o-transition: all 2s;
+		transition: all 2s cubic-bezier(.42, 0, 1, 1);
+		-webkit-animation-duration: 3s;
+		animation-duration: 3s;
+		animation-name: slidein;
+		-webkit-animation-name: slidein;
+	}
+
+	/*
+	 * (.17, .86, .73, .14)
+	 * (.25, .1, .25, 1)*/
+
+	.animation:hover {
+		-webkit-transform: translateX(100px);
+		-ms-transform: translateX(100px);
+		-o-transform: translateX(100px);
+		transform: translateX(100px);
+	}
+
+	@-webkit-keyframes slidein {
+		from {
+			margin-left: 100%;
+			width: 300%;
+		}
+
+		to {
+			margin-left: 0%;
+			width: 100%;
+		}
+	}
+
+	.nav {
+		height: 30px;
+		background-color: #EEDD33;
+	}
+
+	ul.nav li {
+		list-style: none;
+		float: left;
+		margin-right: 20px;
+		height: 30px;
+		background-color: peachpuff;
+	}
+
+	.clearfix:after {
+		visibility: hidden;
+		display: block;
+		font-size: 0;
+		content: " ";
+		clear: both;
+		height: 0;
+	}
+	  .fixDiv{
+           position:fixed;
+           top:0;
+           left:0;
+		   width: 100%;
+		   	height: 100px;
+		   background-color: chartreuse;
+        }
+			
+		ul.fixDiv li{
+			height: 100px;
+		}
+</style>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div class="animation"></div>
+		<ul class="nav clearfix">
+			<li>hhhhh</li>
+			<li>hhhhh</li>
+			<li>hhhhh</li>
+			<li>hhhhh</li>
+		</ul>
+		<div style="height: 1000px;width: 100%;background-color: #ccc;"></div>
+	</body>
+	<script src="js/jquery-2.2.2.min.js"></script>
+<script>
+	$(function(){
+		$(document).scroll(function(){
+			console.log($(this).scrollTop());
+			if($(this).scrollTop() > 100){
+				$('.nav').addClass('fixDiv');
+			}else{
+				$('.nav').removeClass('fixDiv');
+			}
+		});
+	})
+</script>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .top {
+      margin-bottom: 20px;
+    }
+
+    .wrapper {
+      display: flex;
+      flex-wrap: nowrap;
+      margin-bottom: 20px;
+    }
+
+    .wrapper button {
+      margin-right: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top" id="top">我这里是主线程页面</div>
+  <div class="wrapper">
+    <button id="startCount">开始计数</button>
+    <button id="updateCount">传递数据</button>
+    <button id="closeCount">关闭计数</button>
+    <div class="number">计数：<span class="" id="count">0</span></div>
+
+  </div>
+  <div class="wrapper">
+    <button id="startPay">发起支付</button>
+    <button id="closePay">关闭监听</button>
+    <div class="success">支付：<span id="result">未支付</span></div>
+  </div>
+
+
+  <script>
+    let countEl = document.getElementById('count'),
+      resultEl = document.getElementById('result');
+    let startCount = document.getElementById('startCount')
+    let closeCount = document.getElementById('closeCount')
+    let startPay = document.getElementById('startPay')
+    let closePay = document.getElementById('closePay')
+
+    let countWorker;
+    let currentCount = 0;
+    startCount.addEventListener('click', function (e) {
+      console.log('计数点击:', e);
+      createCountWorker();
+    })
+    document.getElementById('updateCount').addEventListener('click', function (e) {
+      if (typeof (countWorker) !== "undefined") {
+        // let obj = {name:'lili',age:11}
+        // countWorker.postMessage(obj,[obj])
+        var ab = new ArrayBuffer(1);
+        countWorker.postMessage(ab,[ab])
+      }
+    })
+    closeCount.addEventListener('click', function (e) {
+      console.log('计数关闭:', e);
+      stopWorker();
+    })
+    startPay.addEventListener('click', function (e) {
+      console.log('支付点击:', e);
+    })
+    closePay.addEventListener('click', function (e) {
+      console.log('支付关闭:', e);
+
+    })
+
+    function createCountWorker() {
+      if (typeof (Worker) !== "undefined") {
+        if (typeof (countWorker) == "undefined") {
+          countWorker = new Worker("./worker1.js");
+          if (currentCount >= 0) {
+            countWorker.postMessage(currentCount)
+          }
+          countWorker.onmessage = function (event) {
+            console.log('接受到了异步消息:', event);
+            currentCount = event.data;
+            countEl.innerHTML = event.data;
+          };
+        }
+
+      } else {
+        document.getElementById("top").innerHTML = "抱歉，你的浏览器不支持 Web Workers...";
+      }
+    }
+
+    function stopWorker() {
+      if (typeof (countWorker) !== "undefined") {
+        countWorker.terminate();
+        countWorker = undefined;
+      }
+
+    }
+  </script>
+</body>
+
+</html>

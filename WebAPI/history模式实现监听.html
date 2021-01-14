@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    ul {
+      list-style: none;
+    }
+
+    a {
+      width: 120px;
+      height: 120px;
+      position: absolute;
+      background-color: #f5f5f5;
+      text-align: center;
+      text-decoration: none;
+      align-items: center;
+      justify-content: center;
+      border-radius: 120px;
+      display: none;
+      /*默认所有的a都不显示*/
+      text-decoration: none;
+      color: #333;
+      transition: all 1s ease;
+      /* box-shadow: 0 0 15px #222; */
+      border: 1px solid #999;
+      font-family: "segoe ui";
+      font-weight: 200;
+      font-size: 16px;
+    }
+
+    .annular-wrap {
+      width: 600px;
+      height: 600px;
+      background-color: #f8993f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+    }
+
+    .circle-center {
+      /* width: 200px;
+      height: 200px; */
+      box-shadow: 0 0 15px #222;
+      display: flex;
+      /*调整中心圆形的位置*/
+      top: calc(50% - 50px);
+      left: calc(50% - 60px);
+      color: #666;
+      animation: light 1s infinite;
+    }
+
+
+    /*调用GPU提升动画性能*/
+    .annular>li {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+      transition: all 1s ease;
+    }
+
+    .selected+.annular a {
+      display: flex;
+    }
+
+    /*设置 li 的位置，rotate是顺/逆时针旋转，translateX是沿x轴平移*/
+    .selected+.annular>li:nth-child(1) {
+      -webkit-transform: rotate(-120deg) translateX(80px);
+      transform: rotate(-120deg) translateX(80px);
+    }
+
+    /*设置a标签内字体的位置，应为容器旋转后，字体倾斜了，需要调整回来*/
+    /*这里有一个小技巧：字体的旋转角度正好和外部容器的旋转角度相反，但是最后一个的位置需要调整*/
+    .selected+.annular>li:nth-child(1)>a {
+      -webkit-transform: rotate(120deg);
+      transform: rotate(120deg);
+    }
+
+
+    .selected+.annular>li:nth-child(2) {
+      -webkit-transform: rotate(-40deg) translateX(80px);
+      transform: rotate(-40deg) translateX(80px);
+    }
+
+    .selected+.annular>li:nth-child(2)>a {
+      -webkit-transform: rotate(40deg);
+      transform: rotate(40deg);
+    }
+
+    .selected+.annular>li:nth-child(3) {
+      -webkit-transform: rotate(40deg) translateX(80px);
+      transform: rotate(40deg) translateX(80px);
+    }
+
+    .selected+.annular>li:nth-child(3)>a {
+      -webkit-transform: rotate(-40deg);
+      transform: rotate(-40deg);
+    }
+
+    .selected+.annular>li:nth-child(4) {
+      -webkit-transform: rotate(120deg) translateX(120px);
+      transform: rotate(120deg) translateX(120px);
+    }
+
+    .selected+.annular>li:nth-child(4)>a {
+      -webkit-transform: rotate(-120deg);
+      transform: rotate(-120deg);
+    }
+
+
+    .selected+.annular>li:nth-child(5) {
+      -webkit-transform: rotate(180deg) translateX(120px);
+      transform: rotate(180deg) translateX(120px);
+    }
+
+    .selected+.annular>li:nth-child(5)>a {
+      -webkit-transform: rotate(180deg);
+      transform: rotate(180deg);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- <div class="circle-wrap">
+
+  </div> -->
+  <div>
+
+    <input type="button" value="点击" id="btn">
+    <span id="txt"></span>
+    <input type="button" value="点击2" id="btn2">
+  </div>
+
+  <!-- 熟悉api -->
+  <script>
+    let btn = document.getElementById('btn');
+    let btn2 = document.getElementById('btn2');
+    let txt = document.getElementById('txt');
+
+    let page = 0;
+    inTxt(0);
+
+    function inTxt(n) {
+      txt.innerText = n
+
+    }
+    btn.onclick = function (e) {
+      page++;
+      inTxt(page);
+      history.pushState({
+        page: page
+      }, '', '?pg=' + page)
+    }
+    btn2.onclick = function (e) {
+      history.pushState({
+        page: 100
+      }, '', '?pg=' + 100)
+    }
+    window.onpopstate = function (e) {
+      console.log('state:', e.state);
+      if (e.state) {
+        inTxt(e.state.page)
+      } else {
+        inTxt(0)
+      }
+    }
+  </script>
+
+  <!-- 设计订阅-发布模式重写监听路由变化 -->
+  <script>
+    class Dep {
+      constructor() {
+        this.id = new Date().getTime();
+        this.subs = []; //订阅者集合
+      }
+      defined() { // 添加订阅者
+        Dep.watch.add(this)
+      }
+      notify() {
+        this.subs.forEach(e => {
+          if (typeof e.update === 'function') {
+            try {
+              e.update.apply(e) //触发更新函数
+            } catch (error) {
+              throw new Error(error);
+            }
+          } else {
+            throw new TypeError('This is not a function!')
+          }
+        })
+      }
+    }
+
+    Dep.watch = null;
+
+    //观察者（发布者）
+    class Watch {
+      constructor(name, fn) {
+        this.name = name;
+        this.id = new Date().getTime();
+        this.callback = fn;
+      }
+      add(dep) {
+        //将订阅者放入dep订阅集合
+        dep.subs.push(this);
+      }
+      update() {
+        let cb = this.callback;
+        cb(this.name);
+      }
+    }
+
+
+
+    var addHistoryMethod = (function () {
+      var historyDep = new Dep();
+      return function (name) {
+        if (name === 'historychange') {
+          return function (name, fn) {
+            var event = new Watch(name, fn)
+            Dep.watch = event;
+            historyDep.defined();
+            Dep.watch = null; //置空供下一个订阅者使用
+          }
+        } else if (name === 'pushState' || name === 'replaceState') {
+          var method = history[name];
+          return function () {
+            method.apply(history, arguments);
+            historyDep.notify();
+          }
+        }
+
+      }
+    }())
+
+    window.addHistoryListener = addHistoryMethod('historychange');
+    history.pushState = addHistoryMethod('pushState');
+    history.replaceState = addHistoryMethod('replaceState');
+  </script>
+
+  <script>
+    window.addHistoryListener('history', function () {
+      console.log('窗口的history改变了');
+    })
+    window.addHistoryListener('history', function () {
+      console.log('窗口的history改变了-我也听到了');
+    })
+    history.pushState({
+      first: 'first'
+    }, "page2", "/first")
+  </script>
+</body>
+
+</html>

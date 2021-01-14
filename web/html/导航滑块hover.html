@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>slide</title>
+	<style type="text/css">
+		* {
+			padding: 0;
+			margin: 0;
+		}
+
+		ul,
+		li {
+			list-style: none;
+		}
+
+		.main {
+			margin: 0 auto;
+			height: 50px;
+			width: 900px;
+			position: relative;
+		}
+
+		.moveul {
+			position: relative;
+		}
+
+		.moveul li {
+			font-size: 16px;
+			padding: 0 10px;
+			height: 50px;
+			line-height: 50px;
+			color: #ffffff;
+			background-color: #FFCCCC;
+			text-align: center;
+			float: left;
+			cursor: pointer;
+		}
+
+		#slidebar {
+			height: 2px;
+			width: 0;
+			background: #993300;
+			position: absolute;
+			left: 0px;
+			top: 0px;
+			opacity: 0;
+			transition: all .5s; //设置过度时间为0.5秒，all是设置所有的过度属性，如果只想让width有过度效果，只需要transition: width .5s;
+			/* transition: all .5s cubic-bezier(.45, 1.92, .9, 1.54); */
+		}
+
+		.animatemove {
+			left: 150px;
+		}
+
+		.test22 {}
+f
+	<script src="../js/jquery-2.2.2.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			var liHeight = $('.moveul li').outerHeight();
+			console.log('hhh', liHeight);
+			console.log('第一个paddingleft', $('.moveul li').eq(0).css('paddingLeft'));
+			$("#slidebar").css({
+				top: liHeight
+			});
+			$(".moveul li").mouseenter(function () {
+				var con = $(this).index();
+				var liHeight = $(this).outerHeight();
+				console.log('h', liHeight);
+				var liWidth = $(this).innerWidth();
+				console.log('w', liWidth);
+				var liLeft = $(this).position().left;
+				console.log('left', liLeft);
+				$("#slidebar").css({
+					left: liLeft,
+					top: liHeight,
+					opacity: 1,
+					width: liWidth
+				});
+				// $(".moveul li").mouseleave(function() {
+				// 	$("#slidebar").css({
+				// 		left: "0px"
+				// 	})
+				// })
+			})
+		})
+	</script>
+</head>
+
+<body>
+	<div class="test22">
+		<ul class="testul">
+			<li>iiiiii
+				<hr>
+			</li>
+			<li>llllll
+				<hr>
+			</li>
+			<li>oooooo
+				<hr>
+			</li>
+			<li>vvvvvv
+				<hr>
+			</li>
+			<li>yyyyyy
+				<hr>
+			</li>
+		</ul>
+	</div>
+	<div class="main">
+		<ul class="moveul">
+			<li>首页</li>
+			<li>闻</li>
+			<li>体育</li>
+			<li>财经自己乱加了</li>
+			<li>NBA</li>
+			<div id="slidebar">
+			</div>
+		</ul>
+
+	</div>
+</body>
+
+</html>

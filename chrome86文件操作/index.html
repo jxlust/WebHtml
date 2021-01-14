@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="btn">点击</button>
+  <script>
+    document.getElementById('btn').addEventListener('click', async (e) => {
+      try {
+        const hFiles = await window.showOpenFilePicker({
+          types: [{
+            description: "文本文件",
+            accept: {
+              "text/plain": [".txt"],
+            },
+          }, ],
+        });
+        if (!hFiles || !hFiles.length) return;
+        const hFile = hFiles[0];
+        l(hFile);
+      } catch (error) {
+        console.error(error);
+      }
+    })
+  </script>
+</body>
+
+</html>

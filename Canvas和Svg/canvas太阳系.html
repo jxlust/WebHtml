@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="wrapper" style="text-align: center;margin-top: 100px;">
+        <canvas id="solar" width="1000" height="1000" style="background-color: #f8f8f8;">不支持canvas！</canvas>
+    </div>
+    <input type="button" class="test" id="back" value="测试返回状态">
+
+    <script>
+        let sun, earth, moon, ctx;
+
+        function init() {
+            sun = new Image();
+            earth = new Image();
+            moon = new Image();
+            sun.src = '../images/sun.png';
+            earth.src = '../images/earth.png';
+            moon.src = '../images/moon.png';
+
+            let canvas = document.querySelector('#solar');
+            ctx = canvas.getContext('2d');
+            // setTimeout(draw, 2000);
+            sun.onload = function () {
+                draw();
+            }
+        }
+        init();
+
+        function draw() {
+            ctx.clearRect(0, 0, 1000, 1000); //清空所有的内容
+            ctx.drawImage(sun, 200, 200, 100, 100);
+            ctx.save();
+            ctx.translate(50, 50);
+
+            //绘制地球轨道
+            ctx.beginPath();
+            ctx.strokeStyle = "#999999";
+            ctx.arc(200, 200, 100, 0, 2 * Math.PI, false);
+            ctx.stroke();
+
+            //绘制地球
+            let time = new Date();
+            ctx.translate(200, 200);
+            ctx.rotate(2 * Math.PI / 60 * time.getSeconds() + 2 * Math.PI / 60000 * time.getMilliseconds());
+            // ctx.rotate(45 * Math.PI / 180);
+            ctx.translate(-100, -200);
+            ctx.drawImage(earth, 200 - 15, 200 - 15, 30, 30);
+
+            //绘制月球轨道
+            ctx.beginPath();
+            ctx.strokeStyle = "#666";
+            ctx.arc(200, 200, 60, 0, 2 * Math.PI);
+            ctx.stroke();
+
+            //绘制月球
+            // ctx.fillRect(0, 0, 10, 10); //找原点
+            ctx.translate(200, 200);
+
+            ctx.rotate(2 * Math.PI / 6 * time.getSeconds() + 2 * Math.PI / 6000 * time.getMilliseconds());
+            ctx.translate(-140, -200);
+            // ctx.fillRect(200 - 10, 200 - 10, 20, 20);
+
+            ctx.drawImage(moon, 200 - 5, 200 - 5, 10, 10);
+
+            ctx.restore();
+            requestAnimationFrame(draw);
+        }
+
+
+        document.querySelector('#back').addEventListener('click', function (e) {
+            console.log(11111);
+            ctx.restore();
+            ctx.fillRect(0, 0, 150, 100);
+        });
+    </script>
+
+    <script>
+        // 多个图片都加载完成的判断
+    </script>
+
+</body>
+
+</html>

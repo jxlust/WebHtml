@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style>
+		.max {
+			width: 100%;
+			height: auto;
+		}
+
+		.min {
+			width: 100px;
+			height: auto;
+		}
+
+		/*初始设置所有盒子大小及颜色*/
+		div.box {
+			width: 100px;
+			height: 100px;
+			background: #0f0;
+			margin-top: 30px;
+			/*设置过渡时间及效果*/
+			transition: all 1s;
+		}
+
+		.a:active {
+			/*旋转 角度为360度*/
+			transform: rotate(360deg);
+		}
+
+		.b:active {
+			/*放大为原来的2倍 缩小为0-1倍*/
+			transform: scale(2);
+		}
+
+		.c:active {
+			/*倾斜为原来的45度 可为正负*/
+			transform: skew(45deg);
+		}
+
+		.d:active {
+			/*平移 可设两个值 中间用 "," 分开 第一个值为x 第二个值为Y轴*/
+			transform: translate(300px);
+		}
+		.rotate-bg{
+			width: 200px;
+			height: 200px;
+			background: #f8f8f8;
+			margin-top: 30px;
+			/*设置过渡时间及效果*/
+			transition: all 1s;
+			text-align: center;
+			padding-left: 10px;
+			margin-bottom: 200px;
+			line-height: 200px;
+			position: relative;
+		}
+		.rotate-bg::before{
+			content: '';
+			position: absolute;
+			width: 1px;
+			height: 100px;
+			top: 30px;
+			left: 0;
+			background: #999999;
+
+		}
+		.rotate-bg .rotate-div{
+			transform: rotate(-0.3deg);
+			width: 150px;
+			height: 150px;
+			display: inline-block;
+			vertical-align: middle;
+			margin: auto;
+			background: #999999;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="container">
+		<input class="rotate-bg" value="s" />
+			<div class="rotate-bg">
+					<div class="rotate-div"></div>
+				</div>
+
+		<img src="../images/d8iNm.png" />
+		<img src="../images/d8iNm.png" class="testImg2" />
+		<div class="box a">旋转</div>
+		<div class="box b">放大</div>
+		<div class="box c">倾斜</div>
+		<div class="box d">平移</div>
+
+	
+
+
+	</div>
+	<script src="../js/jquery-2.2.2.min.js"></script>
+	<script>
+		 $(window).load(function(){
+            console.log("加载中");
+        });
+		
+		var flag = true, //状态true为正常的状态,false为放大的状态
+			imgH, //图片的高度
+			imgW, //图片的宽度
+			img = document.getElementsByTagName('img')[0]; //图片元素
+		img.onclick = function () {
+			//图片点击事件
+			imgH = img.height; //获取图片的高度
+			imgW = img.width; //获取图片的宽度
+			if (flag) {
+				//图片为正常状态,设置图片宽高为现在宽高的2倍
+				flag = false; //把状态设为放大状态
+				img.height = imgH * 2;
+				img.width = imgW * 2;
+			} else {
+				//图片为放大状态,设置图片宽高为现在宽高的二分之一
+				flag = true; //把状态设为正常状态
+				img.height = imgH / 2;
+				img.width = imgW / 2;
+			}
+
+		}
+		$('.testImg2').on('click', function () {
+			$(this).toggleClass('min');
+			$(this).toggleClass('max');
+		});
+	</script>
+</body>
+
+</html>

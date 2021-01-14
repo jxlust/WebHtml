@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      text-decoration: none;
+      font-family: 'Microsoft YaHei';
+
+    }
+
+    .content {
+      display: flex;
+
+    }
+
+    .left {
+      position: fixed;
+      z-index: 10;
+      top: 61px;
+      left: 0;
+      bottom: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      /* height: 52px; */
+      width: 300px;
+    }
+
+    .left>li {
+      height: 44px;
+    }
+
+    .left>li a {
+      display: inline-block;
+      width: 100%;
+      height: 44px;
+      text-align: center;
+      line-height: 44px;
+    }
+
+    .left>li .active {
+      background-color: #f8f8f8;
+      color: #333;
+    }
+
+    .right {
+      flex: 1;
+      padding-left: 350px;
+    }
+
+    .test {
+      width: 100%;
+      height: 500px;
+      background: #ff88ff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content">
+    <ul class="left">
+      <li><a class="section-link active" data-scroll="" href="#test1">test1</a></li>
+      <li><a class="section-link" data-scroll="" href="#test2">test2</a></li>
+      <li><a class="section-link" data-scroll="" href="#test3">test3</a></li>
+      <li><a class="section-link" data-scroll="" href="#test4">test4</a></li>
+      <li><a class="section-link" data-scroll="" href="#test5">test5</a></li>
+      <li><a class="section-link" data-scroll="" href="#test6">test6</a></li>
+    </ul>
+    <div class="right">
+      <h2 id="test1">test1</h2>
+      <div class="test">xxxxxcontent</div>
+      <h2 id="test2">test2</h2>
+      <div class="test">xxxxxcontent</div>
+      <h2 id="test3">test3</h2>
+      <div class="test">xxxxxcontent</div>
+      <h2 id="test4">test4</h2>
+      <div class="test">xxxxxcontent</div>
+      <h2 id="test5">test5</h2>
+      <div class="test">xxxxxcontent</div>
+      <h2 id="test6">test6</h2>
+      <div class="test">xxxxxcontent</div>
+
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+  <script>
+    let scroll = new SmoothScroll('a[href*="#"]', {
+      speed: 500,
+      speedAsDuration: true
+    });
+    const allHeaders = document.querySelectorAll('h2[id*="test"]')
+    console.log(1, allHeaders);
+
+    function updateNav() {
+      var doc = document.documentElement
+      var top = doc && doc.scrollTop || document.body.scrollTop
+      // if (animating || !allHeaders) return
+      var last
+      for (var i = 0; i < allHeaders.length; i++) {
+        var link = allHeaders[i]
+        if (link.offsetTop > top) {
+          if (!last) last = link
+          break
+        } else {
+          last = link
+        }
+      }
+      if (last) {
+        var previousActive = document.querySelector('.section-link.active')
+        var id = last.id;
+        var currentActive = typeof id === 'string' ?
+          document.querySelector('.section-link[href="#' + id + '"]') : id
+        if (currentActive !== previousActive) {
+          if (previousActive) previousActive.classList.remove('active')
+          currentActive.classList.add('active')
+        }
+      }
+
+    }
+    window.addEventListener('scroll', updateNav)
+  </script>
+</body>
+
+</html>

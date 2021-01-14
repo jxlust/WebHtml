@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/jquery-2.2.2.min.js"></script>
+		<script type="text/javascript" src="js/bezierMaker.js"></script>
+	</head>
+
+	<body>
+		<div style="background-color: #F2F2F2;">
+			<canvas width="300" height="300" id="canvas2"></canvas>
+		</div>
+
+		<div></div>
+		<button id="print">打印</button>
+		<button id="clear">清除</button>
+
+		<canvas width="500" height="500" id="canvas"></canvas>
+
+	</body>
+
+</html>
+<script>
+	/**
+	 * canvas canvas's dom object
+	 * bezierCtrlNodesArr control point's array
+	 * color curve's color
+	 */
+	var canvas = document.getElementById('canvas2')
+	//The formations of the less than or equal to third order bezier curves are based on the native API. 
+	var arr0 = [{ x: 70, y: 25 }, { x: 24, y: 51 }]
+	var arr1 = [{ x: 233, y: 225 }, { x: 170, y: 279 }, { x: 240, y: 51 }]
+	var arr2 = [{ x: 23, y: 225 }, { x: 70, y: 79 }, { x: 40, y: 51 }, { x: 300, y: 44 }]
+	var arr3 = [{ x: 333, y: 15 }, { x: 70, y: 79 }, { x: 40, y: 551 }, { x: 170, y: 279 }, { x: 17, y: 239 }]
+	var arr4 = [{ x: 53, y: 85 }, { x: 170, y: 279 }, { x: 240, y: 551 }, { x: 70, y: 79 }, { x: 40, y: 551 }, { x: 170, y: 279 }]
+	var bezier0 = new BezierMaker(canvas, arr0, 'black')
+	var bezier1 = new BezierMaker(canvas, arr1, 'red')
+	var bezier2 = new BezierMaker(canvas, arr2, 'blue')
+	var bezier3 = new BezierMaker(canvas, arr3, 'yellow')
+	var bezier4 = new BezierMaker(canvas, arr4, 'green')
+	bezier0.drawBezier()
+	bezier1.drawBezier()
+	bezier2.drawBezier()
+	bezier3.drawBezier()
+	bezier4.drawBezier()
+</script>
+
+<script>
+	function UnitBezier(p1x, p1y, p2x, p2y) {
+		this.cx = 3.0 * p1x;
+		this.bx = 3.0 * (p2x - p1x) - this.cx;
+		this.ax = 1.0 - this.cx - this.bx;
+		this.cy = 3.0 * p1y;
+		this.by = 3.0 * (p2y - p1y) - this.cy;
+		this.ay = 1.0 - this.cy - this.by;
+	}
+	UnitBezier.prototype = {
+		sampleCurveX: function(t) {
+			return((this.ax * t + this.bx) * t + this.cx) * t;
+		},
+		sampleCurveY: function(t) {
+			console.log(((this.ay * t + this.by) * t + this.cy) * t);
+			return((this.ay * t + this.by) * t + this.cy) * t;
+		},
+		solve: function(t) {
+			this.sampleCurveY(this.sampleCurveX(t))
+		}
+	}
+	/*var myf = new Function('str', 'console.log(str);var a = str+1;console.log(a);');
+	myf(1);*/
+	/*var ub = new UnitBezier(1, 2, 3, 4);
+	console.log(ub.solve(31));*/
+	// console.log(new UnitBezier(1, 1, 2, 3).sampleCurveX(3));
+	// UnitBezier.sampleCurveX(3);
+</script>
+
+<script>
+	function Person(name) {
+		this.name = name
+	}
+	/*Person.prototype.name = 'hhh';*/
+	var p = new Person();
+	var p2 = new Person('hh');
+	console.log(Person.prototype.constructor == Person);
+	console.log(Person.prototype);
+	console.log(Object.__proto__ == Function.prototype);
+</script>
+
+<script>
+	var canvas = document.getElementById('canvas')
+	var ctx = canvas.getContext('2d')
+	var t = 0 //贝塞尔函数涉及的占比比例，0<=t<=1
+	var clickNodes = [] //点击的控制点对象数组
+	var bezierNodes = [] //绘制内部控制点的数组
+	var isPrinted = false //当前存在绘制的曲线
+	var isPrinting = false //正在绘制中
+	var num = 0 //控制点数
+	var isDrag = false //是否进入拖拽行为
+	var isDragNode = false //是否点击到了控制点
+	var dragIndex = 0 //被拖拽的点的索引
+	var clickon = 0 //鼠标按下时间戳
+	var clickoff = 0 //鼠标抬起
+	$(canvas).mousedown(function(e) {
+		isDrag = true
+		clickon = new Date().getTime()
+		var diffLeft = $(this).offset().left,
+			diffTop = $(this).offset().top,
+			clientX = e.clientX,
+			clientY = e.clientY,
+			x = clientX - diffLeft,
+			y = clientY - diffTop
+		clickNodes.forEach(function(item, index) {
+			var absX = Math.abs(item.x - x),
+				absY = Math.abs(item.y - y)
+			if(absX < 5 && absY < 5) {
+				isDragNode = true
+				dragIndex = index
+			}
+		})
+	}).mousemove(function(e) {
+		if(isDrag && isDragNode) {
+			var diffLeft = $(this).offset().left,
+				diffTop = $(this).offset().top,
+				clientX = e.clientX,
+				clientY = e.clientY,
+				x = clientX - diffLeft,
+				y = clientY - diffTop
+			clickNodes[dragIndex] = {
+				x: x,
+				y: y
+			}
+			ctx.clearRect(0, 0, canvas.width, canvas.height)
+			clickNodes.forEach(function(item, index) {
+				var x = item.x,
+					y = item.y,
+					i = parseInt(index, 10) + 1
+				ctx.fillText("p" + i, x, y + 20)
+				ctx.fillText("p" + i + ': (' + x + ', ' + y + ')', 10, i * 20)
+				ctx.beginPath()
+				ctx.arc(x, y, 4, 0, Math.PI * 2, false)
+				ctx.fill()
+				ctx.beginPath()
+				ctx.moveTo(startX, startY)
+				ctx.lineTo(x, y)
+				ctx.strokeStyle = '#696969'
+				ctx.stroke()
+				if(index) {
+					var startX = clickNodes[index - 1].x,
+						startY = clickNodes[index - 1].y
+					ctx.beginPath()
+					ctx.moveTo(startX, startY)
+					ctx.lineTo(x, y)
+					ctx.stroke()
+				}
+			})
+			if(isPrinted) {
+				var bezierArr = []
+				for(i = 0; i < 1; i += 0.01) {
+					bezierArr.push(bezier(clickNodes, i))
+				}
+				bezierArr.forEach(function(obj, index) {
+					if(index) {
+						var startX = bezierArr[index - 1].x,
+							startY = bezierArr[index - 1].y,
+							x = obj.x,
+							y = obj.y
+						ctx.beginPath()
+						ctx.moveTo(startX, startY)
+						ctx.lineTo(x, y)
+						ctx.strokeStyle = 'red'
+						ctx.stroke()
+					}
+				})
+			}
+		}
+	}).mouseup(function(e) {
+		isDrag = false
+		isDragNode = false
+		clickoff = new Date().getTime()
+		if(clickoff - clickon < 200) {
+			var diffLeft = $(this).offset().left,
+				diffTop = $(this).offset().top,
+				clientX = e.clientX,
+				clientY = e.clientY
+			x = clientX - diffLeft,
+				y = clientY - diffTop
+			if(!isPrinted && !isDragNode) {
+				num++
+				var ctx = canvas.getContext('2d')
+				ctx.font = "16px Microsoft YaHei";
+				ctx.fillStyle = '#696969'
+				ctx.fillText("p" + num, x, y + 20);
+				ctx.fillText("p" + num + ': (' + x + ', ' + y + ')', 10, num * 20)
+				ctx.beginPath()
+				ctx.arc(x, y, 4, 0, Math.PI * 2, false)
+				ctx.fill()
+				if(clickNodes.length) {
+					var startX = clickNodes[clickNodes.length - 1].x,
+						startY = clickNodes[clickNodes.length - 1].y
+					ctx.beginPath()
+					ctx.moveTo(startX, startY)
+					ctx.lineTo(x, y)
+					ctx.strokeStyle = '#696969'
+					ctx.stroke()
+				}
+				clickNodes.push({
+					x: x,
+					y: y
+				})
+			}
+		}
+	})
+	$('#print').click(function() {
+		if(!num) return
+		if(!isPrinting) {
+			isPrinted = true
+			drawBezier(ctx, clickNodes)
+		}
+	})
+	$('#clear').click(function() {
+		if(!isPrinting) {
+			isPrinted = false
+			ctx.clearRect(0, 0, canvas.width, canvas.height)
+			clickNodes = []
+			bezierNodes = []
+			t = 0
+			num = 0
+		}
+	})
+
+	function drawBezier(ctx, origin_nodes) {
+		if(t > 1) {
+			isPrinting = false
+			return
+		}
+		isPrinting = true
+		var nodes = origin_nodes
+		t += 0.01
+		ctx.clearRect(0, 0, canvas.width, canvas.height)
+		drawnode(nodes)
+		window.requestAnimationFrame(drawBezier.bind(this, ctx, nodes))
+	}
+
+	function drawnode(nodes) {
+		if(!nodes.length) return
+		var _nodes = nodes
+		var next_nodes = []
+		_nodes.forEach(function(item, index) {
+			var x = item.x,
+				y = item.y
+			if(_nodes.length === num) {
+				ctx.font = "16px Microsoft YaHei"
+				var i = parseInt(index, 10) + 1
+				ctx.fillText("p" + i, x, y + 20)
+				ctx.fillText("p" + i + ': (' + x + ', ' + y + ')', 10, i * 20)
+			}
+			ctx.beginPath()
+			ctx.arc(x, y, 4, 0, Math.PI * 2, false)
+			ctx.fill()
+			if(_nodes.length === 1) {
+				bezierNodes.push(item)
+				if(bezierNodes.length > 1) {
+					bezierNodes.forEach(function(obj, i) {
+						if(i) {
+							var startX = bezierNodes[i - 1].x,
+								startY = bezierNodes[i - 1].y,
+								x = obj.x,
+								y = obj.y
+							ctx.beginPath()
+							ctx.moveTo(startX, startY)
+							ctx.lineTo(x, y)
+							ctx.strokeStyle = 'red'
+							ctx.stroke()
+						}
+					})
+				}
+			}
+			if(index) {
+				var startX = _nodes[index - 1].x,
+					startY = _nodes[index - 1].y
+				ctx.beginPath()
+				ctx.moveTo(startX, startY)
+				ctx.lineTo(x, y)
+				ctx.strokeStyle = '#696969'
+				ctx.stroke()
+			}
+		})
+		if(_nodes.length) {
+			for(var i = 0; i < _nodes.length - 1; i++) {
+				var arr = [{
+					x: _nodes[i].x,
+					y: _nodes[i].y
+				}, {
+					x: _nodes[i + 1].x,
+					y: _nodes[i + 1].y
+				}]
+				next_nodes.push(bezier(arr, t))
+			}
+			drawnode(next_nodes)
+		}
+
+	}
+
+	function factorial(num) { //递归阶乘
+		if(num <= 1) {
+			return 1;
+		} else {
+			return num * factorial(num - 1);
+		}
+	}
+
+	function bezier(arr, t) { //通过各控制点与占比t计算当前贝塞尔曲线上的点坐标
+		var x = 0,
+			y = 0,
+			n = arr.length - 1
+		arr.forEach(function(item, index) {
+			if(!index) {
+				x += item.x * Math.pow((1 - t), n - index) * Math.pow(t, index)
+				y += item.y * Math.pow((1 - t), n - index) * Math.pow(t, index)
+			} else {
+				x += factorial(n) / factorial(index) / factorial(n - index) * item.x * Math.pow((1 - t), n - index) * Math.pow(t, index)
+				y += factorial(n) / factorial(index) / factorial(n - index) * item.y * Math.pow((1 - t), n - index) * Math.pow(t, index)
+			}
+		})
+		return {
+			x: x,
+			y: y
+		}
+	}
+	var getRandomColor = function() {
+		return '#' + Math.floor(Math.random() * 16777215).toString(16);
+	}
+</script>

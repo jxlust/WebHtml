@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/fonts.css">
+    <script src="https://cdn.jsdelivr.net/npm/tween.js@16.3.4"></script>
+
+    <style lang="css">
+        .number-block {
+            display: flex;
+        }
+
+        .number {
+            font-size: 100px;
+            font-family: myLiquidCrystal;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="number-block">
+        <span id="number" class="number">100</span>
+    </div>
+
+    <script>
+        const number1 = document.getElementById('number')
+
+        function animate() {
+            if (TWEEN.update()) {
+                requestAnimationFrame(animate)
+            }
+        }
+        new TWEEN.Tween({
+                tweeningValue: 0
+            })
+            .to({
+                tweeningValue: 99
+            }, 500)
+            .onUpdate(function () {
+                console.log(this.tweeningValue);
+                number1.innerText = this.tweeningValue.toFixed(0)
+            })
+            .start()
+
+        animate()
+    </script>
+</body>
+
+</html>

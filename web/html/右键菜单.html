@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			#menu {
+				position: absolute;
+				width: 150px;
+				visibility: hidden;
+				border: 1px solid #666;
+				border-bottom-width: 0;
+			}
+
+			#menu li {
+				list-style: none;
+				text-indent: 1em;
+			}
+
+			#menu li a {
+				display: block;
+				height: 30px;
+				line-height: 30px;
+				border-bottom: 1px solid #666;
+				text-decoration: none;
+				color: #666;
+				font: 12px/30px tahoma;
+			}
+
+			#menu li a:hover {
+				background: #eee;
+				color: black;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="menu">
+			<ul>
+				<li><a href="#">contextmenuitem 1</a></li>
+				<li><a href="#">contextmenuitem 2</a></li>
+				<li><a href="#">contextmenuitem 3</a></li>
+				<li><a href="#">contextmenuitem 4</a></li>
+				<li><a href="#">contextmenuitem 5</a></li>
+				<li><a href="#">contextmenuitem 6</a></li>
+			</ul>
+		</div>
+	</body>
+
+	<script type="text/javascript">
+		document.oncontextmenu = function(e) {
+			if (window.event) e = window.event;
+			var mymenu = document.getElementById("menu");
+			mymenu.style.visibility = "visible";
+			mymenu.style.left = e.clientX + 5 + "px";
+			mymenu.style.top = e.clientY + 5 + "px";
+			return false;
+		}
+		document.onclick = function() {
+			var mymenu = document.getElementById("menu");
+			mymenu.style.visibility = "hidden";
+		}
+	</script>
+</html>

@@ -1,0 +1,32 @@
+/* 代码整理；懒人之家 www.lanrenzhijia.com */
+html{color:#444333;background-color:#fff;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-rendering:optimizelegibility;min-width:960px}
+html, body, section, div, p, h1, form, input, textarea, label, ol, ul, li, h1, h2, h3{margin:0;padding:0}
+ol li{list-style-position:inside}
+ul li{list-style:none}::selection{color:#fff;background-color:rgb(10,77,0)}
+.center{display:block;width:960px;margin:30px auto;position:relative}
+/*for-majors*/
+.major-list-outer{height:573px; overflow:hidden}
+.major-list{margin-right:-32px;margin-bottom:-30px;*margin-bottom:0px}
+.major-list li{width:216px;height:169px;margin-right:32px;margin-bottom:32px;float:left;position:relative}
+.major-list li a, .major-list li a span{width:100%;height:100%;display:block;position:absolute;left:0;top:0}
+.front-face{z-index:2;background:url(../images/majors.png) no-repeat 0 0}
+.back-face{z-index:1;background:url(../images/majors_back.jpg) no-repeat 0 0}
+.major-list li a{overflow:hidden}
+.major-list li:hover a .back-face{z-index:3;}
+#dx .front-face, #dx .back-face{background-position:0 0}
+#rj .front-face, #rj .back-face{background-position:-217px 0}
+#jx .front-face, #jx .back-face{background-position:-434px 0}
+#gdz .front-face, #gdz .back-face{background-position:-651px 0}
+#jsj .front-face, #jsj .back-face{background-position:0 -170px}
+#kz .front-face, #kz .back-face{background-position:-217px -170px}
+#jg .front-face, #jg .back-face{background-position:-434px -170px}
+#sx .front-face, #sx .back-face{background-position:-651px -170px}
+#gl .front-face, #gl .back-face{background-position:-0 -340px}
+#ch .front-face, #ch .back-face{background-position:-217px -340px}
+#wl .front-face, #wl .back-face{background-position:-434px -340px}
+#xw .front-face, #xw .back-face{background-position:-651px -340px}
+/*for-majors ending here*/
+
+.btm{ margin:30px auto}
+.btm p{ font:normal 12px/24px 'Microsoft YaHei'; text-align:center}
+/* 代码整理；懒人之家 www.lanrenzhijia.com */
