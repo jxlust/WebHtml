@@ -22,6 +22,9 @@
             position: relative;
             max-height: 90vh;
             overflow: auto;
+            transition-property: transform;
+            /* transform: translate3d(0,0,0);
+            transition-duration: 0; */
         }
 
         .item {
@@ -67,7 +70,8 @@
     listsEl.addEventListener('touchstart', function (event) {
         let touch = event.targetTouches[0];
         console.log('touch start', touch);
-        touchstart = touch.pageY;
+        // touchstart = touch.pageY;
+        touchstart = touch.clientY;
         event.preventDefault(); // 阻止浏览器默认下滑事件
     }, false);
 
@@ -76,12 +80,14 @@
     listsEl.addEventListener('touchmove', function (event) {
         let touch = event.targetTouches[0];
         console.log('touch move', touch);
-        listsEl.style.top =  listsEl.offsetTop + touch.pageY - touchstart + 'px';
-        touchStart = touch.pageY;
-        if (listsEl.offsetTop >= 80) {
-          // 限制下拉的距离
-          listsEl.style.top = '80px';
-        }
+        // listsEl.style.top =  listsEl.offsetTop + touch.pageY - touchstart + 'px';
+        // touchStart = touch.pageY;
+        let distance = (touch.clientY - touchstart) | 0;
+        listsEl.style.cssText = `background: '#fff';transform: translate3d(0,${distance}px,0);transition-duration: 0ms;`
+        // if (listsEl.offsetTop >= 80) {
+        //   // 限制下拉的距离
+        //   listsEl.style.top = '80px';
+        // }
         // if (touch.pageY <= 500) {
         //     listsEl.style.top = touch.pageY - touchstart + 'px';
         // }
@@ -90,15 +96,16 @@
     listsEl.addEventListener('touchend', function (event) {
         let top = listsEl.offsetTop;
         console.log('main el top:',top,listsEl.offsetTop)
-        if (top > 80){
-            console.log('dddd');
-        };
-        if (top > 0) {
-             timer = setInterval(function () {
-                listsEl.style.top = listsEl.offsetTop - 4 + 'px';
-                if (listsEl.offsetTop <= 0) clearInterval(timer);
-            }, 1)
-        }
+        listsEl.style.cssText = `transition-duration: 1300ms;transform: translate3d(0,0px,0)`
+        // if (top > 80){
+        //     console.log('dddd');
+        // };
+        // if (top > 0) {
+        //      timer = setInterval(function () {
+        //         listsEl.style.top = listsEl.offsetTop - 4 + 'px';
+        //         if (listsEl.offsetTop <= 0) clearInterval(timer);
+        //     }, 1)
+        // }
     }, false)
 </script>
 
