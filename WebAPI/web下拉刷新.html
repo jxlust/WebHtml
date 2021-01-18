@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+        }
+
+        .main {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+
+        .lists {
+            position: relative;
+            max-height: 90vh;
+            overflow: auto;
+        }
+
+        .item {
+            width: 100%;
+            height: 100px;
+        }
+
+        .item:nth-child(even) {
+            background-color: #f8f8f8;
+        }
+
+        .item:nth-child(odd) {
+            background-color: navajowhite;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="lists">
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+            <div class="item">4</div>
+            <div class="item">5</div>
+            <div class="item">6</div>
+            <div class="item">7</div>
+            <div class="item">8</div>
+            <div class="item">9</div>
+            <div class="item">10</div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    const mainEl = document.querySelector('.main');
+    const listsEl = document.querySelector('.lists');
+    let touchstart = 0;
+    let timer = null;
+
+    //    触摸开始
+    listsEl.addEventListener('touchstart', function (event) {
+        let touch = event.targetTouches[0];
+        console.log('touch start', touch);
+        touchstart = touch.pageY;
+        event.preventDefault(); // 阻止浏览器默认下滑事件
+    }, false);
+
+
+    //    手指移动中记录移动位置
+    listsEl.addEventListener('touchmove', function (event) {
+        let touch = event.targetTouches[0];
+        console.log('touch move', touch);
+        listsEl.style.top =  listsEl.offsetTop + touch.pageY - touchstart + 'px';
+        touchStart = touch.pageY;
+        if (listsEl.offsetTop >= 80) {
+          // 限制下拉的距离
+          listsEl.style.top = '80px';
+        }
+        // if (touch.pageY <= 500) {
+        //     listsEl.style.top = touch.pageY - touchstart + 'px';
+        // }
+    }, false);
+    // 触摸结束
+    listsEl.addEventListener('touchend', function (event) {
+        let top = listsEl.offsetTop;
+        console.log('main el top:',top,listsEl.offsetTop)
+        if (top > 80){
+            console.log('dddd');
+        };
+        if (top > 0) {
+             timer = setInterval(function () {
+                listsEl.style.top = listsEl.offsetTop - 4 + 'px';
+                if (listsEl.offsetTop <= 0) clearInterval(timer);
+            }, 1)
+        }
+    }, false)
+</script>
+
+<!-- 优化1 -->
+<script>
+
+</script>
+
+</html>

@@ -7,7 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="./css/fonts.css">
     <script src="https://cdn.jsdelivr.net/npm/tween.js@16.3.4"></script>
-
+    <script src="./js/global.js"></script>
     <style lang="css">
         .number-block {
             display: flex;
@@ -25,6 +25,7 @@
     <div class="number-block">
         <span id="number" class="number">100</span>
     </div>
+    <canvas width="900" height="900" class="webgl-canvas js-globe-canvas" style="width: 900px; height: 900px;"></canvas>
 
     <script>
         const number1 = document.getElementById('number')
