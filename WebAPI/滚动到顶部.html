@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main {
+            width: 100%;
+        }
+
+        .main-lists {
+            height: 1000px;
+            width: 100%;
+            background-color: #f8f8f8;
+        }
+
+        .fixed-btn {
+            position: fixed;
+            right: 10px;
+            top: 10px;
+            padding: 10px;
+            color: #333;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="main">
+        <div class="main-lists">
+            <p>content 。。。</p>
+        </div>
+        <div class="fixed-btn" id="topBtn">TOP</div>
+    </div>
+
+</body>
+
+<script>
+    const topEl = document.getElementById('topBtn')
+    topEl.addEventListener('click', function (e) {
+        scrollToTop();
+    })
+
+    function windowScrollTo() {
+        window.scrollTo({
+            left: 0,
+            top: 0,
+            behavior: 'smooth'
+        })
+    }
+
+    function scrollToTop() {
+        const c = document.documentElement.scrollTop || document.body.scrollTop;
+        console.log('top:', c);
+        if (c > 0) {
+            window.requestAnimationFrame(scrollToTop);
+            window.scrollTo(0, c - c / 8);
+        }
+    }
+</script>
+
+</html>
