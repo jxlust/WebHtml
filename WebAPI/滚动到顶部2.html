@@ -19,11 +19,13 @@
             width: 100%;
             background-color: #f8f8f8;
         }
-        .content{
+
+        .content {
             height: 2000px;
             width: 100%;
 
         }
+
         .fixed-btn {
             position: fixed;
             right: 10px;
@@ -40,6 +42,7 @@
         <div class="main-lists">
             <div class="content">
                 <p>content 。。。</p>
+                <div id="someAni">hhhh</div>
             </div>
         </div>
         <div class="fixed-btn" id="topBtn">TOP</div>
@@ -51,7 +54,7 @@
     const topEl = document.getElementById('topBtn')
     const scrollParent = document.querySelector('.main-lists');
     topEl.addEventListener('click', function (e) {
-        scrollToTop(scrollParent);
+        scrollToTop();
     })
 
     function windowScrollTo() {
@@ -61,14 +64,22 @@
             behavior: 'smooth'
         })
     }
-
-    function scrollToTop(scrollElement) {
-        let c = scrollElement.scrollTop;
+    function scrollToTop() {
+        let c = scrollParent.scrollTop;
+        console.log(123);
         if (c > 0) {
-            window.requestAnimationFrame(scrollToTop.bind(this,scrollElement));
-            scrollElement.scrollTo(0, c - c / 8);
+            window.requestAnimationFrame(scrollToTop);
+            scrollParent.scrollTo(0, c - c / 8);
         }
     }
+    // function scrollToTop(scrollElement) {
+    //     let c = scrollElement.scrollTop;
+    //     console.log(123);
+    //     if (c > 0) {
+    //         window.requestAnimationFrame(scrollToTop.bind(this, scrollElement));
+    //         scrollElement.scrollTo(0, c - c / 8);
+    //     }
+    // }
 </script>
 
 </html>

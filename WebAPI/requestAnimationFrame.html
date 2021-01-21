@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="main">
+        <div id="someAni">hhhh</div>
+    </div>
+
+    <div class="number">
+        <span id="numId">0</span>
+    </div>
+
+</body>
+<script>
+    // 告诉浏览器——你希望执行一个动画，并且要求浏览器在下次重绘之前调用指定的回调函数更新动画。
+    // 该方法需要传入一个回调函数作为参数，该回调函数会在浏览器下一次重绘之前执行
+    // 重绘 浏览器一般刷新频率为一秒 60次
+    // https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame
+
+    const element = document.getElementById('someAni');
+    let start;
+
+    function step(timestamp) {
+        // console.log('times:',timestamp);
+        if (start === undefined)
+            start = timestamp;
+        const elapsed = timestamp - start;
+
+        //这里使用`Math.min()`确保元素刚好停在200px的位置。
+        element.style.transform = 'translateX(' + Math.min(0.1 * elapsed, 200) + 'px)';
+
+        if (elapsed < 2000) { // 在两秒后停止动画
+            window.requestAnimationFrame(step);
+        }
+    }
+    let aniId = null;
+
+    function step2(timestamp) {
+        // console.log('t:',timestamp);
+        // window.requestAnimationFrame(hhh)
+        if (start === undefined) {
+            start = timestamp;
+        }
+        const diff = timestamp - start;
+        element.style.cssText = 'background: #ff0000';
+
+        if (diff < 2000) {
+            window.requestAnimationFrame(step)
+        }
+        // aniId = window.requestAnimationFrame(step)
+        // if(diff > 2000){
+        //     window.cancelAnimationFrame(aniId)
+        // }
+
+    }
+
+    function hhh() {
+        console.log('hhhh11');
+    }
+
+    window.requestAnimationFrame(step);
+</script>
+
+<script>
+    /*
+    const numEl = document.getElementById('numId');
+    let startNum = 0;
+    let endNum = 0;
+    const timelong = 1000;
+
+    function numberAnimation(timestamp) {
+        console.log('nnnnn:',timestamp);
+        //分区间
+        //比如0-100 在1000ms内完成的话，需要划分n个区间
+        // 均匀分配的话 1000ms/n; n = 10,area = 100ms,inV = (100 - 0) / 10 = 10;
+
+        if(timestamp >= timelong){
+            numEl.innerText = endNum;
+        }else{
+            let number = startNum + 10 * ((timestamp / 100) | 0);
+            console.log(number);
+            numEl.innerText = number;
+            requestAnimationFrame(numberAnimation)
+        }
+
+        // if(startNum < endNum){
+        //     startNum +=  8;
+        //     numEl.innerText = startNum;
+        //     requestAnimationFrame(numberAnimation)
+        // } 
+    }
+    function startBetween(start,end) {
+        numEl.innerText = start;    
+        startNum = start;
+        endNum = end;
+        requestAnimationFrame(numberAnimation)
+    }
+
+    startBetween(0,100)
+*/
+</script>
+
+
+
+<script>
+    const numEl = document.getElementById('numId');
+    let startNum = 0;
+    let endNum = 0;
+    const timelong = 5000;
+    const HZ = 1000 / 60; //刷新一次需要的ms数
+
+    let count = 0;
+    let updateN =  timelong / HZ; // n = duration / 1000 * 60 
+    let avgAdd = 0;
+    function callback(value) {
+        console.log('value:',value);
+        numEl.innerText = value | 0;
+    }
+    function numberAnimation(timestamp) {
+        console.log('nnnnn:', timestamp);
+        console.log('count:',count++);
+        //分区间
+        //初始定 按刷新频率来更新数据，假定刷新频率为 1000ms 60次
+        // HZ = 1000ms / 60
+        //1000ms ，更新60次， 每次 value = (diffNumber) / 60
+
+        //得出以下公式
+        //1.定义动画时长为duration（ms）, 更新次数 n = duration / 1000 * 60 次, 
+        //2.每次改变的值平均增加 avgAdd = (diff) / n, diff = end - start; (考虑的end > start)
+        //3. 新值 newV += avgAdd; 如果 end < start , newV -= avgAdd;
+
+        //实际要实现的效果递增的值不是线性的，会比较呆板，可能要实现曲线递增效果
+
+        if (timestamp >= timelong || startNum >= endNum) {
+            callback(endNum)
+        } else {
+            startNum += avgAdd;//线性递增
+            callback(startNum)
+            requestAnimationFrame(numberAnimation)
+        }
+      
+    }
+
+    function startBetween(start, end) {
+        numEl.innerText = start;
+        startNum = start;
+        endNum = end;
+        avgAdd =  Math.abs(endNum - startNum) / updateN;
+        console.log('avgAdd',avgAdd);
+        requestAnimationFrame(numberAnimation)
+    }
+
+    startBetween(1, 99)
+</script>
+
+</html>

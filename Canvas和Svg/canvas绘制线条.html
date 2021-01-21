@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="main">
+        <canvas id="canvas" width="500px" height="500px" style="background-color: #f8f8f8;"></canvas>
+    </div>
+
+</body>
+<script>
+    
+    function PointOnCubicBezier1(cp, t) {
+        var tPos = {}
+        tPos.x = Math.pow((1 - t), 2) * cp[0].x + 2 * t * (1 - t) * cp[1].x + Math.pow(t, 2) * cp[2].x;
+        tPos.y = Math.pow((1 - t), 2) * cp[0].y + 2 * t * (1 - t) * cp[1].y + Math.pow(t, 2) * cp[2].y;
+        return tPos;
+    }
+    
+
+</script>
+<script>
+    const canvas = document.querySelector('#canvas');
+
+    if (!canvas.getContext) throw new Error('不支持canvas');
+    let ctx = canvas.getContext('2d');
+
+    ctx.beginPath();
+    ctx.lineWidth = 2;
+
+
+    // ctx.fillStyle = '#ff000';
+    ctx.strokeStyle = '#ff0000'
+    // y = 2 + 3x;
+    // for (let i = 0; i < 100; i++) {
+    //     let x = i + 2;
+    //     let y = 20 + 2 * x;
+    //     ctx.lineTo(x, y)
+    // }
+    let point = {
+        x: 0,
+        y: 0
+    };
+    let t1 = 1,
+        max = 20;
+    while (t1 < max) {
+        ctx.lineTo(point.x, point.y);
+        console.log(point);
+        point = PointOnCubicBezier1([point, {
+            x: 100,
+            y: 0
+        }, {
+            x: 100,
+            y: 100
+        }], t1 / max)
+        t1 += 1;
+    }
+    // ctx.lineTo(10,20);
+    // ctx.lineTo(100,200);
+
+    ctx.stroke();
+</script>
+
+</html>

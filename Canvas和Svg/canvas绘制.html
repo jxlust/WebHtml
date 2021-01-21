@@ -57,7 +57,6 @@
         // ctx.drawImage(img,10,10,100,130,20,50,60,60)
     </script>
 
-    <!-- 渐变 -->
     <script>
         let canvas3 = document.getElementById('canvas3');
         let ctx3 = canvas3.getContext('2d');
@@ -85,56 +84,7 @@
     </script>
 
 
-    <script>
-        // let width = window.innerWidth;
-        // let height = window.innerHeight;
-        let width = document.documentElement.clientWidth;
-        let height = document.documentElement.clientHeight;
-        let canvas = document.querySelector('#clock');
-        canvas.width = width;
-        canvas.height = height;
-        if (!canvas.getContext) throw new Error('不支持canvas');
-        let ctx = canvas.getContext('2d');
 
-        ctx.beginPath();
-        ctx.fillStyle = '#f8f8f8';
-        ctx.rect(0, 100, 500, 500);
-        // ctx.arc(150, 150, 500, 0, 2 * Math.PI);
-        // ctx.stroke();
-        // ctx.fill();
-        ctx.clip();
-        // ctx.fillStyle = 'pink';
-        // ctx.fillRect(150, 150, 100, 100);
-
-        drawStar(ctx, 80, 200, 200, 200, 0, 1, '#ff00ff', '#888');
-        window.addEventListener('resize', resize);
-
-        function resize(e) {
-            width = document.documentElement.clientWidth;
-            height = document.documentElement.clientHeight;
-            canvas.width = width;
-            canvas.height = height;
-        }
-    </script>
-    <script>
-        function drawStar(cxt, r, R, x, y, rot, borderWidth, borderStyle, fillStyle) {
-            cxt.beginPath();
-            for (var i = 0; i < 5; i++) {
-                cxt.lineTo(Math.cos((18 + 72 * i - rot) / 180 * Math.PI) * R + x, -Math.sin((18 + 72 * i - rot) / 180 *
-                    Math.PI) * R + y);
-                cxt.lineTo(Math.cos((54 + 72 * i - rot) / 180 * Math.PI) * r + x, -Math.sin((54 + 72 * i - rot) / 180 *
-                    Math.PI) * r + y);
-            }
-            cxt.closePath();
-
-            cxt.lineWidth = borderWidth;
-            cxt.strokeStyle = borderStyle;
-            cxt.fillStyle = fillStyle;
-
-            cxt.fill();
-            cxt.stroke();
-        }
-    </script>
 </body>
 
 

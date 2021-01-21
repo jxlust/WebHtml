@@ -35,14 +35,16 @@
                 requestAnimationFrame(animate)
             }
         }
+        let count = 1;
         new TWEEN.Tween({
-                tweeningValue: 0
+                tweeningValue: -110
             })
             .to({
-                tweeningValue: 99
-            }, 500)
+                tweeningValue: -100
+            }, 1000)
             .onUpdate(function () {
                 console.log(this.tweeningValue);
+                console.log(count++);
                 number1.innerText = this.tweeningValue.toFixed(0)
             })
             .start()
