@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jxlAnimation.js"></script>
+</head>
+
+<body>
+    <div class="main">
+        <canvas id="canvas" width="500px" height="500px"></canvas>
+    </div>
+
+</body>
+
+<script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.beginPath();
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = '#ff0000';
+    // ctx.moveTo(0,0);
+    // ctx.lineTo(100, 100);
+    let ub = new UnitBezier(0,0,1,1);
+    for(let i = 0;i <= 100;i++){
+       let percent = i / 100;
+       let y = ub.getCurveX(percent);
+       console.log(y);
+       ctx.lineTo(i,y * 100)
+    }
+
+    ctx.stroke();
+</script>
+
+</html>

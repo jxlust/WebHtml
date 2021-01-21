@@ -8,27 +8,27 @@
 </head>
 
 <body>
+    <div class="main">
+        <span id="number"></span>
+        <canvas id="canvas" width="500px" height="500px"></canvas>
+    </div>
 
 </body>
 <script>
-    function onebsr(t, a1, a2) {
+    // function onebsr(t, a1, a2) {
+    //     return a1 + (a2 - a1) * t;
+    // }
+    // function twobsr(t, a1, a2, a3) {
+    //     return ((1 - t) * (1 - t)) * a1 + 2 * t * (1 - t) * a2 + t * t * a3;
 
-        return a1 + (a2 - a1) * t;
+    // }
 
-    }
+    // function threebsr(t, a1, a2, a3, a4) {
 
-    function twobsr(t, a1, a2, a3) {
+    //     return a1 * (1 - t) * (1 - t) * (1 - t) + 3 * a2 * t * (1 - t) * (1 - t) + 3 * a3 * t * t * (1 - t) + a4 * t *
+    //         t * t;
 
-        return ((1 - t) * (1 - t)) * a1 + 2 * t * (1 - t) * a2 + t * t * a3;
-
-    }
-
-    function threebsr(t, a1, a2, a3, a4) {
-
-        return a1 * (1 - t) * (1 - t) * (1 - t) + 3 * a2 * t * (1 - t) * (1 - t) + 3 * a3 * t * t * (1 - t) + a4 * t *
-            t * t;
-
-    }
+    // }
 
     function PointOnCubicBezier1(cp, t) {
         var tPos = {}
@@ -79,17 +79,75 @@
     }
 
     let ub = new UnitBezier(0, 0, 1, 1);
-    let start = 0;
-    let hz = 1000 / 60;
+    // let start = 0;
+    // let hz = 1000 / 60;
 
-    while (start < 1000) {
-        console.log('start:', start);
-        let t = start / 1000;
-        let x = ub.sampleCurveX(t)
-        let y = ub.sampleCurveY(t);
-        console.log('x,y', x, y);
-        start += hz;
+    // while (start < 1000) {
+    //     console.log('start:', start);
+    //     let t = start / 1000;
+    //     let x = ub.sampleCurveX(t)
+    //     let y = ub.sampleCurveY(t);
+    //     console.log('x,y', x, y);
+    //     start += hz;
+    // }
+</script>
+
+<script>
+    const numEl = document.getElementById('number');
+    let startNum = 0;
+    let endNum = 0;
+    const timelong = 1000;
+    const HZ = 1000 / 60; //刷新一次需要的ms数
+
+    let count = 0;
+    let updateN = timelong / HZ; // n = duration / 1000 * 60 
+    let avgAdd = 0;
+
+    function callback(value) {
+        console.log('value:', value);
+        numEl.innerText = value | 0;
     }
+    console.log(ub);
+
+    function numberAnimation(timestamp) {
+        // console.log('nnnnn:', timestamp);
+        console.log('count:', count++);
+        //分区间
+        //初始定 按刷新频率来更新数据，假定刷新频率为 1000ms 60次
+        // HZ = 1000ms / 60
+        //1000ms ，更新60次， 每次 value = (diffNumber) / 60
+
+        //得出以下公式
+        //1.定义动画时长为duration（ms）, 更新次数 n = duration / 1000 * 60 次, 
+        //2.每次改变的值平均增加 avgAdd = (diff) / n, diff = end - start; (考虑的end > start)
+        //3. 新值 newV += avgAdd; 如果 end < start , newV -= avgAdd;
+
+        //实际要实现的效果递增的值不是线性的，会比较呆板，可能要实现曲线递增效果
+
+        if (timestamp > timelong) {
+            callback(endNum)
+        } else {
+            // startNum += avgAdd; //线性递增
+            let tPercent = timestamp / timelong;
+            let progress = ub.sampleCurveX(tPercent) //曲线递增
+            console.log('xx:',progress);
+            let newNum = startNum + (endNum - startNum) * progress
+            callback(newNum)
+            requestAnimationFrame(numberAnimation)
+        }
+
+    }
+
+    function startBetween(start, end) {
+        numEl.innerText = start;
+        startNum = start;
+        endNum = end;
+        avgAdd = Math.abs(endNum - startNum) / updateN;
+        console.log('avgAdd', avgAdd);
+        requestAnimationFrame(numberAnimation)
+    }
+
+    startBetween(1, 99)
 </script>
 
 </html>
