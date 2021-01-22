@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <script src="./js/loopChange.js"></script>
   <style>
     @keyframes lgAnimation {
 
@@ -258,43 +259,48 @@
 
   <script>
     const ulCssAniEl = document.getElementById('ulCssAni');
-    let allListsEL = ulCssAniEl.children;
-    let lastChild = null;
-    let rAFId = null;
-    let maxCount = 3;
+    const loopChange = new LoopChange(ulCssAniEl,4,[3000,4000,6000]);
+    loopChange.startLoop();
+  </script>
+  <script>
+    // const ulCssAniEl = document.getElementById('ulCssAni');
+    // let allListsEL = ulCssAniEl.children;
+    // let lastChild = null;
+    // let rAFId = null;
+    // let maxCount = 3;
 
-    function setActive(el) {
-      if (el !== lastChild) {
-        lastChild && lastChild.classList.remove('active');
-        el.classList.add('active');
-        lastChild = el
-      }
-    }
+    // function setActive(el) {
+    //   if (el !== lastChild) {
+    //     lastChild && lastChild.classList.remove('active');
+    //     el.classList.add('active');
+    //     lastChild = el
+    //   }
+    // }
 
-    function cssAni(timestamp) {
-      // 0 - 3000ms red
-      // 3000ms - 4000ms yellow
-      //4000ms - 6000ms green
-      let isGoon = timestamp <= maxCount * 6000;
-      timestamp = timestamp % 6000;
-      if (timestamp < 3000) {
-        setActive(allListsEL[0])
-      } else if (timestamp < 4000) {
-        setActive(allListsEL[1])
-      } else {
-        setActive(allListsEL[2])
-      }
-      loop(isGoon);
-    }
+    // function cssAni(timestamp) {
+    //   // 0 - 3000ms red
+    //   // 3000ms - 4000ms yellow
+    //   //4000ms - 6000ms green
+    //   let isGoon = timestamp <= maxCount * 6000;
+    //   timestamp = timestamp % 6000;
+    //   if (timestamp < 3000) {
+    //     setActive(allListsEL[0])
+    //   } else if (timestamp < 4000) {
+    //     setActive(allListsEL[1])
+    //   } else {
+    //     setActive(allListsEL[2])
+    //   }
+    //   loop(isGoon);
+    // }
 
-    function loop(isGoon) {
-      if (isGoon) {
-        rAFId = window.requestAnimationFrame(cssAni)
-      } else {
-        window.cancelAnimationFrame(rAFId)
-      }
-    }
-    loop(true);
+    // function loop(isGoon) {
+    //   if (isGoon) {
+    //     rAFId = window.requestAnimationFrame(cssAni)
+    //   } else {
+    //     window.cancelAnimationFrame(rAFId)
+    //   }
+    // }
+    // loop(true);
   </script>
 </body>
 
