@@ -63,5 +63,28 @@ const Bezier = function (v, k) {
         b += pw(1 - k, n - i) * pw(k, i) * v[i] * bn(n, i);
     }
     return b;
-
 }
+
+
+
+
+function division() {
+    let start = 0,end = 20,target = 3.1233242341213123,ep = 1e-5;
+    while(start < end){
+        let mid = start + (end - start) * 0.5;
+        let diff = Math.abs(mid-target);
+        if(diff <= ep){
+            console.log(1,diff);
+            return mid;
+        }else if(mid  > target){
+            end = mid;
+        }else {
+            start = mid;
+        }
+    }
+    return start;
+}
+
+console.log(division());
+
+
