@@ -74,10 +74,53 @@
         ctx.moveTo(0, 0);
         ctx.bezierCurveTo(...p2, ...p3, ...p4);
         ctx.stroke();
-
     }
+
+    function path3() {
+        const canvas = document.querySelector('#canvas2');
+        if (!canvas.getContext) throw new Error('不支持canvas');
+        let ctx = canvas.getContext('2d');
+        ctx.beginPath();
+        ctx.fillStyle = 'red';
+        // ctx.save();
+        ctx.lineWidth = 0;
+        let start = 0;
+        let animationId = null;
+
+        function startAni(timestamp) {
+            let t = timestamp / 2000;
+            ctx.beginPath();
+            ctx.arc(start, 100, 1, 0, 2 * Math.PI, false);
+            ctx.fill();
+            let x = threebsr(t, 0, 10, 30, 50);
+            start += x;
+            loop();
+        }
+
+        function loop() {
+            if (start < 1000) {
+                animationId = window.requestAnimationFrame(startAni)
+            } else {
+                cancelAnimationFrame(animationId)
+            }
+        }
+        loop();
+
+        // for (let i = 0; i <= 50; i++) {
+        //     let x = threebsr(i / 50, 0, 10, 30, 50);
+        //     //一维贝塞尔曲线用于动画效果
+        //     console.log(x);
+        //     start += x;
+        //     ctx.beginPath();
+        //     ctx.arc(start, 100, 1, 0, 2 * Math.PI, false);
+        //     ctx.fill();
+        // }
+        console.log(start);
+    }
+
     path1();
     path2();
+    path3();
 </script>
 
 </html>

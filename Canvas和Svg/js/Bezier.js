@@ -10,6 +10,14 @@ function twobsr(t, a1, a2, a3) {
 }
 
 // 3阶贝塞尔曲线公式
+/**
+ * 
+ * @param {float} t  百分比
+ * @param {number} a1  起点
+ * @param {number} a2 控制点
+ * @param {number} a3 控制点
+ * @param {number} a4 终点
+ */
 function threebsr(t, a1, a2, a3, a4) {
     return a1 * (1 - t) * (1 - t) * (1 - t) + 3 * a2 * t * (1 - t) * (1 - t) + 3 * a3 * t * t * (1 - t) + a4 * t * t * t;
 }
@@ -103,5 +111,3 @@ function getBezierPoints(num = 100, p1, p2, p3, p4) {
     }
     return points;
 }
-
-

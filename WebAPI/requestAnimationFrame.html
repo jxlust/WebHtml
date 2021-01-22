@@ -117,15 +117,17 @@
     const HZ = 1000 / 60; //刷新一次需要的ms数
 
     let count = 0;
-    let updateN =  timelong / HZ; // n = duration / 1000 * 60 
+    let updateN = timelong / HZ; // n = duration / 1000 * 60 
     let avgAdd = 0;
+
     function callback(value) {
-        console.log('value:',value);
+        console.log('value:', value);
         numEl.innerText = value | 0;
     }
+
     function numberAnimation(timestamp) {
         console.log('nnnnn:', timestamp);
-        console.log('count:',count++);
+        console.log('count:', count++);
         //分区间
         //初始定 按刷新频率来更新数据，假定刷新频率为 1000ms 60次
         // HZ = 1000ms / 60
@@ -141,23 +143,62 @@
         if (timestamp >= timelong || startNum >= endNum) {
             callback(endNum)
         } else {
-            startNum += avgAdd;//线性递增
+            startNum += avgAdd; //线性递增
             callback(startNum)
             requestAnimationFrame(numberAnimation)
         }
-      
+
     }
 
     function startBetween(start, end) {
         numEl.innerText = start;
         startNum = start;
         endNum = end;
-        avgAdd =  Math.abs(endNum - startNum) / updateN;
-        console.log('avgAdd',avgAdd);
+        avgAdd = Math.abs(endNum - startNum) / updateN;
+        console.log('avgAdd', avgAdd);
         requestAnimationFrame(numberAnimation)
     }
 
     startBetween(1, 99)
+</script>
+
+
+<script>
+    // 道题考察了如何在不卡住页面的情况下渲染数据，也就是说不能一次性将几万条都渲染出来，而应该一次渲染部分 DOM，
+    // 那么就可以通过 requestAnimationFrame 来每 16 ms 刷新一次。
+    setTimeout(() => {
+        // 插入十万条数据
+        const total = 100000
+        // 一次插入 20 条，如果觉得性能不好就减少
+        const once = 20
+        // 渲染数据总共需要几次
+        const loopCount = total / once
+        let count = 0
+        let requestId = 0
+        let ul = document.querySelector("ul");
+
+        function add() {
+            // 优化性能，插入不会造成回流
+            const fragment = document.createDocumentFragment();
+            for (let i = 0; i < once; i++) {
+                const li = document.createElement("li");
+                count += 1
+                li.innerText = Math.floor(count);
+                fragment.appendChild(li);
+            }
+            ul.appendChild(fragment);
+            loop();
+        }
+
+        function loop() {
+            if (count < total) {
+                requestId = window.requestAnimationFrame(add);
+            } else {
+                window.cancelAnimationFrame(requestId)
+            }
+        }
+        loop();
+    }, 0);
 </script>
 
 </html>

@@ -26,6 +26,17 @@
       }
     }
 
+    @keyframes showAni {
+      from {
+        opacity: 0.2;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+
     .light {
       width: 100px;
       height: 100px;
@@ -78,12 +89,65 @@
     .light-block.greenShow>.green {
       opacity: 1;
     }
+
+
+    .ul-css {
+      width: 200px;
+      height: 120px;
+    }
+
+    .ul-css__item {
+      opacity: .2;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: inline-block;
+      outline: none;
+      /* animation-fill-mode: both;
+      animation-timing-function: ease;
+      animation-iteration-count: infinite; */
+      /* animation-direction: alternate-reverse; */
+      /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+    }
+
+    .ul-css__item:nth-child(1) {
+      background-color: red;
+
+    }
+
+    .ul-css__item:nth-child(2) {
+      background-color: yellow;
+
+    }
+
+    .ul-css__item:nth-child(3) {
+      background-color: green;
+    }
+
+    .ul-css__item.active {
+      opacity: 1;
+    }
+
+    .tips {
+      font-size: 14px;
+      color: #999;
+      margin: 20px 0 10px 20px;
+    }
   </style>
 </head>
 
 <body>
+  <p class="tips">纯css样式实现：</p>
+
   <div class="light"></div>
   <div class="light2" id="lgId"></div>
+
+
+  <ul class="ul-css" id="ulCssAni">
+    <li class="ul-css__item"></li>
+    <li class="ul-css__item"></li>
+    <li class="ul-css__item"></li>
+  </ul>
 
   <ul class="ul-light">
     <li class="red"></li>
@@ -147,14 +211,14 @@
       ulElement.className = 'ul-light redShow';
       timerPromise(3000).then(() => {
         ulElement.className = 'ul-light yellowShow';
-        console.log(11);
+        // console.log(11);
         return timerPromise(1000)
       }).then(() => {
         ulElement.className = 'ul-light greenShow';
-        console.log(22);
+        // console.log(22);
         return timerPromise(2000)
       }).then(() => {
-        console.log(33);
+        // console.log(33);
         startLight();
       })
     }
@@ -179,6 +243,7 @@
 
     function startAnimation() {
       // let index = (Math.random() * 3) | 0;
+      // console.log(1111);
       let curDate = Date.now();
       if (curDate - lastDate > diffTime) {
         lastDate = curDate;
@@ -189,6 +254,47 @@
       requestAnimationFrame(startAnimation)
     }
     startAnimation();
+  </script>
+
+  <script>
+    const ulCssAniEl = document.getElementById('ulCssAni');
+    let allListsEL = ulCssAniEl.children;
+    let lastChild = null;
+    let rAFId = null;
+    let maxCount = 3;
+
+    function setActive(el) {
+      if (el !== lastChild) {
+        lastChild && lastChild.classList.remove('active');
+        el.classList.add('active');
+        lastChild = el
+      }
+    }
+
+    function cssAni(timestamp) {
+      // 0 - 3000ms red
+      // 3000ms - 4000ms yellow
+      //4000ms - 6000ms green
+      let isGoon = timestamp <= maxCount * 6000;
+      timestamp = timestamp % 6000;
+      if (timestamp < 3000) {
+        setActive(allListsEL[0])
+      } else if (timestamp < 4000) {
+        setActive(allListsEL[1])
+      } else {
+        setActive(allListsEL[2])
+      }
+      loop(isGoon);
+    }
+
+    function loop(isGoon) {
+      if (isGoon) {
+        rAFId = window.requestAnimationFrame(cssAni)
+      } else {
+        window.cancelAnimationFrame(rAFId)
+      }
+    }
+    loop(true);
   </script>
 </body>
 
