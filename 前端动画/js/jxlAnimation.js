@@ -19,6 +19,7 @@ class UnitBezier {
     }
 }
 
+
 function test() {
     let ub = new UnitBezier(0, 0, 1, 1)
     let x = ub.getCurveX(0.1)

@@ -6,6 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="./js/Bezier.js"></script>
+    <style>
+        body,html{
+            margin: 0;
+            padding: 0;
+        }
+        #mouse-canvas{
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -118,9 +129,37 @@
         console.log(start);
     }
 
+    function threebsrZtoO(t, a2, a3) {
+        return 3 * a2 * t * (1 - t) * (1 - t) + 3 * a3 * t * t * (1 - t) + t *
+            t * t;
+    }
+
+    function path4() {
+        const canvas = document.querySelector('#canvas2');
+        if (!canvas.getContext) throw new Error('不支持canvas');
+        let ctx = canvas.getContext('2d');
+        ctx.beginPath();
+        ctx.strokeStyle = 'blue';
+        let points = [];
+        for (let i = 0; i <= 100; i++) {
+            let x = threebsrZtoO(i/100,0.3,0.6)
+            points.push(x)
+            ctx.lineTo(i*20, x*30)
+        }
+        // console.log('points:',points);
+        console.table(points)
+        console.dir(11122)
+        ctx.stroke();
+
+
+    }
+
     path1();
     path2();
     path3();
+    path4();
 </script>
+
+<script src="./js/mouseClick.js" async></script>
 
 </html>
