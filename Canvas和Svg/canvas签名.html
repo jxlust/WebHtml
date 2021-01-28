@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../前端动画/css/fonts.css">
+
+    <style>
+        .number {
+            font-size: 20px;
+            font-family: myLiquidCrystal;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="number">22</div>
+
+
+</body>
+<script>
+    const myState = {
+        events: ('ontouchstart' in window) ? ['touchstart', 'touchmove', 'touchend'] : ['mousedown', 'mousemove',
+            'mouseup'
+        ],
+        isTouch: ('ontouchstart' in window)
+    }
+    document.body.onload = function () {
+        const events = myState.events;
+        const canvas = document.createElement('canvas');
+        canvas.id = 'mySign';
+        canvas.width = 600;
+        canvas.height = 600;
+        canvas.style.background = '#f8f8f8'
+        document.body.appendChild(canvas);
+        const ctx = canvas.getContext('2d');
+        /**    @type {HTMLCanvasElement} */
+        ctx.font = '100px "myLiquidCrystal"'
+        ctx.save();
+        ctx.translate(50, 180);
+        ctx.rotate(-30 * Math.PI / 180);
+        ctx.fillStyle = '#ff0000';
+        ctx.fillText('999', 0, 00);
+
+        ctx.restore();
+        ctx.fillRect(0, 0, 100, 100);
+        // ctx.fill();
+        ctx.fillText('888', 100, 100)
+        ctx.strokeStyle = '#ff0000';
+        ctx.lineWidth = 3;
+        let startX, startY;
+        let {
+            x: cStartX,
+            y: cStartY
+        } = canvas.getBoundingClientRect();
+
+        let startIng = false;
+
+        function startHandler(event) {
+            event.preventDefault();
+
+            console.log('event start:', event);
+            console.log(cStartX, cStartY);
+            startIng = true;
+            let e = myState.isTouch ? event.touches[0] : event;
+            startX = e.clientX - cStartX;
+            startY = e.clientY - cStartY;
+            ctx.moveTo(startX, startY);
+
+        }
+
+        function moveHandler(event) {
+            event.preventDefault();
+            if (!startIng) return;
+            console.log('move evnet');
+            let e = myState.isTouch ? event.touches[0] : event;
+            let x = e.clientX - cStartX;
+            let y = e.clientY - cStartY;
+            ctx.lineTo(x, y)
+            ctx.stroke();
+        }
+        canvas.addEventListener(events[0], startHandler)
+
+        canvas.addEventListener(events[1], moveHandler)
+        canvas.addEventListener(events[2], function (event) {
+            // ctx.fill();
+            console.log('enedddd.');
+            startIng = false;
+
+        })
+        canvas.addEventListener('mouseout', function (event) {
+            startIng = false;
+        })
+
+        function removeEventListener() {
+            canvas.removeEventListener(events[1], moveHandler, false)
+        }
+
+    }
+</script>
+
+</html>
