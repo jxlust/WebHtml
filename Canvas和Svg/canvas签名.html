@@ -12,12 +12,19 @@
             font-size: 20px;
             font-family: myLiquidCrystal;
         }
+
+        .save-btn {
+            border-radius: 4px;
+            padding: 5px 10px;
+            background-color: #f8f8f8;
+        }
     </style>
 </head>
 
 <body>
     <div class="number">22</div>
-
+    <div class="save-btn" id="saveBtn">Save</div>
+    <div class="img-block"></div>
 
 </body>
 <script>
@@ -27,7 +34,9 @@
         ],
         isTouch: ('ontouchstart' in window)
     }
+
     document.body.onload = function () {
+        saveEvent();
         const events = myState.events;
         const canvas = document.createElement('canvas');
         canvas.id = 'mySign';
@@ -57,6 +66,17 @@
         } = canvas.getBoundingClientRect();
 
         let startIng = false;
+
+
+        function saveEvent() {
+            document.getElementById('saveBtn').addEventListener('click', function (e) {
+                const image = new Image()
+                // 等价于 document.createElement('img')
+                // canvas.toDataURL 返回的是一串Base64编码的URL
+                image.src = canvas.toDataURL("image/png")
+                document.body.appendChild(image)
+            })
+        }
 
         function startHandler(event) {
             event.preventDefault();
