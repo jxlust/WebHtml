@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,
+        html {
+            padding: 0;
+            margin: 0;
+        }
+
+        @keyframes eyes-ani {
+            /* 0% {
+               
+                height: 10px;
+            } */
+
+            90% {
+                height: 10px;
+            }
+
+            100% {
+                height: 1px;
+            }
+        }
+
+        .main {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .robot {
+            position: absolute;
+            left: 100px;
+            top: 100px;
+            width: 100px;
+            height: 200px;
+            background-color: #f8f8f8;
+            transform: rotate(45deg);
+        }
+
+        .eyes-block,.eyes-block2{
+            margin: 10px 0;
+            position: relative;
+            width: 60px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            border-radius: 20px;
+            background-color: blue;
+        }
+
+        .robot-eyes {
+            /* position: absolute; */
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+
+            /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+            animation-name: eyes-ani;
+            animation-delay: 0;
+            animation-duration: 3000ms;
+            animation-fill-mode: both;
+            animation-timing-function: ease;
+            animation-iteration-count: infinite;
+        }
+
+        .robot-eyes2 {
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            transition: height .2s;
+
+        }
+
+        .eyes-block2:hover .robot-eyes2 {
+            width: 10px;
+            height: 1px;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="robot">
+            <div class="eyes-block">
+                <div class="robot-eyes"></div>
+                <div class="robot-eyes"></div>
+            </div>
+
+            <div class="eyes-block2">
+                <div class="robot-eyes2"></div>
+                <div class="robot-eyes2"></div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+
+</script>
+
+</html>
