@@ -1,0 +1,159 @@
+
+@keyframes scroll-warning {
+    0% {
+        background-color: #ffc107;
+        border-color: #ffc107
+    }
+
+    to {
+        background-color: #f8f9fa
+    }
+}
+
+
+@keyframes scan {
+
+    0%,
+    20%,
+    to {
+        height: 0;
+        transform: translate(-50%, .44em)
+    }
+
+    10%,
+    15% {
+        height: 1em;
+        line-height: .2em;
+        transform: translate(-55%, .28em)
+    }
+}
+
+@keyframes attn {
+
+    0%,
+    to {
+        opacity: 1
+    }
+
+    30%,
+    35% {
+        opacity: .4
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    to {
+        transform: translate(-1px)
+    }
+
+    10% {
+        transform: translate(2px, 1px)
+    }
+
+    30% {
+        transform: translate(-3px, 2px)
+    }
+
+    35% {
+        transform: translate(2px, -3px);
+        filter: blur(4px);
+    }
+
+    45% {
+        transform: translate(2px, 2px) skewY(-8deg) scaleX(.96);
+        filter: blur(0);
+    }
+
+    50% {
+        transform: translate(-3px, 1px)
+    }
+}
+
+@keyframes glitch-anim {
+    0% {
+        clip: rect(13px, 9999px, 44px, 0)
+    }
+
+    10% {
+        clip: rect(72px, 9999px, 58px, 0)
+    }
+
+    20% {
+        clip: rect(7px, 9999px, 78px, 0)
+    }
+
+    30% {
+        clip: rect(34px, 9999px, 97px, 0)
+    }
+
+    40% {
+        clip: rect(34px, 9999px, 16px, 0)
+    }
+
+    50% {
+        clip: rect(1px, 9999px, 41px, 0)
+    }
+
+    60% {
+        clip: rect(15px, 9999px, 25px, 0)
+    }
+
+    70% {
+        clip: rect(72px, 9999px, 40px, 0)
+    }
+
+    80% {
+        clip: rect(92px, 9999px, 48px, 0)
+    }
+
+    90% {
+        clip: rect(59px, 9999px, 64px, 0)
+    }
+
+    to {
+        clip: rect(66px, 9999px, 22px, 0)
+    }
+}
+
+
+@keyframes spinner-grow {
+    0% {
+        transform: scale(0)
+    }
+
+    50% {
+        opacity: 1;
+        transform: none
+    }
+}
+
+
+@keyframes fa-spin {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    to {
+        transform: rotate(1turn)
+    }
+}
+
+
+@keyframes progress-bar-stripes {
+    0% {
+        background-position: 1rem 0
+    }
+
+    to {
+        background-position: 0 0
+    }
+}
+
+
+@keyframes spinner-border {
+    to {
+        transform: rotate(1turn)
+    }
+}
