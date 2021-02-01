@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box,
+        .box2 {
+            width: 100px;
+            height: 100px;
+            transform-origin: left top;
+            background-color: aquamarine;
+            transition-duration: 1000ms;
+        }
+
+        .box:hover {
+            transform: skew(30deg, 0);
+        }
+
+
+        .box2:hover {
+            transform: skew(0, 30deg);
+
+        }
+
+
+        .main2 .flip-container {
+            border: 1px solid #f8f8f8;
+            -webkit-perspective: 1000;
+            perspective: 1000;
+            width: 300px;
+            height: 400px;
+        }
+
+        .main2 .flip-container .flipper {
+            position: relative;
+            transition-duration: .6s;
+            transform-style: preserve-3d;
+        }
+
+        .main2 .flipper .front,
+        .main2 .flipper .back {
+            width: 300px;
+            height: 400px;
+            backface-visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition-duration: .6s;
+            transform-style: preserve-3d;
+            transition-property: transform;
+        }
+
+        .main2 .front {
+            z-index: 2;
+            transform: rotateY(0deg);
+        }
+
+        .main2 .back {
+            transform: rotateY(-180deg);
+        }
+
+        .main2 .flip-container:hover .front {
+            transform: rotateY(180deg);
+        }
+
+        .main2 .flip-container:hover .back {
+            transform: rotateY(0deg);
+        }
+
+        .main3 .flip-container {
+            border: 1px solid #f8f8f8;
+            -webkit-perspective: 1000;
+            perspective: 1000;
+            width: 300px;
+            height: 400px;
+        }
+
+        .main3 .flipper {
+            position: relative;
+            transition-duration: .6s;
+            transform-style: preserve-3d;
+        }
+
+        .main3 .front,
+        .main3 .back {
+            width: 300px;
+            height: 400px;
+            backface-visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition-duration: .6s;
+            transform-style: preserve-3d;
+            transition-property: transform;
+        }
+
+        .main3 .front {
+            z-index: 2;
+            transform: rotateY(0deg);
+        }
+
+        .main3 .back {
+            transform: rotateY(180deg);
+        }
+
+        .main3 .flip-container.active .front {
+            transform: rotateY(-180deg);
+        }
+
+        .main3 .flip-container.flip-container.active .back {
+            transform: rotateY(0deg);
+        }
+
+        @keyframes flip-ani {
+            0% {
+                transform: perspective(1000px) rotateY(-180deg) scale(.01);
+                animation-timing-function: ease-in;
+                opacity: 0;
+            }
+            40% {
+                transform: perspective(1000px) rotateY(-160deg) scale(.2);
+                animation-timing-function: ease-in;
+                opacity: 1;
+            }
+
+            60% {
+                transform: perspective(1000px) rotateY(-60deg) scale(.9);;
+            }
+
+            80% {
+                transform: perspective(1000px) rotateY(-10deg) scale(.99);;
+            }
+
+            100% {
+                transform: perspective(1000px);
+            }
+        }
+
+        .flipper-block {
+            width: 300px;
+            height: 400px;
+        }
+
+        .flipper-card {
+            width: 300px;
+            height: 400px;
+            transform-style: preserve-3d;
+            /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+            animation-name: flip-ani;
+            animation-duration: 1000ms;
+            animation-fill-mode: both;
+            animation-iteration-count: infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="box"></div>
+        <div class="box2"></div>
+    </div>
+
+
+    <div class="main2">
+        <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+            <div class="flipper">
+                <div class="front" style="background-color: blueviolet;">
+                </div>
+                <div class="back" style="background-color: red;">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main3">
+        <div class="btn" id="changeBtn">翻转</div>
+        <div class="flip-container" id="flip3">
+            <div class="flipper">
+                <div class="front" style="background-color:gold;">
+                </div>
+                <div class="back" style="background-color: brown;">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main4">
+        <div class="text">动画：</div>
+        <div class="flipper-block">
+            <div class="flipper-card" style="background-color:gold;">
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    const changeBtn = document.getElementById('changeBtn')
+    const flip3 = document.getElementById('flip3')
+    changeBtn.addEventListener('click', function (event) {
+        if (flip3.classList.contains('active')) {
+            flip3.classList.remove('active')
+        } else {
+            flip3.classList.add('active')
+        }
+    })
+</script>
+
+</html>
