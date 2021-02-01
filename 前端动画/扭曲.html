@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box,.box2{
+            width: 100px;
+            height: 100px;
+            transform-origin: left top;
+            background-color: aquamarine;
+            transition-duration: 1000ms;
+        }
+        .box:hover{
+            transform: skew(30deg,0);
+        }
+
+
+        .box2:hover{
+            transform: skew(0,30deg);
+
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="box"></div>
+        <div class="box2"></div>
+    </div>
+    
+</body>
+</html>
