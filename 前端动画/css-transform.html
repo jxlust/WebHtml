@@ -13,9 +13,8 @@
         }
 
         .perspective {
-
             margin-top: 100px;
-            perspective: 800px;
+            perspective: 1000px;
             transform-style: preserve-3d;
         }
 
@@ -40,12 +39,18 @@
             align-items: center;
             transform-origin: left;
             border: 1px solid #1976D2;
+            transition-duration: 1000ms;
+            transition-property: transform;
+        }
+
+        .page.active {
+            transform: rotateY(-180deg);
         }
 
         .book-cover {
             background-color: #1976D2;
             color: #ffffff;
-            animation: roll 6s ease 0s 2 alternate;
+            /* animation: roll 6s ease 0s 2 alternate; */
         }
 
         .book-content {
@@ -54,15 +59,27 @@
         }
 
         .book-content1 {
-            animation: roll 3s ease 3s 2 alternate;
+            /* animation: roll 3s ease 3s 2 alternate; */
+        }
+
+        .book-content1.active {
+            z-index: 9;
+        }
+
+        .book-content2.active {
+            z-index: 8;
+        }
+
+        .book-content3.active {
+            z-index: 7;
         }
 
         .book-content2 {
-            animation: roll 4s ease 2s 2 alternate;
+            /* animation: roll 4s ease 2s 2 alternate; */
         }
 
         .book-content3 {
-            animation: roll 5s ease 1s 2 alternate;
+            /* animation: roll 5s ease 1s 2 alternate; */
         }
 
         @keyframes roll {
@@ -141,18 +158,31 @@
                 transform: rotate(0deg);
             }
         }
+
+        .opt-page{
+            display: flex;
+            align-items: center;
+        }
+        .opt-page *{
+            margin: 0 20px;
+        }
     </style>
 </head>
 
 <body>
-
+  
     <div class="perspective">
+        <div class="opt-page">
+            <div class="cur-page" id="curP">0</div>
+            <div class="pre-page" id="pre">上一页</div>
+            <div class="next-page" id="next">下一页</div>
+        </div>
         <div class="book-wrap">
-            <div class="page book-content">end</div>
-            <div class="page book-content book-content1">第三页</div>
-            <div class="page book-content book-content2">第二页</div>
-            <div class="page book-content book-content3">第一页</div>
-            <div class="page book-cover">封面</div>
+            <div class="page book-content" id="page4">end</div>
+            <div class="page book-content book-content1" id="page3">第三页</div>
+            <div class="page book-content book-content2" id="page2">第二页</div>
+            <div class="page book-content book-content3" id="page1">第一页</div>
+            <div class="page book-cover" id="page0">封面</div>
         </div>
     </div>
 
@@ -178,7 +208,39 @@
     // 该translateZ(200px)函数将元素从屏幕“向外”移动200像素到用户。
     // 这使得在2D显示器上观看时元素显得更大，或者使用VR耳机或其他3D显示设备观看时更接近元素
 </script>
+<script>
+    const domlist = [...document.querySelectorAll('.page')].reverse();
+    let curPage = 0;
+    let lastStack = [];
+    const curP = document.getElementById('curP');
+    const nextEl = document.getElementById('next');
+    const preEL = document.getElementById('pre');
 
+    function setCur() {
+        curP.innerText = curPage;
+    }
+
+    nextEl.addEventListener('click', function (event) {
+        if (curPage < domlist.length - 1) {
+            domlist[curPage].classList.add('active');
+            lastStack.push(curPage)
+            curPage++;
+        } else {
+            alert('到底了')
+        }
+        setCur();
+    })
+    preEL.addEventListener('click', function (event) {
+        if (curPage > 0) {
+            let pop = lastStack.pop();
+            domlist[pop].classList.remove('active');
+            curPage--;
+        } else {
+            alert('第一页')
+        }
+        setCur();
+    })
+</script>
 <script>
     const flipBtn = document.getElementById('flipBtn');
     const flipContainer = document.querySelector('.flip-container');
