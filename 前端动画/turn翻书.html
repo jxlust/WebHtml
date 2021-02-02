@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../web/js/jquery-2.2.2.min.js"></script>
+    <script src="./js/turn.min.js"></script>
+    <style>
+        #flipbook {
+            width: 800px;
+            height: 400px;
+        }
+
+        #flipbook .turn-page {
+            background-color: #ccc;
+        }
+
+        .sample-flipbook {
+            width: 400px;
+            height: 200px;
+            -webkit-transition: margin-left 0.2s;
+            -moz-transition: margin-left 0.2s;
+            -ms-transition: margin-left 0.2s;
+            -o-transition: margin-left 0.2s;
+            transition: margin-left 0.2s;
+        }
+
+        .sample-flipbook .page {
+            width: 200px;
+            height: 200px;
+            background-color: white;
+            line-height: 300px;
+            font-size: 20px;
+        }
+
+        .sample-flipbook .page-wrapper {
+            -webkit-perspective: 2000px;
+            -moz-perspective: 2000px;
+            -ms-perspective: 2000px;
+            -o-perspective: 2000px;
+            perspective: 2000px;
+        }
+
+        .sample-flipbook .hard {
+            background: #ccc !important;
+            color: #333;
+            -webkit-box-shadow: inset 0 0 5px #666;
+            -moz-box-shadow: inset 0 0 5px #666;
+            -o-box-shadow: inset 0 0 5px #666;
+            -ms-box-shadow: inset 0 0 5px #666;
+            box-shadow: inset 0 0 5px #666;
+            font-weight: bold;
+        }
+
+        .sample-flipbook .odd {
+            background: -webkit-gradient(linear, right top, left top, color-stop(0.95, #FFF), color-stop(1, #DADADA));
+            background-image: -webkit-linear-gradient(right, #FFF 95%, #C4C4C4 100%);
+            background-image: -moz-linear-gradient(right, #FFF 95%, #C4C4C4 100%);
+            background-image: -ms-linear-gradient(right, #FFF 95%, #C4C4C4 100%);
+            background-image: -o-linear-gradient(right, #FFF 95%, #C4C4C4 100%);
+            background-image: linear-gradient(right, #FFF 95%, #C4C4C4 100%);
+            -webkit-box-shadow: inset 0 0 5px #666;
+            -moz-box-shadow: inset 0 0 5px #666;
+            -o-box-shadow: inset 0 0 5px #666;
+            -ms-box-shadow: inset 0 0 5px #666;
+            box-shadow: inset 0 0 5px #666;
+
+        }
+
+        .sample-flipbook .even {
+            background: -webkit-gradient(linear, left top, right top, color-stop(0.95, #fff), color-stop(1, #dadada));
+            background-image: -webkit-linear-gradient(left, #fff 95%, #dadada 100%);
+            background-image: -moz-linear-gradient(left, #fff 95%, #dadada 100%);
+            background-image: -ms-linear-gradient(left, #fff 95%, #dadada 100%);
+            background-image: -o-linear-gradient(left, #fff 95%, #dadada 100%);
+            background-image: linear-gradient(left, #fff 95%, #dadada 100%);
+            -webkit-box-shadow: inset 0 0 5px #666;
+            -moz-box-shadow: inset 0 0 5px #666;
+            -o-box-shadow: inset 0 0 5px #666;
+            -ms-box-shadow: inset 0 0 5px #666;
+            box-shadow: inset 0 0 5px #666;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="flipbook" class="sample-flipbook">
+        <div class="hard"> Turn.js </div>
+        <div class="hard"></div>
+        <div class="even"> Page 1 </div>
+        <div class="odd"> Page 2 </div>
+        <div> Page 3 </div>
+        <div> Page 4 </div>
+        <div class="hard"></div>
+        <div class="hard"></div>
+    </div>
+
+</body>
+<script>
+    $("#flipbook").turn({
+        width: 400,
+        height: 300,
+        autoCenter: true
+    });
+</script>
+
+</html>

@@ -104,6 +104,8 @@
         .flipper-front,
         .flipper-back {
             transition-duration: 1s;
+            transition-timing-function: cubic-bezier(.175, .885, .32, 1.275);
+            transition-property: transform;
             transform-style: preserve-3d;
             position: absolute;
             left: 0;
@@ -122,6 +124,7 @@
         .flipper-back {
             background-color: cornflowerblue;
             transform: rotateY(-180deg);
+            
             z-index: 3;
 
         }

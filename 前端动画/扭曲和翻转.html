@@ -28,8 +28,7 @@
 
         .main2 .flip-container {
             border: 1px solid #f8f8f8;
-            -webkit-perspective: 1000;
-            perspective: 1000;
+            perspective: 1000px;
             width: 300px;
             height: 400px;
         }
@@ -42,15 +41,15 @@
 
         .main2 .flipper .front,
         .main2 .flipper .back {
+            border-radius: 6px;
             width: 300px;
             height: 400px;
-            backface-visibility: hidden;
-            position: absolute;
-            top: 0;
-            left: 0;
+            /* backface-visibility: hidden; */
             transition-duration: .6s;
             transform-style: preserve-3d;
-            transition-property: transform;
+            transition-property: transform,opacity;
+            transition-timing-function: cubic-bezier(.175, .885, .32, 1.275);
+
         }
 
         .main2 .front {
@@ -59,7 +58,11 @@
         }
 
         .main2 .back {
+            position: absolute;
+            top: 0;
+            left: 0;
             transform: rotateY(-180deg);
+            opacity: 0;
         }
 
         .main2 .flip-container:hover .front {
@@ -68,6 +71,7 @@
 
         .main2 .flip-container:hover .back {
             transform: rotateY(0deg);
+            opacity: 1;
         }
 
         .main3 .flip-container {
@@ -190,6 +194,7 @@
             animation-duration: 1300ms;
             animation-fill-mode: both;
             animation-iteration-count: infinite;
+            animation-timing-function: cubic-bezier(.175, .885, .32, 1.275);;
         }
     </style>
 </head>
