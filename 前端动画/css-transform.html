@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>纯css3实现翻书效果</title>
+
+
+    <link href="./css/reset.css" rel="stylesheet" type="text/css">
+    <style>
+        body {
+            background-color: #f8f8f8;
+        }
+
+        .perspective {
+
+            margin-top: 100px;
+            perspective: 800px;
+            transform-style: preserve-3d;
+        }
+
+        .book-wrap {
+            width: 300px;
+            height: 300px;
+            position: relative;
+            margin: 0 auto;
+            transform: rotateX(30deg);
+            transform-style: preserve-3d;
+        }
+
+        .page {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform-origin: left;
+            border: 1px solid #1976D2;
+        }
+
+        .book-cover {
+            background-color: #1976D2;
+            color: #ffffff;
+            animation: roll 6s ease 0s 2 alternate;
+        }
+
+        .book-content {
+            background-color: #fff;
+            color: #33363C;
+        }
+
+        .book-content1 {
+            animation: roll 3s ease 3s 2 alternate;
+        }
+
+        .book-content2 {
+            animation: roll 4s ease 2s 2 alternate;
+        }
+
+        .book-content3 {
+            animation: roll 5s ease 1s 2 alternate;
+        }
+
+        @keyframes roll {
+            from {
+                transform: rotateY(0)
+            }
+
+            to {
+                transform: rotateY(-180deg)
+            }
+        }
+    </style>
+    <style>
+        .flip-container {
+            position: relative;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            height: 480px;
+            width: 100vw;
+        }
+
+        .flipper-front,
+        .flipper-back {
+            transition-duration: 1s;
+            transform-style: preserve-3d;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 300px;
+            height: 400px;
+            display: block;
+            backface-visibility: hidden;
+        }
+
+        .flipper-front {
+            background-color: brown;
+            transform: rotateY(0deg);
+        }
+
+        .flipper-back {
+            background-color: cornflowerblue;
+            transform: rotateY(-180deg);
+            z-index: 3;
+
+        }
+
+        /* .flip-container.flipped .flipper-front {
+            transform: translateZ(10px) rotateY(180deg);
+        }
+        .flip-container.flipped .flipper-back {
+            transform: translateZ(10px) rotateY(0deg);
+        } */
+    </style>
+    <style>
+        .turn-container {
+            perspective: 1000px;
+            width: 200px;
+            height: 200px;
+        }
+
+        .turn-container .test {
+            width: 200px;
+            height: 200px;
+            transform: rotate(360deg);
+            transition: transform 4s;
+            background-color: aquamarine;
+        }
+
+        .turn-container:hover .test {
+            transform: rotateY(180deg);
+            animation: turn 4s;
+        }
+
+        @keyframes turn {
+            from {
+                transform: rotate(0deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="perspective">
+        <div class="book-wrap">
+            <div class="page book-content">end</div>
+            <div class="page book-content book-content1">第三页</div>
+            <div class="page book-content book-content2">第二页</div>
+            <div class="page book-content book-content3">第一页</div>
+            <div class="page book-cover">封面</div>
+        </div>
+    </div>
+
+    <div class="btn" id="flipBtn">翻转</div>
+    <div class="flip-container">
+
+        <div class="flipper-back" id="back">
+            卡片背面
+        </div>
+        <div class="flipper-front" id="front">
+            卡片正面
+        </div>
+    </div>
+
+
+    <div class="turn-container">
+        <div class="test">TTEST</div>
+    </div>
+
+</body>
+<script>
+    // perspective 表示摄像机的位置，让其具有景深效果
+    // 该translateZ(200px)函数将元素从屏幕“向外”移动200像素到用户。
+    // 这使得在2D显示器上观看时元素显得更大，或者使用VR耳机或其他3D显示设备观看时更接近元素
+</script>
+
+<script>
+    const flipBtn = document.getElementById('flipBtn');
+    const flipContainer = document.querySelector('.flip-container');
+    const backEl = document.getElementById('back');
+    const frontEl = document.getElementById('front');
+    let count = 0;
+    flipBtn.addEventListener('click', function (event) {
+        console.log(count);
+        let cssfront = '';
+        let cssback = ''
+        if (count < 1) {
+            cssfront = 180;
+            cssback = 0;
+        } else {
+            cssfront = -(count - 1) * 180
+            cssback = -count * 180;
+        }
+        frontEl.style.cssText = `transform: translateZ(10px) rotateY(${cssfront}deg)`;
+        backEl.style.cssText = `transform: translateZ(10px) rotateY(${cssback}deg)`
+        count++;
+
+    })
+</script>
+
+</html>

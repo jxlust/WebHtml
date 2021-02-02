@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>纯css实现旋转方块</title>
+    <link href="css/reset.css" rel="stylesheet" type="text/css">
+    <style>
+        .cube {
+            margin: 0 auto;
+            width: 200px;
+            height: 200px;
+            position: relative;
+        }
+        .big-cube-wrap {
+            margin: 0 auto;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            position: absolute;
+            transform: rotateX(-33.5deg) rotateY(45deg);
+            animation: rotateBig 8s ease 0s infinite;
+            transform-origin: 100px 100px 100px;
+        }
+        .big-cube {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: radial-gradient(transparent 30%,rgba(16,47,91,.2) 100%);
+        }
+        .big-cube:after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            background-color: rgba(126,169,232,.5);
+            transition: transform 1s ease-in-out;
+        }
+        .cube-top {
+            transform-origin: left top;
+            transform: rotateX(90deg);
+        }
+        .cube-bottom {
+            transform-origin: left bottom;
+            transform: rotateX(-90deg);
+        }
+        .cube-left {
+        }
+        .cube-right {
+            transform: translateZ(200px);
+        }
+        .cube-front {
+            transform-origin: left top;
+            transform: rotateY(-90deg);
+        }
+        .cube-backend {
+            transform-origin: right top;
+            transform: rotateY(90deg);
+        }
+        .small-cube-wrap {
+            transform: translate(-50%, -50%) rotateX(-33.5deg) rotateY(45deg);
+            width: 50%;
+            height: 50%;
+            transform-style: preserve-3d;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform-origin: 50px 50px 50px;
+            animation: rotateSmall 8s ease 0s infinite;
+        }
+        .small-cube {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: radial-gradient(transparent 30%,rgba(5,17,53,.2) 100%);
+        }
+        .small-cube.cube-right {
+            transform: translateZ(100px);
+        }
+        .small-cube:after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            background-color: rgba(16,58,177,.5);
+            transition: transform 1s ease-in-out;
+        }
+        @keyframes rotateBig {
+            0%, 40% {transform: rotateX(-33.5deg) rotateY(45deg);}
+            50%, 90% {transform: rotateX(-33.5deg) rotateY(225deg);}
+            100% {transform: rotateX(-33.5deg) rotateY(405deg);}
+        }
+        @keyframes rotateSmall {
+            0%, 40% {transform: translate(-50%, -50%) rotateX(-33.5deg) rotateY(45deg);}
+            50%, 90% {transform: translate(-50%, -50%) rotateX(-33.5deg) rotateY(-315deg);}
+            100% {transform: translate(-50%, -50%) rotateX(-33.5deg) rotateY(-675deg);}
+        }
+    </style>
+</head>
+<body>
+
+<div class="cube">
+    <div class="big-cube-wrap">
+        <div class="big-cube cube-top"></div>
+        <div class="big-cube cube-bottom"></div>
+        <div class="big-cube cube-left"></div>
+        <div class="big-cube cube-right"></div>
+        <div class="big-cube cube-front"></div>
+        <div class="big-cube cube-backend"></div>
+    </div>
+    <div class="small-cube-wrap">
+        <div class="small-cube cube-top"></div>
+        <div class="small-cube cube-bottom"></div>
+        <div class="small-cube cube-left"></div>
+        <div class="small-cube cube-right"></div>
+        <div class="small-cube cube-front"></div>
+        <div class="small-cube cube-backend"></div>
+    </div>
+</div>
+</body>
+</html>

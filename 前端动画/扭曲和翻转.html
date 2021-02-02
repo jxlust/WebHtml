@@ -99,19 +99,19 @@
 
         .main3 .front {
             z-index: 2;
-            transform: rotateY(0deg);
+            transform: perspective(1000px) rotateY(0deg);
         }
 
         .main3 .back {
-            transform: rotateY(180deg);
+            transform: perspective(1000px)  rotateY(180deg);
         }
 
         .main3 .flip-container.active .front {
-            transform: rotateY(-180deg);
+            transform: perspective(1000px)  rotateY(-180deg);
         }
 
         .main3 .flip-container.flip-container.active .back {
-            transform: rotateY(0deg);
+            transform: perspective(1000px)  rotateY(0deg);
         }
 
         @keyframes flip-ani {
@@ -139,6 +139,41 @@
             }
         }
 
+        @keyframes flip2-ani {
+            0% {
+                transform: perspective(1000px) rotateY(-180deg) scale(.01);
+                animation-timing-function: ease-in;
+                opacity: 0;
+            }
+            20% {
+                transform: perspective(1000px) rotateY(-100deg) scale(.2);
+                animation-timing-function: ease-in;
+                opacity: 1;
+            }
+            30%{
+                transform: perspective(1000px) rotateY(0deg) scale(.2);
+                animation-timing-function: ease-in;
+            }
+            /* 40%{
+                transform: perspective(1000px) rotateY(-100deg) scale(.3);
+            } */
+            50%{
+                transform: perspective(1000px) rotateY(-180deg) scale(.5);
+                animation-timing-function: ease-in;
+            }
+            60% {
+                transform: perspective(1000px) rotateY(-90deg) scale(.9);
+            }
+
+            80% {
+                transform: perspective(1000px) rotateY(-10deg) scale(.99);
+            }
+
+            100% {
+                transform: perspective(1000px);
+            }
+        }
+
         .flipper-block {
             width: 300px;
             height: 400px;
@@ -147,10 +182,12 @@
         .flipper-card {
             width: 300px;
             height: 400px;
+            background-color: skyblue;
             transform-style: preserve-3d;
             /* animation: name duration timing-function delay iteration-count direction fill-mode; */
-            animation-name: flip-ani;
-            animation-duration: 1000ms;
+            /* animation-name: flip-ani; */
+            animation-name: flip2-ani;
+            animation-duration: 1300ms;
             animation-fill-mode: both;
             animation-iteration-count: infinite;
         }
@@ -182,7 +219,7 @@
             <div class="flipper">
                 <div class="front" style="background-color:gold;">
                 </div>
-                <div class="back" style="background-color: brown;">
+                <div class="back" style="background-color: blue;">
 
                 </div>
             </div>
@@ -192,7 +229,7 @@
     <div class="main4">
         <div class="text">动画：</div>
         <div class="flipper-block">
-            <div class="flipper-card" style="background-color:gold;">
+            <div class="flipper-card" style="background-color:pink;">
             </div>
         </div>
     </div>
