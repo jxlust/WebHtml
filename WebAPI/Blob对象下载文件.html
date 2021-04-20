@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<div class="">
+		<img  id="myImg" src="" alt="">
+	</div>
+	<div>
+		<a href="" id="myA">xxxxxxx</a>
+	</div>
+
+	
+
+	<script>
+		fetch('https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=657604867,2600784396&fm=26&gp=0.jpg', {
+			method: 'GET',
+			mode: 'cors',
+			cache: 'default'
+		}).then(data => {
+			console.log(data)
+			return data.blob();
+		}).then(blob => {
+			console.log(1111,blob);
+			let url = URL.createObjectURL(blob);
+			document.getElementById('myImg').src = url;
+			
+			let alink = document.getElementById('myA');
+			alink.download = 'my test.jpg';
+			alink.href = url;
+ 
+ 
+			let mya = document.createElement('a');
+			mya.download='aaaa.txt'
+			mya.href = URL.createObjectURL(new Blob(['iikkkddddlsldfsjlfsdjf'], {type: 'application/text'}));
+			mya.click()
+			
+		}).catch(e => {
+			console.log(e);
+		})
+	</script>
+</body>
+
+</html>
