@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    @keyframes toTop {
+      0% {
+        opacity: 1;
+        filter: blur(0)
+      }
+
+      to {
+        opacity: 0;
+        -webkit-transform: translate(0, -300px);
+        transform: translate(0, -300px);
+        filter: blur(2px)
+      }
+    }
+
+    .move {
+      animation-name: toTop;
+      animation-duration: .8s;
+      animation-timing-function: ease-in;
+      animation-fill-mode: forwards;
+      background-position: 50% -62px
+    }
+
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      position: relative;
+      width: 100%;
+    }
+
+    .content {
+      width: 100%;
+      height: auto;
+      position: relative;
+      scroll-behavior: smooth;
+    }
+
+    .content .block {
+      width: 100%;
+      height: 1000px;
+      background-color: #f7f7f7;
+    }
+
+    #rocket {
+      position: fixed;
+      right: 10px;
+      bottom: 10px;
+      background-color: #ff0000;
+      width: 40px;
+      height: 80px;
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    #rocket.show {
+      opacity: 1;
+      visibility: visible;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content">
+
+    <div class="block">
+
+    </div>
+  </div>
+
+  <div id="rocket" class="">
+
+  </div>
+</body>
+
+<script>
+  /** 侧边栏回到顶部 */
+  const rocket = document.getElementById('rocket');
+
+  let scrollParent = document.documentElement;
+  // debounce(slideTopSet, 300)
+
+  //防抖函数
+  function debounce(func, wait) {
+    let timeout;
+    return function () {
+      timeout && clearTimeout(timeout);
+      timeout = setTimeout(func, wait);
+    };
+  };
+
+
+  function slideTopSet() {
+    var top = scrollParent.scrollTop;
+    if (top > 200) {
+      rocket.classList.add('show');
+    } else {
+      rocket.classList.remove('show');
+    }
+  }
+
+
+  //事件
+  document.addEventListener('scroll', debounce(slideTopSet, 300));
+  rocket.addEventListener('click', function (event) {
+    rocket.classList.add('move')
+    toScrollTop(1000);
+
+  })
+  rocket.addEventListener('animationEnd', function () {
+    setTimeout(function () {
+      rocket.classList.remove('move');
+    }, 400);
+  })
+  rocket.addEventListener('webkitAnimationEnd', function () {
+    setTimeout(function () {
+      rocket.classList.remove('move');
+    }, 400);
+  })
+
+  
+  function toScrollTop(time) {
+    let startTimeStamp = null;
+    let top = scrollParent.scrollTop;
+
+    function scrollToTop(timestamp) {
+      if(!startTimeStamp){
+        startTimeStamp = timestamp;
+      }
+      let diff = timestamp - startTimeStamp;
+      let percent =  ( diff / time  * 100 ).toFixed(0);
+      if(diff <= time){
+        scrollParent.scrollTo(0, top - (top * percent / 100));
+        window.requestAnimationFrame(scrollToTop);
+      }
+   
+    }
+    window.requestAnimationFrame(scrollToTop);
+
+  }
+</script>
+
+</html>
