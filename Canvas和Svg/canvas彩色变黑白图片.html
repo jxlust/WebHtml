@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	
+	<canvas id="myCanvas"></canvas>
+
+	<button id="btn">变黑白</button>
+
+
+	<script>
+		const myBtn = document.getElementById('btn');
+		const canvas = document.getElementById('myCanvas');
+		const ctx = canvas.getContext('2d');
+
+
+		canvas.width = 100;
+  	canvas.height = 100;
+		let imgDom = document.createElement('img');
+		imgDom.src = './star.png';
+		imgDom.onload = function () {
+			 ctx.drawImage(imgDom, 0, 0);
+		}
+
+		function getImageData() {
+			var length = canvas.width * canvas.height;
+  		let grayImage = ctx.getImageData(0, 0, canvas.width, canvas.height);
+			// RGBA(255,0,0,255) 红色 绿色 蓝色 透明度
+			for(let i = 0; i < length * 4; i+=4){
+				let r = grayImage.data[i];
+				let g = grayImage.data[i+1];
+				let b = grayImage.data[i+2];
+				//透明度不用管
+				let gray = ((r + g + b) / 3) | 0;
+				grayImage.data[i] = gray;
+				grayImage.data[i+1] = gray;
+				grayImage.data[i+2] = gray;
+			}
+			return grayImage
+		}
+
+		myBtn.addEventListener('click',function (e) {
+			let data = getImageData();
+			ctx.putImageData(data,0,0)
+		})
+		
+	</script>
+</body>
+
+</html>
