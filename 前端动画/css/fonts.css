@@ -4,3 +4,16 @@
         /* IE9 */
         /* url('Sansation_Light.eot'); */
 }
+@font-face {
+    font-family: myFfont;
+    src: url('../assets/myff.ttf')
+        /* IE9 */
+        /* url('Sansation_Light.eot'); */
+}
+
+@font-face {
+    font-family: mystxingkaifont;
+    src: url('../assets/stxingka.ttf')
+        /* IE9 */
+        /* url('Sansation_Light.eot'); */
+}

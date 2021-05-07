@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style id="myStyle">
+        #content {
+            /* width: 500px;
+            height: 500px; */
+            width: 500px;
+            padding: 30px;
+            background-color: #f8f8f8;
+        }
+
+        .skew {
+            background-color: skyblue;
+            width: 100px;
+            height: 100px;
+            transform: skew(-45deg);
+        }
+
+        .ball {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 70px 70px, #5cabff, #000);
+        }
+
+        .halfcircle {
+            width: 50px;
+            height: 100px;
+            /* border-radius: 50px 0 0 50px; */
+            border-radius: 200% 0 0 200% / 100% 0 0 100%;
+            /* 水平半径：width * 百分比，垂直半径：height * 百分比 */
+            background: blue;
+            position: relative;
+        }
+
+        .c1 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            background: #5cabff;
+            opacity: .5;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content">
+        <div class="skew"></div>
+        <div class="ball"></div>
+        <div class="halfcircle">
+            <div class="c1"></div>
+        </div>
+    </div>
+
+    <div class="btn" id="btn">保存为图片</div>
+
+    <script>
+        /**
+         *获取img元素的bse64地址
+         * @param {HTMLElement} imgEle img元素
+         */
+        function getBse64ByImg(imgEle) {
+            const canvas = window.document.createElement("canvas");
+            canvas.width = imgEle.width;
+            canvas.height = imgEle.height;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(imgEle, 0, 0);
+            return canvas.toDataURL();
+        }
+
+        function getImageByDom(target) {
+            const cloneDom = target.cloneNode(true);
+            // cloneDom.setAttribute("xmlns", "http://www.w3.org/1999/xhtml");
+            const width = target.offsetWidth;
+            const height = target.offsetHeight;
+            console.log(width, height);
+            const styleStr = ''
+            //转成base64位地址
+            const styleel = document.getElementById('myStyle').cloneNode(true)
+            console.log(styleel);
+
+            let htmlDom = document.createElement('html');
+            let headDom = document.createElement('head');
+            let bodyDom = document.createElement('body');
+            headDom.appendChild(styleel)
+            bodyDom.appendChild(cloneDom)
+            htmlDom.setAttribute('xmlns',"http://www.w3.org/1999/xhtml");
+            htmlDom.appendChild(headDom);
+            htmlDom.appendChild(bodyDom);
+
+            console.log('html:',htmlDom);
+
+            const xmlContent = `data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"
+  width="${width}" height="${height}"><foreignObject x="0" y="0" width="100%" height="100%">
+  ${new XMLSerializer().serializeToString(htmlDom)}${styleStr}
+    </foreignObject></svg>`;
+            console.log(xmlContent);
+            //处理特殊字符和换行符等等
+            return xmlContent.replace(/\n/g, "").replace(/\t/g, "").replace(/#/g, "%23");
+
+        }
+
+
+        /**
+         *将donm转换成图片并下载到本地
+         *
+         * @param {HTMLElement} target
+         * @param {string} name
+         */
+        function downloadDomToImg(target, name='download') {
+            const src = getImageByDom(target);
+            console.log(111,src);
+            const aEle = window.document.createElement("a");
+            aEle.style.display = "none";
+            aEle.download = name;
+            const img = new Image();
+            img.src = src;
+            window.document.body.appendChild(img)
+            img.onload = () => {
+                let base64 = getBse64ByImg(img);
+                aEle.href = base64;
+                window.document.body.appendChild(aEle);
+                aEle.click();
+                window.document.body.removeChild(aEle);
+            };
+        }
+
+
+
+
+        document.getElementById('btn').addEventListener('click', function (e) {
+            downloadDomToImg(document.getElementById('content'));
+        })
+    </script>
+</body>
+
+</html>
