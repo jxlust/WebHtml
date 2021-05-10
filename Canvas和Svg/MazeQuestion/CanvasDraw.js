@@ -21,12 +21,12 @@ function Ball({
 
 }
 class DrawMaze {
-	constructor(matrix) {
+	constructor(matrix, wrap) {
 		if (matrix.length < 2 || matrix[0].length < 2) {
 			throw new Error('The length is at least 2');
 		}
 		this.matrix = matrix;
-		
+		this.wrap = wrap;
 		this.col = this.matrix[0].length;
 		this.row = this.matrix.length;
 		this.canvas = undefined;
@@ -41,18 +41,28 @@ class DrawMaze {
 		// this.canvas.height = window.innerHeight;
 		this.canvas.width = this.col * CELL_WIDTH;
 		this.canvas.height = this.row * CELL_WIDTH;
-		document.body.appendChild(this.canvas);
+		console.log(this.wrap);
+		if (!!this.wrap) {
+			if (typeof this.wrap === 'string') {
+				let wrapDom = document.querySelector(this.wrap);
+				wrapDom && wrapDom.appendChild(this.canvas);
+			} else if (this.wrap instanceof HTMLElement) {
+				this.wrap.appendChild(this.canvas);
+			}
+		} else {
+			document.body.appendChild(this.canvas);
+		}
 	}
 
-	updateCanvas(matrix){
+	updateCanvas(matrix) {
 		this.matrix = matrix;
 		this.col = this.matrix[0].length;
 		this.row = this.matrix.length;
 		let width = this.col * CELL_WIDTH,
-		height = this.row * CELL_WIDTH
+			height = this.row * CELL_WIDTH
 		this.canvas.width = width;
 		this.canvas.height = height;
-		this.ctx.clearRect(0,0,width,height)
+		this.ctx.clearRect(0, 0, width, height)
 	}
 
 	async draw() {
@@ -60,14 +70,14 @@ class DrawMaze {
 			matrix,
 			ctx
 		} = this;
-		const m = matrix.length,
-			n = matrix[0].length;
+		// const m = matrix.length,
+		// 	n = matrix[0].length;
 		matrix.forEach((col, x) => {
 			col.forEach((value, y) => {
 				ctx.save();
 				ctx.beginPath();
 				ctx.fillStyle = value === 1 ? '#000' : '#f8f8f8';
-				ctx.fillRect(CELL_WIDTH * y, CELL_WIDTH * x, CELL_WIDTH * y + CELL_WIDTH, CELL_WIDTH * x + CELL_WIDTH);
+				ctx.fillRect(CELL_WIDTH * y, CELL_WIDTH * x, CELL_WIDTH, CELL_WIDTH);
 				//绘制格子对应的数字
 				// ctx.font = "14px Georgia";
 				// ctx.fillStyle = 'red';
@@ -83,14 +93,14 @@ class DrawMaze {
 
 
 	initEvent() {
-		return new Promise( resolve => {
+		return new Promise(resolve => {
 			const {
 				matrix,
 				ctx,
 				col,
 				row,
 			} = this;
-	
+
 			const currentPoint = {
 				x: 1,
 				y: 1,
@@ -100,38 +110,45 @@ class DrawMaze {
 				x: row - 2,
 				y: col - 2
 			}
-	
+			//绘制出口
+			ctx.save();
+			ctx.beginPath();
+			ctx.fillStyle = 'red';
+			ctx.fillRect(CELL_WIDTH * endPoint.y, CELL_WIDTH * endPoint.x, CELL_WIDTH, CELL_WIDTH)
+			ctx.restore();
+
 			//绘制起始点
 			let ball = new Ball({
 				x: 1.5 * CELL_WIDTH,
 				y: 1.5 * CELL_WIDTH
 			});
-	
+
 			ctx.save(); //保存坐原点平移之前的状态
 			ball.draw(ctx);
-			const keyupEvent = function (event) {				
+			const keyupEvent = function (event) {
 				let keycode = event.keyCode || event.which || event.charCode;
-				// console.log(111, event.key, event.keyCode);
+				let keyStr = event.key;
+				console.log(111,event,event.key, event.keyCode);
 				let {
 					x,
 					y
 				} = currentPoint;
-				if (keycode === 87) {
+				if (keycode === 87 || keyStr === 'w') {
 					//上
 					x -= 1;
-				} else if (keycode === 83) {
+				} else if (keycode === 83 || keyStr === 's') {
 					//下
 					x += 1;
-				} else if (keycode === 65) {
+				} else if (keycode === 65 || keyStr === 'a') {
 					//左
 					y -= 1;
-				} else if (keycode === 68) {
+				} else if (keycode === 68 || keyStr === 'd') {
 					//右
 					y += 1;
-				}else{
+				} else {
 					return false;
 				}
-	
+
 				if (x >= 0 && x < row && y >= 0 && y < col && matrix[x][y] === 0) {
 					console.log('ok');
 					// translatePoint[0] = ty + CELL_WIDTH * ty;
@@ -139,36 +156,36 @@ class DrawMaze {
 					//清空前一个区域的
 					let oldx = currentPoint.x * CELL_WIDTH;
 					let oldy = currentPoint.y * CELL_WIDTH;
-					console.log('old:',oldx,oldy);
-					
+					console.log('old:', oldx, oldy);
+
 					ball.x = (y + 0.5) * CELL_WIDTH;
 					ball.y = (x + 0.5) * CELL_WIDTH;
 					//清楚起点，以及矩形的宽高
-					ctx.clearRect(oldy,oldx, CELL_WIDTH,CELL_WIDTH);				
+					ctx.clearRect(oldy, oldx, CELL_WIDTH, CELL_WIDTH);
 					// ctx.translate(translatePoint[0], translatePoint[1]);
 					ball.draw(ctx);
-	
+
 					//更新当前位置
 					currentPoint.x = x;
 					currentPoint.y = y;
-	
-					if(x === endPoint.x && y === endPoint.y){
-						console.log('通过了！下一关');
 
-						document.removeEventListener('keyup',keyupEvent)
-						resolve('ok')			
+					if (x === endPoint.x && y === endPoint.y) {
+						console.log('通过了！下一关');
+						document.removeEventListener('keypress', keyupEvent)
+						resolve('ok')
 					}
 				} else {
 					//墙或者越界了走不动
 					console.log('墙，动不了');
 				}
-	
-	
+
+
 			}
-			document.addEventListener('keyup', keyupEvent)
+			document.addEventListener('keypress',keyupEvent)
+			// document.addEventListener('keyup', keyupEvent)
 
 		})
-	
+
 	}
 
 

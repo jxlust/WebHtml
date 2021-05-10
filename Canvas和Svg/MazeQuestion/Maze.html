@@ -12,7 +12,7 @@
 			padding: 0;
 		}
 
-		body {
+		#canvas-wrap {
 			position: relative;
 			display: inline-block;
 		}
@@ -29,15 +29,19 @@
 </head>
 
 <body>
-
-	<div class="toast">恭喜你，通关了</div>
+	<div id="canvas-wrap">
+		<div class="toast" id="toastId"></div>
+	</div>
+	<div class="tips">
+		通过WSAD上下左右控制方向
+	</div>
 
 	<script type="module">
 		import {MazeGame} from "./MazeGame.js";
-		let game = new MazeGame(() => {
+		const toastId = document.getElementById('toastId')
+		let game = new MazeGame('#canvas-wrap',() => {
 			//通关回调
-
-
+			toastId.innerText = '恭喜你，通关了！'
 		});
 		game.start();
 	</script>
@@ -47,5 +51,4 @@
 
 	</script>
 </body>
-
 </html>

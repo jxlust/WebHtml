@@ -5,11 +5,13 @@ import {
 	DrawMaze
 } from './CanvasDraw.js'
 
-const LEVEL_LISTS = [4, 5, 6]; //三关
+const LEVEL_LISTS = [4, 7, 10]; //三关
 
 class MazeGame {
-	constructor(callback) {
+	constructor(element,callback) {
 		this.maze = undefined;
+		this.element = element;
+		this.canvasDraw = undefined;
 		this.level = 0;
 		this.callback = callback;
 	}
@@ -18,9 +20,9 @@ class MazeGame {
 		let number = LEVEL_LISTS[this.level]
 
 		this.maze = new Maze(number, number);
-		this.matrix = this.maze.getMatrix();
+		let matrix = this.maze.getMatrix();
 
-		this.canvasDraw = new DrawMaze(this.matrix);
+		this.canvasDraw = new DrawMaze(matrix,this.element);
 
 		this.canvasDraw.draw().then(data => {
 			console.log('通过：', data);
@@ -38,9 +40,9 @@ class MazeGame {
 		}
 		let number = LEVEL_LISTS[this.level]
 		this.maze = new Maze(number, number);
-		this.matrix = this.maze.getMatrix();
+		let matrix = this.maze.getMatrix();
 
-		this.canvasDraw.updateCanvas(this.matrix);
+		this.canvasDraw.updateCanvas(matrix);
 
 		this.canvasDraw.draw().then(data => {
 			console.log('通过：', data);
