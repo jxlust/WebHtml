@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			position: relative;
+			display: inline-block;
+		}
+
+		.toast {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%,-50%);
+			color: red;
+			z-index: 999;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="toast">恭喜你，通关了</div>
+
+	<script type="module">
+		import {MazeGame} from "./MazeGame.js";
+		let game = new MazeGame(() => {
+			//通关回调
+
+
+		});
+		game.start();
+	</script>
+
+	<script>
+
+
+	</script>
+</body>
+
+</html>
