@@ -53,6 +53,15 @@
 		}
 	</style>
 	<style>
+		/* cyrillic-ext */
+		@font-face {
+			font-family: 'Roboto';
+			font-style: normal;
+			font-weight: 100;
+			src: url(./assets/roboto.woff2) format('woff2');
+			unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+		}
+
 		body {
 			font-size: 16px;
 			max-width: 90vw;
@@ -188,7 +197,9 @@
 		/* cloud end */
 
 		/* lightning start */
-		.lightning {
+		.rain,
+		.lightning,
+		.snow {
 			position: absolute;
 			z-index: 2;
 			top: 50%;
@@ -264,6 +275,41 @@
 		}
 
 		/* lightning end */
+
+
+		.flake::before,
+		.flake::after {
+			content: '\2744';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin: -16.4px 0 0 -16.2px;
+			color: #fff;
+			line-height: 16px;
+			opacity: 0.2;
+			animation: spin 8s linear infinite reverse;
+		}
+
+		.flake::after {
+			margin: 2px 0 0 -16px;
+			font-size: 24px;
+			opacity: 0.4;
+			animation: spin 14s linear infinite;
+		}
+
+		.flake:nth-child(2):before {
+			margin: -10px 0 0 5px;
+			font-size: 20px;
+			opacity: 0.2;
+			animation: spin 10s linear infinite;
+		}
+
+		.flake:nth-child(2):after {
+			margin: 12px 0 0 4px;
+			font-size: 32px;
+			opacity: 0.4;
+			animation: spin 16s linear infinite reverse;
+		}
 	</style>
 </head>
 
