@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 三角形 -->
+    <style></style>
+
+    <style>
+      .halfcircle {
+        width: 50px;
+        height: 100px;
+        /* border-radius: 50px 0 0 50px; */
+        border-radius: 200% 0 0 200% / 100% 0 0 100%;
+        /* border-radius: 100% 0 0 100% / 50% 0 0 50%; */
+        /* 水平半径：width * 百分比，垂直半径：height * 百分比 */
+        background: blue;
+        position: relative;
+      }
+
+      .radius-demo {
+        background-color: skyblue;
+        width: 20px;
+        height: 20px;
+        border-radius: 100% 0  60% 50%/ 60% 0 100% 50%
+      }
+    </style>
+  </head>
+  <body>
+    <div class="radius-demo"></div>
+  </body>
+</html>
