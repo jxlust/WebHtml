@@ -1,4 +1,4 @@
-export var name = 'zhu tou';
+export let name = 'first name';
 export function add(x, y) {
     return x + y;
 }
