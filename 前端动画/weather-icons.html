@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Weather Icons</title>
+	<style>
+		:root {
+			--currentColor: #000;
+		}
+
+		@keyframes spin {
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+
+		@keyframes cloudAni {
+			0% {
+				opacity: 0;
+			}
+
+			50% {
+				opacity: 0.3;
+			}
+
+			100% {
+				opacity: 0;
+				transform: scale(0.5) translate(-200%, -48px);
+			}
+		}
+
+		@keyframes lightning {
+			45% {
+				color: #fff;
+				background: #fff;
+				opacity: 0.2;
+			}
+
+			50% {
+				color: #0cf;
+				background: #0cf;
+				opacity: 1;
+			}
+
+			55% {
+				color: #fff;
+				background: #fff;
+				opacity: 0.2;
+			}
+		}
+	</style>
+	<style>
+		body {
+			font-size: 16px;
+			max-width: 90vw;
+			padding: 2em;
+			margin: 0 auto;
+			color: #161616;
+			font-family: 'Roboto', sans-serif;
+			text-align: center;
+			background-color: currentColor;
+		}
+
+		.icon-wrap {
+			display: flex;
+			flex-wrap: wrap;
+
+		}
+
+		.icon {
+			position: relative;
+			display: inline-block;
+			width: 12em;
+			height: 10em;
+			font-size: 1em;
+
+		}
+
+
+		.sunny {}
+
+		/* sun and rays start */
+		.sun {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			width: 2.5em;
+			height: 2.5em;
+			margin: -1.25em;
+			border-radius: 50%;
+			box-shadow: 0 0 0 0.375em #fff;
+			/* animation: name duration timing-function delay iteration-count direction fill-mode; */
+			animation: spin 12s linear 0s infinite normal both;
+		}
+
+		.rays {
+			position: absolute;
+			top: -32px;
+			left: 50%;
+			margin-left: -3px;
+			display: block;
+			width: 6px;
+			height: 18px;
+			border-radius: 4px;
+			background-color: #fff;
+			box-shadow: 0 86px #fff;
+		}
+
+		.rays::after,
+		.rays::before {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 6px;
+			height: 18px;
+			border-radius: 4px;
+			background-color: #fff;
+			box-shadow: 0 86px #fff;
+
+		}
+
+		.rays::after {
+			transform: rotate(60deg);
+			transform-origin: 50% 52px;
+
+		}
+
+		.rays::before {
+			transform: rotate(120deg);
+			transform-origin: 50% 52px;
+		}
+
+		/* sun and rays end */
+
+
+		/* cloud start */
+		.cloud {
+			position: absolute;
+			z-index: 1;
+			top: 50%;
+			left: 50%;
+			width: 59px;
+			height: 59px;
+			margin: -29.5px;
+			background: currentColor;
+			border-radius: 50%;
+			box-shadow: -35px 11px 0 -11px, 33px 15px 0 -15px, 0 0 0 6px #fff, -35px 11px 0 -5px #fff, 33px 15px 0 -9px #fff;
+		}
+
+		.mini-cloud::after,
+		.cloud::after {
+			content: '';
+			position: absolute;
+			display: block;
+			bottom: 0;
+			left: -8px;
+			width: 73px;
+			height: 16px;
+			background: currentColor;
+			box-shadow: 0 7px 0 -1px #fff;
+		}
+
+		.mini-cloud {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 59px;
+			height: 59px;
+			margin: -29.5px;
+			border-radius: 50%;
+
+			z-index: 0;
+			background: #fff;
+			box-shadow: -35px 11px 0 -11px #fff, 33px 15px 0 -15px #fff, 0 0 0 6px #fff, -35px 11px 0 -5px #fff, 33px 15px 0 -9px #fff;
+			opacity: 0.3;
+			transform: scale(0.5) translate(6em, -3em);
+			animation: cloudAni 6s linear infinite;
+		}
+
+		.mini-cloud::after {
+			background-color: #fff;
+		}
+
+		/* cloud end */
+
+		/* lightning start */
+		.lightning {
+			position: absolute;
+			z-index: 2;
+			top: 50%;
+			left: 50%;
+			width: 60px;
+			height: 60px;
+			margin: 6px 0 0 -32px;
+			background: currentColor;
+		}
+
+		.bolt {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin: -4px 0 0 -2px;
+			color: #fff;
+			opacity: 0.3;
+			animation: lightning 2s linear infinite;
+		}
+
+		.bolt::before {
+			content: '';
+			position: absolute;
+			z-index: 2;
+			top: 50%;
+			left: 50%;
+			margin: -26px 0 0 -16.2px;
+			border-top: 20px solid transparent;
+			border-right: 12px solid;
+			border-bottom: 12px solid;
+			border-left: 8px solid transparent;
+			transform: skewX(-10deg);
+		}
+
+		.bolt::after {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			z-index: 2;
+			margin: -4px 0 0 -4px;
+			border-top: 12px solid;
+			border-right: 8px solid transparent;
+			border-bottom: 20px solid transparent;
+			border-left: 12px solid;
+			transform: skewX(-10deg);
+
+		}
+
+		.bolt:nth-child(2) {
+			width: 8px;
+			height: 4px;
+			margin: -28px 0 0 -30px;
+			transform: translate(40px, 36px);
+			opacity: 0.2;
+			animation: lightning 1.5s linear infinite;
+		}
+
+		.bolt:nth-child(2)::before {
+			margin: -12px 0 0 -8px;
+			border-top: 10px solid transparent;
+			border-right: 6px solid;
+			border-bottom: 6px solid;
+			border-left: 4px solid transparent;
+		}
+
+		.bolt:nth-child(2)::after {
+			margin: -2px 0 0 -2px;
+			border-top: 6px solid;
+			border-right: 4px solid transparent;
+			border-bottom: 10px solid transparent;
+			border-left: 6px solid;
+		}
+
+		/* lightning end */
+	</style>
+</head>
+
+<body>
+	<h1>My Animated Weather Icons</h1>
+
+	<div class="icon-wrap">
+
+
+		<div class="icon sunny">
+			<div class="sun">
+				<div class="rays">
+				</div>
+			</div>
+
+		</div>
+
+		<div class="icon cloudy">
+			<div class="cloud"></div>
+			<div class="mini-cloud"></div>
+		</div>
+
+
+		<div class="icon thunder-storm">
+			<div class="cloud"></div>
+			<div class="lightning">
+				<div class="bolt"></div>
+				<div class="bolt"></div>
+			</div>
+		</div>
+
+		<div class="icon flurries">
+			<div class="cloud"></div>
+			<div class="snow">
+				<div class="flake"></div>
+				<div class="flake"></div>
+			</div>
+		</div>
+
+		<div class="icon">
+			<div class="cloud"></div>
+		</div>
+
+		<div class="icon">
+			<div class="cloud"></div>
+		</div>
+	</div>
+
+
+
+
+
+</body>
+
+</html>
