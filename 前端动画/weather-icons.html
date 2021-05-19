@@ -1,389 +1,543 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather Icons</title>
-    <style>
-      :root {
-        --currentColor: #000;
-      }
 
-      @keyframes spin {
-        100% {
-          transform: rotate(360deg);
-        }
-      }
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Weather Icons</title>
+	<style>
+		:root {
+			--currentColor: #000;
+		}
 
-      @keyframes cloudAni {
-        0% {
-          opacity: 0;
-        }
+		@keyframes spin {
+			100% {
+				transform: rotate(360deg);
+			}
+		}
 
-        50% {
-          opacity: 0.3;
-        }
+		@keyframes cloudAni {
+			0% {
+				opacity: 0;
+			}
 
-        100% {
-          opacity: 0;
-          transform: scale(0.5) translate(-200%, -48px);
-        }
-      }
+			50% {
+				opacity: 0.3;
+			}
 
-      @keyframes lightning {
-        45% {
-          color: #fff;
-          background: #fff;
-          opacity: 0.2;
-        }
+			100% {
+				opacity: 0;
+				transform: scale(0.5) translate(-200%, -48px);
+			}
+		}
 
-        50% {
-          color: #0cf;
-          background: #0cf;
-          opacity: 1;
-        }
+		@keyframes lightning {
+			45% {
+				color: #fff;
+				background: #fff;
+				opacity: 0.2;
+			}
 
-        55% {
-          color: #fff;
-          background: #fff;
-          opacity: 0.2;
-        }
-      }
+			50% {
+				color: #0cf;
+				background: #0cf;
+				opacity: 1;
+			}
 
-      @keyframes rain {
-        0% {
-          background: #0cf;
-          box-shadow: 0.625em 0.875em 0 -0.125em rgba(255, 255, 255, 0.2),
-            -0.875em 1.125em 0 -0.125em rgba(255, 255, 255, 0.2),
-            -1.375em -0.125em 0 #0cf;
-        }
-        25% {
-          box-shadow: 0.625em 0.875em 0 -0.125em rgba(255, 255, 255, 0.2),
-            -0.875em 1.125em 0 -0.125em #0cf,
-            -1.375em -0.125em 0 rgba(255, 255, 255, 0.2);
-        }
-        50% {
-          background: rgba(255, 255, 255, 0.3);
-          box-shadow: 0.625em 0.875em 0 -0.125em #0cf,
-            -0.875em 1.125em 0 -0.125em rgba(255, 255, 255, 0.2),
-            -1.375em -0.125em 0 rgba(255, 255, 255, 0.2);
-        }
-        100% {
-          box-shadow: 0.625em 0.875em 0 -0.125em rgba(255, 255, 255, 0.2),
-            -0.875em 1.125em 0 -0.125em rgba(255, 255, 255, 0.2),
-            -1.375em -0.125em 0 #0cf;
-        }
-      }
-    </style>
-    <style>
-      /* cyrillic-ext */
-      @font-face {
-        font-family: "Roboto";
-        font-style: normal;
-        font-weight: 100;
-        src: url(./assets/roboto.woff2) format("woff2");
-        unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF,
-          U+A640-A69F, U+FE2E-FE2F;
-      }
+			55% {
+				color: #fff;
+				background: #fff;
+				opacity: 0.2;
+			}
+		}
 
-      body {
-        font-size: 16px;
-        max-width: 90vw;
-        padding: 2em;
-        margin: 0 auto;
-        color: #161616;
-        font-family: "Roboto", sans-serif;
-        text-align: center;
-        background-color: currentColor;
-      }
+		@keyframes rain {
+			0% {
+				background: #0cf;
+				box-shadow: 0.625em 0.875em 0 -0.125em rgba(255, 255, 255, 0.2),
+					-0.875em 1.125em 0 -0.125em rgba(255, 255, 255, 0.2),
+					-1.375em -0.125em 0 #0cf;
+			}
 
-      .icon-wrap {
-        display: flex;
-        flex-wrap: wrap;
-      }
+			25% {
+				box-shadow: 0.625em 0.875em 0 -0.125em rgba(255, 255, 255, 0.2),
+					-0.875em 1.125em 0 -0.125em #0cf,
+					-1.375em -0.125em 0 rgba(255, 255, 255, 0.2);
+			}
 
-      .icon {
-        position: relative;
-        display: inline-block;
-        width: 12em;
-        height: 10em;
-        font-size: 1em;
-      }
+			50% {
+				background: rgba(255, 255, 255, 0.3);
+				box-shadow: 0.625em 0.875em 0 -0.125em #0cf,
+					-0.875em 1.125em 0 -0.125em rgba(255, 255, 255, 0.2),
+					-1.375em -0.125em 0 rgba(255, 255, 255, 0.2);
+			}
 
-      .sunny {
-      }
+			100% {
+				box-shadow: 0.625em 0.875em 0 -0.125em rgba(255, 255, 255, 0.2),
+					-0.875em 1.125em 0 -0.125em rgba(255, 255, 255, 0.2),
+					-1.375em -0.125em 0 #0cf;
+			}
+		}
+	</style>
+	<style>
+		/* cyrillic-ext */
+		@font-face {
+			font-family: 'Roboto';
+			font-style: normal;
+			font-weight: 100;
+			src: url(./assets/roboto.woff2) format('woff2');
+			unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+		}
 
-      /* sun and rays start */
-      .sun {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        width: 2.5em;
-        height: 2.5em;
-        margin: -1.25em;
-        border-radius: 50%;
-        box-shadow: 0 0 0 0.375em #fff;
-        /* animation: name duration timing-function delay iteration-count direction fill-mode; */
-        animation: spin 12s linear 0s infinite normal both;
-      }
+		body {
+			font-size: 16px;
+			max-width: 90vw;
+			padding: 2em;
+			margin: 0 auto;
+			color: #161616;
+			font-family: 'Roboto', sans-serif;
+			text-align: center;
+			background-color: currentColor;
+		}
 
-      .rays {
-        position: absolute;
-        top: -32px;
-        left: 50%;
-        margin-left: -3px;
-        display: block;
-        width: 6px;
-        height: 18px;
-        border-radius: 4px;
-        background-color: #fff;
-        box-shadow: 0 86px #fff;
-      }
+		.icon-wrap {
+			display: flex;
+			flex-wrap: wrap;
 
-      .rays::after,
-      .rays::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 6px;
-        height: 18px;
-        border-radius: 4px;
-        background-color: #fff;
-        box-shadow: 0 86px #fff;
-      }
+		}
 
-      .rays::after {
-        transform: rotate(60deg);
-        transform-origin: 50% 52px;
-      }
+		.icon {
+			position: relative;
+			display: inline-block;
+			width: 12em;
+			height: 10em;
+			font-size: 1em;
 
-      .rays::before {
-        transform: rotate(120deg);
-        transform-origin: 50% 52px;
-      }
+		}
 
-      /* sun and rays end */
 
-      /* cloud start */
-      .cloud {
-        position: absolute;
-        z-index: 1;
-        top: 50%;
-        left: 50%;
-        width: 59px;
-        height: 59px;
-        margin: -29.5px;
-        background: currentColor;
-        border-radius: 50%;
-        box-shadow: -35px 11px 0 -11px, 33px 15px 0 -15px, 0 0 0 6px #fff,
-          -35px 11px 0 -5px #fff, 33px 15px 0 -9px #fff;
-      }
+		.sunny {}
 
-      .mini-cloud::after,
-      .cloud::after {
-        content: "";
-        position: absolute;
-        display: block;
-        bottom: 0;
-        left: -8px;
-        width: 73px;
-        height: 16px;
-        background: currentColor;
-        box-shadow: 0 7px 0 -1px #fff;
-      }
+		/* sun and rays start */
+		.sun {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			width: 2.5em;
+			height: 2.5em;
+			margin: -1.25em;
+			border-radius: 50%;
+			box-shadow: 0 0 0 0.375em #fff;
+			/* animation: name duration timing-function delay iteration-count direction fill-mode; */
+			animation: spin 12s linear 0s infinite normal both;
+		}
 
-      .mini-cloud {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 59px;
-        height: 59px;
-        margin: -29.5px;
-        border-radius: 50%;
+		.rays {
+			position: absolute;
+			top: -32px;
+			left: 50%;
+			margin-left: -3px;
+			display: block;
+			width: 6px;
+			height: 18px;
+			border-radius: 4px;
+			background-color: #fff;
+			box-shadow: 0 86px #fff;
+		}
 
-        z-index: 0;
-        background: #fff;
-        box-shadow: -35px 11px 0 -11px #fff, 33px 15px 0 -15px #fff,
-          0 0 0 6px #fff, -35px 11px 0 -5px #fff, 33px 15px 0 -9px #fff;
-        opacity: 0.3;
-        transform: scale(0.5) translate(6em, -3em);
-        animation: cloudAni 6s linear infinite;
-      }
+		.rays::after,
+		.rays::before {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 6px;
+			height: 18px;
+			border-radius: 4px;
+			background-color: #fff;
+			box-shadow: 0 86px #fff;
 
-      .mini-cloud::after {
-        background-color: #fff;
-      }
+		}
 
-      /* cloud end */
+		.rays::after {
+			transform: rotate(60deg);
+			transform-origin: 50% 52px;
 
-      /* lightning start */
-      .rain,
-      .lightning,
-      .snow {
-        position: absolute;
-        z-index: 2;
-        top: 50%;
-        left: 50%;
-        width: 60px;
-        height: 60px;
-        margin: 6px 0 0 -32px;
-        background: currentColor;
-      }
+		}
 
-      .bolt {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin: -4px 0 0 -2px;
-        color: #fff;
-        opacity: 0.3;
-        animation: lightning 2s linear infinite;
-      }
+		.rays::before {
+			transform: rotate(120deg);
+			transform-origin: 50% 52px;
+		}
 
-      .bolt::before {
-        content: "";
-        position: absolute;
-        z-index: 2;
-        top: 50%;
-        left: 50%;
-        margin: -26px 0 0 -16.2px;
-        border-top: 20px solid transparent;
-        border-right: 12px solid;
-        border-bottom: 12px solid;
-        border-left: 8px solid transparent;
-        transform: skewX(-10deg);
-      }
+		/* sun and rays end */
 
-      .bolt::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        z-index: 2;
-        margin: -4px 0 0 -4px;
-        border-top: 12px solid;
-        border-right: 8px solid transparent;
-        border-bottom: 20px solid transparent;
-        border-left: 12px solid;
-        transform: skewX(-10deg);
-      }
 
-      .bolt:nth-child(2) {
-        width: 8px;
-        height: 4px;
-        margin: -28px 0 0 -30px;
-        transform: translate(40px, 36px);
-        opacity: 0.2;
-        animation: lightning 1.5s linear infinite;
-      }
+		/* cloud start */
+		.cloud {
+			position: absolute;
+			z-index: 1;
+			top: 50%;
+			left: 50%;
+			width: 59px;
+			height: 59px;
+			margin: -29.5px;
+			background: currentColor;
+			border-radius: 50%;
+			box-shadow: -35px 11px 0 -11px, 33px 15px 0 -15px, 0 0 0 6px #fff, -35px 11px 0 -5px #fff, 33px 15px 0 -9px #fff;
+		}
 
-      .bolt:nth-child(2)::before {
-        margin: -12px 0 0 -8px;
-        border-top: 10px solid transparent;
-        border-right: 6px solid;
-        border-bottom: 6px solid;
-        border-left: 4px solid transparent;
-      }
+		.mini-cloud::after,
+		.cloud::after {
+			content: '';
+			position: absolute;
+			display: block;
+			bottom: 0;
+			left: -8px;
+			width: 73px;
+			height: 16px;
+			background: currentColor;
+			box-shadow: 0 7px 0 -1px #fff;
+		}
 
-      .bolt:nth-child(2)::after {
-        margin: -2px 0 0 -2px;
-        border-top: 6px solid;
-        border-right: 4px solid transparent;
-        border-bottom: 10px solid transparent;
-        border-left: 6px solid;
-      }
+		.mini-cloud {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 59px;
+			height: 59px;
+			margin: -29.5px;
+			border-radius: 50%;
 
-      /* lightning end */
+			z-index: 0;
+			background: #fff;
+			box-shadow: -35px 11px 0 -11px #fff, 33px 15px 0 -15px #fff, 0 0 0 6px #fff, -35px 11px 0 -5px #fff, 33px 15px 0 -9px #fff;
+			opacity: 0.3;
+			transform: scale(0.5) translate(6em, -3em);
+			animation: cloudAni 6s linear infinite;
+		}
 
-      .flake::before,
-      .flake::after {
-        content: "\2744";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin: -16.4px 0 0 -16.2px;
-        color: #fff;
-        line-height: 16px;
-        opacity: 0.2;
-        animation: spin 8s linear infinite reverse;
-      }
+		.mini-cloud::after {
+			background-color: #fff;
+		}
 
-      .flake::after {
-        margin: 2px 0 0 -16px;
-        font-size: 24px;
-        opacity: 0.4;
-        animation: spin 14s linear infinite;
-      }
+		/* cloud end */
 
-      .flake:nth-child(2):before {
-        margin: -10px 0 0 5px;
-        font-size: 20px;
-        opacity: 0.2;
-        animation: spin 10s linear infinite;
-      }
+		/* lightning start */
+		.rain,
+		.lightning,
+		.snow {
+			position: absolute;
+			z-index: 2;
+			top: 50%;
+			left: 50%;
+			width: 60px;
+			height: 60px;
+			margin: 6px 0 0 -32px;
+			background: currentColor;
+		}
 
-      .flake:nth-child(2):after {
-        margin: 12px 0 0 4px;
-        font-size: 32px;
-        opacity: 0.4;
-        animation: spin 16s linear infinite reverse;
-      }
+		.bolt {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin: -4px 0 0 -2px;
+			color: #fff;
+			opacity: 0.3;
+			animation: lightning 2s linear infinite;
+		}
 
-      .rain::after {
-        content: "";
-        position: absolute;
-        width: 18px;
-        height: 18px;
-        background-color: #0cf;
-        margin: -8px 0 0 -4px;
-		border-radius: 100% 0  60% 50%/ 60% 0 100% 50%;
-		transform: rotate(-28deg);
-		animation: rain 3s linear infinite;
-      }
-    </style>
-  </head>
+		.bolt::before {
+			content: '';
+			position: absolute;
+			z-index: 2;
+			top: 50%;
+			left: 50%;
+			margin: -26px 0 0 -16.2px;
+			border-top: 20px solid transparent;
+			border-right: 12px solid;
+			border-bottom: 12px solid;
+			border-left: 8px solid transparent;
+			transform: skewX(-10deg);
+		}
 
-  <body>
-    <h1>My Animated Weather Icons</h1>
+		.bolt::after {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			z-index: 2;
+			margin: -4px 0 0 -4px;
+			border-top: 12px solid;
+			border-right: 8px solid transparent;
+			border-bottom: 20px solid transparent;
+			border-left: 12px solid;
+			transform: skewX(-10deg);
 
-    <div class="icon-wrap">
-      <div class="icon sunny">
-        <div class="sun">
-          <div class="rays"></div>
-        </div>
-      </div>
+		}
 
-      <div class="icon cloudy">
-        <div class="cloud"></div>
-        <div class="mini-cloud"></div>
-      </div>
+		.bolt:nth-child(2) {
+			width: 8px;
+			height: 4px;
+			margin: -28px 0 0 -30px;
+			transform: translate(40px, 36px);
+			opacity: 0.2;
+			animation: lightning 1.5s linear infinite;
+		}
 
-      <div class="icon thunder-storm">
-        <div class="cloud"></div>
-        <div class="lightning">
-          <div class="bolt"></div>
-          <div class="bolt"></div>
-        </div>
-      </div>
+		.bolt:nth-child(2)::before {
+			margin: -12px 0 0 -8px;
+			border-top: 10px solid transparent;
+			border-right: 6px solid;
+			border-bottom: 6px solid;
+			border-left: 4px solid transparent;
+		}
 
-      <div class="icon flurries">
-        <div class="cloud"></div>
-        <div class="snow">
-          <div class="flake"></div>
-          <div class="flake"></div>
-        </div>
-      </div>
+		.bolt:nth-child(2)::after {
+			margin: -2px 0 0 -2px;
+			border-top: 6px solid;
+			border-right: 4px solid transparent;
+			border-bottom: 10px solid transparent;
+			border-left: 6px solid;
+		}
 
-      <div class="icon">
-        <div class="cloud"></div>
-        <div class="rain"></div>
-      </div>
+		/* lightning end */
 
-      <div class="icon">
-        <div class="cloud"></div>
-      </div>
-    </div>
-  </body>
+
+		.flake::before,
+		.flake::after {
+			content: '\2744';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin: -16.4px 0 0 -16.2px;
+			color: #fff;
+			line-height: 16px;
+			opacity: 0.2;
+			animation: spin 8s linear infinite reverse;
+		}
+
+		.flake::after {
+			margin: 2px 0 0 -16px;
+			font-size: 24px;
+			opacity: 0.4;
+			animation: spin 14s linear infinite;
+		}
+
+		.flake:nth-child(2):before {
+			margin: -10px 0 0 5px;
+			font-size: 20px;
+			opacity: 0.2;
+			animation: spin 10s linear infinite;
+		}
+
+		.flake:nth-child(2):after {
+			margin: 12px 0 0 4px;
+			font-size: 32px;
+			opacity: 0.4;
+			animation: spin 16s linear infinite reverse;
+		}
+
+
+		.rain::after {
+			content: "";
+			position: absolute;
+			width: 18px;
+			height: 18px;
+			background-color: #0cf;
+			margin: -8px 0 0 -4px;
+			border-radius: 100% 0 60% 50%/ 60% 0 100% 50%;
+			transform: rotate(-28deg);
+			animation: rain 3s linear infinite;
+		}
+
+		.cloud+.sun {
+			margin: -39px 0 0px 16px;
+		}
+	</style>
+
+
+	<style>
+		:root {
+			--tWidth: 40px;
+		}
+
+		.use-shape {
+			margin: 150px 0 0 0;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-around;
+			align-content: space-around;
+		}
+
+		.triangle1 {
+			width: 0;
+			height: 0;
+			border-top: 30px solid transparent;
+			border-right: 20px solid #0cf;
+			border-bottom: 30px solid skyblue;
+			border-left: 20px solid transparent;
+			transform: skew(-10deg);
+		}
+
+		.triangle2 {
+			position: relative;
+			width: 0;
+			height: 0;
+			color: red;
+			opacity: 0.5;
+			animation: lightning 2s linear infinite;
+		}
+
+		.triangle2::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			margin: -28px 0 0 -14px;
+			border-top: 16px solid transparent;
+			border-right: 10px solid;
+			border-bottom: 16px solid;
+			border-left: 10px solid transparent;
+			transform: skew(-10deg);
+		}
+
+		.triangle2::after {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			margin: -4px 0 0 -4px;
+			border-top: 16px solid;
+			border-right: 10px solid transparent;
+			border-bottom: 16px solid transparent;
+			border-left: 10px solid;
+			transform: skew(-10deg);
+		}
+
+		.triangle3 {
+			background-color: rgba(255, 255, 255, 0.3);
+			width: 50px;
+			height: 50px;
+			transform: skew(-45deg);
+		}
+
+		.circle3,
+		.circle2,
+		.circle1 {
+			position: relative;
+			width: 20px;
+			height: 20px;
+			background-color: #0cf;
+			border-radius: 100% 0 60% 50% / 60% 0 100% 50%;
+		}
+
+		.circle2 {
+			transform: rotate(-20deg);
+			/* transform: skew(-10deg); */
+		}
+
+		.circle3::after {
+			content: '';
+			display: block;
+			width: 20px;
+			/* position: absolute; */
+			height: 20px;
+			border-radius: 100% 0 60% 50% / 60% 0 100% 50%;
+			box-shadow: -29px -16px 0px 0px red, -28px 23px 0px 2px skyblue, 29px -10px 0px 0px gold, 29px 16px 0px -3px salmon;
+		}
+
+		.circle4 {
+			position: relative;
+			width: 60px;
+			height: 60px;
+			border-radius: 50%;
+			background-color: #fff;
+			/* 画云的思路：1. 画大圆，2. 再通过box-shadow左右两边画两个小圆耳朵，3. 对三个圆进行绘制大一点的同心圆，小云朵就出来了，4.遮挡底部弧线 */
+			box-shadow: -35px 11px 0 -11px #0cf, 33px 15px 0 -15px yellow, 0px 0px 0 6px red, -35px 11px 0 -6px red, 33px 15px 0 -8px red;
+		}
+
+		.circle4::after {
+			content: '';
+			display: block;
+			position: absolute;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="weather-wrap">
+		<h1 style="color: #fff;">My Animated Weather Icons</h1>
+
+		<div class="icon-wrap">
+
+			<div class="icon sunny">
+				<div class="sun">
+					<div class="rays">
+					</div>
+				</div>
+
+			</div>
+
+			<div class="icon cloudy">
+				<div class="cloud"></div>
+				<div class="mini-cloud"></div>
+			</div>
+
+
+			<div class="icon thunder-storm">
+				<div class="cloud"></div>
+				<div class="lightning">
+					<div class="bolt"></div>
+					<div class="bolt"></div>
+				</div>
+			</div>
+
+			<div class="icon flurries">
+				<div class="cloud"></div>
+				<div class="snow">
+					<div class="flake"></div>
+					<div class="flake"></div>
+				</div>
+			</div>
+
+			<div class="icon rainy">
+				<div class="cloud"></div>
+				<div class="rain">
+				</div>
+			</div>
+
+			<div class="icon sun-shower">
+				<div class="cloud">
+				</div>
+				<div class="sun">
+					<div class="rays">
+					</div>
+				</div>
+				<div class="rain">
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="use-shape">
+		<div class="triangle1"></div>
+		<div class="triangle2"></div>
+		<div class="triangle3"></div>
+		<div class="circle1"></div>
+		<div class="circle2"></div>
+		<div class="circle3"></div>
+		<div class="circle4"></div>
+
+	</div>
+
+
+
+
+
+</body>
+
 </html>
