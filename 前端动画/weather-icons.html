@@ -362,15 +362,21 @@
 		:root {
 			--tWidth: 40px;
 		}
-
+		.shape-wrap{
+			padding: 150px 0 40px 0;
+			text-align: left;
+			color: #fff;
+		}
 		.use-shape {
-			margin: 150px 0 0 0;
+			margin-bottom: 10px;
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: space-around;
 			align-content: space-around;
 		}
-
+		.p-text{
+			margin: 30px 0;
+		}
 		.triangle1 {
 			width: 0;
 			height: 0;
@@ -454,7 +460,6 @@
 			height: 60px;
 			border-radius: 50%;
 			background-color: #fff;
-			/* 画云的思路：1. 画大圆，2. 再通过box-shadow左右两边画两个小圆耳朵，3. 对三个圆进行绘制大一点的同心圆，小云朵就出来了，4.遮挡底部弧线 */
 			box-shadow: -35px 11px 0 -11px #0cf, 33px 15px 0 -15px yellow, 0px 0px 0 6px red, -35px 11px 0 -6px red, 33px 15px 0 -8px red;
 		}
 
@@ -523,17 +528,23 @@
 	</div>
 
 
-	<div class="use-shape">
-		<div class="triangle1"></div>
-		<div class="triangle2"></div>
-		<div class="triangle3"></div>
-		<div class="circle1"></div>
-		<div class="circle2"></div>
-		<div class="circle3"></div>
-		<div class="circle4"></div>
+	<div class="shape-wrap">
 
+		<div class="use-shape">
+			<div class="triangle1"></div>
+			<div class="triangle2"></div>
+			<div class="triangle3"></div>
+
+		</div>
+
+		<p class="p-text">画云的思路：1. 画大圆，2. 再通过box-shadow左右两边画两个小圆耳朵，3. 对三个圆进行绘制大一点的同心圆，小云朵就出来了，4.遮挡底部弧线</p>
+		<div class="use-shape">
+			<div class="circle1"></div>
+			<div class="circle2"></div>
+			<div class="circle3"></div>
+			<div class="circle4"></div>
+		</div>
 	</div>
-
 
 
 
