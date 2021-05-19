@@ -468,6 +468,42 @@
 			display: block;
 			position: absolute;
 		}
+
+
+		.circle5{
+			position: relative;
+		}
+		.circle5::before{
+			position: absolute;
+			content: '';
+			width: 16px;
+			height: 20px;
+			left: 0;
+			top: 0;
+			border-radius: 50% / 40%;
+			background-color: skyblue;
+			border-right: 2px solid red;
+			border-bottom: 2px solid red;
+			border-top: 2px solid transparent;
+			border-left: 2px solid transparent;			
+			box-shadow: 0px 0px 0px 0px #000;
+		}
+		.circle5::after{
+			content: '';
+			position: absolute;
+			left: 20px;
+			width: 16px;
+			height: 20px;
+			border-radius: 50% / 40%;
+			background-color: skyblue;
+			border-right: 2px solid red;
+			border-bottom: 2px solid red;
+			border-top: 2px solid transparent;
+			border-left: 2px solid transparent;
+			/* transform: rotate(-270deg); */
+			transform: rotateY(-180deg);
+			box-shadow: 0px 0px 0px 0px #000;
+		}
 	</style>
 </head>
 
@@ -543,6 +579,7 @@
 			<div class="circle2"></div>
 			<div class="circle3"></div>
 			<div class="circle4"></div>
+			<div class="circle5"></div>
 		</div>
 	</div>
 
