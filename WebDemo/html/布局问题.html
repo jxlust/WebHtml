@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		h3 {
+			margin: 10px 0;
+		}
+
+		.outer-block {
+			width: 100px;
+			height: 200px;
+			background-color: rgb(163, 162, 81);
+			display: flex;
+			align-items: center;
+			padding: 0 10px 0 10px;
+		}
+
+		.box1 {
+			width: 100%;
+			padding: 25% 0;
+			background-color: skyblue;
+		}
+
+		.outer-block2 {
+			width: 100px;
+			height: 200px;
+			padding: 0 10px;
+			background-color: rgb(163, 162, 81);
+			display: flex;
+			align-items: center;
+			margin: 0 10px;
+		}
+
+		.inner-block2 {
+			position: relative;
+			width: 100%;
+			padding-bottom: 50%;
+			height: 0;
+			background-color: red;
+
+		}
+
+		.box2 {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 12px;
+
+		}
+
+		.pz-wrap{
+			position: relative;
+			width: 200px;
+			height: 200px;
+		}
+		.pz-header{
+			width: 50%;
+			margin: 0 auto;
+			display: block;
+			height: 50%;
+			background-color: aquamarine;
+		}
+		.pz-bottom{
+			position: relative;
+			height: 50%;
+			display: flex;
+			justify-content: space-between;
+		}
+		.pz-left{
+			flex-shrink: 1;
+			flex-grow: 1;
+			background-color: skyblue;
+			height: 100%;
+		}
+		.pz-right{
+			flex-shrink: 1;
+			flex-grow: 1;
+			background-color: yellowgreen;
+			height: 100%;
+		}
+
+		.pz-bottom2{
+			position: relative;
+			height: 50%;
+			width: 100%;
+		}
+		.pz-left2{
+			position: absolute;
+			left: 0;
+			background-color: skyblue;
+			width: 50%;
+			height: 100%;
+		}
+		.pz-right2{
+			position: absolute;
+			right: 0;
+			background-color: yellowgreen;
+			width: 50%;
+			height: 100%;
+		}
+
+	</style>
+</head>
+
+<body>
+	<h3>div垂直居中高度为宽度一半：</h3>
+	<div class="outer-block">
+		<div class="box1">test1</div>
+	</div>
+
+	<h3>div垂直居中高度为宽度一半2：</h3>
+
+	<div class="outer-block2">
+		<div class="inner-block2">
+			<div class="box2">tests</div>
+		</div>
+	</div>
+
+	<h3>品字：</h3>
+	<div class="pz-wrap">
+		<div class="pz-header">
+
+		</div>
+		<div class="pz-bottom2">
+			<div class="pz-left2"></div>
+			<div class="pz-right2"></div>
+		</div>
+	</div>
+
+
+</body>
+
+</html>
