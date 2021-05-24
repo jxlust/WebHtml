@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		.test {
+			width: 100px;
+			height: 100px;
+		}
+
+		.test-1 {
+			position: relative;
+			background: #f20;
+		}
+
+		.inner {
+			width: 80px;
+			height: 80px;
+			transform: scale(1);
+			/*此处会产生新的stacking context*/
+			background: green;
+		}
+
+		.child {
+			position: absolute;
+			bottom: 15px;
+			color: #fff;
+			font-size: 30px;
+			z-index: 1000;
+		}
+
+		.test-2 {
+			position: relative;
+			margin-top: -50px;
+			background: #000;
+		}
+	</style>
+</head>
+
+<body>
+	<p>这里涉及到一个stacking context（有人翻译为层叠上下文）的概念。</p>
+	<p>给元素设置transform属性会创建一个新的stacking context。</p>
+	<a
+		href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context">The_stacking_context</a>
+
+	<div class="block">
+		<div class="test test-1">
+			<div class="inner">
+				<div class="child">
+					Child
+				</div>
+			</div>
+		</div>
+		<div class="test test-2">
+		</div>
+
+	</div>
+</body>
+
+</html>
