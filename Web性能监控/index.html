@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>性能测试</title>
+	<link rel="stylesheet"
+		href="https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/soutu/css/soutu_new2_ae491b7.css"
+		type="text/css" data-for="result">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		.header {
+			position: static;
+			width: 100%;
+			display: flex;
+			align-items: center;
+		}
+
+		.block {
+			flex: 1;
+			height: 200px;
+			background-color: skyblue;
+		}
+
+		.block:nth-child(even) {
+			background-color: red;
+		}
+
+		.content {
+			position: relative;
+			z-index: 2;
+			width: 100%;
+			height: 500px;
+			margin-top: -50px;
+			background-color: #f8f8f8;
+		}
+
+		.bottom {
+			width: 100%;
+			height: 1200px;
+			background-color: #999;
+
+		}
+	</style>
+
+	<script src="./js/errorAsy.js">
+	
+	</script>
+
+</head>
+
+<body>
+
+	<div class="header">
+		<div class="block"></div>
+		<div class="block"></div>
+		<div class="block"></div>
+	</div>
+	<div class="content">
+		<img src="https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3206689113,2237998950&fm=26&gp=0.jpg" alt="">
+	</div>
+	<div class="bottom">
+		<div class="bottom1">
+			<img src="https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2827471950,3102544597&fm=26&gp=0.jpg" alt="">
+		</div>
+	</div>
+
+
+	<script>
+		let fdiv = document.createElement('div');
+		fdiv.style = 'position: fixed; height: 100px;width: 100px;bottom: 0;right: 0; ';
+		document.body.append(fdiv);
+
+		function moCallback(mutationsList, observer) {
+			console.log(11, mutationsList);
+			console.log(22, observer);
+		}
+		const observer = new MutationObserver(moCallback);
+		observer.observe(fdiv, {
+			attributes: true,
+			childList: true,
+			subtree: true
+		})
+
+	</script>
+	<!-- <script src="./js/error-test.js"></script> -->
+	<script type="module">
+		import FMP from './js/FMP.js';
+		FMP.getFmp(10000).then(data => {
+			console.log('fmp:',data);
+		})
+	</script>
+	<script>
+		window.addEventListener('DOMContentLoaded', function (e) {
+			console.log(1, e);
+		})
+
+		function tranSeconds(time) {
+			return (time / 1000) + '秒';
+		}
+		window.addEventListener('load', function (e) {
+			console.log(2, e);
+			console.log(performance);
+			const {
+				timing
+			} = performance;
+			console.log(timing);
+			console.log('dom解析耗时：', tranSeconds(timing.domInteractive - timing.responseEnd));
+			console.log('白屏时间：', tranSeconds(timing.responseEnd - timing.fetchStart));
+			console.log('页面完全加载时间：', tranSeconds(timing.loadEventStart - timing.fetchStart));
+			//
+			console.log('粗略首屏：', timing.loadEventEnd,tranSeconds(timing.loadEventEnd - timing.fetchStart));
+			console.log('资源加载耗时：', tranSeconds(timing.loadEventStart - timing.domContentLoadedEventEnd));
+			console.log('首包时间：', tranSeconds(timing.responseStart - timing.domainLookupStart));
+		})
+
+		function jsLoadTotalTime() {
+			const p = window.performance.getEntries();
+			let jsR = p.filter(ele => ele.initiatorType === 'script')
+			return Math.max(...jsR.map(ele => ele.responseEnd)) - Math.min(...jsR.map(ele => ele.startTime));
+		}
+
+		function cssLoadTotalTime() {
+
+		}
+
+		function uploadAnalyticsData() {
+			let rumData = new FormData();
+			rumData.append('entries', JSON.stringify(performance.getEntries()));
+			// 同步的 XMLHttpRequest 向服务器发送数据。这导致了页面卸载被延迟
+			// client.open("POST", "/log", false); // 第三个参数表明是同步的 xhr ,可以设置为true
+
+			if ('sendBeacon' in navigator) {
+				// 用户代理在有机会时异步地向服务器发送数据，同时不会延迟页面的卸载或影响下一导航的载入性能
+				if (navigator.sendBeacon('url', rumData)) {
+					// sendBeacon worked! good
+				} else {
+					//failed Use XHR or Fetch instead
+				}
+			} else {
+
+				//Use XHR or Fetch instead
+			}
+		}
+		window.addEventListener('unload', uploadAnalyticsData, false)
+	</script>
+</body>
+
+</html>
