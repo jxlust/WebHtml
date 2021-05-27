@@ -42,10 +42,17 @@
 		}
 
 		.bottom {
+			position: relative;
 			width: 100%;
 			height: 1200px;
 			background-color: #999;
 
+		}
+		.bottom1{
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			z-index: 2;
 		}
 	</style>
 
@@ -59,7 +66,7 @@
 
 	<div class="header">
 		<div class="block"></div>
-		<div class="block"></div>
+		<div id="tips" class="block"></div>
 		<div class="block"></div>
 	</div>
 	<div class="content">
@@ -73,20 +80,19 @@
 
 
 	<script>
-		let fdiv = document.createElement('div');
-		fdiv.style = 'position: fixed; height: 100px;width: 100px;bottom: 0;right: 0; ';
-		document.body.append(fdiv);
-
-		function moCallback(mutationsList, observer) {
-			console.log(11, mutationsList);
-			console.log(22, observer);
-		}
-		const observer = new MutationObserver(moCallback);
-		observer.observe(fdiv, {
-			attributes: true,
-			childList: true,
-			subtree: true
-		})
+		// let fdiv = document.createElement('div');
+		// fdiv.style = 'position: fixed; height: 100px;width: 100px;bottom: 0;right: 0; ';
+		// document.body.append(fdiv);
+		// function moCallback(mutationsList, observer) {
+		// 	console.log(11, mutationsList);
+		// 	console.log(22, observer);
+		// }
+		// const observer = new MutationObserver(moCallback);
+		// observer.observe(fdiv, {
+		// 	attributes: true,
+		// 	childList: true,
+		// 	subtree: true
+		// })
 
 	</script>
 	<!-- <script src="./js/error-test.js"></script> -->
@@ -94,6 +100,7 @@
 		import FMP from './js/FMP.js';
 		FMP.getFmp(10000).then(data => {
 			console.log('fmp:',data);
+			document.getElementById('tips').innerText = '首屏时间：' + data / 1000 + '秒'
 		})
 	</script>
 	<script>
