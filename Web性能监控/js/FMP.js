@@ -15,7 +15,10 @@ class FMP {
 
     const promise = new Promise((resolve) => {
       const observedPoints = [];
-      const observer = new window.MutationObserver(() => {
+			//mutationsList 可能存11个进入微任务队列？
+      const observer = new window.MutationObserver((mutationsList, observer) => {
+				console.log('ob callback:',mutationsList);
+				console.log('ob :',observer);
         const innerHeight = window.innerHeight;
         function getDomMark(dom, level) {
           const length = dom.children ? dom.children.length : 0;
@@ -35,10 +38,10 @@ class FMP {
           return sum;
         }
         window.requestAnimationFrame(() => {
-					
+					console.log('raf');
           const timing = window.performance.timing;
           const startTime = timing.navigationStart || timing.fetchStart;
-          const t = new Date().getTime() - startTime;
+          const t = Date.now() - startTime;
 					console.log(111,t);
           const score = getDomMark(document, 1);
           observedPoints.push({
