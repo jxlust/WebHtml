@@ -81,5 +81,4 @@ class FMP {
 		return promise;
 	}
 }
-
 export default FMP;
