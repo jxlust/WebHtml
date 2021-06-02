@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>事件</title>
+    <style>
+      .main {
+        position: relative;
+        width: 500px;
+        height: 500px;
+        background-color: #f8f8f8;
+      }
+      .top {
+        width: 100%;
+        height: 30px;
+        background-color: steelblue;
+      }
+      .bottom {
+        position: absolute;
+        z-index: 2;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 300px;
+        background-color: skyblue;
+      }
+      .outer {
+        width: 200px;
+        height: 200px;
+        background-color: thistle;
+      }
+      .inner {
+        width: 100px;
+        height: 100px;
+        background-color: tomato;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="top"></div>
+      <div class="bottom">
+        <div class="outer">
+          <div class="inner"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function addClickEvent(dom, options) {
+        dom.addEventListener(
+          "click",
+          function (e) {
+            let name = dom.classList[0];
+            if (options === true) {
+              console.log(name + "捕获阶段");
+            } else {
+              console.log(name + "冒泡阶段");
+            }
+          },
+          options
+        );
+      }
+      const mainDom = document.querySelector(".main");
+      const topDom = document.querySelector(".top");
+      const btDom = document.querySelector(".bottom");
+      const outerDom = document.querySelector(".outer");
+      const innerDom = document.querySelector(".inner");
+
+       //main捕获阶段 
+      // bottom捕获阶段  
+      // outer捕获阶段  
+      // inner捕获阶段
+      addClickEvent(mainDom, true);
+      //addClickEvent(topDom,true)
+      addClickEvent(btDom, true);
+      addClickEvent(outerDom, true);
+      addClickEvent(innerDom, true);
+     
+      addClickEvent(mainDom,false);
+      addClickEvent(btDom, false);
+      addClickEvent(outerDom, false);
+      addClickEvent(innerDom, false);
+
+
+
+    </script>
+  </body>
+</html>
