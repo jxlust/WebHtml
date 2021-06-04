@@ -51,6 +51,14 @@
   </head>
 
   <body>
+    <p>从数据上处理：
+      1. 分页分表，比如前端可以把数据分页或者下拉加载等展示，后端也分段吐数据
+      2. 从渲染上解决
+      2.1 异步渲染，比如进入页面先不渲染，然后加载好页面再渲染。
+      2.2 局部渲染：只渲染目前可见区域的数据，再渲染次屏数据，https://www.cnblogs.com/cangqinglang/p/12341362.html
+      2.3 还有性能瓶颈，可以考虑web worker 做压缩和解码，也可以考虑离屏canvas做预渲染。
+      3. 减少网络耗时：压缩数据，gzip等
+    </p>
     <div class="otp">
       <button id="badInsert">暴力法</button>
       <button id="splitInsert">简单分片</button>
