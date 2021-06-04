@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>大数据列表渲染优化</title>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+      }
+
+      .otp {
+        display: flex;
+        align-items: center;
+        padding: 0 0 50px 0;
+      }
+
+      .main {
+        height: 500px;
+        overflow-y: auto;
+        width: 300px;
+        background-color: #f8f8f8;
+        border-radius: 10px;
+      }
+
+      .list {
+      }
+
+      .item {
+        width: 100%;
+        height: 30px;
+      }
+
+      .item:nth-child(2n) {
+        background-color: tan;
+      }
+
+      .item:nth-child(2n + 1) {
+        background-color: thistle;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="otp">
+      <button id="badInsert">暴力法</button>
+      <button id="splitInsert">简单分片</button>
+      <button id="rafInsert">最优</button>
+    </div>
+    <div class="main">
+      <div class="list" id="container"></div>
+    </div>
+
+    <script>
+      const containerDom = document.getElementById("container");
+      const total = 10000;
+      const onePagerNum = 99;
+
+      function createItem(num) {
+        let item = document.createElement("div");
+        item.className = "item";
+        item.innerText = `我是第${num}条目`;
+        return item;
+      }
+
+      /**
+       * 暴力导致卡顿
+       */
+      function badInsert() {
+        //监听
+        console.time("bad");
+        for (let i = 0; i < total; i++) {
+          containerDom.appendChild(createItem(i+1));
+        }
+        // console.timeEnd("bad");
+      }
+      /**
+       * 异步分片显式栈实现
+       */
+      async function loopStack() {
+        let stack = [];
+        let once = 99;
+        stack.push(0);
+        while (stack.length) {
+          let i = stack.pop();
+          if (i * once < total) {
+            let promise = new Promise((resolve) => {
+              setTimeout(() => {
+                let start = i * once;
+                let end = (i + 1) * once;
+                end > total && (end = total);
+                for (let j = start; j < end; j++) {
+                  containerDom.appendChild(createItem(j+1));
+                }
+                resolve();
+              }, 0);
+            });
+            await promise;
+            stack.push(i + 1);
+          }
+        }
+      }
+      /**
+       * 异步分片递归实现
+       */
+      function loop(curTotal, curIndex) {
+        if (curTotal <= 0) return;
+        let once = curTotal < onePagerNum ? curTotal : onePagerNum; //取最小值
+        setTimeout(() => {
+          for (let i = 0; i < once; i++) {
+            containerDom.appendChild(createItem(curIndex + i + 1));
+          }
+          loop(curTotal - once, curIndex + once);
+        }, 0);
+      }
+
+      function rafInsert() {
+        //requestAnimationFrame 固定绘制频率绘制
+        console.time('raf');
+        let current = 0;
+        let once = 99;
+        const rafDraw = function (timestamp) {
+          //一次绘制99
+          if (current < total) {
+            let end = Math.min(current + once, total);
+            //利用documentfragment优化
+            let fragment = document.createDocumentFragment();
+            for (let i = current; i < end; i++) {
+              fragment.appendChild(createItem(i+1));
+            }
+            //只触发一次重排（回流）和重绘
+            containerDom.appendChild(fragment);
+            current = end;
+            window.requestAnimationFrame(rafDraw);
+          }else{
+            console.timeEnd('raf');
+          }
+        };
+        window.requestAnimationFrame(rafDraw);
+      }
+
+      const observer = new MutationObserver((mutationsList, ob) => {
+        console.log('mutations:', mutationsList);
+        console.timeEnd("bad"); //bad，10万条数据一秒多
+        // console.timeEnd("split");
+      });
+      observer.observe(containerDom, {
+        childList: true,
+        subtree: true,
+      });
+      //暴力插入
+      document
+        .getElementById("badInsert")
+        .addEventListener("click", function (e) {
+          badInsert();
+        });
+      //简单分片
+      document
+        .getElementById("splitInsert")
+        .addEventListener("click", function (e) {
+          //   splitInsert();
+          //   loop(total, 0);
+          loopStack();
+        });
+      //最优帧绘制
+      document
+        .getElementById("rafInsert")
+        .addEventListener("click", function (e) {
+          rafInsert();
+        });
+    </script>
+  </body>
+</html>
