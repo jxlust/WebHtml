@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid布局</title>
+
+    <style>
+        .container {
+            display: grid;
+        }
+
+        .margin-line {
+            margin: 20px 0;
+        }
+
+        .demo1 {
+            font-size: 20px;
+            /* 列宽 */
+            grid-template-columns: 100px 100px 100px;
+            /* 行宽 */
+            grid-template-rows: 100px 100px 100px;
+        }
+
+        .demo2 {
+            width: 400px;
+            grid-template-columns: repeat(3, 33.33%);
+            grid-template-rows: repeat(3, 33.33%);
+        }
+
+        .demo3 {
+            font-size: 10px;
+            grid-template-columns: repeat(2, 100px 20px 30px);
+            grid-template-rows: 50px 50px 50px;
+        }
+
+        .demo4 {
+            width: 400px;
+            font-size: 10px;
+            grid-template-columns: repeat(auto-fill, 100px);
+            grid-template-rows: 50px 50px 50px;
+        }
+
+        .demo5 {
+            width: 300px;
+            font-size: 10px;
+            grid-template-columns: 150px 1fr 2fr;
+            grid-template-rows: 50px 50px 50px;
+        }
+
+        .demo6 {
+            width: 200px;
+            font-size: 10px;
+            /* grid-template-columns: 1fr 1fr minmax(100px,1fr); */
+            grid-template-columns: 50px auto 50px;
+            grid-template-rows: 50px 50px 50px;
+        }
+
+        .demo7 {
+            width: auto;
+            font-size: 10px;
+            /* grid-template-columns: 30% 70%; */
+            grid-template-columns: repeat(12, 1fr);
+        }
+
+        .item {
+            text-align: center;
+            border: 1px solid #999;
+            font-size: 4em;
+        }
+
+        .item-1 {
+            background-color: #ef342a;
+        }
+
+        .item-2 {
+            background-color: #f68f26;
+        }
+
+        .item-3 {
+            background-color: #4ba946;
+        }
+
+        .item-4 {
+            background-color: #0376c2;
+        }
+
+        .item-5 {
+            background-color: #c077af;
+        }
+
+        .item-6 {
+            background-color: #f8d29d;
+        }
+
+        .item-7 {
+            background-color: #b5a87f;
+        }
+
+        .item-8 {
+            background-color: #d0e4a9;
+        }
+
+        .item-9 {
+            background-color: #4dc7ec;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- demo1 -->
+
+    <p>grid-template属性是grid-template-columns、grid-template-rows和grid-template-areas这三个属性的合并简写形式。
+
+        grid属性是grid-template-rows、grid-template-columns、grid-template-areas、
+        grid-auto-rows、grid-auto-columns、grid-auto-flow这六个属性的合并简写形式。
+
+        从易读易写的角度考虑，还是建议不要合并属性，所以这里就不详细介绍这两个属性了。
+
+    </p>
+    <div class="container demo1">
+        <!-- div.item.item-$*10{$} -->
+        <div class="item item-1">1</div>
+        <div class="item item-2">2</div>
+        <div class="item item-3">3</div>
+        <div class="item item-4">4</div>
+        <div class="item item-5">5</div>
+        <div class="item item-6">6</div>
+        <div class="item item-7">7</div>
+        <div class="item item-8">8</div>
+        <div class="item item-9">9</div>
+        <!-- <div class="item item-10">10</div> -->
+    </div>
+
+    <div class="margin-line"></div>
+    <div class="container demo2">
+        <div class="item item-1">1</div>
+        <div class="item item-2">2</div>
+        <div class="item item-3">3</div>
+        <div class="item item-4">4</div>
+        <div class="item item-5">5</div>
+        <div class="item item-6">6</div>
+        <div class="item item-7">7</div>
+        <div class="item item-8">8</div>
+        <div class="item item-9">9</div>
+    </div>
+
+    <div class="margin-line"></div>
+    <div class="container demo3">
+        <div class="item item-1">1</div>
+        <div class="item item-2">2</div>
+        <div class="item item-3">3</div>
+        <div class="item item-4">4</div>
+        <div class="item item-5">5</div>
+        <div class="item item-6">6</div>
+        <div class="item item-7">7</div>
+        <div class="item item-8">8</div>
+        <div class="item item-9">9</div>
+    </div>
+
+    <div class="margin-line"></div>
+    <div class="container demo4">
+        <div class="item item-1">1</div>
+        <div class="item item-2">2</div>
+        <div class="item item-3">3</div>
+        <div class="item item-4">4</div>
+        <div class="item item-5">5</div>
+        <div class="item item-6">6</div>
+        <div class="item item-7">7</div>
+        <div class="item item-8">8</div>
+        <div class="item item-9">9</div>
+    </div>
+
+    <div class="margin-line"></div>
+    <div class="container demo5">
+        <div class="item item-1">1</div>
+        <div class="item item-2">2</div>
+        <div class="item item-3">3</div>
+        <div class="item item-4">4</div>
+        <div class="item item-5">5</div>
+        <div class="item item-6">6</div>
+        <div class="item item-7">7</div>
+        <div class="item item-8">8</div>
+        <div class="item item-9">9</div>
+    </div>
+
+    <div class="margin-line"></div>
+    <p>minmax(100px, 1fr)表示列宽不小于100px，不大于1fr </p>
+    <div class="container demo6">
+        <div class="item item-1">1</div>
+        <div class="item item-2">2</div>
+        <div class="item item-3">3</div>
+        <div class="item item-4">4</div>
+        <div class="item item-5">5</div>
+        <div class="item item-6">6</div>
+        <div class="item item-7">7</div>
+        <div class="item item-8">8</div>
+        <div class="item item-9">9</div>
+    </div>
+
+    <div class="margin-line"></div>
+    <div class="container demo7">
+        <div class="item item-1">1</div>
+        <div class="item item-2">2</div>
+        <div class="item item-3">3</div>
+        <div class="item item-4">4</div>
+        <div class="item item-5">5</div>
+        <div class="item item-6">6</div>
+        <div class="item item-7">7</div>
+        <div class="item item-8">8</div>
+        <div class="item item-9">9</div>
+    </div>
+</body>
+
+</html>

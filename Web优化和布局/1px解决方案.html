@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, width=device-width"> -->
+
+    <title>Document</title>
+    <style>
+
+      .line::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        border: 1px solid #cccccc;
+        border-radius: 26px;
+        width: 200%;
+        height: 200%;
+        transform: scale(0.5);
+        /* scale .5 这里不通用，因为这个跟屏幕像素比有关系 dpr  devicePixelRatio*/
+        transform-origin: left top;
+      }
+
+      .dpr-line{
+          width: 10rem;
+          height: 10rem;
+          /* border-radius: 30px; */
+          border-bottom: 1px solid red;
+          background-color: skyblue;
+      }
+    </style>
+    <script>
+      //设置font-size
+      !(function (e, t) {
+        //设置viewport
+        const dpr = window.devicePixelRatio;
+        const vp = document.createElement("meta");
+        const m = document.getElementsByTagName("meta")[0];
+        // const metaParent = m.parentNode;
+        vp.name = 'viewport'
+        vp.content = `initial-scale=${(1.0 * 1) / dpr}, maximum-scale=${
+          (1.0 * 1) / dpr
+        }, minimum-scale=${
+          (1.0 * 1) / dpr
+        }, user-scalable=no, width=device-width`;
+        m.parentNode.insertBefore(vp, m);
+        let maxv = undefined;
+        function n() {
+          var n = s.getBoundingClientRect().width / dpr;
+           
+          (t = t || 540), n > t && (n = t);
+
+          var i = (100 * n) / e;
+          s.style.fontSize = i + "px";
+        }
+        var i,
+          o = document,
+          d = window,
+          s = o.documentElement;
+        n(),
+          d.addEventListener(
+            "resize",
+            function () {
+              clearTimeout(i), (i = setTimeout(n, 300));
+            },
+            !1
+          ),
+          d.addEventListener(
+            "pageshow",
+            function (e) {
+              e.persisted && (clearTimeout(i), (i = setTimeout(n, 300)));
+            },
+            !1
+          ),
+          d.addEventListener(
+            "DOMContentLoaded",
+            function () {
+                
+              (o.body.style.position = "relative"),
+                (o.body.style.fontSize = "16px"),
+                (o.body.style.margin = "0 auto"),
+                (o.body.style.maxWidth = t + "px");
+            },
+            !1
+          );
+      })(750, 960);
+    </script>
+  </head>
+  <body>
+    <h2>解决方法一：伪元素+transform</h2>
+    <h2>解决方法二：rem + viewport</h2>
+    <p>devicePixelRatio,屏幕像素比，逻辑像素1px在dpr=3的屏幕是等于3个像素点</p>
+
+    <div class="dpr-line">
+
+    </div>
+    <script>
+
+    </script>
+  </body>
+</html>
