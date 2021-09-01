@@ -7,6 +7,32 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<style>
+		.header {
+			width: 300px;
+			height: 100px;
+			/* background: radial-gradient(transparent 10px, red 0) top left/100% 10px no-repeat; */
+			/* background: linear-gradient(180deg,red 10px, transparent 0) 0px 0px / 100% 10px no-repeat; */
+			/* background: linear-gradient(180deg,red 10px, transparent 0) 0px 50px / 100% 10px no-repeat; */
+
+			background: linear-gradient(180deg, red 100%, transparent 0) 0px 0px / 100% 20% no-repeat,
+				linear-gradient(skyblue 100%, transparent 0) 20px 20% / 100% 20% no-repeat,
+				linear-gradient(yellow 100%, transparent 0) 40px 40% / 100% 20% no-repeat,
+				linear-gradient(skyblue 100%, transparent 0) 60px 60% / 100% 20% no-repeat,
+				linear-gradient(#00BFFF 100%, transparent 0) 80px 80% / 100% 20% no-repeat;
+		}
+
+		.header2 {
+			width: 300px;
+			height: 100px;
+
+			background: linear-gradient(red 100%, transparent 0) 0px 0px / 100% 20px no-repeat,
+				linear-gradient(rgb(197, 150, 48) 100%, transparent 0) 20px 20px / 100% 20px no-repeat,
+				linear-gradient(rgb(41, 197, 27) 100%, transparent 0) 40px 40px / 100% 20px no-repeat,
+				linear-gradient(rgb(35, 127, 212) 100%, transparent 0) 60px 60px / 100% 20px no-repeat,
+				linear-gradient(#df28d5 100%, transparent 0) 80px 80px / 100% 20px no-repeat;
+		}
+
+
 		.coupon {
 			width: 300px;
 			height: 100px;
@@ -31,17 +57,72 @@
 			margin-right: 10px;
 			font-weight: 400;
 		}
+
+		.list {
+			max-height: 200px;
+			overflow: auto;
+		}
+
+		.item {
+			background-color: #f8f8f8;
+			height: 100px;
+		}
 	</style>
 </head>
 
 <body>
+	<!-- <div class="header">111</div> -->
+	<div class="header2"></div>
 	<div class="coupon" id="cp">
 		<span>200</span>优惠券
+	</div>
+	<div class="list" id="list">
+		<div class="item">1</div>
+		<div class="item">2</div>
+		<div class="item">3</div>
+		<div class="item">4</div>
+		<div class="item">5</div>
+		<div class="item">6</div>
+		<div class="item">7</div>
+		<div class="item">8</div>
+		<div class="item">9</div>
+		<div class="item">10</div>
+		<div class="item">11</div>
+		<div class="item">12</div>
+		<div class="item">13</div>
+		<div class="item">14</div>
+		<div class="item">15</div>
+		<div class="item">16</div>
+		<div class="item">17</div>
+		<div class="item">18</div>
+		<div class="item">19</div>
+		<div class="item">20</div>
+
 	</div>
 </body>
 
 <script>
+	document.getElementById('cp').addEventListener('click', function () {
+		let other = window.open('./test.html', 'test',
+			'dialogWidth=800px;dialogHeight=600px;help=0;status=0;scroll=0;center=0;resizable=1;')
+		console.log(other);
+		console.log(other.returnV);
+	})
 
-
+	const listDom = document.getElementById('list');
+	listDom.addEventListener('touchmove', function listener() {
+		console.log('move...');
+		for (let i = 1; i < 10000; i++) {
+			for (let j = 1; j < 10000; j++) {
+				let r = i + j;
+			}
+		}
+	}, {
+		passive: true
+	});
+	// listDom.addEventListener('scroll',function () {
+	// 	console.log('scroll.');
+	// });
 </script>
+
 </html>
