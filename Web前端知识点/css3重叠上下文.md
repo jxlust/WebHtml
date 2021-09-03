@@ -81,3 +81,10 @@ z-index值不为auto 的flex 项(父元素display:flex | inline-flex )
 ### 五、判断
 1.首先先看要比较的两个元素是否处于同一个层叠上下文中：       1.1如果是，谁的层叠等级大，谁在上面（怎么判断层叠等级大小呢？——看“层叠顺序”图）。       1.2如果两个元素不在统一层叠上下文中，请先比较他们所处的层叠上下文的层叠等级。
 2.当两个元素层叠等级相同、层叠顺序相同时，在DOM结构中后面的元素层叠等级在前面元素之上。
+
+### 六、注意
+1. 简言之，如果一个元素不是通过「定位」(position: absolute or relative)实现了stacking context，它将会以z-index: 0（高于auto）被看待，因此无论如何更改非「定位」元素的z-index都是无效的。
+虽然文档中只提到opacity less 1构成的stacking context被看做z-index: 0，但通过测试，可以发现其他非「定位」方式创建的stacking context拥有与opacity less 1一致的表现。
+
+2. Fixed定位脱离Viewport的bug
+对于声明transfrom值非none元素，其子元素中若存在position: fixed将以声明transform的最近祖先作为基准而定位，这是因为transfrom值非none的元素定义了一个局部坐标系统，导致postion: fixed以此坐标系统计算布局。
