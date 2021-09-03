@@ -35,17 +35,6 @@ z-index负 < block < float < inline/inline-block <  z-index:auto <z-index正
 + will-change 值设定了任一属性而该属性在 non-initial 值时会创建层叠上下文的元素
 + contain 属性值为 layout、paint 或包含它们其中之一的合成值（比如 contain: strict、contain: content）的元素。
 
-常用：
-z-index（在设置position属性后生效）具体由值确定
-
-opacity （opacity的值不是1的时候，是具有层叠上下文的，层叠顺序是z-index:auto级别）
-
-transform
-
-filter
-
-will-change
-
 
 #### 四、创建
 
@@ -89,5 +78,6 @@ z-index值不为auto 的flex 项(父元素display:flex | inline-flex )
 2、 IE6，7 有个不合常理的地方，就是当元素的 z-index 为 auto 的时候，该元素也升级为创建层叠上下文。这就是为什么在过去 IE6/IE7 的 z-index 一直是个老大难的原因。
 
 
-### 五、优化
-1. 
+### 五、判断
+1.首先先看要比较的两个元素是否处于同一个层叠上下文中：       1.1如果是，谁的层叠等级大，谁在上面（怎么判断层叠等级大小呢？——看“层叠顺序”图）。       1.2如果两个元素不在统一层叠上下文中，请先比较他们所处的层叠上下文的层叠等级。
+2.当两个元素层叠等级相同、层叠顺序相同时，在DOM结构中后面的元素层叠等级在前面元素之上。
