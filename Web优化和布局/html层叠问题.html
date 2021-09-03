@@ -7,6 +7,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<style>
+		.block{
+			margin: 10px 0;
+		}
 		.test {
 			width: 100px;
 			height: 100px;
@@ -40,14 +43,110 @@
 			margin-top: -50px;
 			background: #000;
 		}
+
+		.jxl-outer {
+			position: relative;
+			width: 300px;
+			height: 300px;
+			background-color: skyblue;
+		}
+
+		.jxl-middle {
+			width: 200px;
+			height: 200px;
+			background-color: royalblue;
+			transform: translate(0, 10px);
+		}
+
+		.jxl-inner {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100px;
+			height: 100px;
+			background-color: yellow;
+		}
+
+		.box-wrap {
+			/* 创建一个新的stacking context 隔离 */
+			position: relative;
+			z-index: 100;
+			width: 100%;
+			height: 500px;
+			background-color: #f8f8f8;
+		}
+
+		.parent {
+			/* postion + z-index:0 创建stacking context */
+			position: relative;
+			float: left;
+			z-index: 0;
+			margin: 20px;
+		}
+
+		.box{
+			width: 100px;
+			height: 100px;
+			line-height: 100px;
+		}
+		.box1,.box3,.box5,.box7,.box9{
+			background-color: skyblue;
+		}
+		.box2,.box4,.box6,.box8,.box10{
+			background-color: #f20;
+			margin-top: -40px;
+		}
+
+		.box3, .box5{
+			/*不是通过定位产生了一个层叠上下文层，默认z-index:0 */
+			/* opacity: .99; */
+			transform: translate(0,0);
+		}
+
+		.box6{
+			/* 改变不了层级顺序，单独是产生不了层叠上下文 */
+			z-index: 999;
+		}
+		.box5{
+			/* 默认了的，没有设置定位方式，修改不生效 */
+			z-index: -99;
+		}
+
+
+		.box7{
+			position: relative;
+			z-index: -99;
+			/* 产生了z-index是负值的层叠上下文，小于z-index:auto */
+		}
+
+		.box9{
+			/*不是通过定位产生了一个层叠上下文层，默认z-index:0 */
+			filter: blur(0.5px);
+		}
+		.box10{
+			position: relative;
+			z-index: -1;
+		}
+		
+
+		.img{
+			margin: 10px 0;
+		}
 	</style>
 </head>
 
 <body>
+
+
 	<p>这里涉及到一个stacking context（有人翻译为层叠上下文）的概念。</p>
 	<p>给元素设置transform属性会创建一个新的stacking context。</p>
 	<a
 		href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context">The_stacking_context</a>
+	<a href="https://segmentfault.com/a/1190000002783265">Stacking Context</a>
+
+	<div class="img">
+		<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xODcyMDM1OC0xMjlhMmMzMWIyN2Y3YzU1LnBuZw" alt="">
+	</div>
 
 	<div class="block">
 		<div class="test test-1">
@@ -59,7 +158,43 @@
 		</div>
 		<div class="test test-2">
 		</div>
+	</div>
 
+
+	<!--  position: fixed; 定位并不相对于viewport -->
+	<div class="jxl-outer">
+		<div class="jxl-middle">
+			<div class="jxl-inner"></div>
+		</div>
+	</div>
+
+	<!-- 非定位属性产生的stacking context -->
+
+	<div class="box-wrap">
+		<div class="parent">
+			<div class="box box1">1</div>
+			<div class="box box2">2</div>
+		</div>
+
+		<div class="parent">
+			<div class="box box3">3</div>
+			<div class="box box4">4</div>
+		</div>
+
+		<div class="parent">
+			<div class="box box5">5</div>
+			<div class="box box6">6</div>
+		</div>
+
+		<div class="parent">
+			<div class="box box7">7</div>
+			<div class="box box8">8</div>
+		</div>
+
+		<div class="parent">
+			<div class="box box9">9</div>
+			<div class="box box10">10</div>
+		</div>
 	</div>
 </body>
 
