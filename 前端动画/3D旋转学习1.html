@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>3D效果学习1</title>
+	<style>
+		.box {
+			position: absolute;
+			left: 50px;
+			top: 100px;
+			width: 100%;
+			height: 100%;
+
+		}
+
+		.wrap {
+			transform-style: preserve-3d;
+			perspective: 1200px;
+		}
+
+		.img-wrap {
+			position: relative;
+			margin: auto;
+
+			width: 168px;
+			height: 300px;
+			border: 1px solid #999;
+			transform: rotateY(0deg) rotateX(-20deg);
+			/* Y轴左右旋转，X轴上下，z轴是垂直屏幕的一条轴 */
+
+			/* 设置旋转后背面的显示与否 */
+			/* backface-visibility:hidden;  */
+			box-sizing: border-box;
+			/* 倒影属性box-reflect */
+			/* -webkit-box-reflect:below 3px -webkit-linear-gradient(top,rgba(0,0,0,0) 40%,rgba(0,0,0,0.5)); */
+		}
+
+		.myimg {
+			position: absolute;
+			top: 0;
+			left: 0;
+			box-shadow: 1px -1px 6px #666;
+			border-radius: 4px;
+			width: 100%;
+			height: 300px;
+			max-width: 100%;
+		}
+
+		.img-footer {
+			width: 600px;
+			height: 600px;
+			border-radius: 50%;
+			position: absolute;
+			top: 201%;
+			left: 229%;
+			margin-left: -600px;
+			margin-top: -600px;
+			transform: rotateX(90deg);
+			background: -webkit-radial-gradient(center center, 600px 600px, rgba(158, 158, 222, 0.5), rgba(0, 0, 0, 0));
+		}
+	</style>
+</head>
+
+<!-- img.myimg*7[src="./assets/img/bg$.jpg"] -->
+
+<body>
+	<div class="box">
+
+		<div class="img-wrap" id="imgBox">
+			<!-- <img src="./assets/img/bg1.jpg" alt="" class="myimg"> -->
+			<img src="./assets/img/bg1.jpg" alt="" class="myimg"><img src="./assets/img/bg2.jpg" alt="" class="myimg"><img
+				src="./assets/img/bg3.jpg" alt="" class="myimg"><img src="./assets/img/bg4.jpg" alt="" class="myimg"><img
+				src="./assets/img/bg5.jpg" alt="" class="myimg"><img src="./assets/img/bg6.jpg" alt="" class="myimg"><img
+				src="./assets/img/bg7.jpg" alt="" class="myimg">
+
+			<div class="img-footer"></div>
+		</div>
+
+
+
+
+	</div>
+
+	<script>
+		const imgBox = document.getElementById('imgBox');
+		const images = document.querySelectorAll('.myimg');
+		const count = images.length;
+		let perDeg = Math.floor(360 / count);
+
+		//实现每张图片，绕成一个圈
+		for (let i = 0; i < count; i++) {
+
+			images[i].style.cssText = `transform: rotateY(${perDeg * i}deg) translateZ(300px);`
+
+		}
+	</script>
+</body>
+
+</html>
