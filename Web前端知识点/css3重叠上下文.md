@@ -15,6 +15,26 @@ z-index负 < block < float < inline/inline-block <  z-index:auto <z-index正
 层叠上下文可以嵌套，内部层叠上下文及其所有子元素均受制于外部的层叠上下文。
 
 ### 三、形成重叠上下文属性
+满足以下 12 个条件中任意一个的元素会创建一个层叠上下文(来自MDN)
+
++ **文档根元素（html）**；
++ **position 值为 absolute（绝对定位）或 relative（相对定位）且 z-index 值不为 auto 的元素**；
++ **position 值为 fixed（固定定位）或 sticky（粘滞定位）的元素（沾滞定位适配所有移动设备上的浏览器，但老的桌面浏览器不支持**；
++ **flex (flexbox) 容器的子元素，且 z-index 值不为 auto**；
++ grid (grid) 容器的子元素，且 z-index 值不为 auto；
++ **opacity 属性值小于 1 的元素**
++ mix-blend-mode 属性值不为 normal 的元素；
++ 以下任意属性值不为 none 的元素：
+	+ **transform**
+	+ **filter**
+	+ **perspective**
+	+ clip-path
+	+ mask / mask-image / mask-border
++ isolation 属性值为 isolate 的元素；
++ **-webkit-overflow-scrolling 属性值为 touch 的元素**；
++ will-change 值设定了任一属性而该属性在 non-initial 值时会创建层叠上下文的元素
++ contain 属性值为 layout、paint 或包含它们其中之一的合成值（比如 contain: strict、contain: content）的元素。
+
 常用：
 z-index（在设置position属性后生效）具体由值确定
 
