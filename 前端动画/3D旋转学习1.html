@@ -7,6 +7,34 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>3D效果学习1</title>
 	<style>
+		.item-1 {
+			background-color: #ef342a;
+		}
+
+		.item-2 {
+			background-color: #f68f26;
+		}
+
+		.item-3 {
+			background-color: #4ba946;
+		}
+
+		.item-4 {
+			background-color: #0376c2;
+		}
+
+		.item-5 {
+			background-color: #c077af;
+		}
+
+		.item-6 {
+			background-color: #f8d29d;
+		}
+
+		.item-7 {
+			background-color: #b5a87f;
+		}
+
 		.box {
 			position: absolute;
 			left: 50px;
@@ -24,6 +52,9 @@
 		.img-wrap {
 			position: relative;
 			margin: auto;
+
+			transform-style: preserve-3d;
+			perspective: 1200px;
 
 			width: 168px;
 			height: 300px;
@@ -70,12 +101,17 @@
 	<div class="box">
 
 		<div class="img-wrap" id="imgBox">
-			<!-- <img src="./assets/img/bg1.jpg" alt="" class="myimg"> -->
-			<img src="./assets/img/bg1.jpg" alt="" class="myimg"><img src="./assets/img/bg2.jpg" alt="" class="myimg"><img
+			<div class="myimg item-1"></div>
+			<div class="myimg item-2"></div>
+			<div class="myimg item-3"></div>
+			<div class="myimg item-4"></div>
+			<div class="myimg item-5"></div>
+			<div class="myimg item-6"></div>
+			<div class="myimg item-7"></div>
+			<!-- <img src="./assets/img/bg1.jpg" alt="" class="myimg"><img src="./assets/img/bg2.jpg" alt="" class="myimg"><img
 				src="./assets/img/bg3.jpg" alt="" class="myimg"><img src="./assets/img/bg4.jpg" alt="" class="myimg"><img
 				src="./assets/img/bg5.jpg" alt="" class="myimg"><img src="./assets/img/bg6.jpg" alt="" class="myimg"><img
-				src="./assets/img/bg7.jpg" alt="" class="myimg">
-
+				src="./assets/img/bg7.jpg" alt="" class="myimg"> -->
 			<div class="img-footer"></div>
 		</div>
 
@@ -96,6 +132,38 @@
 			images[i].style.cssText = `transform: rotateY(${perDeg * i}deg) translateZ(300px);`
 
 		}
+		//设置循环动画
+		function setAnimation(longTime) {
+			let startTime;
+			const animationCallBack = function (timestamp) {
+				if (!startTime) {
+					startTime = timestamp;
+				}
+				let diff = timestamp - startTime;
+				// console.log(111,diff);
+				if (longTime > 0) {
+					if (diff <= longTime) {
+						//更新dom ui
+						let percent = (diff / longTime * 360) | 0;
+						imgBox.style.cssText = `transform: rotateY(${percent}deg) rotateX(-20deg);`
+						window.requestAnimationFrame(animationCallBack)
+					} else {
+						//取消
+						imgBox.style.cssText = `transform: rotateY(360deg) rotateX(-20deg);`
+					}
+				} else {
+					//无限
+					let degNum = ( (timestamp - startTime) / 20 | 0) * 2;
+					degNum = degNum % 360;
+					imgBox.style.cssText = `transform: rotateY(${degNum}deg) rotateX(-20deg);`
+					window.requestAnimationFrame(animationCallBack)
+				}
+
+			}
+			window.requestAnimationFrame(animationCallBack)
+		}
+		// setAnimation(3000);
+		setAnimation(-1)
 	</script>
 </body>
 
