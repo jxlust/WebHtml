@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .halo_pager_101__halo {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        @keyframes halotwinkle {
+            30% {
+                opacity: .3;
+            }
+        }
+
+        #halo_lightPath1 {}
+
+        #halo_lightPath2 {
+            /* opacity: 1;
+         animation: halotwinkle 3s ease-in-out infinite;
+         animation-delay: calc(3s * -0.33); */
+
+        }
+
+        #halo_lightPath3 {}
+        .halo-wrap{
+            width: 100vw;
+            height: 100vh;
+            background-color: skyblue;
+        }
+    </style>
+
+
+    <script src="./js/gsap-latest-beta.min.js"></script>
+</head>
+
+<body>
+    <div class="halo-wrap">
+        <svg class="halo_pager_101__halo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            width="375px" height="173px" viewBox="0 0 375 173" version="1.1">
+            <title>halo</title>
+            <defs>
+                <linearGradient x1="84.3207761%" y1="50.3012224%" x2="3.50499429%" y2="44.2078061%"
+                    id="halo_linearGradient-1">
+                    <stop stop-color="#FFE26C" offset="0%" />
+                    <stop stop-color="#FFF7DD" offset="99.9845763%" />
+                </linearGradient>
+                <filter x="-1.6%" y="-4.4%" width="103.0%" height="108.8%" filterUnits="objectBoundingBox"
+                    id="halo_filter-2">
+                    <feGaussianBlur stdDeviation="1.6" in="SourceGraphic" />
+                </filter>
+                <linearGradient x1="84.3207761%" y1="50.3063836%" x2="3.50499429%" y2="44.1085629%"
+                    id="halo_linearGradient-3">
+                    <stop stop-color="#FFE26C" offset="0%" />
+                    <stop stop-color="#FFF7DD" offset="99.9845763%" />
+                </linearGradient>
+                <filter x="-5.2%" y="-14.7%" width="110.3%" height="129.5%" filterUnits="objectBoundingBox"
+                    id="halo_filter-4">
+                    <feGaussianBlur stdDeviation="4.8 0" in="SourceGraphic" />
+                </filter>
+                <linearGradient x1="84.3207761%" y1="50.3362943%" x2="3.50499429%" y2="43.5334109%"
+                    id="halo_linearGradient-5">
+                    <stop stop-color="#FFE26C" offset="0%" />
+                    <stop stop-color="#FFF7DD" offset="99.9845763%" />
+                </linearGradient>
+                <filter x="-4.6%" y="-12.4%" width="109.1%" height="124.8%" filterUnits="objectBoundingBox"
+                    id="halo_filter-6">
+                    <feGaussianBlur stdDeviation="4.8 0" in="SourceGraphic" />
+                </filter>
+            </defs>
+            <g id="halo_光环" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.962367467">
+                <g id="halo_编组" transform="translate(19.848153, 15.626150)" stroke-width="1.6">
+                    <path
+                        d="M164.540653,10 C72.0621082,17.3866689 4,42.4307478 4,72.1890375 C4,107.756175 101.227093,136.589037 221.162791,136.589037 C254.06126,136.589037 285.251112,134.419625 313.194384,130.536884 C331.29529,128.021749 348.033898,124.787683 362.99217,120.958658"
+                        id="halo_lightPath1" stroke="url(#halo_linearGradient-1)" filter="url(#halo_filter-2)"
+                        transform="translate(183.496085, 73.294519) rotate(-3.000000) translate(-183.496085, -73.294519) " />
+                    <path
+                        d="M361.906684,29.1875513 C350.420429,24.6860677 339.761998,21.700321 329.931391,20.2303114 C236.924718,6.32265364 141.042771,23.2735002 131.569917,25.7674866 C94.8543085,35.4338691 71.7186521,49.5364655 71.7186521,65.2415154 C71.7186521,94.3845784 151.384756,118.009699 249.657876,118.009699 C276.614281,118.009699 302.170676,116.232122 325.066882,113.050675 C337.12589,111.375066 348.446979,109.310033 358.84604,106.910174"
+                        id="halo_lightPath2" stroke="url(#halo_linearGradient-3)" filter="url(#halo_filter-4)"
+                        transform="translate(216.812668, 66.409699) rotate(-3.000000) translate(-216.812668, -66.409699) " />
+                    <path
+                        d="M362.081883,23.0012291 C354.289959,20.6235199 346.858602,18.9060036 339.787812,17.8486802 C229.318298,1.32973448 115.433652,21.4632551 104.182184,24.42551 C60.5728892,35.9068429 33.093305,52.6573288 33.093305,71.3111432 C33.093305,105.926079 127.717438,133.987029 244.442221,133.987029 C276.459934,133.987029 306.814772,131.875695 334.009947,128.096903 C341.742241,127.022495 349.219105,125.813287 356.406133,124.479482"
+                        id="halo_lightPath3" stroke="url(#halo_linearGradient-5)" filter="url(#halo_filter-6)"
+                        transform="translate(197.587594, 72.698664) rotate(-3.000000) translate(-197.587594, -72.698664) " />
+                </g>
+            </g>
+        </svg>
+    </div>
+
+    <script>
+        function initRipperAni(){
+            const tl = gsap.timeline({
+                repeat: -1,
+                defaults: {
+                    // duration: 3,
+                    // opacity: 0,
+                    // yoyo: true,
+                    transformOrigin: 'center',
+                    ease: "power2.inOut",
+                }
+            });
+            const tl2 = gsap.timeline({
+                repeat: -1,
+                defaults: {
+                    // duration: 3,
+                    // opacity: 0,
+                    // yoyo: true,
+                    transformOrigin: 'center',
+                    ease: "power2.inOut",
+                }
+            });
+            const tl3 = gsap.timeline({
+                repeat: -1,
+                defaults: {
+                    // duration: 3,
+                    // opacity: 0,
+                    // yoyo: true,
+                    transformOrigin: 'center',
+                    ease: "power2.inOut",
+                }
+            });
+         
+            tl.fromTo('#halo_lightPath2',{
+                opacity: 0,
+            },{
+                duration: .3,
+                opacity: 1,
+            },0).to('#halo_lightPath2',{
+                opacity: 0,
+                duration: .5,
+            },.5)
+
+            tl2.fromTo('#halo_lightPath3',{
+                opacity: 0,
+            },{
+                duration: .3,
+                opacity: 1,
+            },.3).to('#halo_lightPath3',{
+                opacity: 0,
+                duration: .5,
+            },.8)
+
+            tl3.fromTo('#halo_lightPath1',{
+                opacity: 0,
+            },{
+                duration: .3,
+                opacity: 1,
+            },0.9).to('#halo_lightPath1',{
+                opacity: 0,
+                duration: .5,
+            },1.4)
+ 
+
+        }
+        function initRipperAni2() {
+            const tl = gsap.timeline({
+                repeat: -1,
+                defaults: {
+                    // duration: 3,
+                    // opacity: 0,
+                    // yoyo: true,
+                    transformOrigin: 'center',
+                    ease: "power2.inOut",
+                }
+            });
+         
+            // [0      1     2      3]  s 
+            // [0 .3]  
+            //           [1.8 3      ]     [  ](1.2s)
+            tl.fromTo('#halo_lightPath2',{
+                scale: 0,
+            },{
+                duration: 3,
+                // opacity: 1,
+                scale: 1,
+            }).fromTo('#halo_lightPath2',{
+                opacity: 0,
+            },{
+                duration: .3,
+                opacity: 1,
+            },0).to('#halo_lightPath2',{
+                opacity: 0,
+                duration: 1.2,
+            },1.8)
+
+            tl.fromTo('#halo_lightPath3',{
+                scale: 0,
+            },{
+                duration: 3,
+                scale: 1,
+            },1).fromTo('#halo_lightPath3',{
+                opacity: 0,
+            },{
+                duration: .3,
+                opacity: 1,
+            },1).to('#halo_lightPath3',{
+                opacity: 0,
+                duration: 1.2
+            },2.8)
+
+            tl.fromTo('#halo_lightPath1',{
+                scale: 0,
+            },{
+                duration: 3,
+                scale: 1,
+            },2).fromTo('#halo_lightPath1',{
+                opacity: 0,
+            },{
+                duration: .3,
+                opacity: 1,
+            },2).to('#halo_lightPath1',{
+                opacity: 0,
+                duration: 1.2
+            },3.8)
+
+
+
+
+
+
+            // tl.fromTo('#halo_lightPath2', {
+            //     opacity: 0
+            // }, {
+            //     opacity: 1
+            // }).fromTo('#halo_lightPath3', {
+            //     opacity: 0
+            // }, {
+            //     opacity: 1,
+            // }, '-=.2').fromTo('#halo_lightPath1', {
+            //     opacity: 0,
+            // }, {
+            //     opacity: 1,
+            // }, '-=.2')
+
+        }
+        initRipperAni();
+    </script>
+</body>
+
+</html>
