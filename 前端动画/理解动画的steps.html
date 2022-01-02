@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>理解animation steps</title>
+    <style>
+        @keyframes RedGreenLightAnim {
+            0% {
+                background-color: red;
+            }
+
+            50% {
+                background-color: yellow;
+            }
+
+            100% {
+                background-color: green;
+            }
+        }
+
+        @keyframes Test {
+            0% {
+                background-color: red;
+            }
+            100% {
+                background-color: green;
+            }
+        }
+        .test{
+            width: 300px;
+            height: 300px;
+            animation-name: Test;
+            animation-duration: 3s;
+            animation-timing-function: steps(3, end);
+            animation-delay: 0s;
+        }
+        .box {
+            width: 300px;
+            height: 300px;
+            animation-name: RedGreenLightAnim;
+            animation-duration: 3s;
+            animation-timing-function: steps(3, end);
+            animation-delay: 0s;
+            animation-iteration-count: infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div class="box test1"></div>
+
+        <p>2个参数都会选择性的跳过前后部分，start跳过0%，end跳过100%</p>
+        <p>step-start在变化过程中，都是以下一帧的显示效果来填充间隔动画，所以0% 到 50% 直接就显示了yellow</p>
+        <p>step-end与上面相反，都是以上一帧的显示效果来填充间隔动画，所以0% 到 50% 直接就显示了red</p>
+
+        <p>@keyframes 定义帧动画，steps 函数执行的是跳跃效果，不同于渐变效果</p>
+        <p>比如keyframes 定义了0% - 50% 的帧动画 steps(3)只会分三段显示效果，end不显示最后一个效果，start不显示第一个效果</p>
+    </div>
+</body>
+
+</html>

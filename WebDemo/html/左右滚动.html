@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .scroll-wrap {
+            overflow: scroll;
+            width: 200px;
+            height: 500px;
+            background-color: skyblue;
+        }
+
+        .content {
+            width: 2000px;
+            height: 1000px;
+            background-color: beige;
+        }
+
+        .wrap {
+            width: 600px;
+            height: 600px;
+            background-color: antiquewhite;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="scroll-wrap">
+        <div class="content">
+            sadljs sadljfasdljs sadljfasdljs sadljfasdljs sadljfas
+            <p>dljs sadljfasdljs sadljfasdljs sadljfasdljs sadljfas</p>
+            <p>dljs sadljfasdljs sadljfasdljs sadljfas dljs sadljfasdljs sadljfasdljs sadljfas</p>
+        </div>
+    </div>
+    <div class="wrap" id="wrap">
+
+    </div>
+
+    <script>
+        // document.onmousewheel=function(e){
+        //     var e=e||window.event;
+        //     console.log(e);
+        //     // 非火狐浏览器下e.wheelDelta用来监听浏鼠标的滚轮方向，(window)中向上为正（120），向下为负（-120）
+        // if(e.wheelDelta<0){
+        //     console.log(e.wheelDelta);
+        //     // alert("向下滚动");
+        // }else{
+        //     console.log(e.wheelDelta);
+        //     // alert("向上滚动");
+        // }}
+    </script>
+    <script>
+        // mousedown', 'mousemove'
+        let startX, startY, moveEndX, moveEndY;
+
+        document.addEventListener('mousedown', function (e) {
+            e.preventDefault();
+            console.log(111, e);
+            startX = e.pageX,
+                startY = e.pageY;
+
+        })
+        document.addEventListener('mousemove', function (e) {
+            e.preventDefault();
+            // console.log(2222, e);
+            moveEndX = e.pageX;
+            moveEndY = e.pageY;
+            let X = moveEndX - startX;
+            let Y = moveEndY - startY;
+
+            if (Math.abs(X) > Math.abs(Y) && X > 0) {
+                // alert("left 2 right");
+                console.log('left 2 right');
+            } else if (Math.abs(X) > Math.abs(Y) && X < 0) {
+                // alert("right 2 left");
+                console.log('right 2 left');
+            } else if (Math.abs(Y) > Math.abs(X) && Y > 0) {
+                console.log("top 2 bottom");
+            } else if (Math.abs(Y) > Math.abs(X) && Y < 0) {
+                console.log("bottom 2 top");
+            } else {
+                // alert("just touch");
+                console.log('just touch');
+            }
+        })
+
+        // $("body").on("touchstart", function (e) {
+        //     e.preventDefault();
+        //     startX = e.originalEvent.changedTouches[0].pageX,
+        //         startY = e.originalEvent.changedTouches[0].pageY;
+        // });
+        // $("body").on("touchmove", function (e) {
+        //     e.preventDefault();
+        //     moveEndX = e.originalEvent.changedTouches[0].pageX,
+        //         moveEndY = e.originalEvent.changedTouches[0].pageY,
+        //         X = moveEndX - startX,
+        //         Y = moveEndY - startY;
+
+        //     if (Math.abs(X) > Math.abs(Y) && X > 0) {
+        //         alert("left 2 right");
+        //     } else if (Math.abs(X) > Math.abs(Y) && X < 0) {
+        //         alert("right 2 left");
+        //     } else if (Math.abs(Y) > Math.abs(X) && Y > 0) {
+        //         alert("top 2 bottom");
+        //     } else if (Math.abs(Y) > Math.abs(X) && Y < 0) {
+        //         alert("bottom 2 top");
+        //     } else {
+        //         alert("just touch");
+        //     }
+        // });
+    </script>
+</body>
+
+</html>

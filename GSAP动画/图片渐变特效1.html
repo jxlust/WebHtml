@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .content {
+            padding: 100px;
+        }
+
+        .img-block ,.img2-block{
+            margin: 10px;
+            position: relative;
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .img-wrap {
+            overflow: hidden;
+            width: 200px;
+            height: 200px;
+            background-color: skyblue;
+        }
+        .img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .img-mask {
+            position: absolute;
+            z-index: 1;
+            left: -50px;
+            top: -50px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, .7);
+            box-shadow: inset 0px 0px 0px 150px yellow;
+            transition: all 1s;
+
+        }
+    
+        .mask-cover{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 2;
+            background-color: transparent;
+        }
+
+        .img2-wrap{
+            position: relative;
+            overflow: hidden;
+            width: 200px;
+            height: 200px;
+             transition: all 1s;
+        }
+        .img2-mask{
+            position: absolute;
+            z-index: 1;
+            left: -50px;
+            top: -50px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background-color: transparent;
+             box-shadow: inset 0px 0px 0px 150px rgba(0, 0, 0, .7);
+            /* transition: all 1s; */
+        }
+        .img2{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+
+    <script src="./js/gsap-latest-beta.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="content">
+        <div class="img-block">
+            <div class="img-wrap">
+                <img class="img" src="http://localhost:8080/images/prizes_fragment/bg_air01@2x.png" alt="">
+            </div>
+            <div class="img-mask" id="mask"></div>
+        </div>
+
+        <div class="img2-block">
+            <div class="img2-wrap">
+                <img class="img2" src="http://localhost:8080/images/prizes_fragment/bg_air01@2x.png" alt="">
+                <div class="img2-mask" id="mask2"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    const maskEl = document.getElementById('mask');
+    const mask2El = document.getElementById('mask2');
+    const tl = gsap.timeline();
+    // tl.to(maskEl,{
+    //     scale: 0,
+    //     duration: 5,
+    //     ease: 'power2.inOut',
+    //     opacity: 0,
+    // })
+
+    tl.to(mask2El,{
+        // opacity: 0,
+        // scale: 0,
+        duration: 3,
+        ease: 'power2.inOut',
+        boxShadow: 'inset 0px 0px 0px 0px rgba(0, 0, 0, .3)'
+
+    })
+
+
+</script>
+
+</html>

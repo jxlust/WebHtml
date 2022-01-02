@@ -7,6 +7,7 @@
     <title>JXLUST 球体动画</title>
     <script src="./js/three.min.js"></script>
     <script src="./js/gsap-latest-beta.min.js"></script>
+    <!-- <script src="./js/GSDevTools3.min.js"></script> -->
     <style>
         body {
             margin: 0;
@@ -23,6 +24,8 @@
 
 </body>
 <script>
+                // GSDevTools.create();
+
     var scene = new THREE.Scene();
     document.addEventListener('mousemove', onMouseMove, false);
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);

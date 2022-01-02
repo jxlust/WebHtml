@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset='UTF-8'>
+	<style type="text/css">
+		.circle {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-top: -150px;
+			margin-left: -150px;
+			width: 300px;
+			height: 300px;
+			border: 1px solid #333;
+			border-radius: 50%;
+		}
+
+		.circle .c-circle {
+			width: 100%;
+			height: 100%;
+			border-radius: 100%;
+			position: absolute;
+			transform-origin: center center;
+			/* animation: circle 300s linear infinite; */
+		}
+
+		.circle .c-circle:after {
+			content: '';
+			position: absolute;
+			transform: translate(-50%, -50%);
+			border-radius: 100%;
+		}
+
+		.circle .first:after {
+			width: 80px;
+			height: 80px;
+			left: 40px;
+			top: 250px;
+			/* background: url(../img/1.jpg) no-repeat; */
+			background: skyblue;
+			background-size: cover;
+		}
+
+		.circle .second:after {
+			width: 50px;
+			height: 50px;
+			left: 40px;
+			top: 50px;
+			/* background: url(../img/2.jpg) no-repeat; */
+			background: red;
+			background-size: cover;
+		}
+
+		.circle .third:after {
+			width: 80px;
+			height: 80px;
+			left: 250px;
+			top: 50px;
+			/* background: url(../img/3.jpg) no-repeat; */
+			background: yellow;
+			background-size: cover;
+		}
+
+		.circle .four:after {
+			width: 60px;
+			height: 60px;
+			left: 255px;
+			top: 250px;
+			background: green;
+			/* background: url(../img/4.jpg) no-repeat; */
+			background-size: cover;
+		}
+
+		@keyframes circle {
+			0% {
+				transform: rotate(0deg);
+			}
+
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+	</style>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+
+</head>
+
+<body>
+	<div class="circle">
+		<div id="first" class="c-circle first"></div>
+		<div id="second" class="c-circle second"></div>
+		<div id="third" class="c-circle third"></div>
+		<div id="four" class="c-circle four"></div>
+	</div>
+	<script>
+		const circleEl = document.querySelector('.circle');
+		const firstEl = document.getElementById('first');
+		const secondEl = document.getElementById('second');
+		const thirdEl = document.getElementById('third');
+		const fourEl = document.getElementById('four');
+
+
+		function circleAni() {
+			let cTl = gsap.timeline();
+			cTl.fromTo(circleEl, {
+				opacity: 0
+			}, {
+				opacity: 1,
+				duration: 1
+			})
+			return cTl;
+		}
+
+		function firstAni() {
+			let cTl = gsap.timeline();
+			cTl.fromTo(firstEl, {
+				opacity: 0
+			}, {
+				opacity: 1,
+				duration: 1
+			})
+			return cTl;
+		}
+		function secondAni() {
+			let cTl = gsap.timeline();
+			cTl.fromTo(secondEl, {
+				opacity: 0
+			}, {
+				opacity: 1,
+				duration: 1
+			})
+			return cTl;
+		}
+		function thirdAni() {
+			let cTl = gsap.timeline();
+			cTl.fromTo(thirdEl, {
+				opacity: 0
+			}, {
+				opacity: 1,
+				duration: 1
+			})
+			return cTl;
+		}
+
+
+
+		let masterTl = gsap.timeline();
+		masterTl.add(circleAni()).add(firstAni()).add(secondAni()).add(thirdAni())
+	</script>
+</body>
+
+</html>
