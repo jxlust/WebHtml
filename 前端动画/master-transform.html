@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Transform 3D</title>
+
+    <style>
+        /* rotate */
+        .box-rotate {
+            width: 100%;
+            height: auto;
+        }
+
+        .rotate-wrap {
+            background-color: #999;
+            padding: 20px;
+            width: 200px;
+            height: 200px;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+        .rotate1{
+            width: 100px;
+            height: 100px;
+            background-color: skyblue;
+            /* x轴 y轴 z轴 */
+            /* transform: rotate3d(); */
+            transform: rotate3d(1,0,0,45deg);
+            /* 等价于 rotateX(45deg) */
+            transform-origin: 0 0;
+            /* origin位置，默认center === 50% 50% */
+            transition: all .8s;
+        }
+        .rotate1:hover{
+            transform: rotate3d(1,0,0,0deg);
+        }
+        .rotate2{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            transform-origin: center;
+            transform: translate3d(10px,10px,100px);
+            transition: all 1s;
+        }
+        .rotate2:hover{
+            transform: translate3d(0,0,0px);
+        }
+
+        .rotate3{
+            width: 100px;
+            height: 100px;
+            background-color: burlywood;
+            /* transform: scale3d(); */
+            transition: all 2s;
+        }
+        .rotate3:hover{
+            transform: scale3d(.3,1.2,.6)
+        }
+        /* scale 负值可以进行轴对称翻转图片 */
+        .rotate3-img{
+            width: 120px;
+            height: 48px;
+            background-image: url(./assets/dn-img/arrow.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            transition: all 2s;
+        }
+        .rotate3-img:hover{
+           transform: scaleX(-1);
+           /* transform: scaleY(-1); */
+        }
+        
+        .rotate4{
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="box-rotate">
+        <div class="rotate-wrap">
+            <div class="rotate1"></div>
+        </div>
+        <div class="rotate-wrap">
+            <div class="rotate2"></div>
+        </div>
+        <div class="rotate-wrap">
+            <div class="rotate3"></div>
+            <div class="rotate3-img"></div>
+        </div>
+        <div class="rotate-wrap">
+            <div class="rotate4"></div>
+        </div>
+    </div>
+</body>
+
+</html>
