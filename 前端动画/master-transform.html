@@ -12,6 +12,8 @@
         .box-rotate {
             width: 100%;
             height: auto;
+            display: flex;
+            flex-wrap: wrap;
         }
 
         .rotate-wrap {
@@ -73,9 +75,39 @@
            transform: scaleX(-1);
            /* transform: scaleY(-1); */
         }
-        
-        .rotate4{
 
+        .rotate4{
+            width: 100px;
+            height: 100px;
+            background-color: burlywood;
+            transform: skew(-10deg,10deg);
+            /* skew  -180 ~ 180*/
+            /* transition: all 2s; */
+        }
+
+        .rotate5{
+            width: 100px;
+            height: 100px;
+            background-color: rosybrown;
+            transition: all 1s;
+            /* transform: rotate3d(1,1,0,45deg); */
+
+            transform-origin: 0 0;
+
+        }
+        .rotate5:hover{
+            /* x y轴对角线45度 45deg旋转 */
+            transform: rotate3d(1,1,0,45deg);
+            /* x轴1 y轴2矢量夹角 旋转 */
+            /* transform: rotate3d(1,2,0,180deg); */
+            /* transform-origin: 100% 0; */
+            /* x轴 旋转90度 */
+            /* transform: rotate3d(1,0,0,90deg); */
+
+        }
+
+        .rotate6{
+            
         }
 
     </style>
@@ -96,6 +128,14 @@
         </div>
         <div class="rotate-wrap">
             <div class="rotate4"></div>
+        </div>
+
+        <div class="rotate-wrap">
+            <div class="rotate5"></div>
+        </div>
+
+        <div class="rotate-wrap">
+            <div class="rotate6"></div>
         </div>
     </div>
 </body>

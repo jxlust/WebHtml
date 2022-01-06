@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stagger </title>
+    <style>
+        html,
+        body {
+            width: 0;
+            /* for fixing iOS iframe issues */
+            min-width: 100%;
+            /* for fixing iOS iframe issues */
+            overflow-x: hidden;
+            position: relative;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #222;
+            text-align: center;
+            color: #bbb;
+            font-family: "Signika Negative", sans-serif;
+            font-weight: 300;
+            font-size: 18px;
+            padding: 10px 0;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 50px;
+            text-align: left;
+        }
+
+        h2 {
+            font-size: 38px;
+            margin-bottom: 0;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: white;
+            font-weight: 400;
+        }
+
+        h3 {
+            margin-bottom: -12px;
+        }
+
+        #header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        a {
+            color: #88ce02;
+            text-decoration: none;
+            font-weight: 400;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        #container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: visible;
+        }
+
+        .box {
+            background-color: #88ce02;
+            position: relative;
+        }
+
+        .box:before {
+            padding-top: 100%;
+            content: "";
+            display: block;
+        }
+
+        #instructions {
+            margin-top: 35px;
+            padding: 0 16px 16px 16px;
+            text-align: left;
+            max-width: 1000px;
+            display: inline-block;
+        }
+
+        .code {
+            background-color: #111;
+            padding: 12px;
+            border-radius: 10px;
+        }
+
+        .featured {
+            color: white;
+        }
+
+        strong {
+            color: white;
+            font-weight: 400;
+            font-size: 20px;
+        }
+
+        .question {
+            color: white;
+            font-size: 21px;
+            font-weight: 400;
+            display: block;
+        }
+
+        #controls {
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: start;
+        }
+
+        .control {
+            display: flex;
+            align-items: flex-start;
+            font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .control-label {
+            margin-top: 10px;
+        }
+
+        .control-vertical {
+            display: flex;
+            flex-direction: column;
+            align-content: flex-start;
+            text-align: left;
+            justify-content: flex-start;
+            padding: 6px 8px;
+            border-radius: 9px;
+            background-color: #111;
+            margin-right: 18px;
+            color: #bbb;
+        }
+
+        .fr-video {
+            display: block;
+            position: relative;
+            width: 100%;
+            height: 0;
+            float: left;
+            padding-bottom: 56.25%;
+            margin: 12px 0 35px 0;
+        }
+
+        .fr-video iframe {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border: 2px solid #444;
+        }
+
+        #instructions li {
+            margin-bottom: 10px;
+        }
+
+        @media only screen and (max-width: 640px) {
+            h1 {
+                font-size: 30px;
+                line-height: 30px;
+            }
+
+            #controls {
+                align-items: flex-start;
+                justify-content: flex-start;
+            }
+        }
+    </style>
+    <script src="./js/gsap-latest-beta.min.js"></script>
+</head>
+
+<body>
+    <div id="container"></div>
+
+</body>
+<script>
+    //GSAP 3 introduces advanced stagger values
+    var grid = [7, 15], //[rows, columns]
+        tl = gsap.timeline({
+            repeat: -1,
+            repeatDelay: 0.5
+        });
+
+    function animateBoxes(from, axis, ease) {
+        //one stagger call does all the animation:
+        tl.to(".box", {
+            duration: 1,
+            scale: 0.1,
+            y: 60,
+            yoyo: true,
+            repeat: 1,
+            ease: "power1.inOut",
+            // stagger: .3,
+            stagger: {
+                amount: 1.5,
+                grid: grid,
+                axis: axis,
+                ease: ease,
+                from: from
+            }
+        });
+    }
+
+
+    //builds a grid of <div class="box"> elements, dropped into #container (unrelated to animation code)
+    buildGrid({
+        grid: grid,
+        className: "box",
+        width: 1000,
+        gutter: 15,
+        parent: "#container",
+        onCellClick: onCellClick
+    });
+
+    animateBoxes("center");
+
+
+    //---- the rest of the code below just handles all the interactivity ----
+    // var options = document.querySelectorAll('input[name="from"], input[name="axis"], input[name="ease"]'),
+    //     _select = function (selector) {
+    //         return document.querySelector(selector);
+    //     },
+    //     axisCodeEl = _select("#axisCode"),
+    //     axisEl = _select("#axis"),
+    //     easeCodeEl = _select("#easeCode"),
+    //     easeEl = _select("#ease"),
+    //     fromEl = _select("#from"),
+    //     fromIndexEl = _select("#fromIndex"),
+    //     indexEl = _select("#index"),
+    //     selections = {
+    //         from: "center",
+    //         axis: null,
+    //         ease: "none"
+    //     },
+    //     i;
+
+    // //add change listeners
+    // for (i = 0; i < options.length; i++) {
+    //     options[i].addEventListener("change", onOptionChange);
+    // }
+
+    // function onOptionChange(e) {
+    //     var group = e.target.getAttribute("name"),
+    //         value = e.target.getAttribute("value");
+    //     if (group === "from") {
+    //         updateFrom(value);
+    //     } else if (group === "axis") {
+    //         selections.axis = (value === "null") ? null : value;
+    //         axisCode.style.display = (value === "null") ? "none" : "inline";
+    //         axisEl.textContent = '"' + value + '"';
+    //     } else if (group === "ease") {
+    //         easeEl.textContent = value;
+    //         easeCodeEl.style.display = (value === '"none"') ? "none" : "inline";
+    //         selections.ease = value.split('"').join("");
+    //     }
+    //     updateAnimation();
+    // }
+
+    function updateFrom(value) {
+        var current = selections.from,
+            parsedVal = value,
+            newIsNumber = !isNaN(value),
+            oldIsNumber = !isNaN(current);
+        if (newIsNumber) {
+            parsedVal = parseInt(value, 10);
+        } else if (value === "end") {
+            parsedVal = grid[0] * grid[1] - 1;
+            newIsNumber = true;
+        }
+        if (current !== parsedVal) {
+            selections.from = parsedVal;
+            fromEl.textContent = (value === "end") ? '"end"' : newIsNumber ? value : '"' + value + '"';
+            if (newIsNumber && !oldIsNumber) {
+                gsap.to(".box", {
+                    duration: 0.3,
+                    backgroundColor: "#595959"
+                });
+            } else if (!newIsNumber && oldIsNumber) {
+                gsap.to(".box", {
+                    duration: 0.3,
+                    backgroundColor: "#88ce02"
+                });
+            }
+            if (newIsNumber) {
+                if (value !== "end") {
+                    indexEl.checked = true;
+                    indexEl.setAttribute("value", parsedVal);
+                    fromIndexEl.textContent = parsedVal + " (index)";
+                }
+                gsap.fromTo("[data-index='" + parsedVal + "']", {
+                    rotation: 0
+                }, {
+                    duration: 0.4,
+                    rotation: 360,
+                    backgroundColor: "#88ce02",
+                    ease: "power1.inOut"
+                });
+                if (oldIsNumber) {
+                    gsap.to("[data-index='" + current + "']", {
+                        duration: 0.3,
+                        backgroundColor: "#595959"
+                    });
+                }
+            }
+        }
+    }
+
+    function onCellClick(e) {
+        updateFrom(e.target.index);
+        updateAnimation();
+    }
+
+    function updateAnimation() {
+        tl.seek(0).clear();
+        animateBoxes(selections.from, selections.axis, selections.ease);
+    }
+
+    //helper function to build a grid of <div> elements
+    function buildGrid(vars) {
+        vars = vars || {};
+        var container = document.createElement("div"),
+            rows = vars.grid[0] || 5,
+            cols = vars.grid[1] || 5,
+            width = vars.width || 100,
+            gutter = vars.gutter || 1,
+            className = vars.className || "",
+            w = (width - cols * gutter) / cols,
+            parent = (typeof (vars.parent) === "string") ? document.querySelector(vars.parent) : vars.parent ? vars
+            .parent : document.body,
+            css = "display: inline-block; margin: 0 " + (gutter / width * 100) + "% " + (gutter / width * 100) +
+            "% 0; width: " + (w / width * 100) + "%;",
+            l = rows * cols,
+            i, box;
+        for (i = 0; i < l; i++) {
+            box = document.createElement("div");
+            box.style.cssText = css;
+            box.setAttribute("class", className);
+            box.index = i;
+            box.setAttribute("data-index", i);
+            if (vars.onCellClick) {
+                box.addEventListener("click", vars.onCellClick);
+            }
+            container.appendChild(box);
+        }
+        container.style.cssText = "width:" + width + "px; line-height: 0; padding:" + gutter + "px 0 0 " + gutter +
+            "px; display:inline-block;";
+        parent.appendChild(container);
+        return container;
+    }
+
+    //this just helps avoid the pixel-snapping that some browsers do.
+    gsap.set(".box", {
+        rotation: 0.5,
+        force3D: true
+    });
+</script>
+
+</html>

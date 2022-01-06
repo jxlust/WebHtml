@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSAP In Canvas Use</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        canvas {
+            background-color: #f8f8f8;
+        }
+    </style>
+    <script src="./js/gsap-latest-beta.min.js"></script>
+</head>
+
+<body>
+    <canvas id="myCanvas"></canvas>
+
+</body>
+<script>
+    /** @type {HTMLCanvasElement} */
+    const canvasEl = document.getElementById('myCanvas');
+    const ctx = canvasEl.getContext('2d');
+    const widthWindow = window.innerWidth;
+    const heightWindow = window.innerHeight;
+    canvasEl.width = widthWindow;
+    canvasEl.height = heightWindow;
+
+    const drawArray = [{
+        r: 80,
+        x: 100,
+        y: 100,
+        start: 0,
+        end: 0
+    }, {
+        r: 100,
+        x: 300,
+        y: 300,
+        start: 0,
+        end: 0
+    }]
+    let animating = false;
+
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = "#ff0000";
+    ctx.fillStyle = "skyblue";
+
+    function renderCanvas() {
+        ctx.save();
+        ctx.clearRect(0, 0, widthWindow, heightWindow);
+        // console.log('render..');
+        // ctx.translate(width / 2, height / 2);
+        // console.log('drawArray 0:', drawArray[0]);
+        for (const arc of drawArray) {
+            ctx.beginPath();
+            ctx.arc(arc.x, arc.y, arc.r, arc.start, arc.end, false);
+            ctx.stroke();
+            // ctx.fill();
+            ctx.restore();
+        }
+
+        if (animating) requestAnimationFrame(renderCanvas);
+    }
+    //gsap animation
+    const timeline = gsap.timeline({
+        onStart: () => {
+            console.log('total onstart..');
+            animating = true;
+        },
+        onComplete: () => {
+            console.log('total onComplete...');
+            animating = false;
+        },
+        // stagger: 3,
+        force3D: true
+        // force3D: 'auto'
+
+    });
+    //自己遍历，实现不同效果
+    for (let draw of drawArray) {
+        let duration = draw.r === 80 ? 3 : 2;
+        let easeType = draw.r === 80 ? 'none' : 'power1.inOut'
+        timeline.to(draw, {
+            ease: easeType,
+            duration: duration,
+            start: 0,
+            end: Math.PI * 2,
+            onUpdated: () => {
+                renderCanvas();
+            },
+            onComplete: (v1) => {
+                console.log('item onComplete...',v1);
+            },
+            onCompleteParams: [draw]
+        },'<')
+    }
+
+
+    //目标对象如果是数组，会自动遍历，动画效果相同
+    // timeline.to(drawArray, {
+    //     onStart: () => {
+    //         animating = true;
+    //     },
+    //     stagger: 1,
+    //     onUpdate: () => {
+    //         renderCanvas();
+    //     },
+    //     ease: 'power1.inOut',
+    //     duration: 3,
+    //     start: 0,
+    //     end: Math.PI * 2,
+    //     onComplete: () => {
+    //         animating = false;
+    //     },
+    // })
+</script>
+
+</html>

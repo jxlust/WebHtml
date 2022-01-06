@@ -1,12 +1,443 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>starry sky</title>
+    <script src="../GSAP动画/js/gsap-latest-beta.min.js"></script>
+    <style>
+        @keyframes escurecer {
+            0% {
+                top: 0;
+            }
+
+            100% {
+                top: 100%;
+            }
+        }
+
+        @keyframes estrela {
+            0% {
+                box-shadow: 0 0 10px 0px rgba(255, 255, 255, 0.05);
+            }
+
+            50% {
+                box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.4);
+            }
+
+            100% {
+                box-shadow: 0 0 10px 0px rgba(255, 255, 255, 0.05);
+            }
+        }
+
+        @keyframes estrelaDestacada {
+            0% {
+                background-color: #ffffff;
+                box-shadow: 0 0 10px 0px rgba(255, 255, 255, 1);
+            }
+
+            20% {
+                background-color: #ffc4c4;
+                box-shadow: 0 0 10px 0px rgb(255, 196, 196, 1);
+            }
+
+            80% {
+                background-color: #c4cfff;
+                box-shadow: 0 0 10px 0px rgb(196, 207, 255, 1);
+            }
+
+            100% {
+                background-color: #ffffff;
+                box-shadow: 0 0 10px 0px rgba(255, 255, 255, 0.2);
+            }
+        }
+
+        @keyframes meteoroStyle1 {
+            0% {
+                opacity: 0;
+                right: 300px;
+                top: 100px;
+            }
+
+            30% {
+                opacity: 0.3;
+            }
+
+            60% {
+                opacity: 0.3;
+            }
+
+            100% {
+                opacity: 0;
+                right: 1000px;
+                top: 600px;
+            }
+        }
+
+        @keyframes meteoroStyle2 {
+            0% {
+                opacity: 0;
+                right: 700px;
+                top: 100px;
+            }
+
+            30% {
+                opacity: 1;
+            }
+
+            60% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                right: 1400px;
+                top: 600px;
+            }
+        }
+
+        @keyframes meteoroStyle3 {
+            0% {
+                opacity: 0;
+                right: 300px;
+                top: 300px;
+            }
+
+            30% {
+                opacity: 1;
+            }
+
+            60% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                right: 1000px;
+                top: 800px;
+            }
+        }
+
+        @keyframes meteoroStyle4 {
+            0% {
+                opacity: 0;
+                right: 700px;
+                top: 300px;
+            }
+
+            30% {
+                opacity: 1;
+            }
+
+            60% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                right: 1400px;
+                top: 800px;
+            }
+        }
+
+        @keyframes luaAni {
+            0% {
+                box-shadow: 0 0 160px 0px #fff, 0 0 30px -4px #fff,
+                    0 0 8px 2px rgba(255, 255, 255, 0.26);
+            }
+
+            50% {
+                box-shadow: 0 0 80px 0px #fff, 0 0 30px -4px #fff,
+                    0 0 8px 2px rgba(255, 255, 255, 0.26);
+            }
+
+            100% {
+                box-shadow: 0 0 160px 0px #fff, 0 0 30px -4px #fff,
+                    0 0 8px 2px rgba(255, 255, 255, 0.26);
+            }
+        }
+    </style>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        .starry-sky-wrap {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(180deg,
+                    rgb(0, 0, 0) 50%,
+                    rgb(25, 19, 39) 80%,
+                    rgb(43, 32, 72) 100%);
+        }
+
+        #myStarrySky {
+            /* width: 100vw;
+            height: 100vh; */
+            /* background-color: skyblue; */
+        }
+
+        .footer-tree {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .my-tree-bg {
+            width: 100%;
+            height: auto;
+            background-image: url(./images/bgTree.png);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .my-tree-img {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .moon-wrap {
+            position: absolute;
+            right: 200px;
+            top: 150px;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            box-shadow: 0 0 160px 0px #fff, 0 0 30px -4px #fff,
+                0 0 8px 2px rgb(255 255 255 / 26%);
+            background-color: #fff;
+            animation-name: luaAni;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-duration: 10s;
+        }
+
+        .moon {
+            background-image: url(./images/bgMoon.png);
+            background-position: center;
+            background-size: 100%;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            border-radius: 50%;
+            overflow: hidden;
+            opacity: 0.4;
+        }
+    </style>
 </head>
+
 <body>
-    
+    <!-- <canvas  width="500px" height="500" style="background-color: #f8f8f8;"></canvas> -->
+    <div class="starry-sky-wrap">
+        <canvas id="myStarrySky"></canvas>
+        <div class="moon-wrap">
+            <div class="moon"></div>
+        </div>
+        <div class="footer-tree">
+            <img class="my-tree-img" src="./images/bgTree.png" alt="" />
+            <!-- <div class="my-tree-bg"></div> -->
+        </div>
+    </div>
 </body>
+<script>
+    // util function
+    function getRandomArbitrary(min, max) {
+        // [0,max-min) + min
+        // [min,max)
+        // return Math.floor(Math.random() * (max - min)) + min;
+        return ((Math.random() * (max - min)) | 0) + (min | 0);
+    }
+
+    function getRandomValue(array) {
+        let l = array.length;
+        let i = getRandomArbitrary(0, l);
+        return array[i];
+    }
+</script>
+<script>
+    // 常量 constant
+    const StartCount = 268; //星星个数
+    const DurationLists = [0.5, 1, 1.5, 2]; //星星动画持续时间
+    const OpacityLists = [1, 0.5, 0.1]; //透明度
+    const SizeLists = [1, 2, 3]; //星星大小
+    const AnimationStyleLists = [1, 2, 3]; //定义几种星星动画
+    const MeteoroStyleLists = [1, 2, 3, 4]; //流星动画
+</script>
+
+<script>
+    /** @type {HTMLCanvasElement} */
+    const mySkyCanvas = document.getElementById("myStarrySky");
+
+    const widthWindow = window.innerWidth;
+    const heightWindow = window.innerHeight;
+    mySkyCanvas.width = widthWindow;
+    mySkyCanvas.height = heightWindow;
+
+    const ctx = mySkyCanvas.getContext("2d");
+    let myStartInfoLists = [];
+
+    let test = [{
+        r: 100,
+        x1: 0,
+        y1: 0,
+    }, ];
+    let animating = false;
+    // drawTest();
+    function drawTest() {
+        ctx.save();
+        // ctx.clearRect(0, 0, width, height);
+        // ctx.translate(width / 2, height / 2);
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = "#ff0000";
+        ctx.fillStyle = "#ffffff";
+
+        ctx.beginPath();
+        console.log('tt:', test[0]);
+        for (const arc of test) {
+            ctx.arc(200, 150, arc.r, arc.x1, arc.y1, false);
+        }
+        ctx.stroke();
+        // ctx.fill();
+        ctx.restore();
+        if (animating) requestAnimationFrame(drawTest);
+    }
+    let timeline = gsap.timeline();
+    for (let a of test) {
+        timeline.to(a, {
+            onStart: () => {
+                animating = true;
+            },
+            onUpdate: () => {
+                drawTest();
+            },
+            duration: 3,
+            x1: 0,
+            y1: Math.PI * 2,
+            onComplete: () => {
+                animating = false;
+            },
+        });
+    }
+
+
+    function drawAnimation() {
+        initDraw();
+        gsapAnimation();
+        // console.log('draw animation..');
+        window.requestAnimationFrame(drawAnimation);
+    }
+
+    function gsapAnimation() {
+        let timeline = gsap.timeline({
+            onUpdate: (v) => {
+                // console.log('xxxxx', v);
+            },
+        });
+        for (let star of myStartInfoLists) {
+            timeline.fromTo(
+                star, {
+                    opacity: 0,
+                }, {
+                    onUpdate: (v) => {},
+                    duration: 1,
+                    opacity: star.opacity,
+                },
+                "<"
+            );
+        }
+    }
+
+    function initOriginData() {
+        let starLists = [];
+        let widthWindow = window.innerWidth;
+        let heightWindow = window.innerHeight;
+        for (let i = 0; i < StartCount; i++) {
+            // ctx.clearRect(0, 0, width, height);
+            let r = getRandomValue(SizeLists);
+            let opacity = getRandomValue(OpacityLists);
+
+            let x = getRandomArbitrary(0, widthWindow);
+            let y = getRandomArbitrary(0, heightWindow * 0.76);
+
+            let duration = getRandomValue(DurationLists);
+            // TODO
+            let animationName = getRandomValue(AnimationStyleLists);
+
+            starLists.push({
+                r,
+                opacity,
+                x,
+                y,
+                duration,
+                animationName,
+            });
+        }
+        return starLists;
+    }
+
+    function initDraw() {
+
+        // if (myStartInfoLists ?.length === 0) {
+        //     myStartInfoLists = this.initOriginData();
+        // }
+        if (!myStartInfoLists || myStartInfoLists.length === 0) {
+            myStartInfoLists = this.initOriginData();
+        }
+
+        // ctx.strokeStyle = 'red';
+        ctx.fillStyle = "#ffffff";
+        for (let star of myStartInfoLists) {
+            let {
+                r,
+                opacity,
+                x,
+                y,
+                duration,
+                animationName
+            } = star;
+
+            // ctx.shadowOffsetX = 0;
+            // ctx.shadowOffsetY = 0;
+            // ctx.shadowColor = 'rgba(255, 255, 255, 0.05)';
+            // ctx.shadowBlur = 10;
+            ctx.globalAlpha = opacity;
+            // ctx.save();
+            //绘制圆
+            ctx.beginPath();
+
+            ctx.arc(x, y, r, 0, 2 * Math.PI, false);
+            // ctx.stroke();
+            ctx.fill();
+        }
+    }
+
+    // drawAnimation();
+
+    window.onresize = function () {
+        // initDraw();
+        // const widthWindow = window.innerWidth;
+        // const heightWindow = window.innerHeight;
+        // mySkyCanvas.width = widthWindow;
+        // mySkyCanvas.height = heightWindow;
+    };
+</script>
+
 </html>
