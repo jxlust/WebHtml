@@ -43,7 +43,7 @@
         x: 300,
         y: 300,
         start: 0,
-        end: 0
+        end: Math.PI * .5
     }]
     let animating = false;
 
@@ -56,9 +56,14 @@
         ctx.clearRect(0, 0, widthWindow, heightWindow);
         // console.log('render..');
         // ctx.translate(width / 2, height / 2);
-        // console.log('drawArray 0:', drawArray[0]);
+        console.log('drawArray 0:', drawArray[0]);
         for (const arc of drawArray) {
             ctx.beginPath();
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+            ctx.shadowColor = 'red';
+            ctx.shadowBlur = 20
+
             ctx.arc(arc.x, arc.y, arc.r, arc.start, arc.end, false);
             ctx.stroke();
             // ctx.fill();
@@ -69,9 +74,13 @@
     }
     //gsap animation
     const timeline = gsap.timeline({
+        onUpdated: () => {
+            console.log('total updated..');
+        },
         onStart: () => {
             console.log('total onstart..');
             animating = true;
+            renderCanvas();
         },
         onComplete: () => {
             console.log('total onComplete...');
@@ -86,19 +95,26 @@
     for (let draw of drawArray) {
         let duration = draw.r === 80 ? 3 : 2;
         let easeType = draw.r === 80 ? 'none' : 'power1.inOut'
+        let repeat = draw.r === 80 ? 0 : -1
         timeline.to(draw, {
             ease: easeType,
             duration: duration,
             start: 0,
             end: Math.PI * 2,
+            repeat: repeat,
+            onStart: () => {
+                console.log('item start');
+                // renderCanvas();
+            },
             onUpdated: () => {
-                renderCanvas();
+                console.log('item updated');
+                console.log(1,draw);
             },
             onComplete: (v1) => {
-                console.log('item onComplete...',v1);
+                console.log('item onComplete...', v1);
             },
             onCompleteParams: [draw]
-        },'<')
+        }, '<')
     }
 
 

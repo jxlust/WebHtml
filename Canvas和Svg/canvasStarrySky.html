@@ -241,6 +241,40 @@
             overflow: hidden;
             opacity: 0.4;
         }
+
+
+        .meteoro {
+            position: absolute;
+
+            background-color: #fff;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            transform: rotate(-35deg);
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-duration: 1s;
+        }
+
+        .meteoro:before {
+            content: "";
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+            width: 0;
+            height: 0;
+            border-top: 1px solid transparent;
+            border-bottom: 1px solid transparent;
+            border-left: 85px solid white;
+            position: absolute;
+            left: 2px;
+            top: 0;
+        }
+
+        /* .meteoro.style1 { animation-name: meteoroStyle1; }
+.meteoro.style2 { animation-name: meteoroStyle2; }
+.meteoro.style3 { animation-name: meteoroStyle3; }
+.meteoro.style4 { animation-name: meteoroStyle4; } */
     </style>
 </head>
 
@@ -273,97 +307,48 @@
     }
 </script>
 <script>
-    // 常量 constant
-    const StartCount = 268; //星星个数
-    const DurationLists = [0.5, 1, 1.5, 2]; //星星动画持续时间
-    const OpacityLists = [1, 0.5, 0.1]; //透明度
+    // 常量 constant 268
+    const StartCount = 200; //星星个数
+    const DurationLists = [3, 1, 2.5, 2.3, 3.5, 2, 1.5, 4]; //星星动画持续时间
+    const OpacityLists = [1, 0.1, 0.5, 0.6]; //透明度
     const SizeLists = [1, 2, 3]; //星星大小
     const AnimationStyleLists = [1, 2, 3]; //定义几种星星动画
     const MeteoroStyleLists = [1, 2, 3, 4]; //流星动画
-</script>
+    const starAni1Array = [{
+        blur: 10,
+        blurColor: 'rgba(255, 255, 255, .5)',
+        duration: 0,
+    }, {
+        blur: 20,
+        blurColor: 'rgba(255, 255, 255, 1)',
+        duration: 1,
+    }, {
+        blur: 10,
+        blurColor: 'rgba(255, 255, 255, 0.5)',
+        duration: 1
+    }]
+    const starAni2Array = [{
+        blur: 10,
+        blurColor: 'rgba(255, 255, 255, 1)',
+        backgroundColor: '#ffffff',
+        duration: 0,
+    }, {
+        blur: 10,
+        blurColor: 'rgba(255, 196, 196, 1)',
+        backgroundColor: '#ffc4c4',
+        duration: 2,
+    }, {
+        blur: 10,
+        blurColor: 'rgba(196, 207, 255, 1)',
+        backgroundColor: '#c4cfff',
+        duration: 4,
+    }, {
+        blur: 10,
+        blurColor: 'rgba(255, 255, 255, .2)',
+        backgroundColor: '#ffffff',
+        duration: 2,
+    }]
 
-<script>
-    /** @type {HTMLCanvasElement} */
-    const mySkyCanvas = document.getElementById("myStarrySky");
-
-    const widthWindow = window.innerWidth;
-    const heightWindow = window.innerHeight;
-    mySkyCanvas.width = widthWindow;
-    mySkyCanvas.height = heightWindow;
-
-    const ctx = mySkyCanvas.getContext("2d");
-    let myStartInfoLists = [];
-
-    let test = [{
-        r: 100,
-        x1: 0,
-        y1: 0,
-    }, ];
-    let animating = false;
-    // drawTest();
-    function drawTest() {
-        ctx.save();
-        // ctx.clearRect(0, 0, width, height);
-        // ctx.translate(width / 2, height / 2);
-        ctx.lineWidth = 3;
-        ctx.strokeStyle = "#ff0000";
-        ctx.fillStyle = "#ffffff";
-
-        ctx.beginPath();
-        console.log('tt:', test[0]);
-        for (const arc of test) {
-            ctx.arc(200, 150, arc.r, arc.x1, arc.y1, false);
-        }
-        ctx.stroke();
-        // ctx.fill();
-        ctx.restore();
-        if (animating) requestAnimationFrame(drawTest);
-    }
-    let timeline = gsap.timeline();
-    for (let a of test) {
-        timeline.to(a, {
-            onStart: () => {
-                animating = true;
-            },
-            onUpdate: () => {
-                drawTest();
-            },
-            duration: 3,
-            x1: 0,
-            y1: Math.PI * 2,
-            onComplete: () => {
-                animating = false;
-            },
-        });
-    }
-
-
-    function drawAnimation() {
-        initDraw();
-        gsapAnimation();
-        // console.log('draw animation..');
-        window.requestAnimationFrame(drawAnimation);
-    }
-
-    function gsapAnimation() {
-        let timeline = gsap.timeline({
-            onUpdate: (v) => {
-                // console.log('xxxxx', v);
-            },
-        });
-        for (let star of myStartInfoLists) {
-            timeline.fromTo(
-                star, {
-                    opacity: 0,
-                }, {
-                    onUpdate: (v) => {},
-                    duration: 1,
-                    opacity: star.opacity,
-                },
-                "<"
-            );
-        }
-    }
 
     function initOriginData() {
         let starLists = [];
@@ -383,27 +368,222 @@
 
             starLists.push({
                 r,
-                opacity,
+                opacityOrigin: opacity,
                 x,
                 y,
                 duration,
                 animationName,
+                blur: 10,
+                opacity: 0,
+                blurColor: 'rgba(196, 207, 255, 1)',
+                backgroundColor: '#fff',
             });
         }
         return starLists;
     }
+</script>
 
-    function initDraw() {
+<script>
+    /** @type {HTMLCanvasElement} */
+    const mySkyCanvas = document.getElementById("myStarrySky");
 
+    const widthWindow = window.innerWidth;
+    const heightWindow = window.innerHeight;
+    mySkyCanvas.width = widthWindow;
+    mySkyCanvas.height = heightWindow;
+
+    const ctx = mySkyCanvas.getContext("2d");
+    let myStartInfoLists = [];
+    if (!myStartInfoLists || myStartInfoLists.length === 0) {
+        myStartInfoLists = this.initOriginData();
+    }
+    let MeteoroPointObj = {
+        x: 0,
+        y: 0,
+        rotate: -35,
+        length: 85,
+    };
+    let animating = false;
+    let animating2 = false;
+
+    // ctx.lineWidth = 3;
+    // ctx.strokeStyle = 'red';
+    ctx.save();
+
+    function drawAnimation() {
+        toDrawStar();
+        // console.log('render canvas animation..');
+        if (animating) {
+            window.requestAnimationFrame(drawAnimation);
+        }
+    }
+
+    function drawMeteoroAnimation() {
+        toDrawMeteoro();
+        // console.log('render drawMeteoroAnimation..');
+        if (animating2) {
+            window.requestAnimationFrame(drawMeteoroAnimation);
+        }
+    }
+
+    function gsapAnimation() {
+        const starTL = gsap.timeline({
+            onStart: () => {
+                console.log('total onstart..');
+                animating = true;
+                drawAnimation();
+            },
+            onComplete: () => {
+                console.log('total onComplete...');
+                animating = false;
+            },
+            // stagger: 3,
+            // force3D: true,
+            ease: 'none',
+            // force3D: 'auto'
+        });
+        for (let star of myStartInfoLists) {
+            let keyframes = []
+            if (star.duration === 4) {
+                //use ani2
+                keyframes = [{
+                    backgroundColor: '#ffffff',
+                    opacity: star.opacityOrigin * 1,
+                    duration: 1,
+                }, {
+                    backgroundColor: '#ffc4c4',
+                    duration: 1,
+                    opacity: star.opacityOrigin * .5,
+                }, {
+                    backgroundColor: '#c4cfff',
+                    duration: 1,
+                    opacity: star.opacityOrigin * 0.6,
+                }, {
+                    backgroundColor: '#ffffff',
+                    duration: 1,
+                    opacity: star.opacityOrigin * 1,
+                }]
+            } else {
+                //use ani1
+                keyframes = [{
+                    opacity: star.opacityOrigin * 1,
+                    duration: 1
+                }, {
+                    opacity: star.opacityOrigin * .3,
+                    duration: 1
+                }, {
+                    opacity: star.opacityOrigin * 1,
+                    duration: 1
+                }]
+            }
+            console.log('kkk:', keyframes, star.duration);
+            starTL.to(star, {
+                    onUpdate: () => {},
+                    duration: star.duration,
+                    // opacity: star.opacity,
+                    keyframes: keyframes,
+                    repeat: -1,
+                    yoyo: true,
+                    // delay: parseInt(Math.random() * 2),
+                },
+                "<"
+            );
+        }
+
+        let meteoroTl = gsap.timeline({
+            onStart: () => {
+                console.log('2 total onstart..');
+                animating2 = true;
+                drawMeteoroAnimation();
+            },
+            onComplete: () => {
+                console.log('2 total onComplete..');
+                animating2 = false;
+            }
+        });
+
+        meteoroTl.fromTo(MeteoroPointObj, {
+            x: 200,
+            y: 300,
+            rotate: -35,
+            length: 85,
+        }, {
+            x: -500,
+            duration: 1,
+            ease: 'none',
+            delay: 0,
+            // repeat: 5,
+            // repeatDelay: 5,
+            // onComplete: () => {}
+        }).fromTo(MeteoroPointObj, {
+            x: 500,
+            y: 200,
+            rotate: -25,
+            length: 120,
+        }, {
+            x: -300,
+            duration: 2,
+            ease: 'none',
+        },'3')
+        //第三颗
+        meteoroTl.fromTo(MeteoroPointObj, {
+            x: 1200,
+            y: 600,
+            rotate: -30,
+            length: 90,
+        }, {
+            x: -300,
+            duration: 5,
+            ease: 'none',
+        },'4')
+    }
+
+
+    function toDrawMeteoro() {
+        ctx.save();
+        ctx.lineWidth = 1;
+        // 创建渐变
+        var grd = ctx.createLinearGradient(0, 0, 200, 0);
+        grd.addColorStop(0, "white");
+        grd.addColorStop(1, "rgb(196, 207, 255, 1)");
+        ctx.fillStyle = grd;
+        // ctx.strokeStyle = 'red';
+        ctx.translate(30, 0)
+        let {
+            x,
+            y,
+            rotate,
+            length,
+        } = MeteoroPointObj;
+        
+        ctx.rotate(Math.PI / 180 * rotate);
+        ctx.globalAlpha = 1;
+        // 200 300
+        // 190 300
+        // 180 300
+        // ...
+        // 0 300
+       
+        console.log('point x y:', x, y);
+        ctx.moveTo(x, y);
+        ctx.lineTo(x + length, y);
+        ctx.lineTo(x, y + 2);
+        ctx.lineTo(x, y);
+
+        ctx.fill();
+
+        ctx.restore();
+
+    }
+    // toDrawMeteoro();
+
+    function toDrawStar() {
         // if (myStartInfoLists ?.length === 0) {
         //     myStartInfoLists = this.initOriginData();
         // }
-        if (!myStartInfoLists || myStartInfoLists.length === 0) {
-            myStartInfoLists = this.initOriginData();
-        }
-
-        // ctx.strokeStyle = 'red';
-        ctx.fillStyle = "#ffffff";
+        //clear canvas
+        ctx.clearRect(0, 0, widthWindow, heightWindow);
+        ctx.save();
         for (let star of myStartInfoLists) {
             let {
                 r,
@@ -411,33 +591,42 @@
                 x,
                 y,
                 duration,
-                animationName
+                animationName,
+                blurColor,
+                blur,
+                backgroundColor
             } = star;
-
-            // ctx.shadowOffsetX = 0;
-            // ctx.shadowOffsetY = 0;
-            // ctx.shadowColor = 'rgba(255, 255, 255, 0.05)';
-            // ctx.shadowBlur = 10;
+            // console.log('star:', star);
+            ctx.fillStyle = backgroundColor || "#ffffff";
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+            ctx.shadowColor = '#fff';
+            ctx.shadowBlur = 12
+            // ctx.shadowColor = blurColor || '#fff';
+            // ctx.shadowBlur = blur || 10;
             ctx.globalAlpha = opacity;
-            // ctx.save();
             //绘制圆
             ctx.beginPath();
-
             ctx.arc(x, y, r, 0, 2 * Math.PI, false);
             // ctx.stroke();
             ctx.fill();
         }
+        ctx.restore();
     }
 
-    // drawAnimation();
-
+    // toDrawStar();
+    gsapAnimation();
     window.onresize = function () {
-        // initDraw();
+        // toDrawStar();
         // const widthWindow = window.innerWidth;
         // const heightWindow = window.innerHeight;
         // mySkyCanvas.width = widthWindow;
         // mySkyCanvas.height = heightWindow;
     };
+</script>
+
+<script>
+
 </script>
 
 </html>

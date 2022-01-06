@@ -1,34 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <!-- 三角形 -->
-    <style></style>
 
-    <style>
-      .halfcircle {
-        width: 50px;
-        height: 100px;
-        /* border-radius: 50px 0 0 50px; */
-        border-radius: 200% 0 0 200% / 100% 0 0 100%;
-        /* border-radius: 100% 0 0 100% / 50% 0 0 50%; */
-        /* 水平半径：width * 百分比，垂直半径：height * 百分比 */
-        background: blue;
-        position: relative;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <!-- 三角形 -->
+  <style></style>
 
-      .radius-demo {
-        background-color: skyblue;
-        width: 20px;
-        height: 20px;
-        border-radius: 100% 0  60% 50%/ 60% 0 100% 50%
-      }
-    </style>
-  </head>
-  <body>
-    <div class="radius-demo"></div>
-  </body>
+  <style>
+    .halfcircle {
+      width: 50px;
+      height: 100px;
+      /* border-radius: 50px 0 0 50px; */
+      border-radius: 200% 0 0 200% / 100% 0 0 100%;
+      /* border-radius: 100% 0 0 100% / 50% 0 0 50%; */
+      /* 水平半径：width * 百分比，垂直半径：height * 百分比 */
+      background: blue;
+      position: relative;
+    }
+
+    .radius-demo {
+      background-color: skyblue;
+      width: 20px;
+      height: 20px;
+      border-radius: 100% 0 60% 50%/ 60% 0 100% 50%;
+      /* border-top-left-radius: 100% 60%;
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 60% 100%;
+      border-bottom-left-radius: 50%; */
+    }
+
+    .content {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .box {
+      position: relative;
+      margin: 10px;
+    }
+
+    .meteoro {
+      margin-top: 50px;
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
+      background-color: red;
+      transform: rotate(-35deg);
+    }
+
+    .meteoro::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 0;
+      height: 0;
+      border-top: 1px solid transparent;
+      border-bottom: 1px solid transparent;
+      border-left: 85px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content">
+    <div class="box">
+      <div class="halfcircle"></div>
+    </div>
+    <div class="box">
+      <div class="radius-demo"></div>
+    </div>
+
+    <div class="box">
+      <div class="meteoro"></div>
+    </div>
+  </div>
+
+</body>
+
 </html>
