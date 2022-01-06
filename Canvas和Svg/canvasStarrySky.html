@@ -398,11 +398,62 @@
         myStartInfoLists = this.initOriginData();
     }
     let MeteoroPointObj = {
-        x: 0,
-        y: 0,
+        id: 1,
+        x: 200,
+        y: 300,
         rotate: -35,
         length: 85,
     };
+    let MeteoroPointLists = [{
+        id: 1,
+        x: 400,
+        y: 300,
+        duration: 1,
+        rotate: -25,
+        length: 100,
+        opacity: 0,
+    }, {
+        id: 2,
+        x: 500,
+        y: 600,
+        duration: 2,
+        rotate: -35,
+        length: 85,
+        opacity: 0,
+    }, {
+        id: 3,
+        x: 600,
+        y: 300,
+        duration: 2,
+        rotate: -30,
+        length: 100,
+        opacity: 0,
+    },{
+        id: 4,
+        x: 800,
+        y: 200,
+        duration: 1,
+        rotate: -45,
+        length: 100,
+        opacity: 0,
+    },{
+        id: 5,
+        x: 600,
+        y: 200,
+        duration: 3,
+        rotate: 30,
+        length: 120,
+        opacity: 0,
+    },{
+        id: 6,
+        x: 500,
+        y: 100,
+        duration: 5,
+        rotate: 30,
+        length: 100,
+        opacity: 0,
+    }]
+
     let animating = false;
     let animating2 = false;
 
@@ -423,6 +474,14 @@
         // console.log('render drawMeteoroAnimation..');
         if (animating2) {
             window.requestAnimationFrame(drawMeteoroAnimation);
+        }
+    }
+
+    function drawMeteoroAnimation2() {
+        toDrawMeteoro2();
+        // console.log('render drawMeteoroAnimation..');
+        if (animating2) {
+            window.requestAnimationFrame(drawMeteoroAnimation2);
         }
     }
 
@@ -476,7 +535,7 @@
                     duration: 1
                 }]
             }
-            console.log('kkk:', keyframes, star.duration);
+            // console.log('kkk:', keyframes, star.duration);
             starTL.to(star, {
                     onUpdate: () => {},
                     duration: star.duration,
@@ -489,6 +548,56 @@
                 "<"
             );
         }
+
+        gsapMeteoroLists();
+
+    }
+
+    function gsapMeteoroLists() {
+        let mTl = gsap.timeline({
+            repeat: 3,
+            repeatDelay: 2,
+            onStart: () => {
+                console.log('3 onstart..');
+                animating2 = true;
+                window.requestAnimationFrame(drawMeteoroAnimation2);
+            },
+            onComplete: () => {
+                console.log('3 total onComplete..');
+                animating2 = false;
+            }
+        })
+
+        for (let item of MeteoroPointLists) {
+            let {
+                id,
+                x,
+                y,
+                duration,
+                rotate,
+                length,
+                opacity
+            } = item;
+            let pos = (id === 1) ? 1 : '-=1';
+            mTl.fromTo(item, {
+                x: x,
+                y: y,
+            }, {
+                x: -500,
+                duration: duration,
+                ease: 'none',
+                delay: 0,
+            }, pos)
+            .to(item,{
+                opacity: 1,
+                duration: 0.2,
+            }, '<')
+        }
+
+
+    }
+
+    function gsapMeteoroObj() {
 
         let meteoroTl = gsap.timeline({
             repeat: 10,
@@ -526,7 +635,7 @@
             x: -300,
             duration: 2,
             ease: 'none',
-        },'3')
+        }, '3')
         //第三颗
         meteoroTl.fromTo(MeteoroPointObj, {
             x: 1200,
@@ -537,9 +646,42 @@
             x: -500,
             duration: 5,
             ease: 'none',
-        },'4')
+        }, '4')
     }
 
+    function toDrawMeteoro2() {
+        ctx.save();
+        ctx.lineWidth = 1;
+        // 创建渐变
+        var grd = ctx.createLinearGradient(0, 0, 200, 0);
+        grd.addColorStop(0, "white");
+        grd.addColorStop(1, "rgb(196, 207, 255, 1)");
+        ctx.fillStyle = grd;
+        // ctx.strokeStyle = 'red';
+        // ctx.translate(30, 0)
+        for (let pointObj of MeteoroPointLists) {
+            ctx.save();
+            let {
+                x,
+                y,
+                rotate,
+                length,
+                opacity
+            } = pointObj;
+            if (opacity <= 0) continue;
+            ctx.rotate(Math.PI / 180 * rotate);
+            ctx.globalAlpha = 1;
+            // console.log('point x y:', x, y);
+            ctx.moveTo(x, y);
+            ctx.lineTo(x + length, y);
+            ctx.lineTo(x, y + 2);
+            ctx.lineTo(x, y);
+            ctx.fill();
+            ctx.restore();
+        }
+        ctx.restore();
+
+    }
 
     function toDrawMeteoro() {
         ctx.save();
@@ -557,7 +699,7 @@
             rotate,
             length,
         } = MeteoroPointObj;
-        
+
         ctx.rotate(Math.PI / 180 * rotate);
         ctx.globalAlpha = 1;
         // 200 300
@@ -565,7 +707,6 @@
         // 180 300
         // ...
         // 0 300
-       
         console.log('point x y:', x, y);
         ctx.moveTo(x, y);
         ctx.lineTo(x + length, y);
