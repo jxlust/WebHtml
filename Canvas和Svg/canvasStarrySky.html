@@ -491,6 +491,8 @@
         }
 
         let meteoroTl = gsap.timeline({
+            repeat: 10,
+            repeatDelay: 5,
             onStart: () => {
                 console.log('2 total onstart..');
                 animating2 = true;
@@ -532,7 +534,7 @@
             rotate: -30,
             length: 90,
         }, {
-            x: -300,
+            x: -500,
             duration: 5,
             ease: 'none',
         },'4')
