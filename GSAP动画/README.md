@@ -15,18 +15,18 @@
 
 1. [官网 showcase](https://greensock.com/showcase/)
 2. 年度账单合成效果
-3. [3d开门]()  
+3. [我的codepen](https://codepen.io/your-work)
 4. 引申[requestAnimationFrame](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame)
    > 告诉浏览器，你希望执行一个动画，并且要求浏览器在下次重绘之前调用指定的回调函数更新动画。
    > 该方法需要传入一个回调函数作为参数，该回调函数会在浏览器下一次重绘之前执行,重绘。浏览器一般刷新频率为 60fps
    > 下一次重绘之前更新动画帧所调用的函数(即上面所说的回调函数)。
    > 该回调函数会被传入 DOMHighResTimeStamp 参数，该参数与 performance.now()的返回值相同，它表示 requestAnimationFrame() 开始去执行回调函数的时刻。
 
-### 三、简单使用
+### 三、GSAP简单使用
 
-1. **时序** ”是“Sequencing with Timelines”的中文意思，简单地说就是顺序和时间
+1. **时序** Sequencing with Timelines，简单地说就是顺序和时间
 
-css 里的动画
+css 动画
 
 ```css
 @keyframes move {
@@ -34,9 +34,16 @@ css 里的动画
   }
   ...;
 }
+.box {
+  /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+  animation-duration: 1s;
+  animation-delay: 1s;
+  /* transition-duration和transition-delay */
+}
+
 ```
 
-使用
+矩阵变换使用
 
 ```css
 .box {
@@ -50,12 +57,6 @@ y 垂直位移 */
   transform: matrix(...);
   /* 4*4 仿射矩阵变换 */
   transform: matrix3d(...);
-}
-.box {
-  /* animation: name duration timing-function delay iteration-count direction fill-mode; */
-  animation-duration: 1s;
-  animation-delay: 1s;
-  /* transition-duration和transition-delay */
 }
 ```
 
@@ -73,14 +74,28 @@ const tl = gsap.timeline();
 
 4. **顺序**，position 位置参数使用
 
+![图片1](./images/gsaptimeline1.png)
+
 ```js
 const tl = gsap.timeline();
 tl.to("#green", { duration: 1, x: 750 })
   .to("#blue", { duration: 1, x: 750 }, "-=1")
   .to("#orange", { duration: 1, x: 750 }, "<");
 ```
+重点讲下标签label
+```js
+const tl = gsap.timeline();
+tl.to("#green", {duration: 1, x: 750})
+    .add("mylabel", "+=1")
+    .to("#blue", {duration: 2, x: 750, rotation: 360}, "mylabel")
+    .to("#orange", {duration: 2, x: 750, rotation: 360}, "mylabel+=0.5");
+```
+
+![图片2](./images/gsaptimeline2.png)
+
 
 5. **管理时间轴**
+
    > 主时间轴添加模块化的各个动画时间轴,时间轴嵌套时间轴
 
 ```js
