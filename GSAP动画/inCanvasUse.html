@@ -12,6 +12,10 @@
             padding: 0;
         }
 
+        .number {
+            text-align: center;
+        }
+
         canvas {
             background-color: #f8f8f8;
         }
@@ -20,6 +24,7 @@
 </head>
 
 <body>
+    <div class="number" id="numberId">0</div>
     <canvas id="myCanvas"></canvas>
 
 </body>
@@ -27,8 +32,8 @@
     /** @type {HTMLCanvasElement} */
     const canvasEl = document.getElementById('myCanvas');
     const ctx = canvasEl.getContext('2d');
-    const widthWindow = window.innerWidth;
-    const heightWindow = window.innerHeight;
+    const widthWindow = 0.8 * window.innerWidth;
+    const heightWindow = 0.8 * window.innerHeight;
     canvasEl.width = widthWindow;
     canvasEl.height = heightWindow;
 
@@ -56,7 +61,7 @@
         ctx.clearRect(0, 0, widthWindow, heightWindow);
         // console.log('render..');
         // ctx.translate(width / 2, height / 2);
-        console.log('drawArray 0:', drawArray[0]);
+        // console.log('drawArray 0:', drawArray[0]);
         for (const arc of drawArray) {
             ctx.beginPath();
             ctx.shadowOffsetX = 0;
@@ -108,7 +113,7 @@
             },
             onUpdated: () => {
                 console.log('item updated');
-                console.log(1,draw);
+                console.log(1, draw);
             },
             onComplete: (v1) => {
                 console.log('item onComplete...', v1);
@@ -135,6 +140,44 @@
     //         animating = false;
     //     },
     // })
+</script>
+<script>
+    const numberEl = document.getElementById('numberId');
+    let numberObj = {
+        value: 0,
+        endValue: 100,
+    }
+    let numberTL = gsap.timeline({
+        immediate: true,
+    }).to(numberObj, {
+        value: numberObj.endValue,
+        // roundProps: "value",
+        ease: "power2.inOut",
+        duration: 2,
+        onUpdate: () => {
+            console.log('nnnnn:', numberObj.value,numberEl);
+            numberEl.innerHTML = numberObj.value
+        }
+    })
+
+    // const numberValue = {
+    //     value: 0,
+    //     endValue: 100,
+    // };
+    // const numberTween = gsap
+    //     .timeline({
+    //         repeat: 0,
+    //     })
+    //     .to(numberValue, {
+    //         value: numberValue.endValue,
+    //         duration: 3,
+    //         // roundProps: "value",
+    //         ease: "power2.inOut",
+    //         onUpdate: () => {
+    //             console.log('nnnn:', numberValue.value);
+    //             numberEl.innerHTML = numberValue.value;
+    //         },
+    //     });
 </script>
 
 </html>

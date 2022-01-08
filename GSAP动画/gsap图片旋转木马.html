@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSAP 图片选择木马</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            perspective: 800px;
+            width: 100%;
+            box-sizing: border-box;
+            min-height: 100px;
+            background-color: #f2f2f2;
+            padding: 100px 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .img-wrap {
+            width: 128px;
+            height: 100px;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .img-item {
+            width: 128px;
+            height: 100px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .btn-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: 20px;
+            width: 300px;
+        }
+
+        .btn-wrap>.btn {
+            width: auto;
+            padding: 5px 10px;
+            background-color: skyblue;
+        }
+
+   
+    </style>
+    <script src="./js/gsap-latest-beta.min.js"></script>
+</head>
+
+<body>
+    <div class="container" id="container">
+        <div class="img-wrap" id="imgWrap">
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+        </div>
+    </div>
+
+
+    <div class="btn-wrap">
+         <div class="btn play" id="play">play</div>
+        <div class="btn stop" id="stop">stop</div>
+    </div>
+
+</body>
+<script>
+    // 随机颜色HSL
+    const randomHsl = function () {
+        return "hsla(" + Math.round(360 * Math.random()) + "," + "60%, 50%, .9)";
+    }
+    const imgItemLists = document.querySelectorAll('.img-item');
+    const count = imgItemLists.length;
+    const imgWrapEl = document.getElementById('imgWrap');
+    const Width = imgWrapEl.offsetWidth;
+    let perDeg = (360 / count) | 0;
+
+    let R = Width / 2 / Math.tan(perDeg / 2 / 180 * Math.PI);
+
+    imgItemLists.forEach((item, index) => {
+        item.style.cssText =
+            `background: ${randomHsl()};transform: rotateY(${perDeg * (index+1)}deg) translateZ(${R + 20}px);`;
+    })
+
+    let tween = gsap.to(imgWrapEl,{
+        force3D: true,
+        rotateY: 360,
+        // reversed: true,
+        // repeatRefresh: true,
+        duration: 3,
+        repeat: -1,
+        ease: "none",
+        // paused: true,
+    })
+
+    document.getElementById('play').addEventListener('click', function () {
+        if (tween.paused()) {
+            console.log('暂停恢复');
+            tween.resume();
+        } else {
+            console.log('start');
+            tween.play();
+        }
+    })
+    document.getElementById('stop').addEventListener('click', function () {
+        tween.pause();
+    })
+</script>
+
+
+</html>
