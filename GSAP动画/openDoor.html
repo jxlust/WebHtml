@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Door</title>
+    <style>
+        .audio-wrap {
+            display: none;
+        }
+
+        .phone-box {
+            position: relative;
+            width: 375px;
+            height: 667px;
+            display: flex;
+            align-items: center;
+            background-color: #f2f2f2;
+            /* perspective: 1000px;
+            transform-style: preserve-3d; */
+        }
+
+        .room {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 100%;
+            width: 375px;
+            height: auto;
+            margin: auto;
+            display: flex;
+            background-color: skyblue;
+        }
+
+        .room-img {
+            width: 100%;
+            max-width: 100%;
+            object-fit: cover;
+            /* max-width: 100%; */
+        }
+
+        .door-box {
+            position: relative;
+            z-index: 1;
+            max-width: 100%;
+            width: 375px;
+            height: 628px;
+            background-color: #2a273c;
+            overflow: hidden;
+
+        }
+
+        .wall {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 100px;
+            border-bottom: 3px solid #211820;
+            background-color: #646326;
+        }
+
+        .door-border {
+            position: absolute;
+            top: 28px;
+            left: 40px;
+            right: 40px;
+            bottom: 0;
+            border: 3px solid #211820;
+            border-radius: 3px 3px 0 0;
+            border-bottom: none;
+            background-color: #183269;
+        }
+
+        .door-frame {
+            position: absolute;
+            top: 10px;
+            left: 9px;
+            right: 9px;
+            bottom: 0px;
+            border: 3px solid #211820;
+            border-bottom: none;
+            border-radius: 3px 3px 0 0;
+            /* background-color: transparent; */
+            background-color: #fbfad0;
+            perspective: 1200px;
+        }
+
+        .door {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            transform-style: preserve-3d;
+            transform-origin: left;
+            transform: rotateY(0deg);
+            backface-visibility: hidden;
+        }
+
+        .light {
+            position: absolute;
+            opacity: 0;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            background: #F7E08F;
+            width: 1000px;
+            transform: translateZ(-13px);
+        }
+
+        .door-face-0 {
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border: 3px solid #211820;
+            background-color: #295489;
+            transform: translateZ(-12px);
+        }
+
+        .door-face-1 {
+            position: absolute;
+            height: 6px;
+            left: -3px;
+            right: -3px;
+            top: 0;
+            border: 3px solid #211820;
+            border-radius: 2px;
+            background-color: #0c2e59;
+            transform: translate3D(0, -7.5px, -6px) rotateX(90deg);
+        }
+
+        .door-face-2 {
+            position: absolute;
+            left: -3px;
+            top: -3px;
+            right: -3px;
+            bottom: -3px;
+            border: 3px solid #211820;
+            background-color: #295489;
+        }
+
+        .door-face-3 {
+            position: absolute;
+            width: 6px;
+            top: -3px;
+            right: 0;
+            bottom: -3px;
+            border: 3px solid #211820;
+            border-radius: 2px;
+            background-color: #0c2e59;
+            transform: translate3D(7.5px, 0, -6px) rotateY(90deg);
+        }
+
+        .my-door-text {
+            position: absolute;
+            width: 165px;
+            height: 60px;
+            line-height: 60px;
+            background-color: skyblue;
+            top: 60px;
+            left: 0;
+            right: 0;
+            margin: auto;
+            text-align: center;
+            font-size: 30px;
+            border: 3px solid;
+            border-radius: 2px;
+        }
+
+        .open-door {
+            position: absolute;
+            left: 0;
+            right: 0;
+            text-align: center;
+            margin-top: 240px;
+            font-size: 24px;
+            color: #9dbce3;
+            line-height: 36px;
+            cursor: pointer;
+        }
+        .room-text{
+            position: absolute;
+            font-weight: bold;
+            color: skyblue;
+            font-size: 20px;
+            top: 100px;
+        }
+    </style>
+    <script src="./js/gsap-latest-beta.min.js"></script>
+</head>
+
+<body>
+    <div class="phone-box">
+        <!-- 一层又一层 -->
+        <div class="door-box" id="doorBox">
+            <div class="wall">
+                <div class="door-border">
+                    <div class="door-frame">
+                        <div id="door" class="door">
+                            <div id="light" class="light"></div>
+                            <!-- 背面 -->
+                            <div class="door-face-0"></div>
+                            <!-- 上面 -->
+                            <div class="door-face-1"></div>
+                            <!-- 中面 -->
+                            <div class="door-face-2">
+                                <div class="my-door-text">密室</div>
+                                <div class="open-door" id="openDoor">开门</div>
+                            </div>
+                            <!-- 右面 -->
+                            <div class="door-face-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="room" id="room">
+            <div class="room-text">开门大吉</div>
+            <img class="room-img" src="../前端动画/assets/dn-img/cover.webp" alt="">
+        </div>
+    </div>
+
+
+
+</body>
+
+<script>
+    const myAudioElement = new Audio('./images/open.mp3');
+    myAudioElement.addEventListener("canplaythrough", event => {
+        /* 音频可以播放；如果权限允许则播放 */
+        // 浏览器默认不能自动播放
+        // myAudioElement.play();
+    });
+    const openDoorEl = document.getElementById('openDoor');
+    const doorEl = document.getElementById('door');
+    const lightEl = document.getElementById('light');
+    const doorBoxEl = document.getElementById('doorBox');
+    const roomEl = document.getElementById('room')
+    openDoorEl.addEventListener('click', function () {
+        // myAudioElement.play();
+        openAnimation();
+    })
+
+    function openAnimation() {
+        let timeline = gsap.timeline();
+        timeline.to(doorEl, {
+                force3d: true,
+                rotateY: -90,
+                duration: 2,
+                ease: 'power2.inOut',
+            }).set(lightEl, {
+                opacity: 0.8,
+                delay: 0.5
+            }, '<')
+            .to(lightEl, {
+                opacity: 0,
+                duration: 1.2,
+                ease: 'power1.out'
+            }, '<').fromTo(roomEl,{
+                scale: .5,
+                translateZ: -100,
+            },{
+                scale: 1,
+                translateZ: 0,
+                duration: 2,
+            },'-=0.8')
+            // 转场动画 z轴正方向位移，前一个景放大且透明度变化
+            .to(doorBoxEl, {
+                opacity: 0,
+                scale: 2,
+                translateZ: 100,
+                duration: 1.5
+            }, '<')
+
+    }
+</script>
+
+</html>

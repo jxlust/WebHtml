@@ -16,11 +16,12 @@
 1. [官网 showcase](https://greensock.com/showcase/)
 2. 年度账单合成效果
 3. [我的codepen](https://codepen.io/your-work)
-4. 引申[requestAnimationFrame](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame)
-   > 告诉浏览器，你希望执行一个动画，并且要求浏览器在下次重绘之前调用指定的回调函数更新动画。
-   > 该方法需要传入一个回调函数作为参数，该回调函数会在浏览器下一次重绘之前执行,重绘。浏览器一般刷新频率为 60fps
-   > 下一次重绘之前更新动画帧所调用的函数(即上面所说的回调函数)。
-   > 该回调函数会被传入 DOMHighResTimeStamp 参数，该参数与 performance.now()的返回值相同，它表示 requestAnimationFrame() 开始去执行回调函数的时刻。
+4. 引申[requestAnimationFrame](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame) 
+
+> 告诉浏览器，你希望执行一个动画，并且要求浏览器在下次重绘之前调用指定的回调函数更新动画。
+该方法需要传入一个回调函数作为参数，该回调函数会在浏览器下一次重绘之前执行,重绘。浏览器一般刷新频率为 60fps
+下一次重绘之前更新动画帧所调用的函数(即上面所说的回调函数)。
+该回调函数会被传入 DOMHighResTimeStamp 参数，该参数与 performance.now()的返回值相同，它表示 requestAnimationFrame() 开始去执行回调函数的时刻。
 
 ### 三、GSAP简单使用
 
@@ -32,7 +33,9 @@ css 动画
 @keyframes move {
   0% {
   }
-  ...;
+  ...
+  100%{
+  }
 }
 .box {
   /* animation: name duration timing-function delay iteration-count direction fill-mode; */
@@ -47,7 +50,7 @@ css 动画
 
 ```css
 .box {
-  /* matrix方法有六个参数matrix(a, b, c, d, x, y)，六个参数默认值是matrix(1, 0, 0, 1, 0, 0)，这六个参数分别控制不同的变换
+  /* 2d矩阵变换 matrix方法有六个参数matrix(a, b, c, d, x, y)，六个参数默认值是matrix(1, 0, 0, 1, 0, 0)，这六个参数分别控制不同的变换
 a 水平缩放
 b 水平拉伸
 c 垂直拉伸
