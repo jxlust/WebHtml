@@ -1,15 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mask Study</title>
+    <title>Mask & Filter Study</title>
     <style>
-       
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .box {
+            min-width: 100px;
+            min-height: 100px;
+            margin: 10px;
+        }
+
+        .mask-img {
+            width: 100px;
+            height: 100px;
+            -webkit-mask-image: url(./images/logo.png);
+            mask-image: url(./images/logo.png);
+        }
+
+        .mask-svg {
+            width: 0;
+            height: 0;
+            position: absolute;
+        }
+
+        .mask-img2 {
+            width: 100px;
+            height: 100px;
+            -webkit-mask-image: url('#mask');
+            mask-image: url('#mask');
+            background-color: #000;
+        }
+
+        .mask-img3 {
+            width: 250px;
+            height: 187.5px;
+            -webkit-mask-image: url(#mask);
+            mask: url(#mask);
+            mask-image: url(#mask);
+        }
+
+        .mask-bg {
+            width: 200px;
+            height: 100px;
+            mask: linear-gradient(#000, transparent);
+            -webkit-mask-image: linear-gradient(90deg, transparent, #fff);
+            background: url('../Canvas和Svg/images/majors_back.jpg');
+        }
+
+        .mask-bg2 {
+            width: 200px;
+            height: 100px;
+            background: linear-gradient(135deg, transparent 15px, red 0) top left/100px 50px,
+                linear-gradient(-135deg, transparent 15px, red 0) top right/100px 50px,
+                linear-gradient(45deg, transparent 15px, red 0) bottom left/ 100px 50px,
+                linear-gradient(-45deg, transparent 15px, red 0) bottom right/ 100px 50px;
+            background-color: skyblue;
+            background-repeat: no-repeat;
+            overflow: hidden;
+            /* background-size: 50% 50%; */
+        }
+
+        .mask-bg3 {
+            width: 200px;
+            height: 100px;
+            background: url(../Canvas和Svg/images/majors_back.jpg);
+            mask:
+                linear-gradient(135deg, transparent 15px, red 0) top left/100px 50px,
+                linear-gradient(-135deg, transparent 15px, red 0) top right/100px 50px,
+                linear-gradient(45deg, transparent 15px, red 0) bottom left/ 100px 50px,
+                linear-gradient(-45deg, transparent 15px, red 0) bottom right/ 100px 50px;
+            -webkit-mask: linear-gradient(135deg, transparent 15px, red 0) top left/100px 50px,
+                linear-gradient(-135deg, transparent 15px, red 0) top right/100px 50px,
+                linear-gradient(45deg, transparent 15px, red 0) bottom left/ 100px 50px,
+                linear-gradient(-45deg, transparent 15px, red 0) bottom right/ 100px 50px;
+            -webkit-mask-size: 50% 50%;
+            mask-size: 50% 50%;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+        }
+
+        .mask-bg4 {
+            position: relative;
+            width: 300px;
+            height: 150px;
+            background: url(./images/fruit3.jpeg) no-repeat center;
+            background-size: cover;
+        }
+
+        .mask-bg4::after {
+            content: '';
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            background: url(./images/fruit7.jpeg) no-repeat center;
+            background-size: cover;
+            mask: linear-gradient(45deg, #000 40%, transparent 60%);
+            -webkit-mask: linear-gradient(45deg, #000 40%, transparent 60%);
+
+            animation: maskRotate 1.2s ease-in-out;
+        }
+
+        /* @keyframes maskRotate {
+    @for $i from 0 through 50 { 
+        #{$i}% {
+            mask: linear-gradient(45deg, #000 #{$i * 2 + '%'}, transparent #{$i * 2.5 + '%'}, transparent #{$i * 2.5 + '%'});
+        }
+    }
+    100% {
+        mask: linear-gradient(45deg, #000， #000 100%);
+    }
+} */
+
+        /* @keyframes maskRotate{
+         
+@for $i from 0 through 100 { 
+        #{$i}% {
+            mask: conic-gradient(#000 #{$i - 8 + '%'}, transparent #{$i + '%'}, transparent);
+        }
+    }
+        } */
+
+        @keyframes maskMove {
+            from {
+                mask-position: 0 0;
+                -webkit-mask-position: 0 0;
+            }
+
+            to {
+                mask-position: 100% 0;
+                -webkit-mask-position: 100% 0;
+            }
+        }
+
+        .box56 {
+            position: relative;
+            width: 500px;
+            height: 300px;
+        }
+
+        .mask-bg5 {
+            background: url(./images/fruit5.jpeg) no-repeat left top;
+            background-size: cover;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+        }
+
+        .mask-bg6 {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            left: 0;
+            top: 0;
+            mask: url(./images/imgmask.png);
+            -webkit-mask: url(./images/imgmask.png);
+            mask-size: 3000% 100%;
+            animation: maskMove 2s steps(29) infinite;
+        }
+
+        .mask-bg6::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: url(./images/fruit8.jpeg) no-repeat left top;
+            background-size: cover;
+        }
     </style>
+
 </head>
+
 <body>
-    
+    <!--  mask 使用svg 、 图片、渐变来做遮罩
+    mask: url(mask.png);
+    mask: url(masks.svg#star);
+    mask: linear-gradient(#000, transparent)   -->
+    <svg class="mask-svg">
+        <defs>
+            <mask id="mask" maskContentUnits="objectBoundingBox">
+                <!-- 柔化边缘 -->
+                <ellipse cx=".5" cy=".5" rx=".48" ry=".28" fill="black"></ellipse>
+                <rect x=".2" y="0" width=".6" height="1" rx=".1" ry=".1" fill="black"></rect>
+                <!-- 主体遮罩 -->
+                <ellipse cx=".5" cy=".5" rx=".4" ry=".2" fill="white"></ellipse>
+                <rect x=".3" y=".1" width=".4" height=".8" rx=".1" ry=".1" fill="white"></rect>
+            </mask>
+        </defs>
+    </svg>
+    <div class="content">
+        <div class="box">
+            <img class="mask-img" src="./images/fruit1.jpeg" alt="">
+        </div>
+        <div class="box">
+            <!-- 仅Firefox浏览器支持： -->
+            <div class="mask-img2" alt="">
+            </div>
+        </div>
+
+        <div class="box" style="width: 250px;height: 186px;">
+            <svg width="250" height="186">
+                <image xlink:href="../Canvas和Svg/images/majors_back.jpg" class="mask-img3" width="250" height="186">
+                </image>
+            </svg>
+        </div>
+
+        <div class="box">
+            <div class="mask-bg"></div>
+        </div>
+
+        <div class="box">
+            <div class="mask-bg2">
+            </div>
+        </div>
+
+        <!-- mask切割图片 -->
+        <div class="box">
+            <div class="mask-bg3">
+            </div>
+        </div>
+        <!-- mask多图展示 和渐变效果 -->
+        <div class="box">
+            <div class="mask-bg4"></div>
+        </div>
+
+
+        <div class="box56">
+            <div class="mask-bg5"></div>
+            <div class="mask-bg6"></div>
+        </div>
+
 </body>
+
 </html>
