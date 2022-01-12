@@ -1,15 +1,15 @@
 ### 一、前端动画框架
+#### 动画
 
 1. [GSAP(GreenSock Animation Platform)](https://greensock.com/docs/v3)，动画管理工具
-
 2. Lottie，配合 UI 设计师设计的动画导出通用的 json 数据进行动画设置，web 端包是 lottie-web
-
-3. 渲染框架 [PixiJS](https://pixijs.com/)、[CreateJS](https://createjs.com/)、[Three.js](https://threejs.org/)的 3D 渲染, 都是基于 WebGL，而 WebGL 都是依赖于 OpenGL(Mac/Linux 等)或者 DirectX(windows)，Apple 设备的渲染会转成都用 Metal 绘制
-
+#### 渲染框架
+1. [PixiJS](https://pixijs.com/)
+2. [CreateJS](https://createjs.com/)
+3. [Three.js](https://threejs.org/)的 3D 渲染, 都是基于 WebGL，而 WebGL 都是依赖于 OpenGL(Mac/Linux 等)或者 DirectX(windows)，Apple 设备的渲染以后会转成都用 Metal 绘制
 4. Web 游戏，2d、3d 都可， [Cocos Creator](https://www.cocos.com/docs) ，底层是 c++实现
-
 5. 未来，基于 WebGPU 的图像渲染前端技术，真 3D 图形和计算能力
-   出自 W3C
+
 
 ### 二、GSAP 效果
 
@@ -25,7 +25,7 @@
 
 ### 三、GSAP简单使用
 
-1. **时序** Sequencing with Timelines，简单地说就是顺序和时间
+1. **时序概念** Sequencing with Timelines，简单地说就是顺序和时间
 
 css 动画
 
@@ -110,7 +110,7 @@ master.add(tl1).add(tl2).add(tl3)...
 
 1. 操作自定义普通对象
 
-2. 常用监听函数的使用
+2. 常用回调（监听）函数使用
 
 - onStart
 - onUpdate

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClipPath</title>
+    <script src="./js/gsap-latest-beta.min.js"></script>
+    <style>
+        .content{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .box{
+            width: 300px;
+            height: 300px;
+            position: relative;
+            outline: 3px solid #999;
+            /* box-sizing: content-box; */
+        }
+        .box img{
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            /* clip-path: circle(0px at 50% 80%); */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="content">
+
+        <div class="box">
+            <img class="img img1" src="../Web技巧和布局/images/fruit5.jpeg" alt="">
+            <img class="img img2" src="../Web技巧和布局/images/fruit7.jpeg" alt="">
+            <img class="img img3" src="../Web技巧和布局/images/fruit2.jpeg" alt="">
+        </div>
+    </div>
+</body>
+<script>
+    const timeline = gsap.timeline();
+    const imgs = document.querySelectorAll('.img');
+  
+    imgs.forEach((img,index) => {
+        timeline.fromTo(img,{
+        clipPath: 'circle(0px at 50% 50%)',
+    },{
+        duration: 2,
+        ease: 'none',
+        clipPath: 'circle(150px at 50% 50%)'
+    },'+=1')
+        // let opacity = 0,webkitClipPath = 'circle(0px at 50% 50%);'
+        // if(index === 0){
+        //     opacity = 1;
+        //     webkitClipPath = 'circle(150px at 50% 50%);'
+        // }
+        // timeline.set(img,{
+        //     opacity,
+        //     webkitClipPath
+        // })
+    })
+
+</script>
+
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clip Path</title>
+    <style>
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+
+        }
+
+        .box {
+            position: relative;
+            margin: 10px;
+        }
+
+        .box1 {
+            width: 100px;
+            height: 100px;
+            background-color: rosybrown;
+            /* circle(半径 at 圆心坐标) */
+            clip-path: circle(20% at 50% 50%);
+        }
+
+        .box2 {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            background-color: skyblue;
+            /* 椭圆 */
+            clip-path: ellipse(50px 90px at 10% 10%);
+        }
+        .box2_2{
+            position: relative;
+            width: 100px;
+            height: 50px;
+            background-color: skyblue;
+            /* 椭圆默认值 椭圆两个半径都默认为宽高的一半，原点默认为盒子中心点 */
+            clip-path: ellipse();
+        }
+
+        .box2 img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(.3);
+        }
+
+        .box3 {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            background-color: royalblue;
+            /* 多边形 */
+            /* clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%) */
+            /* 矩形 inset 对应距离top right bottom left的裁剪位置 圆角round*/
+            clip-path: inset(10px 5px 20px 12px round 6px);
+        }
+
+        .box4 {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            background-color: skyblue;
+            /* 多边形 */
+            clip-path: polygon(50% 0, 100% 30%, 100% 70%, 50% 100%, 0 50%);
+        }
+        .box5{
+            position: relative;
+            width: 50px;
+            height: 50px;
+            background-color: skyblue;
+            /* 路径跟svg一致 */
+            clip-path: path('m20.839,34.96898c-7.47717,-6.05982 -10.15056,-9.89315 -10.17222,-14.58584c-0.01976,-4.27796 3.2804,-8.40683 6.70043,-8.38302c1.70781,0.01191 5.37118,1.58644 6.66839,2.86613c0.65361,0.64478 0.96319,0.5812 2.41839,-0.49669c3.96042,-2.93356 7.82782,-2.99514 10.33251,-0.1645c4.00303,4.52396 3.27424,9.9264 -2.09504,15.53018c-2.85462,2.9793 -9.08848,8.26474 -9.74776,8.26474c-0.20061,0 -2.04772,-1.36396 -4.10469,-3.03101l0,0z');
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div class="box box1"></div>
+
+        <div class="box box2">
+            <img class="img" src="./images/fruit3.jpeg" alt="">
+        </div>
+        <div class="box box2_2"></div>
+
+        <div class="box box3"></div>
+
+        <div class="box box4"></div>
+        <div class="box box5"></div>
+
+
+    </div>
+
+</body>
+
+</html>
