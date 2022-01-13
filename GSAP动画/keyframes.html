@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>keyframes</title>
     <style>
-      
-          html,
+        html,
         body {
             width: 0;
             /* for fixing iOS iframe issues */
-            min-width: 100%; 
+            min-width: 100%;
             /* for fixing iOS iframe issues */
             overflow-x: hidden;
             position: relative;
@@ -29,39 +29,198 @@
             font-size: 18px;
             padding: 10px 0;
         }
-        .box{
+
+        .box {
             position: relative;
             width: 100px;
             height: 100px;
             border-radius: 4px;
-             background-color: skyblue;
+            margin: 10px;
+            background-color: skyblue;
         }
-        .content{
+
+        .content1 {
             position: relative;
-            left: 0;
-            top: 0;
             z-index: 2;
-            width: 100vw;
-            height: 100vh;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            height: 300px;
+            width: 100%;
+            justify-content: space-around;
+        }
+
+        .box2 {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background-color: skyblue;
+            /* transform: translate(-50%,-50%); */
+        }
+
+        .content2 {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .box2-wrap {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border: 1px dashed #999;
+            background-color: #f8f8f8;
+            box-sizing: border-box;
+        }
+
+        .box2-wrap::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            box-shadow: -100px -100px 0px -96px red,
+                100px -100px 0px -96px red,
+                100px 100px 0px -96px red,
+                -100px 100px 0px -96px red;
+            border-radius: 50%;
+        }
+
+        .radio-wrap {
+            display: flex;
+            flex-direction: column;
+            padding-left: 50px;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+        }
+
+        input,
+        label {
+            cursor: pointer;
         }
     </style>
-    <script src="./js/gsap-latest-beta.min.js"></script>
+    <script src="https://unpkg.co/gsap@3/dist/gsap.min.js"></script>
 </head>
+
 <body>
-    <div class="content">
-        <div class="box"></div>
+    <div class="content1">
+        <div class="box" id="box1"></div>
+        <div class="box" id="box2"></div>
+        <div class="box" id="box3"></div>
+    </div>
+
+    <div class="content2">
+        <div class="box2-wrap">
+            <div class="box2" id="box4"></div>
+        </div>
+        <form class="radio-wrap" id="myForm">
+            <div class="radio-item"> <input name="ani-type" id="radio1" type="radio" value="easeEach" />
+                <label for="radio1">easeEach</label>
+            </div>
+            <div class="radio-item"> <input name="ani-type" id="radio2" type="radio" value="ease" />
+                <label for="radio2">ease</label>
+            </div>
+        </form>
+
+
     </div>
 </body>
 <script>
     let timeline = gsap.timeline({
         force3D: true
     });
-    let boxEl = document.querySelector('.box');
-    timeline.to(boxEl,{
-        repeat: -1,
+    let boxEl = document.querySelectorAll('.box');
+    timeline.to('#box1', {
+        // repeat: -1,
         duration: 5,
         ease: 'none',
-        keyframes: [{x:100, duration:0}, {y:100, duration:1}]
+        keyframes: [{
+            x: 100,
+            duration: 0
+        }, {
+            y: 100,
+            duration: 1
+        }]
     })
+    // v3.9
+    timeline.to('#box2', {
+        keyframes: {
+            "0%": {
+                x: 100,
+                y: 100
+            },
+            "75%": {
+                x: 0,
+                y: 0,
+                ease: 'sine.out'
+            }, // finetune with individual eases
+            "100%": {
+                x: 50,
+                y: 50
+            },
+            easeEach: 'sine.inOut' // ease between keyframes
+        },
+        ease: 'none', // ease the entire keyframe block
+        duration: 2
+    }, '<')
 </script>
+
+<script>
+    let tween3 = gsap.to("#box3", {
+        keyframes: {
+            x: [100, 0, 50],
+            y: [100, 0, 50],
+            // easeEach: 'none',
+            easeEach: 'sine.inOut', // ease between keyframes
+            ease: 'power1.in'
+        },
+        duration: 5,
+    })
+    // tween3.play();
+</script>
+
+<script>
+    const form = document.getElementById('myForm');
+    gsap.set('#box4', {
+        x: '-50%',
+        y: '-50%'
+    })
+    const eachTween = gsap.to('#box4', {
+        keyframes: {
+            x: [-25, 175, 175, -25, -25],
+            y: [-25, -25, 175, 175, -25],
+            easeEach: 'power4.inOut',
+        },
+        duration: 5,
+        ease: 'none',
+        paused: true,
+    })
+    const easeTween = gsap.to('#box4', {
+        keyframes: {
+            x: [-25, 175, 175, -25, -25],
+            y: [-25, -25, 175, 175, -25],
+            easeEach: 'none',
+        },
+        paused: true,
+        duration: 5,
+        ease: 'power2.inOut'
+    })
+    form.addEventListener("change", (e) => {
+        let value = document.querySelector('input[name="ani-type"]:checked').value;
+        if (value === "ease") {
+            eachTween.kill()
+            easeTween.play(0)
+        } else {
+            easeTween.kill()
+            eachTween.play(0)
+        }
+    });
+</script>
+
 </html>

@@ -8,26 +8,54 @@
     <title>ClipPath</title>
     <script src="./js/gsap-latest-beta.min.js"></script>
     <style>
-        .content{
+        .content {
             display: flex;
             flex-wrap: wrap;
         }
-        .box{
+
+        .box {
             width: 300px;
             height: 300px;
             position: relative;
-            outline: 3px solid #999;
+            /* outline: 2px solid #999; */
+            margin: 10px;
             /* box-sizing: content-box; */
         }
-        .box img{
+
+        .box img {
             position: absolute;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
+            inset: 0;
             width: 100%;
             height: 100%;
-            /* clip-path: circle(0px at 50% 80%); */
+            outline: none;
+            border: none;
+            /* clip-path: inset(50% round 10% 50%); */
+            /* clip-path: circle(100px at 50% 80%); */
+        }
+
+        .img-mask {
+            z-index: 2;
+            position: absolute;
+            /* top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0; */
+            inset: 0;
+            background-color: rgba(0, 0, 0, .6);
+        }
+
+        .img2 {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+           
+            z-index: 3;
+        }
+        .images2{
+            width: 100%;
+            height: 100%;
+           
         }
     </style>
 </head>
@@ -35,37 +63,84 @@
 <body>
 
     <div class="content">
+        <div class="box">
+            <div class="img-mask" id="imgMask"></div>
+            <img class="img img1" src="../Web技巧和布局/images/logo.png" alt="">
+            <div class="img img2">
+                <img class="images2" src="../Web技巧和布局/images/fruit7.jpeg" alt="">
+            </div>
+        </div>
 
         <div class="box">
-            <img class="img img1" src="../Web技巧和布局/images/fruit5.jpeg" alt="">
-            <img class="img img2" src="../Web技巧和布局/images/fruit7.jpeg" alt="">
-            <img class="img img3" src="../Web技巧和布局/images/fruit2.jpeg" alt="">
+            <div class="img-mask"></div>
+            <!-- <img class="img" src="../Web技巧和布局/images/fruit1.jpeg" alt="">
+            <img class="img" src="../Web技巧和布局/images/fruit2.jpeg" alt=""> -->
+            <img class="img" id="img8" src="../Web技巧和布局/images/fruit8.jpeg" alt="">
         </div>
     </div>
 </body>
 <script>
-    const timeline = gsap.timeline();
+    const timeline = gsap.timeline({
+        repeat: -1,
+        repeatDelay: 1,
+        repeatRefresh: true,
+        onRepeat: () => {
+            randomIndex =  (randomIndex + 1) % clipPathArray.length;
+            console.log('repeat..', randomIndex);
+        },
+    });
     const imgs = document.querySelectorAll('.img');
-  
-    imgs.forEach((img,index) => {
-        timeline.fromTo(img,{
-        clipPath: 'circle(0px at 50% 50%)',
+    const circleHalf = ~~Math.sqrt(Math.pow(300, 2) * 2) / 2 + 1;
+    let clipPathArray = [{
+        start: 'circle(0px at 50% 50%)',
+        end: `circle(${circleHalf}px at 50% 50%)`
+    }, {
+        start: 'inset(50% round 10% 50%)',
+        end: 'inset(0% round 0%)'
+    }, {
+        // 菱形
+        start: 'polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)',
+        end: 'polygon(50% -50%, 150% 50%, 50% 150%, -50% 50%)'
     },{
-        duration: 2,
+        // 十字星
+        start: 'polygon(50% 20%, 50% 50%, 20% 50%, 50% 50%, 50% 80%, 50% 50%, 80% 50%, 50% 50%)',
+        end: 'polygon(50% 0%, 0% 0%, 0% 50%, 0% 100%, 50% 100%, 100% 100%, 100% 50%, 100% 0%)'
+    }]
+    // let randomIndex = gsap.utils.random(0, clipPathArray.length) | 0;
+    let randomIndex = 0;
+    timeline.fromTo('.img2', {
+        clipPath: () => {
+            return clipPathArray[randomIndex].start
+        },
+         opacity: 0,
+    }, {
+        opacity: 1,
+        duration: .3,
         ease: 'none',
-        clipPath: 'circle(150px at 50% 50%)'
-    },'+=1')
-        // let opacity = 0,webkitClipPath = 'circle(0px at 50% 50%);'
-        // if(index === 0){
-        //     opacity = 1;
-        //     webkitClipPath = 'circle(150px at 50% 50%);'
-        // }
-        // timeline.set(img,{
-        //     opacity,
-        //     webkitClipPath
-        // })
-    })
+    }).to('.img2', {
+        duration: 1.5,
+        // scale: 1,
+        ease: 'none',
+        clipPath: () => {
+            return clipPathArray[randomIndex].end
+        }
+    }, '<').fromTo('.images2',{
+        scale: 0.8,
+    },{
+        scale: 1,
+        duration: 1,
+    },'<')
+</script>
 
+<script>
+    const img8Timeline = gsap.timeline({
+        repeat: -1
+    });
+    img8Timeline.fromTo('#img8',{
+
+    },{
+        
+    })
 </script>
 
 </html>
