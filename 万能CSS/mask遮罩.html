@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mask & Filter Study</title>
     <style>
+        :root{
+            --seed: 0,
+        }
         html,
         body {
             margin: 0;
@@ -28,8 +31,8 @@
         .mask-img {
             width: 100px;
             height: 100px;
-            -webkit-mask-image: url(./images/logo.png);
-            mask-image: url(./images/logo.png);
+            -webkit-mask-image: url(../Web技巧和布局/images/logo.png);
+            mask-image: url(../Web技巧和布局/images/logo.png);
         }
 
         .mask-svg {
@@ -60,6 +63,34 @@
             mask: linear-gradient(#000, transparent);
             -webkit-mask-image: linear-gradient(90deg, transparent, #fff);
             background: url('../Canvas和Svg/images/majors_back.jpg');
+        }
+
+        .mask-bg9 {
+            width: 200px;
+            height: 100px;
+            mask: radial-gradient(circle, #000 calc(1% * var(--seed)), transparent calc(1% * var(--seed))) no-repeat center;
+            background: url('../Canvas和Svg/images/majors_back.jpg');
+            -webkit-mask: radial-gradient(circle, #000 calc(1% * var(--seed)), transparent calc(1% * var(--seed))) no-repeat center;
+            animation-name: circleAni;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+        }
+        @keyframes circleAni{
+            0%{
+                --seed: 0
+            }
+            10%{
+                --seed: 10
+            }
+            50%{
+                --seed: 50
+            }
+            60%{
+                --seed: 60
+            }
+            100%{
+               --seed: 100
+            }
         }
 
         .mask-bg2 {
@@ -98,7 +129,7 @@
             position: relative;
             width: 300px;
             height: 150px;
-            background: url(./images/fruit3.jpeg) no-repeat center;
+            background: url(../Web技巧和布局/images/fruit3.jpeg) no-repeat center;
             background-size: cover;
         }
 
@@ -110,7 +141,7 @@
             top: 0;
             bottom: 0;
             right: 0;
-            background: url(./images/fruit7.jpeg) no-repeat center;
+            background: url(../Web技巧和布局/images/fruit7.jpeg) no-repeat center;
             background-size: cover;
             mask: linear-gradient(45deg, #000 40%, transparent 60%);
             -webkit-mask: linear-gradient(45deg, #000 40%, transparent 60%);
@@ -157,7 +188,7 @@
         }
 
         .mask-bg5 {
-            background: url(./images/fruit5.jpeg) no-repeat left top;
+            background: url(../Web技巧和布局/images/fruit5.jpeg) no-repeat left top;
             background-size: cover;
             height: 100%;
             position: absolute;
@@ -172,8 +203,8 @@
             width: 100%;
             left: 0;
             top: 0;
-            mask: url(./images/imgmask.png);
-            -webkit-mask: url(./images/imgmask.png);
+            mask: url(../Web技巧和布局/images/imgmask.png);
+            -webkit-mask: url(../Web技巧和布局/images/imgmask.png);
             mask-size: 3000% 100%;
             animation: maskMove 2s steps(29) infinite;
         }
@@ -185,8 +216,87 @@
             left: 0;
             height: 100%;
             width: 100%;
-            background: url(./images/fruit8.jpeg) no-repeat left top;
+            background: url(../Web技巧和布局/images/fruit8.jpeg) no-repeat left top;
             background-size: cover;
+        }
+
+        .mask-bg7 {
+            position: relative;
+            width: 300px;
+            height: 150px;
+            left: 0;
+            top: 0;
+            mask: url('./images/heart.svg') no-repeat center;
+            -webkit-mask: url('./images/heart.svg') no-repeat center;
+            /* mask-size: 0% 0%;
+            -webkit-mask-size: 0% 00%; */
+            /* -webkit-mask-repeat: no-repeat; */
+            animation-name: heartAni;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+        }
+
+        .mask-bg7::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, red 0%, transparent 100%) no-repeat left top;
+            background-size: cover;
+        }
+
+        .mask-bg8 {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+
+        .mask-bg8::after {
+            content: '';
+            position: absolute;
+            inset: calc(50% - 15px);
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            border-radius: 50%;
+        }
+
+        .mask-bg8 img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .mask-bg8 .img-mask {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .mask-bg8 .show-img {
+            z-index: 2;
+            position: absolute;
+            inset: 0;
+            mask: url('./images/heart.svg') no-repeat center;
+            -webkit-mask: url('./images/heart.svg') no-repeat center;
+            animation-name: heartAni;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes heartAni {
+            0% {
+                mask-size: 0% 0%;
+                -webkit-mask-size: 0% 0%;
+            }
+
+            100% {
+                mask-size: 300% 300%;
+                -webkit-mask-size: 300% 300%;
+
+            }
         }
     </style>
 
@@ -212,8 +322,9 @@
     </svg>
     <div class="content">
         <div class="box">
-            <img class="mask-img" src="./images/fruit1.jpeg" alt="">
+            <img class="mask-img" src="../Web技巧和布局/images/fruit1.jpeg" alt="">
         </div>
+
         <div class="box">
             <!-- 仅Firefox浏览器支持： -->
             <div class="mask-img2" alt="">
@@ -229,6 +340,9 @@
 
         <div class="box">
             <div class="mask-bg"></div>
+        </div>
+        <div class="box">
+            <div class="mask-bg9"></div>
         </div>
 
         <div class="box">
@@ -246,11 +360,26 @@
             <div class="mask-bg4"></div>
         </div>
 
+        <!-- 利用svg图片遮罩 -->
+        <div class="box">
+            <div class="mask-bg7"></div>
+        </div>
+
+        <div class="box">
+            <div class="mask-bg8">
+                <div class="img-mask"></div>
+                <img src="../Canvas和Svg/images/majors_back.jpg" alt="">
+                <img class="show-img" src="../Canvas和Svg/images/majors_back.jpg" alt="">
+
+            </div>
+        </div>
 
         <div class="box56">
             <div class="mask-bg5"></div>
             <div class="mask-bg6"></div>
         </div>
+
+
 
 </body>
 
