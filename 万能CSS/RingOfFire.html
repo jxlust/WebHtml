@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ring of Fire</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-wrap: wrap;
+            background-color: #000;
+        }
+
+        .circle {
+            position: relative;
+            width: 600px;
+            height: 600px;
+            filter: url('#wavy') blur(1px);
+        }
+
+        .circle::before {
+            content: '';
+            position: absolute;
+            inset: 100px;
+            border: 20px solid #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 50px #0f0,
+                inset 0 0 50px #0f0;
+            /* 倒影 */
+            -webkit-box-reflect: below 10px linear-gradient(transparent, transparent, #0002);
+            animation: animate 5s linear infinite;
+        }
+
+        .circle:nth-child(2)::before {
+            animation-delay: -2.5s;
+        }
+
+        .circle::after {
+            content: '';
+            position: absolute;
+            inset: 100px;
+            border: 20px solid #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #fff,
+                inset 0 0 20px #fff;
+        }
+
+
+        @keyframes animate {
+            0% {
+                box-shadow: 0 0 50px #0f0,
+                    inset 0 0 50px #0f0;
+                filter: hue-rotate(0deg);
+            }
+
+            20% {
+                box-shadow: 0 0 60px #0f0,
+                    inset 0 0 60px #0f0;
+            }
+
+            40% {
+                box-shadow: 0 0 40px #0f0,
+                    inset 0 0 40px #0f0;
+            }
+
+            60% {
+                box-shadow: 0 0 80px #0f0,
+                    inset 0 0 80px #0f0;
+            }
+
+            80% {
+                box-shadow: 0 0 100px #0f0,
+                    inset 0 0 100px #0f0;
+            }
+
+            100% {
+                box-shadow: 0 0 50px #0f0,
+                    inset 0 0 50px #0f0;
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        svg {
+            width: 0;
+            height: 0;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="circle"></div>
+    <div class="circle"></div>
+
+    <svg>
+        <filter id="wavy">
+            <feTurbulence x="0" y="0" baseFrequency="0.009" numOctaves="5" seed="2">
+                <animate attributeName="baseFrequency" dur="60s" values="0.02;0.005;0.02" repeatCount="indefinite">
+            </feTurbulence>
+            <feDisplacementMap in="SourceGraphic" scale="30"></feDisplacementMap>
+        </filter>
+
+    </svg>
+</body>
+
+</html>
