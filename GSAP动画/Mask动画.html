@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mask Animation</title>
+    <style>
+        .box{
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+        .mask-bg{
+            position: absolute;
+            border-radius: 50%;
+            inset: 0;
+            background-color: skyblue;
+            /* mask: conic-gradient(#000 10%,transparent 10%) no-repeat center;
+            -webkit-mask: conic-gradient(#000 10%,transparent 10%) no-repeat center; */
+        }
+    </style>
+    <script src="https://unpkg.co/gsap@3/dist/gsap.min.js"></script>
+</head>
+<body>
+    <div class="box">
+        <div class="mask-bg" id="mask1"></div>
+    </div>
+    
+</body>
+<script>
+    const tween = gsap.fromTo('#mask1',{
+        mask: 'conic-gradient(#000 0%,transparent 0%) no-repeat center',
+        webkitMask: 'conic-gradient(#000 0%,transparent 0%) no-repeat center',
+    },{
+        duration: 3,
+        ease: 'power1.inOut',
+        mask: 'conic-gradient(#000 100%,transparent 100%) no-repeat center',
+        webkitMask: 'conic-gradient(#000 100%,transparent 100%) no-repeat center'
+    })
+</script>
+</html>

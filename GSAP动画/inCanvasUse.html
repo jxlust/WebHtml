@@ -59,9 +59,6 @@
     function renderCanvas() {
         ctx.save();
         ctx.clearRect(0, 0, widthWindow, heightWindow);
-        // console.log('render..');
-        // ctx.translate(width / 2, height / 2);
-        // console.log('drawArray 0:', drawArray[0]);
         for (const arc of drawArray) {
             ctx.beginPath();
             ctx.shadowOffsetX = 0;
