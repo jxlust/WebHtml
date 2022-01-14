@@ -105,13 +105,20 @@ tl.to("#green", {duration: 1, x: 750})
 const master = gsap.timeline();
 master.add(tl1).add(tl2).add(tl3)...
 ```
+### 四、年度账单相关应用
+1. 图片过场动画
+  + boxshadow
+  + clip-path
+  + mask
+  + animation/gsap
 
-### 四、在 Canvas 或其它 上使用
+2. 碎片合成动画
+  + transfrom
+  + gsap的add,嵌套时间轴
 
+### 五、在 Canvas 或其它 上使用
 1. 操作自定义普通对象
-
 2. 常用回调（监听）函数使用
-
 - onStart
 - onUpdate
 - onComplete
@@ -121,3 +128,11 @@ master.add(tl1).add(tl2).add(tl3)...
 - stagger
 - keyframes
 - ....
+
+### 六、破解插件
+> 源码都拿到了，看我怎么破解你: 关键点插件里面找到**匹配host的函数**，屏蔽掉即可
+
+> tips: 最好不用拿收费的插件用于商业用途
+
+
+

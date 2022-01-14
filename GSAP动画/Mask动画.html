@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mask Animation</title>
     <style>
-        .box{
+        .box-container{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .box {
             position: relative;
             width: 100px;
             height: 100px;
+            margin: 50px;
         }
-        .mask-bg{
+
+
+        .mask-bg {
             position: absolute;
             border-radius: 50%;
             inset: 0;
@@ -19,24 +27,92 @@
             /* mask: conic-gradient(#000 10%,transparent 10%) no-repeat center;
             -webkit-mask: conic-gradient(#000 10%,transparent 10%) no-repeat center; */
         }
+
+        .mask-bg8 {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+
+        .mask-bg8::after {
+            content: '';
+            position: absolute;
+            inset: calc(50% - 15px);
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            border-radius: 50%;
+        }
+
+        .mask-bg8 img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .mask-bg8 .img-mask {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .mask-bg8 .show-img {
+            z-index: 2;
+            position: absolute;
+            inset: 0;
+            mask: url('../万能CSS/images/heart.svg') no-repeat center;
+            -webkit-mask: url('../万能CSS/images/heart.svg') no-repeat center;
+            animation-name: heartAni;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes heartAni {
+            0% {
+                mask-size: 0% 0%;
+                -webkit-mask-size: 0% 0%;
+            }
+
+            100% {
+                mask-size: 300% 300%;
+                -webkit-mask-size: 300% 300%;
+
+            }
+        }
     </style>
     <script src="https://unpkg.co/gsap@3/dist/gsap.min.js"></script>
 </head>
+
 <body>
-    <div class="box">
-        <div class="mask-bg" id="mask1"></div>
-    </div>
+    <div class="box-container">
+        <div class="box">
+            <div class="mask-bg" id="mask1"></div>
+        </div>
     
+        <div class="box">
+            <div class="mask-bg8">
+                <div class="img-mask"></div>
+                <img src="../Canvas和Svg/images/majors_back.jpg" alt="">
+                <img class="show-img" src="../Canvas和Svg/images/majors_back.jpg" alt="">
+            </div>
+        </div>
+    </div>
+   
+
 </body>
 <script>
-    const tween = gsap.fromTo('#mask1',{
+    const tween = gsap.fromTo('#mask1', {
         mask: 'conic-gradient(#000 0%,transparent 0%) no-repeat center',
         webkitMask: 'conic-gradient(#000 0%,transparent 0%) no-repeat center',
-    },{
+    }, {
         duration: 3,
         ease: 'power1.inOut',
         mask: 'conic-gradient(#000 100%,transparent 100%) no-repeat center',
         webkitMask: 'conic-gradient(#000 100%,transparent 100%) no-repeat center'
     })
 </script>
+
 </html>

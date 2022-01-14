@@ -15,14 +15,22 @@
         }
     </style>
     <script src="./js/gsap-latest-beta.min.js"></script>
+    <script src="./js/DrawSVGPlugin3.min.js"></script>
 
 </head>
 
 <body>
     <div class="box"></div>
 
+
+    <svg id="circ" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 100 100">
+        <circle id="myCircle" stroke="skyblue" stroke-width="10" fill="none" cx="50" cy="50" r="40" />
+    </svg>
+
+
 </body>
 <script>
+    gsap.registerPlugin(DrawSVGPlugin);
     const rdTl = gsap.timeline({
         repeat: -1,
         repeatRefresh: true,
@@ -33,6 +41,17 @@
         duration: 1,
         ease: 'none'
     })
+
+
+    gsap.fromTo(
+        "#myCircle", {
+            drawSVG: "0%"
+        }, {
+            duration: 3,
+            repeat: -1,
+            drawSVG: "100%"
+        }
+    );
 </script>
 
 </html>

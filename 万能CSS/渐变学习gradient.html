@@ -168,6 +168,31 @@
 			background-color: #999;
 			/* border: 2px solid #666; */
 		}
+
+		.text-wrap {
+			position: relative;
+		}
+
+		.textBg1 {
+			background-image: linear-gradient(90deg, #147B96, #E6D205 25%, #147B96 50%, #E6D205 75%, #147B96);
+			background-size: 200% 100%;
+			/* 文字渐变的关键属性 */
+			/* 文字填充色透明 */
+			-webkit-text-fill-color: transparent;
+			/* 背景按文字裁剪 chrome私人用品 */
+			-webkit-background-clip: text;
+			animation: text1MaskedAnimation 3s infinite linear;
+		}
+
+		@-webkit-keyframes text1MaskedAnimation {
+			0% {
+				background-position: 0 0;
+			}
+
+			100% {
+				background-position: -100% 0;
+			}
+		}
 	</style>
 </head>
 
@@ -194,6 +219,14 @@
 	<div class="wall-wrap">
 		<div class="wall"></div>
 		<div class="wall2"></div>
+	</div>
+
+
+	<div class="text-wrap">
+		<div class="textBg1">
+			<h2>我是一串神奇的文字</h2>
+		</div>
+
 	</div>
 
 	<div class="list" id="list">
