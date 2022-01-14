@@ -29,6 +29,7 @@
     <div class="number" id="numberId">0</div>
 
 </body>
+
 <script>
     /** @type {HTMLCanvasElement} */
     const canvasEl = document.getElementById('myCanvas');
@@ -77,7 +78,7 @@
     }
     //gsap animation
     const timeline = gsap.timeline({
-        onUpdated: () => {
+        onUpdate: () => {
             console.log('total updated..');
         },
         onStart: () => {
@@ -109,7 +110,7 @@
                 console.log('item start');
                 // renderCanvas();
             },
-            onUpdated: () => {
+            onUpdate: () => {
                 console.log('item updated');
                 console.log(1, draw);
             },

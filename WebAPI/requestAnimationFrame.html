@@ -131,10 +131,14 @@
         console.log('value:', value);
         numEl.innerText = value | 0;
     }
-
+    let startTime = null;
     function numberAnimation(timestamp) {
         console.log('nnnnn:', timestamp);
         console.log('count:', count++);
+        if(!startTime){
+            startTime = timestamp;
+        }
+        let diffTime = timestamp - startTime;
         //分区间
         //初始定 按刷新频率来更新数据，假定刷新频率为 1000ms 60次
         // HZ = 1000ms / 60
@@ -147,7 +151,7 @@
 
         //实际要实现的效果递增的值不是线性的，会比较呆板，可能要实现曲线递增效果
 
-        if (timestamp >= timelong || startNum >= endNum) {
+        if (diffTime >= timelong || startNum >= endNum) {
             callback(endNum)
         } else {
             startNum += avgAdd; //线性递增
