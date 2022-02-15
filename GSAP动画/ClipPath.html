@@ -1,145 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ClipPath</title>
     <script src="./js/gsap-latest-beta.min.js"></script>
     <style>
-        .content {
-            display: flex;
-            flex-wrap: wrap;
-        }
+      .content {
+        display: flex;
+        flex-wrap: wrap;
+      }
 
-        .box {
-            width: 300px;
-            height: 300px;
-            position: relative;
-            /* outline: 2px solid #999; */
-            margin: 10px;
-            /* box-sizing: content-box; */
-        }
+      .box {
+        width: 300px;
+        height: 300px;
+        position: relative;
+        /* outline: 2px solid #999; */
+        margin: 10px;
+        /* box-sizing: content-box; */
+      }
 
-        .box img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            outline: none;
-            border: none;
-            /* clip-path: inset(50% round 10% 50%); */
-            /* clip-path: circle(100px at 50% 80%); */
-        }
+      .box img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        outline: none;
+        border: none;
+        /* clip-path: inset(50% round 10% 50%); */
+        /* clip-path: circle(100px at 50% 80%); */
+      }
 
-        .img-mask {
-            z-index: 2;
-            position: absolute;
-            /* top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0; */
-            inset: 0;
-            background-color: rgba(0, 0, 0, .6);
-        }
+      .img-mask {
+        z-index: 2;
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+      }
 
-        .img2 {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 3;
-        }
-        .images2{
-            width: 100%;
-            height: 100%;
-           
-        }
+      .img2 {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 3;
+      }
+
+      .images2 {
+        width: 100%;
+        height: 100%;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div class="content">
-        <div class="box">
-            <div class="img-mask" id="imgMask"></div>
-            <img class="img img1" src="../Web技巧和布局/images/logo.png" alt="">
-            <div class="img img2">
-                <img class="images2" src="../Web技巧和布局/images/fruit7.jpeg" alt="">
-            </div>
+      <div class="box">
+        <div class="img-mask" id="imgMask"></div>
+        <img class="img img1" src="../Web技巧和布局/images/logo.png" alt="" />
+        <div class="img img2">
+          <img
+            class="images2"
+            src="../Web技巧和布局/images/fruit7.jpeg"
+            alt=""
+          />
         </div>
+      </div>
 
-        <div class="box">
-            <div class="img-mask"></div>
-            <!-- <img class="img" src="../Web技巧和布局/images/fruit1.jpeg" alt="">
+      <div class="box">
+        <div class="img-mask"></div>
+        <!-- <img class="img" src="../Web技巧和布局/images/fruit1.jpeg" alt="">
             <img class="img" src="../Web技巧和布局/images/fruit2.jpeg" alt=""> -->
-            <img class="img" id="img8" src="../Web技巧和布局/images/fruit8.jpeg" alt="">
-        </div>
+        <img
+          class="img"
+          id="img8"
+          src="../Web技巧和布局/images/fruit8.jpeg"
+          alt=""
+        />
+      </div>
     </div>
-</body>
-<script>
+  </body>
+  <script>
+    let obj = {};
+    let b = obj?.a ?? "zz";
+
     const timeline = gsap.timeline({
-        repeat: -1,
-        repeatDelay: 1,
-        repeatRefresh: true,
-        onRepeat: () => {
-            randomIndex =  (randomIndex + 1) % clipPathArray.length;
-            console.log('repeat..', randomIndex);
-        },
+      repeat: -1,
+      repeatDelay: 1,
+      repeatRefresh: true,
+      onRepeat: () => {
+        randomIndex = (randomIndex + 1) % clipPathArray.length;
+        console.log("repeat..", randomIndex);
+      },
     });
-    const imgs = document.querySelectorAll('.img');
+    const imgs = document.querySelectorAll(".img");
     const circleHalf = ~~Math.sqrt(Math.pow(300, 2) * 2) / 2 + 1;
-    let clipPathArray = [{
-        start: 'circle(0px at 50% 50%)',
-        end: `circle(${circleHalf}px at 50% 50%)`
-    }, {
-        start: 'inset(50% round 10% 50%)',
-        end: 'inset(0% round 0%)'
-    }, {
+    let clipPathArray = [
+      {
+        start: "circle(0px at 50% 50%)",
+        end: `circle(${circleHalf}px at 50% 50%)`,
+      },
+      {
+        start: "inset(50% round 10% 50%)",
+        end: "inset(0% round 0%)",
+      },
+      {
         // 菱形
-        start: 'polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)',
-        end: 'polygon(50% -50%, 150% 50%, 50% 150%, -50% 50%)'
-    },{
+        start: "polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)",
+        end: "polygon(50% -50%, 150% 50%, 50% 150%, -50% 50%)",
+      },
+      {
         // 十字星
-        start: 'polygon(50% 20%, 50% 50%, 20% 50%, 50% 50%, 50% 80%, 50% 50%, 80% 50%, 50% 50%)',
-        end: 'polygon(50% 0%, 0% 0%, 0% 50%, 0% 100%, 50% 100%, 100% 100%, 100% 50%, 100% 0%)'
-    }]
+        start:
+          "polygon(50% 20%, 50% 50%, 20% 50%, 50% 50%, 50% 80%, 50% 50%, 80% 50%, 50% 50%)",
+        end: "polygon(50% 0%, 0% 0%, 0% 50%, 0% 100%, 50% 100%, 100% 100%, 100% 50%, 100% 0%)",
+      },
+    ];
     // let randomIndex = gsap.utils.random(0, clipPathArray.length) | 0;
     let randomIndex = 0;
-    timeline.fromTo('.img2', {
-        clipPath: () => {
-            return clipPathArray[randomIndex].start
+    timeline
+      .fromTo(
+        ".img2",
+        {
+          clipPath: () => {
+            return clipPathArray[randomIndex].start;
+          },
+          opacity: 0,
         },
-         opacity: 0,
-    }, {
-        opacity: 1,
-        duration: .3,
-        ease: 'none',
-    }).to('.img2', {
-        duration: 1.5,
-        // scale: 1,
-        ease: 'none',
-        clipPath: () => {
-            return clipPathArray[randomIndex].end
+        {
+          opacity: 1,
+          duration: 0.3,
+          ease: "none",
         }
-    }, '<').fromTo('.images2',{
-        scale: 0.8,
-    },{
-        scale: 1,
-        duration: 1,
-    },'<')
-</script>
+      )
+      .to(
+        ".img2",
+        {
+          duration: 1.5,
+          // scale: 1,
+          ease: "none",
+          clipPath: () => {
+            return clipPathArray[randomIndex].end;
+          },
+        },
+        "<"
+      )
+      .fromTo(
+        ".images2",
+        {
+          scale: 0.8,
+        },
+        {
+          scale: 1,
+          duration: 1,
+        },
+        "<"
+      );
+  </script>
 
-<script>
+  <script>
     const img8Timeline = gsap.timeline({
-        repeat: -1
+      repeat: -1,
     });
-    img8Timeline.fromTo('#img8',{
-
-    },{
-        
-    })
-</script>
-
+    img8Timeline.fromTo("#img8", {}, {});
+  </script>
 </html>

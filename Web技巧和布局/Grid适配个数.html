@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grid适配个数</title>
+    <style>
+      .box-container {
+        /* width: 50%; */
+        margin-top: 50px;
+      }
+      .box {
+        display: grid;
+        grid-gap: 10px;
+        /* grid-template-columns: repeat(auto-fill, 100px); */
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        /* grid-template-rows: repeat(200px); */
+        /* grid-template-rows: repeat(auto-fill,200px); */
+      }
+      .box-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: skyblue;
+        height: 100px;
+        color: #fff;
+        font-size: 26px;
+      }
+      .box2 {
+        display: grid;
+        grid-template-columns: repeat(3, 100px);
+        grid-template-rows: repeat(3, 100px);
+        grid-gap: 10px;
+        grid-auto-rows: 50px;
+      }
+      .box2 .box-item2:nth-child(7) {
+        /* grid-row-start: 3;
+        grid-column-start: 2; */
+        grid-row-start: 2;
+        grid-row-end: 4;
+        grid-column-end: 3;
+        grid-column-start: 1;
+      }
+      .box-item2 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: skyblue;
+        color: #fff;
+        font-size: 26px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box-container">
+      <div class="box">
+        <div class="box-item">1</div>
+        <div class="box-item">2</div>
+        <div class="box-item">3</div>
+        <div class="box-item">4</div>
+        <div class="box-item">5</div>
+        <div class="box-item">6</div>
+        <div class="box-item">7</div>
+        <div class="box-item">8</div>
+        <div class="box-item">9</div>
+      </div>
+    </div>
+
+    <div class="box-container">
+      <div class="box2">
+        <div class="box-item2">1</div>
+        <div class="box-item2">2</div>
+        <div class="box-item2">3</div>
+        <div class="box-item2">4</div>
+        <div class="box-item2">5</div>
+        <div class="box-item2">6</div>
+        <div class="box-item2">7</div>
+        <div class="box-item2">8</div>
+        <div class="box-item2">9</div>
+        <div class="box-item2">10</div>
+      </div>
+    </div>
+  </body>
+</html>
