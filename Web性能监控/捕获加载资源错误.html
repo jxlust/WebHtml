@@ -12,6 +12,7 @@
         console.log("callback data:", data);
         collectResourceErrorLists.push(data);
       }
+      
       window.onload = function (e) {
           console.log('onload end:',collectResourceErrorLists);
           document.body.innerHTML = (collectResourceErrorLists.map(item => JSON.stringify(item)).join('<br>'))
