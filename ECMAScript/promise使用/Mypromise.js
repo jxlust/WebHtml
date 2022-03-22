@@ -79,8 +79,8 @@ class MyPromise {
         this._status = FULFILLED;
 
         //执行队列里的函数
-        // let cb = this._fulfilledQueues.shift();
-        // cb(data)
+        let cb = this._fulfilledQueues.shift();
+        cb(data)
 
     }
     //私有方法

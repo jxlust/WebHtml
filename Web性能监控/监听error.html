@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      var isFrist = true;
+      window.addEventListener(
+        "error",
+        function (e, t) {
+          console.log("window error捕获:", e);
+          let targetObj = event.target || event.srcElement;
+        //   console.log(111,targetObj);
+          if (targetObj instanceof HTMLScriptElement) {
+            //js 加载出问题了
+            if (isFrist) {
+              isFrist = false;
+              window.onload = function () {
+                let divDom = document.createElement("div");
+                divDom.style.cssText = 'color: #999;text-align: center;font-size:16px;margin:30px auto;'
+                divDom.innerText = "版本有更新，请点击左上角刷新按钮刷新页面";
+                window.document.body.appendChild(divDom);
+              };
+            }
+          }
+          return true;
+        },
+        true
+      );
+      // document.onreadystatechange = function (e) {
+      //     console.log('eee:',e)
+      //     console.log('xxxx:',document.readyState);
+      // }
+
+      // window.onerror = function (message,source,lineno,colno,error) {
+      //     console.log('message:',message);
+      //     console.log('source:',source);
+      //     console.log('error:',error);
+      // }
+    </script>
+    <script src="./js/xst.js"></script>
+    <script src="./js/xxst.js"></script>
+
+  </head>
+  <body></body>
+</html>

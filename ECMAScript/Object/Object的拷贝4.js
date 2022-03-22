@@ -12,11 +12,12 @@ const deepCopy = function (obj, map = new WeakMap()) {
   if (map.has(obj)) return map.get(obj);
 
   //创建拷贝输出的对象
+  let result = undefined;
   try {
-    // Try to run constructor (without arguments, as we don't know them)
-    var result = new obj.constructor();
+    // 构造函数创建
+     result = new obj.constructor();
   } catch (e) {
-    // Constructor failed, create object without running the constructor
+    // failed, 通过获取原型对象创建
     result = Object.create(Object.getPrototypeOf(obj))
   }
 
@@ -43,10 +44,6 @@ const deepCopy = function (obj, map = new WeakMap()) {
   })
   map.set(obj, result)
   return result;
-  //方法2：
-  // return Object.assign(result, ...Object.keys(obj).map(key => ({
-  //   [key]: deepCopy(obj[key])
-  // })))
 }
 let set = new Set([1, 2, 4])
 let map = new Map([

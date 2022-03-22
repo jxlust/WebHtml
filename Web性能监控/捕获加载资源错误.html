@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      var collectResourceErrorLists = [];
+
+      function funcCallBack(data) {
+        console.log("callback data:", data);
+        collectResourceErrorLists.push(data);
+      }
+      window.onload = function (e) {
+          console.log('onload end:',collectResourceErrorLists);
+          document.body.innerHTML = (collectResourceErrorLists.map(item => JSON.stringify(item)).join('<br>'))
+      }
+      window.addEventListener &&
+        window.addEventListener(
+          "error",
+          function (event) {
+            if (!event.message) {
+              console.log("event catch:", event);
+              var target = event.target || event.srcElement;
+              var targetHtml = target && target.outerHTML;
+              targetHtml &&
+                targetHtml.length > 200 &&
+                (targetHtml = targetHtml.slice(0, 200));
+              console.log("target:", target, targetHtml);
+              var resourceErrorObj = {
+                type: "resourceError",
+                target: {
+                  outerHTML: targetHtml,
+                  src: target && target.src,
+                  tagName: target && target.tagName,
+                  id: target && target.id,
+                  className: target && target.className,
+                  name: target && target.name,
+                  type: target && target.type,
+                },
+              };
+              console.log("resourceErrorObj:", resourceErrorObj);
+              if (resourceErrorObj.target.src && window.XMLHttpRequest) {
+                var request = new XMLHttpRequest();
+                console.log("request:", request);
+                request.Fundebug = true;
+                request.open("OPTIONS", resourceErrorObj.target.src);
+                request.send();
+                request.onload = function (e) {
+                  if (200 !== e.target.status) {
+                    resourceErrorObj.target.status = e.target.status;
+                    resourceErrorObj.target.statusText = e.target.statusText;
+                    funcCallBack(resourceErrorObj);
+                  }
+                };
+              }
+            }
+          },
+          true
+        );
+    </script>
+  </head>
+  <body></body>
+  <script src="./js/xxxx.js"></script>
+  <script src="./js/xx2xx.js"></script>
+</html>
