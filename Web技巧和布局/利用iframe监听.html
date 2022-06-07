@@ -1,0 +1,80 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: jxlust
+ * @Date: 2022-06-07 15:51:33
+ * @LastEditors: jxlust
+ * @LastEditTime: 2022-06-07 16:05:00
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>利用iframe监听内容变化</title>
+    <style>
+        body,
+        html {
+            padding: 0;
+            margin: 0;
+        }
+
+        .main {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .main-wrapper {
+            position: relative;
+        }
+
+        .main-content {}
+
+        .main-wrapper iframe {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+
+        <div class="main-wrapper">
+
+            <div class="main-content" id="mainContent">
+                test data...
+            </div>
+            <iframe title="domChangeIframe" id="myHackIframe" src="" frameborder="0"></iframe>
+        </div>
+
+        <div class="button" id="button">change</div>
+    </div>
+
+</body>
+
+<script>
+    // 这里用iframe resize来监听 兼容性较好
+    // 其他方案：intersectionObserver mutationObserver
+    const myHackIframeDom = document.getElementById('myHackIframe');
+    myHackIframeDom.contentWindow.onresize = (e) => {
+        console.log('dom change:', e)
+    }
+    const buttonEl = document.getElementById('button');
+    const mainContentEl = document.getElementById('mainContent')
+    buttonEl.addEventListener('click', () => {
+        let str = '';
+        for (let i = 0; i < 10; i++) {
+            str += '测试数据，我是一段测试数据，我是一段测试数据，我是一段测试数据，我是一段测试数据，';
+        }
+        mainContentEl.innerText = str;
+    })
+
+</script>
+
+</html>
