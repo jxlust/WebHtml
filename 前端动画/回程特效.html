@@ -1,0 +1,277 @@
+<!--
+ * @Descripttion: 回程特效动画
+ * @version: 1.0
+ * @Author: jxlust
+ * @Date: 2022-06-07 10:56:29
+ * @LastEditors: jxlust
+ * @LastEditTime: 2022-06-07 11:57:07
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>回程特效</title>
+    <style>
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background: url(./assets/bg/back.jpeg) center;
+            background-size: cover;
+            transform-style: preserve-3d;
+        }
+
+        .game-wrap {
+            position: fixed;
+            width: 700px;
+            height: 800px;
+            top: 50%;
+            left: 50%;
+            margin-top: -423px;
+            margin-left: -350px;
+            /* background: rgb(128, 236, 255); */
+            transform-style: preserve-3d;
+            transform: rotateX(-20deg);
+        }
+
+        .flower-item {
+            position: absolute;
+            width: 15px;
+            height: 20px;
+            background-image: radial-gradient(#fdedff 40%, #ffb9ff);
+            /* background-image: linear-gradient(to bottom, #fff 0%, #ff8aff 100%); */
+            box-shadow: 0 5px 10px 2px rgba(255, 255, 255, .8);
+            border-radius: 80% 80% 100% 100%;
+            transform-style: preserve-3d;
+            transform: rotateZ(30deg);
+            animation: rotate-flower 5s linear infinite;
+        }
+
+        @keyframes rotate-flower {
+            from {
+                transform: rotateZ(30deg) rotateY(0deg);
+            }
+
+            to {
+                transform: rotateZ(30deg) rotateY(360deg);
+            }
+        }
+
+        .light-wrap {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            left: 50%;
+            bottom: -400px;
+            margin-left: -400px;
+            transform-style: preserve-3d;
+            transform: rotateX(0deg) rotateZ(30deg);
+            margin-bottom: 375px;
+        }
+
+        .light-wrap.one {
+            transform: rotateX(0deg) rotateZ(150deg);
+        }
+
+        .light-item {
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            box-sizing: border-box;
+            border: 10px solid #ffb9ff;
+            /* box-shadow: 0 0 3px 1px rgb(255 246 82) inset; */
+            mask-image: linear-gradient(to top, transparent 25%, #000 75%);
+            -webkit-mask-image: linear-gradient(to top, transparent 25%, #000 75%);
+            clip-path: polygon(0% 25%, 50% 50%, 0% 75%);
+            -webkit-clip-path: polygon(0% 25%, 50% 50%, 0% 75%);
+        }
+
+        .light-item.one {
+            animation: rotate-light 3s linear infinite;
+        }
+
+        .light-item.two {
+            /* margin-bottom: 450px; */
+            animation: rotate-light 3s linear infinite;
+        }
+
+        @keyframes rotate-light {
+            from {
+                transform: rotateY(360deg) rotateX(90deg);
+            }
+
+            to {
+                transform: rotateY(0deg) rotateX(90deg);
+            }
+        }
+
+        /* 圆形底纹 */
+        #bottom-wrap {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            left: 50%;
+            margin-left: -300px;
+            bottom: -300px;
+            border-radius: 50%;
+            transform-style: preserve-3d;
+            box-sizing: border-box;
+            transform: rotateX(90deg);
+            border: 5px solid #ffb9ff;
+            box-shadow: 0 0 50px 2px rgb(255 155 238 / 80%) inset;
+        }
+
+        .bottom-item {
+            border: 5px solid #ffb9ff;
+            box-shadow: 0 0 50px 2px rgb(255 155 238 / 80%) inset;
+            width: 75%;
+            height: 75%;
+            box-sizing: border-box;
+            border-radius: 50%;
+            left: 50%;
+            top: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+        }
+
+        .bottom-content {
+            position: absolute;
+            width: 100%;
+            height: 1000px;
+            opacity: .7;
+            background-image: linear-gradient(to right, transparent, rgb(255 151 247 / 60%), rgb(253 192 255), rgb(255 151 247 / 60%) 80%, transparent);
+            mask-image: linear-gradient(to bottom, transparent -10%, #fff 20%, #fff 80%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent -10%, #fff 20%, #fff 80%, transparent);
+            bottom: 0;
+        }
+
+        .user {
+            display: block;
+            position: absolute;
+            bottom: 0;
+            width: 700px;
+            transform-style: preserve-3d;
+            transform: translate(-50%);
+            left: 50%;
+        }
+
+        .bottom-item.copy {
+            animation: moveTop .5s linear infinite;
+        }
+
+        @keyframes moveTop {
+            from {
+                opacity: 1;
+                transform: translate(-50%, -50%) translateZ(0);
+            }
+
+            to {
+                opacity: 0;
+                transform: translate(-50%, -50%) translateZ(1200px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="game-wrap">
+
+        <!-- 旋转光圈 -->
+        <div class="light-wrap one">
+            <div class="light-item one"></div>
+        </div>
+        <div class="light-wrap two">
+            <div class="light-item two"></div>
+        </div>
+
+        <div class="bottom-content">
+        </div>
+        <img class="user" src="./assets/bg/user.png" alt="">
+
+        <!-- 回城底部圆形波 -->
+        <div id="bottom-wrap">
+            <div class="bottom-item">
+            </div>
+            <div class="bottom-item copy"></div>
+        </div>
+    </div>
+
+
+
+</body>
+
+<script>
+    // 花朵飘落
+    let lastflowerTime = 0, // 上次生成花瓣的时间
+        flowerFrequency = 2, // 生成花瓣的频率
+        screenWidth = document.documentElement.clientWidth, // 屏幕宽度
+        screenHeight = document.documentElement.clientHeight, // 屏幕高度
+        flowerAngle = 60, // 花瓣偏移角度
+        flowerSpeed = 3, // 花瓣移动速度
+        createflowerInterval = null // 花瓣生成的定时器
+    function flowerStart(timestamp) {
+        // 花瓣生成的频率
+        // console.log(1,timestamp)
+        let now = new Date().getTime()
+        if (now - lastflowerTime > (1000 / flowerFrequency)) {
+            // 创建花瓣
+            let flowerItem = document.createElement('div')
+            flowerItem.className = 'flower-item'
+            flowerItem.style.top = -flowerItem.offsetWidth + 'px'
+            // 在给花瓣随机分配横向坐标时，范围应该把花瓣的偏移量也算进去，否则屏幕右下角会出现空白
+            let _left = (screenWidth + Math.tan(flowerAngle * Math.PI / 180) * screenHeight) * Math.random()
+            flowerItem.style.left = _left + 'px'
+            // 增加随机透明度
+            // flowerItem.style.opacity = Math.random()
+            document.body.appendChild(flowerItem)
+
+            // 给花瓣一个随机的放大系数，之后运动速度要和这个系数相乘
+            flowerItem.flowerScale = Math.random() * 0.5 + 0.5
+            flowerItem.style.width = flowerItem.offsetWidth * flowerItem.flowerScale + 'px'
+            flowerItem.style.height = flowerItem.offsetHeight * flowerItem.flowerScale + 'px'
+
+            // 花瓣移动
+            let flowerMove = () => {
+                // 此处的花瓣移动速度要和当前花瓣的移动系数相乘
+                let moveY = flowerSpeed * flowerItem.flowerScale
+                flowerItem.style.top = flowerItem.offsetTop + moveY + 'px'
+
+                // 根据设置的花瓣偏移角度和纵向移动距离计算花瓣的横向移动距离
+                let moveX = Math.tan(flowerAngle * Math.PI / 180) * moveY
+                flowerItem.style.left = flowerItem.offsetLeft - moveX + 'px'
+
+                // 如果花瓣偏移角度大于0，则判断花瓣是否超出左侧屏幕
+                if (flowerAngle > 0) {
+                    if (flowerItem.offsetLeft < (-flowerItem.offsetWidth)) {
+                        document.body.removeChild(flowerItem)
+                        return
+                    }
+                }
+
+                // 如果花瓣距离屏幕顶部距离大于等于屏幕高度，则移除此花瓣
+                if (flowerItem.offsetTop > screenHeight) {
+                    document.body.removeChild(flowerItem)
+                } else {
+                    requestAnimationFrame(flowerMove)
+                }
+            }
+
+            flowerMove()
+            lastflowerTime = now
+        }
+        createflowerInterval = requestAnimationFrame(flowerStart)
+    }
+    flowerStart()
+</script>
+
+</html>
