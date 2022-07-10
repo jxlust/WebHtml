@@ -1,0 +1,29 @@
+{
+  "name": "webassembly",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "binaryen": "^108.0.0-nightly.20220528",
+    "long": "^5.2.0"
+  },
+  "scripts": {
+    "test": "node tests",
+    "asbuild:debug": "asc assembly/index.ts --target debug",
+    "asbuild:release": "asc assembly/index.ts --target release",
+    "asbuild": "npm run asbuild:debug && npm run asbuild:release",
+    "start": "npx serve ."
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "assemblyscript": "^0.20.13"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./build/release.js",
+      "types": "./build/release.d.ts"
+    }
+  }
+}
