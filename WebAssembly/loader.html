@@ -10,9 +10,14 @@
   <body>
     <script>
       let loader = new WasmLoader();
-      loader.wasm("./build/release.wasm").then((module) => {
-        console.log("module:", module);
-      });
+      async function startLoader() {
+        const { testAbort } = await loader.wasm("./build/release.wasm")//module
+        testAbort(100)
+      }
+    
+      startLoader();
+
+      // testAbort(100)
     </script>
   </body>
 </html>
