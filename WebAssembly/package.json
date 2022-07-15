@@ -17,7 +17,8 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "assemblyscript": "^0.20.13"
+    "assemblyscript": "^0.20.13",
+    "benchmark": "^2.1.4"
   },
   "type": "module",
   "exports": {
