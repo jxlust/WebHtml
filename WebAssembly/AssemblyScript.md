@@ -114,8 +114,8 @@ npm install --save-dev benchmark
 
 ```js
 // benchmark.js
-const Benchmark = require("benchmark");
-const assemblyFunc = require("./index").xxx;
+import Benchmark from 'benchmark'
+import { assemblyFunc } from 'xx'
 function jsFunc(x) {}
 const suite = new Benchmark.Suite();
 const startNumber = 2;
