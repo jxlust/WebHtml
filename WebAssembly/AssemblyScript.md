@@ -5,6 +5,7 @@
 ### 1. WASM 是什么
 
 WebAssembly 是一种底层类汇编语言，能在 Web 平台上以趋近原生应用的速度运行。C/C++/Rust 等语言将 Wasm 作为编译目标语言，可以将已有的代码移植到 Web 平台中运行，以提升代码复用度。
+>**High-Level  ->  Assembly -> Binary**
 
 官网上所说的特性：
 ![特性](./img/img3.jpg)
