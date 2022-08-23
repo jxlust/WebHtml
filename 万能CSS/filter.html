@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        <style>img {
+        img {
             width: 33%;
             height: auto;
             float: left;
@@ -62,6 +62,23 @@
             -webkit-filter: drop-shadow(8px 8px 10px green);
             filter: drop-shadow(8px 8px 10px green);
         }
+
+        .img-wrap {
+            height: 100px;
+            width: 100px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .img-wrap img {
+            height: 100px;
+            width: 100px;
+        }
+
+        .img-wrap:hover img {
+            filter: drop-shadow(#ff0000 100px 0);
+            transform: translateX(-100px);
+        }
     </style>
     </style>
 </head>
@@ -82,6 +99,10 @@
     <img class="shadow" src="../Web技巧和布局/images/fruit3.jpeg" alt="Pineapple" width="300" height="300">
 
 
+
+    <div class="img-wrap">
+        <img src="../Web技巧和布局/images/imgmask.png" alt="">
+    </div>
 </body>
 
 </html>
