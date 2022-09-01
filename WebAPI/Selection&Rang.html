@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .container {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            border: 1px solid skyblue;
+        }
+
+        .container[contenteditable="true"]:empty::before {
+            content: attr(placeholder);
+            display: block;
+            color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+
+    <p id="pRangeTest">Test: <i>abc</i> and <span>def</span></p>
+
+    <p id="pRangeTest2">Test: <i>abc</i> and <span>def</span></p>
+
+    <div class="container" id="myEditor" contenteditable="true" data-editable="true" placeholder="Enter"></div>
+
+
+    <script>
+        //选择Selection  范围Range
+        const myEditorDom = document.getElementById('myEditor');
+
+        myEditorDom.addEventListener('input', (e) => {
+            // console.log(e);
+            console.log(getSelection().focusNode);
+            console.log(getSelection().focusOffset);
+        })
+    </script>
+
+    <script>
+        let range = new Range();
+        let pDom = document.getElementById('pRangeTest');
+        range.setStart(pDom, 0);
+        range.setEnd(pDom, 2);
+        console.log('range:', range);// Test:<i>abc</i> 
+        console.log('range text:', range.toString());// Test: abc
+        // document.getSelection().addRange(range);
+    </script>
+
+
+    <script>
+        let range2 = new Range();
+        let pDom2 = document.getElementById('pRangeTest2');
+        range2.setStart(pDom2.firstChild, 2);
+        range2.setEnd(pDom2.querySelector('span').firstChild, 1);
+
+        console.log('range text:', range2.toString());//st: abc and d
+        document.getSelection().addRange(range2);
+
+        /**
+         * startContainer，startOffset —— 起始节点和偏移量， 在上例中：分别是 < p > 中的第一个文本节点和 2。
+         * 
+         * endContainer，endOffset —— 结束节点和偏移量，在上例中：分别是 < span > 中的第一个文本节点和 1。
+         * 
+         * collapsed —— 布尔值，如果范围在同一点上开始和结束（所以范围内没有内容）则为 true，在上例中：false
+         * 
+         * commonAncestorContainer —— 在范围内的所有节点中最近的共同祖先节点，在上例中：<p>
+         * 
+         **/
+    </script>
+
+    <script>
+// 根据 Selection API 规范[1] 一个选择可以包括零个或多个范围。
+// 不过实际上，只有 Firefox 允许使用 Ctrl+click (Mac 上用 Cmd+click) 在文档中选择多个范围。
+    </script>
+
+</body>
+
+</html>
