@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loading</title>
+
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+        }
+
+        .parent {
+            display: grid;
+            gap: 20px;
+            padding: 150px;
+        }
+
+        @keyframes bgSize {
+            100% {
+                background-size: 100%;
+            }
+        }
+
+        /* 平滑加载 */
+        .progress-1 {
+            width: 100%;
+            height: 20px;
+            /* background-image: linear-gradient(90deg, #000 0, red 100%);
+        background-repeat: no-repeat;
+        background-size: 0;
+        background-position: 0; */
+            background: linear-gradient(90deg, #000 0, red 100%) 0/0 no-repeat;
+            animation: bgSize 5s infinite linear;
+        }
+
+        @keyframes bgSizeStep {
+            100% {
+                background-size: 100%;
+            }
+        }
+
+        @keyframes bgInset {
+            100% {
+                inset: 0;
+            }
+        }
+
+        /* 按步加载 */
+        .progress-2 {
+            width: 200px;
+            height: 20px;
+            border-radius: 20px;
+            background: linear-gradient(90deg, orange 0 0) 0/0 no-repeat skyblue;
+            animation: bgSizeStep 2s infinite steps(10, start) both;
+        }
+
+        /* 条纹加载 */
+        .progress-3 {
+            width: 200px;
+            height: 20px;
+            border-radius: 20px;
+            background: repeating-linear-gradient(135deg, #f03355 0 10px, #ffa516 0 20px) 0/0 no-repeat,
+                repeating-linear-gradient(135deg, #ddd 0 10px, #eee 0 20px) 0/100% no-repeat;
+            animation: bgSize 5s infinite linear;
+        }
+
+        /* 虚线加载 */
+        .progress-4 {
+            width: 300px;
+            height: 20px;
+            /* mask: linear-gradient(90deg, #000 70%, #000 0) 0/20%; */
+            -webkit-mask: linear-gradient(90deg, #000 67%, transparent 0) 0/10%;
+            background: linear-gradient(90deg, #000 0 100%) 0/0 no-repeat;
+            animation: bgSize 5s infinite steps(10, start);
+            /* 说明 */
+            /* 1. mask 遮罩background-size设置为20% 说明分割了5份 */
+            /* 2. 每一份长度可以计算得出 width / 5 */
+            /* 3. 在设置遮罩的image 要是正方形变成得20px，20px / 每一份长度可以计算出图片遮罩的百分比为50% */
+            /* 4. steps需要根分数对应上 */
+        }
+
+        /* 电池加载 */
+        .progress-5 {
+            width: 200px;
+            height: 20px;
+        }
+
+        /* 内部加载 */
+        .progress-6 {
+            width: 200px;
+            height: 22px;
+            border-radius: 20px;
+            color: skyblue;
+            border: 2px solid;
+            position: relative;
+        }
+
+        .progress-6::before {
+            content: '';
+            position: absolute;
+            margin: 1px;
+            inset: 0 100% 0 0;
+            border-radius: inherit;
+            background-color: #f03355;
+            animation: bgInset 5s infinite ease-in-out;
+        }
+
+        /* 信号加载 */
+        @keyframes sizeTwo {
+            100% {
+                background-size: 100% 100%;
+            }
+        }
+
+        .progress-7 {
+            width: 200px;
+            height: 100px;
+            border-radius: 200px 200px 0 0;
+            -webkit-mask: repeating-radial-gradient(farthest-side at bottom,
+                    transparent 0,
+                    #000 1px 12%,
+                    transparent calc(12% + 1px) 20%);
+            background: radial-gradient(farthest-side at bottom, #514b82 0 95%, transparent 0) bottom/0% 0% no-repeat;
+            animation: sizeTwo 3s infinite steps(5, start);
+        }
+
+        .progress-8 {
+            width: auto;
+            height: 20px;
+            display: flex;
+            column-gap: 3px;
+            align-items: self-end;
+        }
+
+        @keyframes colAni {
+            100% {
+                /* background-color: red; */
+                background-size: 100% 100%;
+            }
+        }
+
+        .signal-column:nth-child(1) {
+            width: 6px;
+            height: 10px;
+            /* background-color: #999; */
+            background: linear-gradient(180deg, red 0 100%) 0 100%/100% 0 no-repeat #999;
+            border-radius: 2px;
+            animation: colAni 0.3s linear both;
+        }
+
+        .signal-column:nth-child(2) {
+            width: 6px;
+            height: 12px;
+            /* background-color: #999; */
+            background: linear-gradient(180deg, red 0 100%) 0 100%/100% 0 no-repeat #999;
+            border-radius: 2px;
+            animation: colAni 0.3s linear 1s both;
+        }
+
+        .signal-column:nth-child(3) {
+            width: 6px;
+            height: 16px;
+            /* background-color: #999; */
+            background: linear-gradient(180deg, red 0 100%) 0 100%/100% 0 no-repeat #999;
+            border-radius: 2px;
+            animation: colAni 0.3s linear 2s both;
+        }
+
+        .signal-column:nth-child(4) {
+            width: 6px;
+            height: 20px;
+            /* background-color: #999; */
+            background: linear-gradient(180deg, red 0 100%) 0 100%/100% 0 no-repeat #999;
+            border-radius: 2px;
+            animation: colAni 0.3s linear 3s both;
+        }
+
+        @keyframes colunmAni {
+            100% {
+                background-size: 100% 100%;
+            }
+        }
+
+        .column-test {
+            width: 6px;
+            height: 100px;
+            background: linear-gradient(180deg, red 0 100%) 0 100%/100% 0 no-repeat;
+            animation: colunmAni 1s linear both;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="parent">
+        <div class="box">
+            <div class="column-test"></div>
+        </div>
+        <div class="box">
+            <div class="progress-1"></div>
+        </div>
+
+        <div class="box">
+            <div class="progress-2"></div>
+        </div>
+
+        <div class="box">
+            <div class="progress-3"></div>
+        </div>
+
+        <div class="box">
+            <div class="progress-4"></div>
+        </div>
+
+        <div class="box">
+            <div class="progress-5"></div>
+        </div>
+
+        <div class="box">
+            <div class="progress-6"></div>
+        </div>
+
+        <div class="box">
+            <div class="progress-7"></div>
+        </div>
+
+        <div class="box">
+            <div class="progress-8">
+                <span class="signal-column"></span>
+                <span class="signal-column"></span>
+                <span class="signal-column"></span>
+                <span class="signal-column"></span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
