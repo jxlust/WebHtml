@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+        .green {
+            background-color: rgb(170, 243, 170);
+        }
+
+        .blue {
+            background-color: skyblue;
+        }
+
+        .red {
+            background-color: rgb(219, 155, 155);
+        }
+
+        .gold {
+            background-color: gold;
+        }
+
+        .box {
+            position: relative;
+            width: 100%;
+            /* height: 600px; */
+        }
+
+        .box-item {
+            position: absolute;
+        }
+
+        .show-img {
+            max-width: 100%;
+        }
+
+        #waterContainer {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            overflow: auto;
+            /* padding-right: 50px; */
+        }
+
+        /* 设置滚动条的样式 */
+        #waterContainer::-webkit-scrollbar {
+            /* display: none; */
+            width: 0px;
+            height: 0px;
+        }
+
+        /* 滚动槽 */
+    </style>
+</head>
+
+<body>
+    <div class="water" id="waterContainer">
+        <div class="box water-wall" id="boxId">
+            <!-- <div class="box-item red"></div> -->
+        </div>
+    </div>
+</body>
+
+<script>
+    //   代码思路：
+    // + item宽度是固定的，高度不固定
+    // + 获取当前窗口宽度，计算可以分割成几列
+    // + 获取所有图片或者展示元素的，计算出高度，存储到数组中
+    // + 定义一个空数组用来存储每列的高度值
+    // + 算法，页面加载和页面宽度发生变化执行逻辑
+    //     + 遍历所有元素， 第一行元素，top就是设置的间距，left就是宽度+间距对应的值，通过列索引计算即可,更新元素高度数据
+    //     + 第n行元素（n > 1）, 对比所有列的高度，取最小高度列，设置top，left,并且更新数组高度数据
+
+    const maybeHeights = [30, 50, 100, 200, 300, 400, 500, 600];
+
+    const randomGenerateLists = () => {
+        let lists = [];
+        for (let i = 0; i < 16; i++) {
+            let index = (Math.random() * maybeHeights.length) | 0;
+            lists.push(maybeHeights[index]);
+        }
+        return lists;
+    };
+    // const COL_COUNT = 5; // 列数
+    const GAP = 10; // 行列的间距
+    const MIN_WIDTH = 200;// 平分最小列宽度
+
+    const heightLists = randomGenerateLists();
+    // const heightLists = [500, 50, 200, 500, 200, 500, 200, 50, 30, 30, 30, 300, 50, 600, 300, 200];
+    console.log(heightLists);
+
+
+
+    /**
+     * 查找最小的插入位置
+     **/
+    function findMinPosition(lists) {
+        let index = 0,
+            min = lists[0];
+        for (let i = 0, len = lists.length; i < len; ++i) {
+            let cur = lists[i];
+            if (cur < min) {
+                min = cur;
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    function computedColCount(boxWidth, minWidth, gap) {
+        // boxWidth - gap * (? - 1)) / ? >= minWidth
+        // boxWidth + gap >= minWidth * ? + gap * ?
+        //  boxWidth + gap / (minWidth + gap) >= ?
+        let count = (boxWidth + gap) / (minWidth + gap);
+        console.log('col count:', count);
+        return count | 0;
+    }
+    function debounce(fn, time) {
+        let timer = null;
+        return (...args) => {
+            timer && clearTimeout(timer);
+            timer = setTimeout(() => {
+                fn.apply(null, args);
+            }, time);
+        }
+    }
+    const updatedDom = debounce((e) => {
+        //防抖debounce
+        const boxElement = document.getElementById("boxId");
+        console.log(boxElement.clientWidth);
+        const computedCount = computedColCount(boxElement.clientWidth, MIN_WIDTH, GAP);
+        const everyColWidth =
+            (boxElement.clientWidth - GAP * (computedCount - 1)) / computedCount;
+        console.log("everyColWidth:", everyColWidth);
+
+        //记录列区块总高的数组
+        const colHeight = new Array(computedCount);
+        colHeight.fill(0);
+
+        const children = boxElement.querySelectorAll('.box-item');
+        for (let i = 0, len = heightLists.length; i < len; ++i) {
+            //第几行row 列col
+            let col = i % computedCount;
+            let row = (i / computedCount) | 0;
+            let curHeight = heightLists[i];
+
+            const itemDom = children[i];
+            itemDom.className = "box-item blue";
+
+            //计算位置left,top
+            let styleString = `width: ${everyColWidth}px; height: ${curHeight}px;`;
+
+            //插入到minIndex 列
+            let minIndex = findMinPosition(colHeight);
+            console.log("minIndex:", minIndex);
+
+            let top = colHeight[minIndex];
+            let left = minIndex * everyColWidth + minIndex * GAP;
+            styleString += `left: ${left}px; top: ${top}px;`;
+
+            colHeight[minIndex] += curHeight + GAP;
+
+            console.log("colHeight:", colHeight);
+            itemDom.style.cssText = styleString;
+            itemDom.innerText = i + 1;
+
+        }
+
+    }, 0)
+
+    window.addEventListener('resize', updatedDom, { passive: true })
+
+    const renderBoxItem = () => {
+        const boxElement = document.getElementById("boxId");
+        console.log(boxElement.clientWidth);
+        const computedCount = computedColCount(boxElement.clientWidth, MIN_WIDTH, GAP);
+        const everyColWidth =
+            (boxElement.clientWidth - GAP * (computedCount - 1)) / computedCount;
+        console.log("everyColWidth:", everyColWidth);
+
+        //记录列区块总高的数组
+        const colHeight = new Array(computedCount);
+        colHeight.fill(0);
+
+        const fragment = document.createDocumentFragment();
+        for (let i = 0, len = heightLists.length; i < len; ++i) {
+            //第几行row 列col
+            let col = i % computedCount;
+            let row = (i / computedCount) | 0;
+            let curHeight = heightLists[i];
+
+            const itemDom = document.createElement("div");
+            itemDom.className = "box-item blue";
+
+            //计算位置left,top
+            let styleString = `width: ${everyColWidth}px; height: ${curHeight}px;`;
+
+            //插入到minIndex 列
+            let minIndex = findMinPosition(colHeight);
+            console.log("minIndex:", minIndex);
+
+            let top = colHeight[minIndex];
+            let left = minIndex * everyColWidth + minIndex * GAP;
+            styleString += `left: ${left}px; top: ${top}px;`;
+
+            colHeight[minIndex] += curHeight + GAP;
+
+            console.log("colHeight:", colHeight);
+            itemDom.style.cssText = styleString;
+            itemDom.innerText = i + 1;
+
+            fragment.appendChild(itemDom);
+        }
+
+        //把生成的dom插入到box
+        boxElement.appendChild(fragment);
+    }
+    window.onload = renderBoxItem;
+</script>
+
+</html>
