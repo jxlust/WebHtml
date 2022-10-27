@@ -9,7 +9,40 @@
 </head>
 
 <body>
-    1
+    123
 </body>
+<script>
+
+    // fetch('https://unpkg.com/vue@3/dist/vue.global.js', {
+    //     method: 'GET',
+    //     // mode: 'no-cors',
+    //     headers: new Headers({
+    //         'accept': 'application/javascript; charset=utf-8'
+    //     })
+    // }).then(async res => {
+    //     console.log(res.statusText)
+    //     let s = await res.status;
+    //     console.log(s);
+    //     console.log(await res.blob());
+    //     // let a = await res.text();
+    //     // console.log(11, a);
+    // }).catch(e => {
+    //     console.error(e)
+    // })
+
+    // 通过fetch获取百度的错误提示页面
+    //跨域访问不了的
+    fetch('https://www.baidu.com/rec?platform=wise&ms=1&rset=rcmd&word=123&qid=11327900426705455986&rq=123&from=844b&baiduid=A1D0B88941B30028C375C79CE5AC2E5E%3AFG%3D1&tn=&clientWidth=375&t=1506826017369&r=8255', { // 在URL中写上传递的参数
+        method: 'GET',
+        // mode: 'no-cors',
+        headers: new Headers({
+            'Accept': 'application/json' // 通过头指定，获取的数据类型是JSON
+        })
+    }).then((res) => {
+        return res.text() // 返回一个Promise，可以解析成JSON
+    }).then((res) => {
+        console.log(22, res) // 获取JSON数据
+    })
+</script>
 
 </html>
