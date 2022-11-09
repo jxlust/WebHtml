@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 80vw;
+            margin: auto;
+            background-color: skyblue;
+            display: flex;
+            align-items: center;
+        }
+
+        .left {
+            /* width: 60%; */
+            /* 百分比会导致宽度改变 */
+            /* margin-right: 10px; */
+            width: 60px;
+            /* flex: 1; */
+            /* flex-basis: 490px; */
+            flex: 60%;
+            /* margin-right: 10px; */
+            padding-right: 10px;
+            min-height: 100px;
+            background-color: salmon;
+        }
+
+        .right {
+            /* flex: 1;
+            flex-basis: 200px; */
+            flex: 40%;
+            width: 40%;
+            min-height: 100px;
+            background-color: sandybrown;
+        }
+
+        .content {
+            display: flex;
+            width: 100%;
+
+        }
+
+        .icon {
+            display: inline-block;
+            width: 64px;
+            height: 64px;
+            background-color: yellowgreen;
+        }
+
+        .item {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .box2 {
+            display: flex;
+            align-items: center;
+            width: 50vw;
+            background-color: yellow;
+        }
+
+        .icon2 {
+            width: 64px;
+            height: 64px;
+            display: inline-block;
+            background-color: aqua;
+        }
+
+        .item2 {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .line {
+            width: 10px;
+            height: 100%;
+            flex: 0 0 10px;
+            background-color: beige;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>解决flex 存在边距，又是按百分比布局，内容溢出会改变width大小的问题</h3>
+
+    <div class="box">
+        <div class="left">
+            <div class="content">
+                <div class="icon"></div>
+                <div class="item">收到了就放假啊善良的，书法的肌肤拉基舍夫</div>
+            </div>
+        </div>
+        <div class="line"></div>
+        <div class="right"></div>
+    </div>
+
+    <div class="box2">
+        <div class="icon2"></div>
+        <div class="item2">收到了就放假啊善良的，书法的肌肤拉基舍夫</div>
+    </div>
+
+</body>
+
+</html>
