@@ -19,12 +19,13 @@
             /* width: 60%; */
             /* 百分比会导致宽度改变 */
             /* margin-right: 10px; */
-            width: 60px;
+            /* width: 60px; */
+            width: calc(60% - 5px);
             /* flex: 1; */
             /* flex-basis: 490px; */
-            flex: 60%;
+            flex: 1 1 auto;
             /* margin-right: 10px; */
-            padding-right: 10px;
+            /* padding-right: 10px; */
             min-height: 100px;
             background-color: salmon;
         }
@@ -32,8 +33,9 @@
         .right {
             /* flex: 1;
             flex-basis: 200px; */
-            flex: 40%;
-            width: 40%;
+            /* flex: 40%; */
+            width: calc(40% - 5px);
+            flex: 1 1 auto;
             min-height: 100px;
             background-color: sandybrown;
         }
