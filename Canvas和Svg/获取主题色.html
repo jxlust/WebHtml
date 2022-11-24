@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .test1 {
+      width: 500px;
+      text-align: center;
+    }
+
+    .test1>img {
+      max-width: 100%;
+    }
+
+    .box1 {
+      width: 100%;
+      height: 50px;
+    }
+
+    .boxp {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin: 10px;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
+</head>
+
+<body>
+  <div class="test1" id="test1">
+    <img src="./images/earth.png" alt="" id="testImg1">
+
+    <div class="box1" id="box1"></div>
+  </div>
+
+
+</body>
+<script>
+  const colorThief = new ColorThief();
+  const img = document.querySelector('#testImg1');
+  const box1 = document.getElementById('test1')
+  img.crossOrigin = 'Anonymous';
+
+  // Make sure image is finished loading
+  if (img.complete) {
+    const data = colorThief.getColor(img);
+    console.log(1, data)
+
+  } else {
+    img.addEventListener('load', function () {
+      const data = colorThief.getColor(img);
+      console.log(2, data)
+      const [r, g, b] = data;
+      // box1.style.cssText = `background-color: rgba(${r}, ${g}, ${b}, 1);`
+      box1.style.cssText = `background-image: linear-gradient(180deg,rgba(${r}, ${g}, ${b}, 1),rgba(${r}, ${g}, ${b}, 0.5));`
+
+      const palette = colorThief.getPalette(img, 5);
+      console.log(palette)
+      for (let p of palette) {
+        const span = document.createElement('span');
+        span.classList = 'boxp';
+        const [r, g, b] = p;
+        span.style.cssText = `background-color: rgba(${r}, ${g}, ${b}, 1);`
+        document.body.append(span);
+      }
+    });
+  }
+</script>
+
+</html>

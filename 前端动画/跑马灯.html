@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box1 {
+            position: relative;
+            width: 200px;
+            height: 30px;
+            background-color: skyblue;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .box1 .text {
+            /* position: absolute; */
+            white-space: nowrap;
+            transition-timing-function: linear;
+        }
+
+        .mg-left {
+            margin-left: 30px;
+            color: orange;
+        }
+
+        @keyframes move{
+            0%{
+                transform: translateX(0);
+            }
+            100%{
+                transform: translateX(-50%);
+            }
+        }
+        .box2 {
+            margin: 40px 0 0 50px;
+            position: relative;
+            width: 200px;
+            height: 30px;
+            background-color: skyblue;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+        .box2 .marquee{
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            animation-name:  move;
+            animation-timing-function: linear;
+            animation-duration: 10s;
+            animation-iteration-count: infinite;
+        }
+        .box2 .marquee>span {
+            margin-right: 50px;
+        }
+
+        .marquee .copy {
+            color: red;
+            /* margin-left: 50px; */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box1" id="box1">
+        <div class="text" id="text1">start我是跑马灯内容是善良的卷发end</div>
+        <div class="text mg-left" id="text2">start我是跑马灯内容是善良的卷发end</div>
+    </div>
+
+    <div class="box2">
+        <div class="marquee">
+            <span>start我是跑马灯内容是善良的卷发end</span>
+            <span class="copy">start我是跑马灯内容是善良的卷发end</span>
+        </div>
+    </div>
+
+    <div class="box2">
+        <div class="marquee">
+            <span>start我是卷发end</span>
+            <span class="copy">start我是卷发end</span>
+        </div>
+    </div>
+</body>
+
+<script>
+    const raf = (fn) => requestAnimationFrame(fn);
+    const box1El = document.getElementById('box1');
+    const text1El = document.getElementById('text1');
+    const text2El = document.getElementById('text2');
+
+    const speed = 60;
+    const startAnimation = () => {
+        const boxWidth = box1El.offsetWidth;
+        const textWidth = text1El.offsetWidth;
+        if (boxWidth < textWidth) {
+            // transform: marqueeState.offset ? `translateX(${marqueeState.offset}px)` : '',
+            // transitionDuration: `${marqueeState.duration}s`,
+            raf(() => {
+                let duration = (boxWidth + textWidth) / speed;
+                let styleText = `transform: translateX(${-textWidth}px); transition-duration: ${duration}s`
+                text1El.style.cssText = styleText
+
+                let duration2 = (textWidth * 2 + 30) / speed;
+                text2El.style.cssText = `transform: translateX(${-textWidth - 30}px); transition-duration: ${duration2}s`
+            })
+        }
+    }
+
+    text2El.addEventListener('transitionend', () => {
+        // marqueeState.offset = wrapWidth;
+        // marqueeState.duration = 0;
+        let styleText = `transform: translateX(0px); transition-duration: 0s`
+        text1El.style.cssText = styleText
+        text2El.style.cssText = `transform: translateX(0px); transition-duration: 0s`
+        //start animation again
+        startAnimation();
+
+    })
+
+    startAnimation();
+
+</script>
+
+</html>

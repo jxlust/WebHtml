@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.3.0/core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.3.0/sha256.min.js"></script>
+
+
+</head>
+
+<body>
+
+
+    <script>
+        const generateFingerprint = () => {
+            const outScreenCanvas = document.createElement('canvas');
+            const ctx = outScreenCanvas.getContext('2d');
+            // Text with lowercase/uppercase/punctuation symbols
+            const txt = 'BrowserLeaks,com <canvas> 1.0';
+            ctx.textBaseline = 'top';
+            // The most common type
+            ctx.font = "14px 'Arial'";
+            ctx.textBaseline = 'alphabetic';
+            ctx.fillStyle = '#f60';
+            ctx.fillRect(125, 1, 62, 20);
+            // Some tricks for color mixing to increase the difference in rendering
+            ctx.fillStyle = '#069';
+            ctx.fillText(txt, 2, 15);
+            ctx.fillStyle = 'rgba(102, 204, 0, 0.7)';
+            ctx.fillText(txt, 4, 17);
+            const canvasImageData = outScreenCanvas.toDataURL();
+            console.log('canvas image data:', canvasImageData);
+
+            const figId = CryptoJS.SHA256(canvasImageData).toString();
+            console.log('figId:', figId)
+            
+        };
+        generateFingerprint();
+
+    </script>
+</body>
+
+</html>
