@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <video id="myVideo" width="360" height="202" controls autoplay loop muted src="./mp4/step.mp4"></video>
+
+    <canvas id="myCanvas"></canvas>
+
+</body>
+<script>
+    const video = document.getElementById('myVideo');
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+
+    const canvasWidth = 500;
+    const canvasHeight = 250;
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
+
+    function startPlay() {
+        const rafPlay = () => {
+            if (video.paused || video.ended) {
+                return
+            }
+            ctx.drawImage(video, 0, 0, canvasWidth, canvasHeight);
+            window.requestAnimationFrame(rafPlay)
+        }
+        window.requestAnimationFrame(rafPlay)
+    }
+    function initPlay() {
+        video.addEventListener('play', () => {
+            console.log('video play')
+            startPlay();
+        })
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+        initPlay();
+    })
+</script>
+
+</html>
