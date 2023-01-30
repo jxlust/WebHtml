@@ -1,91 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate,public" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
     <title>Document</title>
     <link rel="stylesheet" href="./css/animation.css">
     <style>
-        
+        .text-wrap {
+            position: relative;
+            width: 100%;
+            height: 7.1875rem;
+            text-align: center;
+            z-index: 3
+        }
 
-.text-wrap {
-    position: relative;
-    width: 100%;
-    height: 7.1875rem;
-    text-align: center;
-    z-index: 3
-}
+        .text-wrap h1 {
+            position: absolute;
+            text-align: center;
+            width: 100%;
+            font-size: 6rem;
+            font-weight: 700;
+            margin: 0;
+            animation: shake .6s ease-in-out infinite alternate;
+            user-select: none
+        }
 
-.text-wrap h1 {
-    position: absolute;
-    text-align: center;
-    width: 100%;
-    font-size: 6rem;
-    font-weight: 700;
-    margin: 0;
-    animation: shake .6s ease-in-out infinite alternate;
-    user-select: none
-}
-.text-wrap h1:before {
-    content: attr(data-t);
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, .34em);
-    height: .1em;
-    line-height: .5em;
-    width: 100%;
-    animation: scan .5s ease-in-out 487ms infinite alternate, glitch-anim .3s ease-in-out infinite alternate;
-    overflow: hidden;
-    opacity: .7
-}
+        .text-wrap h1:before {
+            content: attr(data-t);
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, .34em);
+            height: .1em;
+            line-height: .5em;
+            width: 100%;
+            animation: scan .5s ease-in-out 487ms infinite alternate, glitch-anim .3s ease-in-out infinite alternate;
+            overflow: hidden;
+            opacity: .7
+        }
 
-.text-wrap h1:after {
-    content: attr(data-t);
-    position: absolute;
-    top: -4px;
-    left: 50%;
-    transform: translate(-50%, .34em);
-    height: .5em;
-    line-height: .1em;
-    width: 100%;
-    animation: scan 665ms ease-in-out 76ms infinite alternate, glitch-anim .3s ease-in-out infinite alternate;
-    overflow: hidden;
-    opacity: .8;
-}
-.test1{
-    animation: spinner-border 1000ms 0ms infinite alternate;
-    /* animation-direction: alternate; */
-}
-.test2{
+        .text-wrap h1:after {
+            content: attr(data-t);
+            position: absolute;
+            top: -4px;
+            left: 50%;
+            transform: translate(-50%, .34em);
+            height: .5em;
+            line-height: .1em;
+            width: 100%;
+            animation: scan 665ms ease-in-out 76ms infinite alternate, glitch-anim .3s ease-in-out infinite alternate;
+            overflow: hidden;
+            opacity: .8;
+        }
 
-}
-.test3{
-    position: relative;
-    left: 20px;
-    animation: scan 1000ms 0ms infinite alternate;
-}
-.test4{
-    animation: scroll-warning 1000ms 0ms infinite alternate;
+        .test1 {
+            animation: spinner-border 1000ms 0ms infinite alternate;
+            /* animation-direction: alternate; */
+        }
 
-}
-.box{
-    overflow: hidden;
-    height: 100px;
-    width: 100px;
-}
-.boximg{
-    position: relative;
-    height: 200px;
-    height: 200px;
-}
-.boximg .img{
-    position: absolute;
-    animation: glitch-anim 1000ms 0ms infinite alternate;
+        .test2 {}
 
-}
+        .test3 {
+            position: relative;
+            left: 20px;
+            animation: scan 1000ms 0ms infinite alternate;
+        }
+
+        .test4 {
+            animation: scroll-warning 1000ms 0ms infinite alternate;
+
+        }
+
+        .box {
+            overflow: hidden;
+            height: 100px;
+            width: 100px;
+        }
+
+        .boximg {
+            position: relative;
+            height: 200px;
+            height: 200px;
+        }
+
+        .boximg .img {
+            position: absolute;
+            animation: glitch-anim 1000ms 0ms infinite alternate;
+        }
+
+        .user {
+            width: 24px;
+            height: 24px;
+        }
+
+        .user img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background-image: linear-gradient(90deg, #ff0000, #fff);
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
     </style>
 
 </head>
+
 <body>
     <div class="text-wrap">
         <h1 data-t="404" class="h1">404</h1>
@@ -99,8 +124,8 @@
         <div class="box">
             <h3 class="test1">test1</h3>
         </div>
-      
-      
+
+
         <div class="box">
             <h3 class="test3">test3</h3>
         </div>
@@ -109,5 +134,17 @@
             <h3 class="test4">test4</h3>
         </div>
     </div>
+
+    <div class="user">
+        <img id="userImg" src="" alt="">
+    </div>
 </body>
+
+<script>
+    const userImg = document.getElementById('userImg');
+    setTimeout(() => {
+        userImg.src = 'https://img1.baidu.com/it/u=1417619431,3652916055&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1670950800&t=7f87694a96e4d4a5ab85c6331057f662'
+    }, 1000);
+</script>
+
 </html>
