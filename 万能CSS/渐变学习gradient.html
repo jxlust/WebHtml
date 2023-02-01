@@ -10,6 +10,7 @@
 		/* background:bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit; */
 		/* background-image: radial-gradient(shape size at position, start-color, ..., last-color); */
 		/* linear-gradient 角度计算，从上往下是180deg 从左往右是90deg,从右往左-90deg,从下往上0，右边渐变是正值，反是负值 */
+		/* 渐变的扩展大小是随着渐变角度扩展的长度，比如45deg就是沿着对角线长度延长x长度渐变 */
 		.header {
 			width: 300px;
 			height: 100px;
@@ -194,6 +195,50 @@
 			}
 		}
 	</style>
+
+	<style>
+		.step{
+			width: 80vw;
+		}
+		.step-container {
+			color: #fff;
+			background-color: rgb(194, 214, 255);
+			display: flex;
+			align-items: center;
+			height: 44px;
+			line-height: 44px;
+			position: relative;
+		}
+
+		.step-item {
+			flex: 1;
+			min-width: 0;
+			text-align: center;
+			align-self: stretch;
+			position: relative;
+			z-index: 2;
+		}
+
+		.step-slide {
+			position: absolute;
+			width: 0;
+			height: 100%;
+			top: 0;
+			left: 0;
+			background: linear-gradient(-135deg,
+					rgb(194, 214, 255) 15.5px,
+					transparent 0) 0 0/100% 50%,
+				linear-gradient(-45deg, rgb(194, 214, 255) 15.5px, transparent 0) right 22px/100% 50%,
+				radial-gradient(circle at left top,
+					rgb(114, 164, 255) 5%,
+					rgb(72, 118, 255) 100%) 0 0/100% 100%;
+			background-repeat: no-repeat;
+
+		}
+		.step-slide__1{
+			width: 33.3333%;
+		}
+	</style>
 </head>
 
 <body>
@@ -215,6 +260,14 @@
 		<div class="bgBox"></div>
 		<div class="bgBox"></div>
 
+	</div>
+	<div class="step">
+		<div class="step-container">
+			<span class="step-item">1</span>
+			<span class="step-item">2</span>
+			<span class="step-item">3</span>
+			<span class="step-slide step-slide__1"></span>
+		</div>
 	</div>
 	<div class="wall-wrap">
 		<div class="wall"></div>

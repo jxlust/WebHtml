@@ -48,7 +48,8 @@
 			background-color: #999;
 
 		}
-		.bottom1{
+
+		.bottom1 {
 			position: absolute;
 			bottom: 0;
 			right: 0;
@@ -57,7 +58,7 @@
 	</style>
 
 	<script src="./js/errorAsy.js">
-	
+
 	</script>
 
 </head>
@@ -70,11 +71,13 @@
 		<div class="block"></div>
 	</div>
 	<div class="content">
-		<img src="https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3206689113,2237998950&fm=26&gp=0.jpg" alt="">
+		<!-- <img src="https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3206689113,2237998950&fm=26&gp=0.jpg"
+			alt=""> -->
 	</div>
 	<div class="bottom">
 		<div class="bottom1">
-			<img src="https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2827471950,3102544597&fm=26&gp=0.jpg" alt="">
+			<!-- <img src="https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2827471950,3102544597&fm=26&gp=0.jpg"
+				alt=""> -->
 		</div>
 	</div>
 
@@ -96,17 +99,30 @@
 
 	</script>
 	<!-- <script src="./js/error-test.js"></script> -->
-	<script type="module">
+	<!-- <script type="module">
 		import FMP from './js/FMP.js';
 		FMP.getFmp(10000).then(data => {
-			console.log('fmp:',data);
+			console.log('fmp:', data);
 			document.getElementById('tips').innerText = '首屏时间：' + data / 1000 + '秒'
 		})
-	</script>
+	</script> -->
 	<script>
 		window.addEventListener('DOMContentLoaded', function (e) {
-			console.log(1, e);
+			console.log(1222, e);
+			let fp = window.performance.getEntriesByName('first-paint')[0].startTime;
+			let fcpList = window.performance.getEntriesByName('first-contentful-paint');
+			console.log('fcplist:', fcpList)
+			if (fcpList.length) {
+				let fcp = window.performance.getEntriesByName('first-contentful-paint')[0].startTime;
+				console.log('fcp:', fcp);
+			}
+			console.log('fp:', fp);
+
+			setTimeout(() => {
+				document.getElementById('tips').innerText = '首屏时间：' + 9999 + '秒'
+			}, 1000);
 		})
+
 
 		function tranSeconds(time) {
 			return (time / 1000) + '秒';
@@ -114,6 +130,9 @@
 		window.addEventListener('load', function (e) {
 			console.log(2, e);
 			console.log(performance);
+
+			let fcpList = window.performance.getEntriesByName('first-contentful-paint');
+			console.log('fcplist2:', fcpList)
 			const {
 				timing
 			} = performance;
@@ -122,7 +141,7 @@
 			console.log('白屏时间：', tranSeconds(timing.responseEnd - timing.fetchStart));
 			console.log('页面完全加载时间：', tranSeconds(timing.loadEventStart - timing.fetchStart));
 			//
-			console.log('粗略首屏：', timing.loadEventEnd,tranSeconds(timing.loadEventEnd - timing.fetchStart));
+			console.log('粗略首屏：', timing.loadEventEnd, tranSeconds(timing.loadEventEnd - timing.fetchStart));
 			console.log('资源加载耗时：', tranSeconds(timing.loadEventStart - timing.domContentLoadedEventEnd));
 			console.log('首包时间：', tranSeconds(timing.responseStart - timing.domainLookupStart));
 		})
