@@ -28,14 +28,16 @@
             color: orange;
         }
 
-        @keyframes move{
-            0%{
+        @keyframes move {
+            0% {
                 transform: translateX(0);
             }
-            100%{
+
+            100% {
                 transform: translateX(-50%);
             }
         }
+
         .box2 {
             margin: 40px 0 0 50px;
             position: relative;
@@ -46,17 +48,19 @@
             display: flex;
             align-items: center;
         }
-        .box2 .marquee{
+
+        .box2 .marquee {
             white-space: nowrap;
             display: flex;
             align-items: center;
-            animation-name:  move;
+            animation-name: move;
             animation-timing-function: linear;
-            animation-duration: 10s;
+            animation-duration: 5s;
             animation-iteration-count: infinite;
         }
+
         .box2 .marquee>span {
-            margin-right: 50px;
+            padding-right: 50px;
         }
 
         .marquee .copy {
@@ -94,7 +98,7 @@
     const text1El = document.getElementById('text1');
     const text2El = document.getElementById('text2');
 
-    const speed = 60;
+    const speed = 40;
     const startAnimation = () => {
         const boxWidth = box1El.offsetWidth;
         const textWidth = text1El.offsetWidth;
@@ -102,11 +106,11 @@
             // transform: marqueeState.offset ? `translateX(${marqueeState.offset}px)` : '',
             // transitionDuration: `${marqueeState.duration}s`,
             raf(() => {
-                let duration = (boxWidth + textWidth) / speed;
+                let duration = (textWidth) / speed;
                 let styleText = `transform: translateX(${-textWidth}px); transition-duration: ${duration}s`
                 text1El.style.cssText = styleText
 
-                let duration2 = (textWidth * 2 + 30) / speed;
+                let duration2 = (textWidth + 30) / speed;
                 text2El.style.cssText = `transform: translateX(${-textWidth - 30}px); transition-duration: ${duration2}s`
             })
         }
