@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            background-color: #f8f8f8;
+            padding: 30px 0 0 0;
+            width: 80vw;
+        }
+
+        .user-group {
+            padding-left: 30px;
+        }
+
+        .list-item {
+            margin: 5px 0;
+        }
+
+        .opt-btn {
+            color: skyblue;
+            margin-left: 30px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <header class="title">请选择部门/员工</header>
+        <div class="list">
+            <div class="list-item" data-id="org1">
+                <div class="org-box">
+                    <input type="checkbox" id="org1">
+                    <label for="org1">部门1</label>
+                    <span class="opt-btn">+/-</span>
+                </div>
+                <div class="user-group">
+                    <div class="user-checkbox">
+                        <input type="checkbox">
+                        <label>用户1</label>
+                    </div>
+                    <div class="user-checkbox">
+                        <input type="checkbox">
+                        <label>用户2</label>
+                    </div>
+                    <div class="user-checkbox">
+                        <input type="checkbox">
+                        <label>用户3</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-item" data-id="org2">
+                <div class="org-box">
+                    <input type="checkbox" id="org2">
+                    <label for="org2">部门2</label>
+                    <span class="opt-btn">+/-</span>
+                </div>
+                <div class="user-group">
+                    <div class="user-checkbox">
+                        <input type="checkbox">
+                        <label>用户4</label>
+                    </div>
+                    <div class="user-checkbox">
+                        <input type="checkbox">
+                        <label>用户5</label>
+                    </div>
+                    <div class="user-checkbox">
+                        <input type="checkbox">
+                        <label>用户6</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-item" data-id="org3">
+                <div class="org-box">
+                    <input type="checkbox" id="org3">
+                    <label for="org3">部门3</label>
+                    <span class="opt-btn">+/-</span>
+                </div>
+                <div class="user-group">
+                    <div class="user-checkbox">
+                        <input type="checkbox">
+                        <label>用户7</label>
+                    </div>
+                    <div class="user-checkbox">
+                        <input type="checkbox">
+                        <label>用户8</label>
+                    </div>
+                    <div class="user-checkbox">
+                        <input type="checkbox">
+                        <label>用户9</label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="result-show">
+            <p>选中结果：</p>
+            <p class="json-text" id="jsonText">"{}"</p>
+        </div>
+    </div>
+</body>
+
+<script>
+
+    const orgList = [];
+    const userList = [];
+    const jsonTextEl = document.querySelector('#jsonText');
+
+    const orgBoxCheckBox = document.querySelectorAll('.org-box input[type="checkbox"]');
+    orgBoxCheckBox.forEach((orgInput, index) => {
+        orgInput.addEventListener('change', (e) => {
+            let target = e.target;
+            console.log(11, e.target)
+
+            updateJsonText();
+        })
+    })
+
+    function updateJsonText() {
+        let jsonStr = JSON.stringify({
+            departments: [],
+            users: []
+        })
+        jsonTextEl.innerText = jsonStr
+    }
+</script>
+
+</html>

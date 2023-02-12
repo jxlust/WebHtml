@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div>
+      <span>test</span>
+      <div id="box">
+        <img src="http://www.baidu.com/sidfa.png" alt="" />
+      </div>
+    </div>
+
+    <script>
+      const box = document.getElementById("box");
+      setTimeout(() => {
+        box.innerHTML = "hhhhhhhh";
+        let FP = window.performance.getEntriesByName("first-paint")[0];
+        console.log("time:", FP.startTime);
+      }, 10000);
+    </script>
+
+    <script>
+      function getFirstPaint() {
+        let firstPaints = {};
+        if (typeof performance.getEntriesByType === "function") {
+          let performanceEntries = performance.getEntriesByType("paint") || [];
+          performanceEntries.forEach((entry) => {
+            if (entry.name === "first-paint") {
+              firstPaints.firstPaint = entry.startTime;
+            } else if (entry.name === "first-contentful-paint") {
+              firstPaints.firstContentfulPaint = entry.startTime;
+            }
+          });
+        } else {
+          if (chrome && chrome.loadTimes) {
+            let loadTimes = window.chrome.loadTimes();
+            let { firstPaintTime, startLoadTime } = loadTimes;
+            firstPaints.firstPaint = (firstPaintTime - startLoadTime) * 1000;
+          } else if (
+            performance.timing &&
+            typeof performance.timing.msFirstPaint === "number"
+          ) {
+            let { msFirstPaint, navigationStart } = performance.timing;
+            firstPaints.firstPaint = msFirstPaint - navigationStart;
+          }
+        }
+        return firstPaints;
+      }
+    </script>
+  </body>
+</html>
