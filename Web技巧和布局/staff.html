@@ -35,21 +35,21 @@
         <div class="list">
             <div class="list-item" data-id="org1">
                 <div class="org-box">
-                    <input type="checkbox" id="org1">
+                    <input type="checkbox" id="org1" value="1">
                     <label for="org1">部门1</label>
-                    <span class="opt-btn">+/-</span>
+                    <span class="opt-btn">-</span>
                 </div>
                 <div class="user-group">
                     <div class="user-checkbox">
-                        <input type="checkbox">
+                        <input type="checkbox" value="1">
                         <label>用户1</label>
                     </div>
                     <div class="user-checkbox">
-                        <input type="checkbox">
+                        <input type="checkbox" value="2">
                         <label>用户2</label>
                     </div>
                     <div class="user-checkbox">
-                        <input type="checkbox">
+                        <input type="checkbox" value="3">
                         <label>用户3</label>
                     </div>
                 </div>
@@ -57,21 +57,21 @@
 
             <div class="list-item" data-id="org2">
                 <div class="org-box">
-                    <input type="checkbox" id="org2">
+                    <input type="checkbox" id="org2" value="2">
                     <label for="org2">部门2</label>
-                    <span class="opt-btn">+/-</span>
+                    <span class="opt-btn">-</span>
                 </div>
                 <div class="user-group">
                     <div class="user-checkbox">
-                        <input type="checkbox">
+                        <input type="checkbox" value="4">
                         <label>用户4</label>
                     </div>
                     <div class="user-checkbox">
-                        <input type="checkbox">
+                        <input type="checkbox" value="5">
                         <label>用户5</label>
                     </div>
                     <div class="user-checkbox">
-                        <input type="checkbox">
+                        <input type="checkbox" value="6">
                         <label>用户6</label>
                     </div>
                 </div>
@@ -79,21 +79,21 @@
 
             <div class="list-item" data-id="org3">
                 <div class="org-box">
-                    <input type="checkbox" id="org3">
+                    <input type="checkbox" id="org3" value="3">
                     <label for="org3">部门3</label>
-                    <span class="opt-btn">+/-</span>
+                    <span class="opt-btn">-</span>
                 </div>
                 <div class="user-group">
                     <div class="user-checkbox">
-                        <input type="checkbox">
+                        <input type="checkbox" value="7">
                         <label>用户7</label>
                     </div>
                     <div class="user-checkbox">
-                        <input type="checkbox">
+                        <input type="checkbox" value="8">
                         <label>用户8</label>
                     </div>
                     <div class="user-checkbox">
-                        <input type="checkbox">
+                        <input type="checkbox" value="9">
                         <label>用户9</label>
                     </div>
                 </div>
@@ -113,23 +113,91 @@
     const userList = [];
     const jsonTextEl = document.querySelector('#jsonText');
 
-    const orgBoxCheckBox = document.querySelectorAll('.org-box input[type="checkbox"]');
-    orgBoxCheckBox.forEach((orgInput, index) => {
+    const orgBoxList = document.querySelectorAll('.org-box input[type="checkbox"]');
+    const userBoxList = document.querySelectorAll('.user-group')
+
+    function setInputsCheck(els, isChecked = true) {
+        els.forEach(node => {
+            node.checked = isChecked;
+        })
+    }
+
+    orgBoxList.forEach((orgInput, index) => {
         orgInput.addEventListener('change', (e) => {
             let target = e.target;
-            console.log(11, e.target)
-
+            let parentEl = target.parentElement;
+            let nextEl = parentEl.nextElementSibling;
+            const inputLists = nextEl.querySelectorAll('input');
+            setInputsCheck(inputLists, target.checked);
             updateJsonText();
         })
     })
 
+
+    userBoxList.forEach((usergroup, index) => {
+        const childInputs = usergroup.querySelectorAll('input');
+        const previousElementSibling = usergroup.previousElementSibling;
+
+        childInputs.forEach(inputEl => {
+            inputEl.addEventListener('change', e => {
+                console.log(11112, childInputs);
+                let isAllChecked = Array.from(childInputs).every(item => item.checked);
+                if (isAllChecked) {
+                    previousElementSibling.querySelector('input').checked = true;
+                } else {
+                    previousElementSibling.querySelector('input').checked = false;
+                }
+                updateJsonText()
+            })
+        })
+
+    })
+
+
     function updateJsonText() {
+        let departments = [];
+        let users = [];
+        orgBoxList.forEach(org => {
+            if (org.checked) {
+                //add org
+                departments.push(+org.value)
+            } else {
+                //add user
+                let parentEl = org.parentElement;
+                let nextEl = parentEl.nextElementSibling;
+                const inputLists = nextEl.querySelectorAll('input');
+                console.log('iii:', inputLists);
+                inputLists.forEach(user => {
+                    if (user.checked) {
+                        users.push(+user.value)
+                    }
+                })
+            }
+        })
         let jsonStr = JSON.stringify({
-            departments: [],
-            users: []
+            departments,
+            users
         })
         jsonTextEl.innerText = jsonStr
     }
+    const optDoms = document.querySelectorAll('.opt-btn');
+    optDoms.forEach(el => {
+        el.addEventListener('click', e => {
+            // if()
+            let parentEl = el.parentElement;
+            let nextEl = parentEl.nextElementSibling;
+            let text = el.innerText;
+            if (text === '-') {
+                //更新，折叠
+                el.innerText = '+'
+                nextEl.style.cssText = 'display:none'
+            } else {
+                //更新，展开
+                el.innerText = '-'
+                nextEl.style.cssText = 'display:block'
+            }
+        })
+    });
 </script>
 
 </html>
