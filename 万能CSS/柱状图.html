@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            background-color: #f8f8f8;
+            height: 500px;
+            width: 90vw;
+            margin: 50px auto;
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+            column-gap: 20px;
+        }
+
+        .box-item {
+            width: 20px;
+            background-image: linear-gradient(180deg, #256DFE 0%, #7FADFF 100%);
+            border-radius: 4px 4px 0 0;
+            height: 0px;
+            transition: height 2s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box" id="boxId">
+    </div>
+</body>
+
+<script>
+
+    function getPercent(list, boxHeight) {
+        let max = Math.max(...list);
+        let maxY = max / 0.9;
+        let stepY = maxY / boxHeight;
+        // 1px 代表的stepY值
+        let columnList = list.map(item => item / stepY);
+        return columnList
+    }
+
+    const test = []
+    for (let i = 0; i < 6; ++i) {
+        test.push((Math.random() * 200) | 0)
+    }
+
+    const boxEl = document.getElementById('boxId');
+    const boxHeight = boxEl.clientHeight;
+    function createBoxItem(num) {
+        let item = document.createElement("div");
+        item.className = "box-item";
+        item.style.height = `${num}px`;
+        return item;
+    }
+    function createColumn() {
+        const boxHeight = boxEl.clientHeight;
+        const list = getPercent(test, boxHeight);
+        let fragment = document.createDocumentFragment();
+        let boxLists = []
+        for (let item of list) {
+            let dom = createBoxItem(0)
+            boxLists.push(dom)
+            fragment.appendChild(dom)
+        }
+        boxEl.appendChild(fragment);
+        setTimeout(() => {
+            for (let i in list) {
+                let num = list[i];
+                console.log(boxLists[i], 1, num);
+                boxLists[i].style.height = `${num}px`;
+            }
+        }, 0);
+
+    }
+
+    createColumn();
+
+</script>
+
+</html>

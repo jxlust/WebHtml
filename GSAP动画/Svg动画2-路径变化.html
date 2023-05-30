@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/gsap-latest-beta.min.js"></script>
+
+    <style>
+        body {
+            padding: 100px;
+        }
+
+        .box2,
+        .box1 {
+            width: 160px;
+            height: 160px;
+            background-color: skyblue;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .box2>span,
+        .box1>span {
+            position: relative;
+            z-index: 2;
+            color: #fff;
+            font-size: 20px;
+            text-align: center;
+            line-height: 160px;
+            display: inline-block;
+
+        }
+
+        .box2>svg,
+        .box1>svg {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- viewBox :裁剪的区域 放大到width height 展示 -->
+    <div class="box1">
+        <span>Box1 Path Change </span>
+        <svg id="svgId" xmlns="http://www.w3.org/2000/svg" fill="red" width="240" height="240" viewBox="0 0 240 240">
+            <path id="pathId" d="M0 0L240 0L240 240L240 0L0 0Z"></path>
+
+        </svg>
+    </div>
+
+    <div class="box2">
+        <span>Box2 Path Change </span>
+        <svg id="svgId2" xmlns="http://www.w3.org/2000/svg" fill="red" width="240" height="240" viewBox="0 0 240 240">
+            <polyline id="polyLineId" points='0 0,240,0,240,240,240,0,0,0' fill="rgba(122,255,255,0.8)"></polyline>
+        </svg>
+    </div>
+
+
+</body>
+<script>
+    const pathEl = document.getElementById('pathId');
+    const svg = document.getElementById('svgId');
+    const box1 = document.querySelector('.box1');
+    // 【240，0】 -》 【0，240】
+    // y = -1 * x  + 240;
+    // [x,-x+240];
+    //x :240 -> 0;
+    box1.addEventListener('mouseenter', (e) => {
+        const obj = {
+            x: 240
+        }
+        gsap.to(obj, {
+            x: 0,
+            duration: .3,
+            ease: 'linear',
+            onUpdate: () => {
+                const x = obj.x;
+                const y = -x + 240;
+                pathEl.setAttribute('d', `M0 0L240 0L240 240L${x} ${y}L0 0Z`)
+            }
+        })
+    })
+    box1.addEventListener('mouseleave', (e) => {
+        const obj = {
+            x: 0
+        }
+        gsap.to(obj, {
+            x: 240,
+            duration: .3,
+            onUpdate: () => {
+                const x = obj.x;
+                const y = -x + 240;
+                pathEl.setAttribute('d', `M0 0L240 0L240 240L${x} ${y}L0 0Z`)
+            }
+        })
+    })
+
+    gsap.to(pathEl, {
+        attr: {
+            d: 'M0 0L240 0L240 240L0 240L0 0Z'
+        },
+        duration: 1,
+    })
+
+
+
+
+</script>
+
+<script>
+    const polyLineEl = document.getElementById('polyLineId');
+    // gsap.to(polyLineEl.points[3], {
+    //     x: 0,
+    //     y: 240,
+    //     ease: "power2.inOut",
+    //     duration: 2
+    // })
+    gsap.to(polyLineEl, {
+        attr: {
+            points: '0 0,240,0,240,240,0,240,0,0'
+        },
+        duration: 1,
+        ease: 'power2.inOut'
+    })
+
+</script>
+
+</html>

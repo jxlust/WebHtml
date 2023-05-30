@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/gsap-latest-beta.min.js"></script>
+
+</head>
+
+<body>
+    <svg id="svgId" xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+        <polyline id="polyLineId" points='' fill="rgba(122,255,255,0.8)"></polyline>
+    </svg>
+
+</body>
+<script>
+    const polyLineEl = document.getElementById('polyLineId');
+    const svg = document.getElementById('svgId');
+    const orginPoints = [[0, 60], [170, 60], [250, 140], [170, 220], [0, 220]]
+    const pointsList = [];
+    for (let p of orginPoints) {
+        let svgP = svg.createSVGPoint();
+        svgP.x = p[0]; svgP.y = p[1];
+        let polyPoint = polyLineEl.points.appendItem(svgP)
+        // console.log(xx == svgP, xx, svgP)
+        pointsList.push(polyPoint)
+    }
+    // gsap.to(polyLineEl.points, {
+    //     // points: "0,60,170,60,150,140,170,220,0,220",
+    //     // x: 0,
+    //     fill: 'red',
+    //     // points: '',
+    //     duration: 3,
+    // });
+    let timeline = gsap.timeline();
+    timeline.to(pointsList[2], {
+        x: 60,
+        duration: 3,
+    }).to(polyLineEl.points[2], {
+        x: 300,
+        duration: 1
+    })
+</script>
+
+</html>
