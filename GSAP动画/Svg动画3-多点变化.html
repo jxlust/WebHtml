@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/gsap-latest-beta.min.js"></script>
+
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+        }
+
+        .shape-svg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .box1 {
+            width: 500px;
+            height: 300px;
+            background-color: #f8f8f8;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    <svg class="shape-svg" id="svgId" xmlns="http://www.w3.org/2000/svg" fill="skyblue">
+        <path id="pathId" fill="skyblue" d=""></path>
+        <circle id="circle" fill="red"></circle>
+    </svg>
+
+    <div class="box1">
+
+    </div>
+
+
+</body>
+<script>
+    const svg = document.getElementById('svgId');
+    const circle = document.getElementById('circle');
+    const pathId = document.getElementById('pathId')
+    const box1 = document.querySelector('.box1');
+    const rect = box1.getBoundingClientRect();
+    console.log(rect);
+    const boxWdith = box1.clientWidth;
+    const boxHeight = box1.clientHeight;
+    const offset_rate = 4;
+    let points =
+        [[rect.left, rect.top],
+        [rect.right - boxWdith / offset_rate, rect.top],
+        [rect.right, rect.top],
+        [rect.right, rect.top + boxHeight / 2],
+        [rect.right, rect.bottom],
+        [rect.right - boxWdith / offset_rate, rect.bottom],
+        [rect.left, rect.bottom],
+        [rect.left, rect.top + boxHeight / 2],
+            // [rect.left, rect.top]//闭合
+        ];
+
+    console.log(points)
+    function polyline2path(points) {
+        const path = 'M' + points.slice(0, 2).join(' ') + 'L' + points.slice(2).join(' ');
+        return path;
+    }
+    for (let p of points) {
+        let copyCircle = circle.cloneNode(true);
+        copyCircle.setAttribute('cx', p[0]);
+        copyCircle.setAttribute('cy', p[1]);
+        copyCircle.setAttribute('r', 5)
+        // cx="25" cy="75" r="20"
+        svg.appendChild(copyCircle)
+    }
+    let endPath = polyline2path(points.flat())
+    console.log('end:', endPath)
+
+    // M0 0L240 0L240 240L0 240L0 0Z
+    const starts = [[30, 300], [30, 320], [30, 340], [30, 340], [30, 340], [30, 320], [30, 320], [30, 300]];
+    for (let s of starts) {
+        let copyCircle = circle.cloneNode(true);
+        copyCircle.setAttribute('cx', s[0]);
+        copyCircle.setAttribute('cy', s[1]);
+        copyCircle.setAttribute('r', 5)
+        copyCircle.setAttribute('fill', 'red')
+        svg.appendChild(copyCircle)
+    }
+    let startPath = polyline2path(starts.flat())
+    console.log('startPath:', startPath)
+
+
+
+</script>
+
+</html>
