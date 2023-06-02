@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        .shape-svg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <p>(rx ry x-axis-rotation large-arc-flag sweep-flag x y)+</p>
+    <p> rx ry 是椭圆的两个半轴的长度。 </p>
+    <p> x-axis-rotation 是椭圆相对于坐标系的旋转角度，角度数而非弧度数。 </p>
+    <p> large-arc-flag 是标记绘制大弧(1)还是小弧(0)部分。</p>
+    <p> sweep-flag 是标记向顺时针(1)还是逆时针(0)方向绘制。 </p>
+    <p> x y 是圆弧终点的坐标。</p>
+
+
+    <svg class="shape-svg" id="svgId" xmlns="http://www.w3.org/2000/svg" stroke-width="2">
+        <g fill="none" stroke-width="2" stroke="red">
+            <path d="M30 30 H100"></path>
+            <!-- 小写都是相对量 即x0+x -->
+            <path d="M30 50 h100"></path>
+        </g>
+
+        <!-- 椭圆的绘制 -->
+        <path d="M100,200 A100 50 45 1 1 200,200" fill="none" stroke="green"></path>
+
+        <!-- 大弧 小弧 顺时钟 逆时钟 四种情况 -->
+        <g fill="none" stroke-width="5" stroke="skyblue">
+            <path d="M200,300 A50 30 0 1 1 270,300"></path>
+            <path d="M200,300 A50 30 0 0 1 270,300" stroke="red"></path>
+            <path d="M200,300 A50 30 0 1 0 270,300" stroke="blue"></path>
+            <path d="M200,300 A50 30 0 0 0 270,300" stroke="yellow"></path>
+        </g>
+        <!-- 椭圆 400 ，300 坐标原点 -->
+        <path d="M400,300 m-50,0 a50 30 0 1 1 100 0 a50 30 0 1 1 -100 0" stroke="#666" fill="none"></path>
+
+        <!-- 圆心 400，160 r: 50 -->
+        <path id="circle" d="M400,160,m-50,0, a50 50 0 1 1 100,0 a50 50 0 1 1 -100,0" stroke="#999" fill="none"></path>
+        <path id="left" d="M400,160 m-50,0 h50" stroke="#ff0000"></path>
+        <path id="right" d="M400,160 h50" stroke="#f6f3f2"></path>
+        <path id="top" d="M400,160 v-50" stroke="#12f232"></path>
+        <path id="top" d="M400,160 v50" stroke="#888"></path>
+    </svg>
+
+</body>
+
+</html>
