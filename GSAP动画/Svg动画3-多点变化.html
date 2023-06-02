@@ -56,6 +56,11 @@
 
 </body>
 <script>
+    function twobsr(t, a1, a2, a3) {
+        return ((1 - t) * (1 - t)) * a1 + 2 * t * (1 - t) * a2 + t * t * a3;
+    }
+    
+
     function polyline2path(points) {
         const path = 'M' + points.slice(0, 2).join(' ') + 'L' + points.slice(2).join(' ') + 'Z';
         return path;
@@ -168,6 +173,51 @@
     //         updateSvgPath(currentX)
     //     }
     // })
+
+    function updateSvgPathByBezier(currentX) {
+        let currentAxles = [currentX, currentX - boxWdith / OffsetRate, currentX - boxWdith];
+        let p = [];
+        // 初始化 p
+        for (let pt of startsPoints) {
+            p.push([pt[0], pt[1]])
+        }
+        for (let i = 0, len = currentAxles.length; i < len; i++) {
+            let cx = currentAxles[i];
+            const axlesPoints = threeAxlesPoints[i];
+
+            if (cx > changeData.fromX) {
+                // 当前变化的轴是大于起始点轴了
+                // 计算对应轴元素的位置，利用简单的直线方程y=kx+b;
+                let targetAxlesMax = targetPoints[axlesPoints[0]][0];
+                if (cx >= targetAxlesMax) {
+                    // 加不加这个判断都不影响
+                    console.log('到达最大轴了哦亲')
+                    //直接停留到目标点即可
+                    for (let axles of axlesPoints) {
+                        p[axles] = targetPoints[axles]
+                    }
+                } else {
+                    for (let axles of axlesPoints) {
+                        p[axles][0] = cx;
+                        p[axles][1] = ks[axles].k * cx + ks[axles].b;
+                    }
+                }
+            }
+            // 兼容收回的时候,这段逻辑收回和展开是通用的
+            if (cx <= changeData.fromX) {
+                //都设置为起始点
+                for (let axles of axlesPoints) {
+                    p[axles] = startsPoints[axles]
+                }
+            }
+        }
+        // 闭合 因为贝塞尔曲线，Q一阶，需要一个控制点和目标点
+        p[8] = p[0];
+        console.log('update p:', p)
+        // let path = polyline2path(p.flat())
+        let path = polyline2BezierPath(p);
+        setSvgPath(pathId, path)
+    }
 
     function updateSvgPath(currentX) {
         let currentAxles = [currentX, currentX - boxWdith / OffsetRate, currentX - boxWdith];

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        .shape-svg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <p>
+
+        <a href="https://developer.mozilla.org/en-US/docs/Web/SVG">https://developer.mozilla.org/en-US/docs/Web/SVG</a>
+
+        <a
+            href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/path">https://developer.mozilla.org/en-US/docs/Web/SVG/Element/path</a>
+
+        <a
+            href="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke">https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke</a>
+    </p>
+
+    <svg class="shape-svg" id="svgId" xmlns="http://www.w3.org/2000/svg">
+        <path id="pathId" fill="none" stroke="red" stroke-width="10" d="M30 30 Q100 170,200,300"></path>
+        <path id="line2" fill="none" stroke="skyblue" stroke-width="10" d="M100 100 L200 300"></path>
+        <path id="line2" fill="none" stroke="skyblue" stroke-width="10" d="M100 100 L300 100"></path>
+
+    </svg>
+
+</body>
+
+</html>
