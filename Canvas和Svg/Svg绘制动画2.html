@@ -6,9 +6,108 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+        .all-svg {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+    </style>
 </head>
 
 <body>
+    <!-- set -->
+    <svg width="100" height="100">
+        <circle cx="30" cy="30" r="25" style="stroke: none; fill: #0000ff;">
+            <set attributeName="r" attributeType="XML" to="50" begin="1s" />
+            <set attributeName="r" attributeType="XML" to="25" begin="2s" />
+            <set attributeName="fill" attributeType="CSS" to='red' begin="3s" />
+            <set attributeName="fill" attributeType="CSS" to='green' begin="4s" />
+        </circle>
+    </svg>
+
+    <!-- animate -->
+    <svg width="500">
+        <circle cx="30" cy="30" r="25" fill="skyblue">
+            <animate attributeType="XML" attributeName="cx" from="30" to="200" dur="1" fill="freeze" repeatCount="1" />
+        </circle>
+
+        <circle cx="30" cy="90" r="25" fill="red">
+            <animate attributeType="XML" attributeName="cx" from="30" to="200" dur="1" fill="remove" repeatCount="1" />
+        </circle>
+    </svg>
+
+    <!-- animateTransform -->
+    <svg class="all-svg">
+        <rect x="220" y="320" width="100" height="30" stroke="#222">
+            <!-- from（角度 x y） -->
+            <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 320 340"
+                to="360 320 340" begin="1s" dur="3s" repeatCount="1" fill="freeze" />
+        </rect>
+    </svg>
+
+    <svg>
+        <!-- transform="translate(25,10)" -->
+        <rect x="0" y="0" width="50" height="20" stroke="red" fill="red">
+            <animateTransform attributeName="transform" attributeType="XML" begin="2s" type="scale" from="0.5 0.5"
+                to="2 2" dur="3s" repeatCount="indefinite" />
+        </rect>
+    </svg>
+
+    <svg>
+        <rect x="0" y="0" width="50" height="20" stroke="red" fill="red">
+            <animateTransform attributeName="transform" attributeType="XML" begin="2s" type="translate" from="0 10"
+                to="100 20" dur="3s" repeatCount="indefinite" />
+        </rect>
+    </svg>
+
+    <!-- animateMotion -->
+    <svg width="500" height="500">
+        <path id="movepath" d="M20,20 q50,10 100,120 t100,140" fill="none" stroke="#111"></path>
+        <rect x="0" y="0" width="30" height="15" stroke="red" fill="red">
+            <animateMotion begin="0" dur="3s" repeatCount="indefinite">
+                <mpath xlink:href="#movepath"></mpath>
+            </animateMotion>
+        </rect>
+
+        <rect x="-15" y="-7" width="30" height="15" stroke="red" fill="red">
+            <animateMotion begin="0s" dur="5s" repeatCount="indefinite" rotate="auto">
+                <mpath xlink:href="#movepath"></mpath>
+            </animateMotion>
+        </rect>
+
+    </svg>
+
+    <!-- 组合动画 -->
+    <svg width="500" height="200">
+        <rect x="0" y="0" width="30" height="15" stroke="red" fill="red">
+            <animate attributeType="XML" attributeName="x" from="0" to="300" dur="3s" repeatCount="1" />
+            <animate attributeType="XML" attributeName="y" from="0" to="100" dur="3s" repeatCount="1" />
+        </rect>
+    </svg>
+
+    <!-- 串行 -->
+    <svg width="500" height="200">
+        <rect x="0" y="0" width="30" height="15" stroke="#222" fill="#222">
+            <animate id="one" attributeType="XML" attributeName="x" from="0" to="300" dur="3s" repeatCount="1"
+                fill="freeze" />
+            <animate attributeType="XML" attributeName="y" begin="one.end" from="0" to="100" dur="3s" repeatCount="1"
+                fill="freeze" />
+        </rect>
+    </svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <rect x="10" y="10" width="40" height="20" style="stroke: #000000; fill: none;">
+            <animateTransform attributeName="transform" attributeType="XML" type="scale" from="1" to="3" begin="0s"
+                dur="10s" repeatCount="indefinite" additive="sum"></animateTransform>
+            <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 30 20" to="360 30 20"
+                begin="0s" dur="10s" fill="freeze" repeatCount="indefinite" additive="sum"></animateTransform>
+        </rect>
+    </svg>
 
 </body>
 

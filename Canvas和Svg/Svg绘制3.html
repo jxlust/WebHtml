@@ -31,6 +31,7 @@
     <p> large-arc-flag 是标记绘制大弧(1)还是小弧(0)部分。</p>
     <p> sweep-flag 是标记向顺时针(1)还是逆时针(0)方向绘制。 </p>
     <p> x y 是圆弧终点的坐标。</p>
+    <p>二阶贝塞尔Q q T t, 三阶贝塞尔曲线C c S s</p>
 
 
     <svg class="shape-svg" id="svgId" xmlns="http://www.w3.org/2000/svg" stroke-width="2">
@@ -59,6 +60,10 @@
         <path id="right" d="M400,160 h50" stroke="#f6f3f2"></path>
         <path id="top" d="M400,160 v-50" stroke="#12f232"></path>
         <path id="bottom" d="M400,160 v50" stroke="#888"></path>
+
+
+        <!-- 贝塞尔曲线 -->
+        <path d="M550,100 q10,70 100,130 t130 190" stroke="red" fill="none"></path>
     </svg>
 
 </body>
