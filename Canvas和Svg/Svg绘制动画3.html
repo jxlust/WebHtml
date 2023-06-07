@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .all-svg {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <svg width="500" height="200">
+        <rect x="0" y="0" width="20" height="20" style="stroke: #ff0000; fill: none;">
+            <animate attributeName="x" dur="5s" values="0; 40; 160" calcMode="discrete" />
+        </rect>
+        <rect x="0" y="40" width="20" height="20" style="stroke: #ff0000; fill: none;">
+            <animate attributeName="x" dur="5s" values="0; 40; 160" calcMode="linear" />
+        </rect>
+        <rect x="0" y="80" width="20" height="20" style="stroke: #ff0000; fill: none;">
+            <animate attributeName="x" dur="5s" values="0; 40; 160" calcMode="paced" />
+        </rect>
+        <rect x="0" y="120" width="20" height="20" style="stroke: #ff0000; fill: none;">
+            <animate attributeName="x" dur="5s" values="0; 40; 160" keyTimes="0; .8; 1" calcMode="linear" />
+        </rect>
+        <rect x="0" y="160" width="20" height="20" style="stroke: #ff0000; fill: none;">
+            <animate attributeName="x" dur="5s" values="0; 40; 160" keyTimes="0; .8; 1" calcMode="spline"
+                keySplines=".5 0 .5 1; 0 0 1 1" />
+        </rect>
+    </svg>
+
+
+    <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="60" cy="10" r="10">
+            <animate attributeName="cx" dur="4s" max="6s" repeatCount="indefinite" values="60 ; 110 ; 60 ; 10 ; 60"
+                keyTimes="0 ; 0.25 ; 0.5 ; 0.75 ; 1" />
+            <animate attributeName="cy" dur="4s" max="6s" repeatCount="indefinite" values="10 ; 60 ; 110 ; 60 ; 10"
+                keyTimes="0 ; 0.25 ; 0.5 ; 0.75 ; 1" />
+        </circle>
+    </svg>
+
+    <svg width="500" height="200">
+        <rect x="0" y="0" width="20" height="20" style="fill: black;" id='rect'></rect>
+        <rect x="0" y="40" width="20" height="20" style="stroke: #ff0000; fill: none;">
+            <animate attributeName="x" dur="1s" min='3s' restart='whenNotActive' begin='rect.click'
+                values="0; 40; 160" />
+        </rect>
+        <rect x="0" y="80" width="20" height="20" style="stroke: #ff0000; fill: none;">
+            <animate attributeName="x" dur="1s" min='3s' restart='always' begin='rect.click' values="0; 40; 160" />
+        </rect>
+    </svg>
+</body>
+
+</html>
