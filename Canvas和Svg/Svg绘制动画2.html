@@ -67,14 +67,16 @@
 
     <!-- animateMotion -->
     <svg width="500" height="500">
+        <path id="testbsr" d="M0,0 C250,250 400,100,500,500" stroke="red" fill="none"></path>
         <path id="movepath" d="M20,20 q50,10 100,120 t100,140" fill="none" stroke="#111"></path>
         <rect x="0" y="0" width="30" height="15" stroke="red" fill="red">
-            <animateMotion begin="0" dur="3s" repeatCount="indefinite">
+            <animateMotion begin="0" dur="5s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="spline"
+                keySplines="0.5 0.5 0.8 .2;">
                 <mpath xlink:href="#movepath"></mpath>
             </animateMotion>
         </rect>
 
-        <rect x="-15" y="-7" width="30" height="15" stroke="red" fill="red">
+        <rect x="-15" y="-7" width="30" height="15" stroke="none" fill="green">
             <animateMotion begin="0s" dur="5s" repeatCount="indefinite" rotate="auto">
                 <mpath xlink:href="#movepath"></mpath>
             </animateMotion>
