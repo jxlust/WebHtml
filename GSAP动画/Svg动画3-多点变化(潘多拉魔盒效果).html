@@ -56,10 +56,15 @@
 
 </body>
 <script>
+    /**
+     * t
+     * a1 start
+     * a2 key
+     * a3 end
+     **/
     function twobsr(t, a1, a2, a3) {
         return ((1 - t) * (1 - t)) * a1 + 2 * t * (1 - t) * a2 + t * t * a3;
     }
-    
 
     function polyline2path(points) {
         const path = 'M' + points.slice(0, 2).join(' ') + 'L' + points.slice(2).join(' ') + 'Z';
