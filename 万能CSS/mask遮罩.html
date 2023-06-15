@@ -7,9 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mask & Filter Study</title>
     <style>
-        :root{
+        :root {
             --seed: 0,
         }
+
         html,
         body {
             margin: 0;
@@ -33,6 +34,18 @@
             height: 100px;
             -webkit-mask-image: url(../Web技巧和布局/images/logo.png);
             mask-image: url(../Web技巧和布局/images/logo.png);
+        }
+
+        .mask-img-svg {
+            background-color: currentColor;
+            mask-size: cover;
+            font-size: 200px;
+            width: 1em;
+            height: 1em;
+            overflow: hidden;
+            /* color: red; */
+            -webkit-mask-image: url(./images/heart.svg);
+            mask-image: url(./images/heart.svg);
         }
 
         .mask-svg {
@@ -75,28 +88,33 @@
             animation-duration: 2s;
             animation-iteration-count: infinite;
         }
-        @keyframes circleAni{
-            0%{
+
+        @keyframes circleAni {
+            0% {
                 --seed: 0
             }
-            10%{
+
+            10% {
                 --seed: 10
             }
-            50%{
+
+            50% {
                 --seed: 50
             }
-            60%{
+
+            60% {
                 --seed: 60
             }
-            100%{
-               --seed: 100
+
+            100% {
+                --seed: 100
             }
         }
 
         .mask-bg2 {
             width: 200px;
             height: 100px;
-            
+
             background: linear-gradient(135deg, transparent 15px, red 0) top left/100px 50px,
                 linear-gradient(-135deg, transparent 15px, red 0) top right/100px 50px,
                 linear-gradient(45deg, transparent 15px, red 0) bottom left/ 100px 50px,
@@ -208,7 +226,7 @@
             -webkit-mask: url(../Web技巧和布局/images/imgmask.png);
             mask-size: 3000% 100%;
             animation: maskMove 2s steps(29) infinite;
-            
+
         }
 
         .mask-bg6::after {
@@ -325,6 +343,9 @@
     <div class="content">
         <div class="box">
             <img class="mask-img" src="../Web技巧和布局/images/fruit1.jpeg" alt="">
+        </div>
+        <div class="box">
+            <div class="mask-img-svg"></div>
         </div>
 
         <div class="box">
