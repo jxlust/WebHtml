@@ -306,6 +306,18 @@
             animation-iteration-count: infinite;
         }
 
+
+        .mask-bg8 .eye-img {
+            z-index: 2;
+            position: absolute;
+            inset: 0;
+            mask: url('./images/eye.svg') no-repeat center;
+            -webkit-mask: url('./images/eye.svg') no-repeat center;
+            animation-name: eyeAni;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+        }
+
         @keyframes heartAni {
             0% {
                 mask-size: 0% 0%;
@@ -315,6 +327,19 @@
             100% {
                 mask-size: 300% 300%;
                 -webkit-mask-size: 300% 300%;
+
+            }
+        }
+
+        @keyframes eyeAni {
+            0% {
+                mask-size: 0% 0%;
+                -webkit-mask-size: 0% 0%;
+            }
+
+            100% {
+                mask-size: 500% 500%;
+                -webkit-mask-size: 500% 500%;
 
             }
         }
@@ -397,11 +422,20 @@
             </div>
         </div>
 
+
         <div class="box56">
             <div class="mask-bg5"></div>
             <div class="mask-bg6"></div>
         </div>
 
+
+        <div class="box">
+            <div class="mask-bg8">
+                <div class="img-mask"></div>
+                <img src="../Canvas和Svg/images/majors_back.jpg">
+                <img class="eye-img" src="../Canvas和Svg/images/majors_back.jpg" alt="">
+            </div>
+        </div>
 
 
 </body>
