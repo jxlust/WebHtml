@@ -197,9 +197,10 @@
 	</style>
 
 	<style>
-		.step{
+		.step {
 			width: 80vw;
 		}
+
 		.step-container {
 			color: #fff;
 			background-color: rgb(194, 214, 255);
@@ -235,8 +236,52 @@
 			background-repeat: no-repeat;
 
 		}
-		.step-slide__1{
+
+		.step-slide__1 {
 			width: 33.3333%;
+		}
+	</style>
+	<style>
+		.icons {
+			display: flex;
+			align-items: center;
+			padding: 20px;
+		}
+
+		.icons .fold-icon1 {
+			width: 14px;
+			height: 14px;
+			margin-right: 8px;
+			border: 1px solid #999;
+			background: linear-gradient(#999, #999) 50%/10px 1px no-repeat;
+		}
+
+		.icons .fold-icon2 {
+			width: 14px;
+			height: 14px;
+			margin-right: 8px;
+			border: 1px solid #999;
+			background: linear-gradient(#999, #999) 50%/1px 10px no-repeat, linear-gradient(#999, #999) 50%/10px 1px no-repeat;
+		}
+
+		.icons .line-icon1 {
+			display: flex;
+			align-items: center;
+			height: 46px;
+			color: rgba(0, 0, 0, 0.85);
+			cursor: default;
+			outline: 0;
+			padding-left: 30px;
+			list-style: none;
+			background: repeating-linear-gradient(90deg, #999 0 1px, transparent 0px 2px) 0px 50%/20px 1px no-repeat;
+		}
+
+		.icons .line-icon2 {
+			width: 50px;
+			height: 46px;
+			padding-left: 40px;
+			background: repeating-linear-gradient(#999 0 1px, transparent 0px 2px) 40px 0px/1px 100% no-repeat;
+			/* background: linear-gradient(#999, #999) 40px 0px/1px 100% no-repeat; */
 		}
 	</style>
 </head>
@@ -259,6 +304,12 @@
 		<div class="bgBox"></div>
 		<div class="bgBox"></div>
 		<div class="bgBox"></div>
+	</div>
+	<div class="icons">
+		<div class="fold-icon2"></div>
+		<div class="fold-icon1"></div>
+		<div class="line-icon1"></div>
+		<div class="line-icon2"></div>
 
 	</div>
 	<div class="step">
