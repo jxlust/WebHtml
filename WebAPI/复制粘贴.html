@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="wrap">这是复制的复制内容</div>
+
+
+    <script>
+        var wrap = document.getElementById('wrap')
+        wrap.oncopy = function (event) {
+            // 通过copy事件监听，阻止将选中内容复制到系统剪切板上
+            event.preventDefault()
+            // 获取选中内容对象
+            const selection = document.getSelection()
+            // selection对象重构了toSring()方法，获取selection对象的选中内容
+            var selectContent = selection.toString()
+            var dealContent =
+                selectContent +
+                '转载请联系作者，内容地址：xxxxx'
+            // 把重写后的内容写入到剪贴板  
+            event.clipboardData.setData('text/plain', dealContent)
+        }
+    </script>
+
+</body>
+
+</html>
