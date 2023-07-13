@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            background: #1A3847;
+            text-align: center;
+        }
+
+        .buttonWrapper {
+            position: relative;
+            transform: scale(.4);
+            display: inline-block;
+            width: 460px;
+            height: 565px;
+            border-radius: 280px;
+        }
+
+        .buttonWrapper .button {
+            position: absolute;
+            top: calc(50% - 160px);
+            left: calc(50% - 220px);
+            width: 440px;
+            height: 355px;
+            border-radius: 50%;
+            background: #f3a50afd;
+            box-shadow: 0 10px 0 #f3a50afd, 0 20px 0 #f3a50afd, 0 30px 0 #f3a50afd, 10px 40px 0 rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        .buttonWrapper .button:before {
+            position: absolute;
+            top: -95px;
+            left: 40px;
+            width: 360px;
+            height: 305px;
+            border-radius: inherit;
+            color: #FF0017;
+            background-color: #FF0017;
+            box-shadow: 0 30px 0 #DF0014, 0 60px 0 #DF0014, 0 90px 0 #DF0014, 0 110px 0 #DF0014, 25px 140px 0 rgba(0, 0, 0, 0.1);
+            content: '';
+            -webkit-transition: all 100ms;
+            -moz-transition: all 100ms;
+            transition: all 100ms;
+        }
+
+        .buttonWrapper .button:active:before,
+        .buttonWrapper .button.active:before {
+            top: 0px;
+            box-shadow: 0 16px #DF0014, 0 16px #DF0014, 0 16px #DF0014, 0 16px #DF0014, 5px 20px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .button-text {
+            position: absolute;
+            width: 256px;
+            text-align: center;
+            top: 8px;
+            left: 88px;
+            color: #8ed024;
+            font-size: 65px;
+            transition: all 100ms;
+        }
+
+        .buttonWrapper .button:active .button-text {
+            transform: translateY(100px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="buttonWrapper">
+        <div class="button">
+            <div class="button-text">SOS</div>
+        </div>
+    </div>
+
+</body>
+
+</html>
