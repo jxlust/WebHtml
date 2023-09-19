@@ -22,16 +22,90 @@
             background-size: 1px 6px;
             background-repeat: repeat-y;
         }
+
+        .box {
+            width: 686px;
+            height: 248px;
+            background: #FFFFFF;
+            border-radius: 16px;
+            margin: auto;
+            position: relative;
+        }
+
+        .bg {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 500px;
+            background-color: #f8f8f8;
+        }
+
+        .label {
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 84px;
+            height: 34px;
+            background: #DFF7EF;
+            border-radius: 0px 16px 0px 16px;
+        }
+
+        .label::after {
+            content: '';
+            position: absolute;
+            bottom: -16px;
+            right: 0;
+            width: 16px;
+            height: 16px;
+            background: radial-gradient(circle at left bottom, #fff 16px, #DFF7EF 16px, #DFF7EF 100%);
+
+        }
+
+        .label::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -16px;
+            width: 16px;
+            height: 16px;
+            background: radial-gradient(circle at left bottom, #fff 16px, #DFF7EF 16px, #DFF7EF 100%);
+
+
+        }
+
+        .box1 {
+            width: 100px;
+            height: 100px;
+            /* background-color: skyblue; */
+            background: radial-gradient(circle at left bottom, #fff 100px, red 100px, red 100%);
+            /* border-radius: 0 100% 0 0; */
+            /* background-color: #fff; */
+            /* background-image: linear-gradient(-45deg, red 0%, blue 100%); */
+
+        }
     </style>
 </head>
 
 <body>
 
+    https://update.glados-config.com/clash/402657/f77ab81/75218/glados.yaml
     <div class="line1">
 
     </div>
 
     <div class="line2"></div>
+
+    <div class="bg">
+        <div class="box1"></div>
+        <div class="box">
+            <div class="label">用印中</div>
+        </div>
+    </div>
+
 </body>
 
 </html>
