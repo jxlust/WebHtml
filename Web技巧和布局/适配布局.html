@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .box11,
+        .box3,
+        .box2,
+        .box1 {
+            /* width: 80vw; */
+            width: 600px;
+            height: 50px;
+            background-color: #f8f8f8;
+            display: flex;
+            align-items: stretch;
+            margin-bottom: 20px;
+        }
+
+        .box1-item {}
+
+        /* flex-basis: 0 理解为该item初始化宽度是0，他占用的空间都是通过剩余空间去计算的 */
+        .box1-item:nth-child(1) {
+            flex-basis: 0%;
+            flex-grow: 1;
+            flex-shrink: 1;
+            background-color: rosybrown;
+        }
+
+        .box1-item:nth-child(2) {
+            flex-basis: 0%;
+            flex-grow: 2;
+            flex-shrink: 1;
+            background-color: yellow;
+        }
+
+        .box1-item:nth-child(3) {
+            flex-basis: 0%;
+            flex-grow: 1;
+            flex-shrink: 1;
+            background-color: skyblue;
+        }
+
+        .box11-item:nth-child(1) {
+            flex-basis: 0%;
+            flex-grow: 1;
+            flex-shrink: 1;
+            background-color: rosybrown;
+        }
+
+        .box11-item:nth-child(2) {
+            flex-basis: 100px;
+            flex-grow: 2;
+            flex-shrink: 1;
+            background-color: yellow;
+        }
+
+        .box11-item:nth-child(3) {
+            flex-basis: 400px;
+            flex-grow: 1;
+            flex-shrink: 1;
+            background-color: skyblue;
+        }
+
+        /* flex-basis: auto 会自动适配内容的宽度，除去内容的宽度再去计算剩余空间（flex-grow）或者压缩空间（flex-shrink） */
+        .box2-item:nth-child(1) {
+            flex-basis: 0%;
+            flex-grow: 1;
+            flex-shrink: 1;
+            background-color: rosybrown;
+        }
+
+        .box2-item:nth-child(2) {
+            flex-basis: auto;
+            flex-grow: 2;
+            flex-shrink: 1;
+            background-color: yellow;
+        }
+
+        .box2-item:nth-child(3) {
+            flex-basis: 0%;
+            flex-grow: 1;
+            flex-shrink: 1;
+            background-color: skyblue;
+        }
+
+        /* basis有具体值，计算就是父容器宽度把basis减去剩余的空间根据flex-grow flex-shrink去计算 然后再加到item上 */
+        .box3-item:nth-child(1) {
+            flex-basis: 100px;
+            flex-grow: 1;
+            flex-shrink: 1;
+            background-color: rosybrown;
+        }
+
+        .box3-item:nth-child(2) {
+            flex-basis: 200px;
+            flex-grow: 2;
+            flex-shrink: 1;
+            background-color: yellow;
+        }
+
+        .box3-item:nth-child(3) {
+            flex-basis: 100px;
+            flex-grow: 1;
+            flex-shrink: 1;
+            background-color: skyblue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box1">
+        <div class="box1-item"></div>
+        <div class="box1-item">box1-----item2</div>
+        <div class="box1-item"></div>
+    </div>
+
+    <div class="box11">
+        <div class="box11-item"></div>
+        <div class="box11-item">box11-----item2</div>
+        <div class="box11-item"></div>
+    </div>
+
+    <div class="box2">
+        <div class="box2-item"></div>
+        <div class="box2-item">box2----item2</div>
+        <div class="box2-item"></div>
+    </div>
+
+    <div class="box3">
+        <div class="box3-item"></div>
+        <div class="box3-item">box3----item2</div>
+        <div class="box3-item"></div>
+    </div>
+
+</body>
+
+</html>
