@@ -1,189 +1,189 @@
-   <!DOCTYPE html>
-   <html>
+<!DOCTYPE html>
+<html>
 
-   <head>
-   	<meta charset="UTF-8">
-   	<meta name="viewport" content="initial-scale=1,maximum-scale=1, minimum-scale=1">
-   	<script type="text/javascript" src="js/jquery-2.2.2.min.js"></script>
-   	<title></title>
-   </head>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1, minimum-scale=1">
+	<script type="text/javascript" src="js/jquery-2.2.2.min.js"></script>
+	<title></title>
+</head>
 
-   <body>
-   	<button>1</button>
-   	<button>2</button>
-   	<button>3</button>
+<body>
+	<button>1</button>
+	<button>2</button>
+	<button>3</button>
 
-   	<div id="outer" style="width: 200px;padding: 30px 0;background-color: #ff0000;;">
-   		<div id="midder" style="padding: 30px 0;width: 100px;background-color: #cccccc;margin: 0  auto;">
-   			<div id="inner" style="height: 50px;width: 50px;background-color: #999;margin: 0 auto;"></div>
-   		</div>
-   	</div>
-   	<ul style="height: 120px;background: #ff0000;">
-   		<li>111111</li>
-   		<li>222222</li>
-   		<li>333333</li>
-   		<li>444444</li>
-   	</ul>
-   </body>
+	<div id="outer" style="width: 200px;padding: 30px 0;background-color: #ff0000;;">
+		<div id="midder" style="padding: 30px 0;width: 100px;background-color: #cccccc;margin: 0  auto;">
+			<div id="inner" style="height: 50px;width: 50px;background-color: #999;margin: 0 auto;"></div>
+		</div>
+	</div>
+	<ul style="height: 120px;background: #ff0000;">
+		<li>111111</li>
+		<li>222222</li>
+		<li>333333</li>
+		<li>444444</li>
+	</ul>
+</body>
 
-   </html>
-   <script src="js/继承.js"></script>
-   <script>
-   	//promise
-   	console.log(1);
-   	new Promise(function (resovle, reject) {
-   		reject(2);
-   		resovle(3);
-   	}).then(function (data) {
-   		console.log(data);
-   	}).catch(function (e) {
-   		console.log(e)
-   	})
-   	console.log(4)
+</html>
+<script src="js/继承.js"></script>
+<script>
+	//promise
+	console.log(1);
+	new Promise(function (resovle, reject) {
+		reject(2);
+		resovle(3);
+	}).then(function (data) {
+		console.log(data);
+	}).catch(function (e) {
+		console.log(e)
+	})
+	console.log(4)
 
-   	for (var i = 0; i < 3; i++) {
+	for (var i = 0; i < 3; i++) {
 
-   	}
+	}
 
-   	let cat = {
-   		sound: 'meow',
-   		say: function () {
-   			console.log(this.sound);
-   		}
-   	}
-   	let catSay = cat.say;
-   	catSay();
-   </script>
+	let cat = {
+		sound: 'meow',
+		say: function () {
+			console.log(this.sound);
+		}
+	}
+	let catSay = cat.say;
+	catSay();
+</script>
 
-   <script>
-   	$('ul').on('click', 'li', {
-   		name: "李四"
-   	}, function (e) {
-   		console.log($(this).index());
-   		console.log(e.data.name);
-   	})
-   	var f = function () {
-   		this.a = 1;
-   		this.b = 2;
-   	}
-   	var o = new f();
-   	f.prototype.c = 3333;
-   	console.log(o.c);
-   	console.log(o);
+<script>
+	$('ul').on('click', 'li', {
+		name: "李四"
+	}, function (e) {
+		console.log($(this).index());
+		console.log(e.data.name);
+	})
+	var f = function () {
+		this.a = 1;
+		this.b = 2;
+	}
+	var o = new f();
+	f.prototype.c = 3333;
+	console.log(o.c);
+	console.log(o);
 
-   	var str1 = new String("a");
-   	var str = "a";
-   	var str2 = str1;
-   	var obj = {
-   		foo: "bar"
-   	};
-   	var obj2 = obj;
+	var str1 = new String("a");
+	var str = "a";
+	var str2 = str1;
+	var obj = {
+		foo: "bar"
+	};
+	var obj2 = obj;
 
-   	//var x = x;
-   	console.log(Object.is(NaN, NaN));
-   	console.log(obj === obj2);
-   </script>
-   <scrip>
-   	function $(element) {
-   	return document.getElementById(element);
-   	}
+	//var x = x;
+	console.log(Object.is(NaN, NaN));
+	console.log(obj === obj2);
+</script>
+<script>
+	function $(element) {
+		return document.getElementById(element);
+	}
 
-   	function on(element, eventname, callback, capture) {
-   	if(addEventListener) {
-   	$(element).addEventListener(eventname, callback, capture);
-   	} else {
-   	$(element).attachEvent('on' + eventname, callback);
-   	}
+	function on(element, eventname, callback, capture) {
+		if (addEventListener) {
+			$(element).addEventListener(eventname, callback, capture);
+		} else {
+			$(element).attachEvent('on' + eventname, callback);
+		}
 
-   	}
-   	on('outer', 'click', function() {
-   	console.log("outer 点击 冒泡");
-   	}, false);
-   	on('outer', 'click', function() {
-   	console.log("outer 捕获");
-   	}, true);
-   	on('midder', 'click', function(event) {
-   	console.log("midder 点击 冒泡");
-   	console.log('m 1',event.target);
-   	console.log('m 1',event.currentTarget);
-   	}, false);
-   	on('midder', 'click', function(event) {
-   	console.log("midder 捕获");
-   	console.log('m 2',event.target);
-   	console.log('m 2',event.currentTarget);
-   	}, true);
+	}
+	on('outer', 'click', function () {
+		console.log("outer 点击 冒泡");
+	}, false);
+	on('outer', 'click', function () {
+		console.log("outer 捕获");
+	}, true);
+	on('midder', 'click', function (event) {
+		console.log("midder 点击 冒泡");
+		console.log('m 1', event.target);
+		console.log('m 1', event.currentTarget);
+	}, false);
+	on('midder', 'click', function (event) {
+		console.log("midder 捕获");
+		console.log('m 2', event.target);
+		console.log('m 2', event.currentTarget);
+	}, true);
 
-   	on('inner', 'click', function(event) {
-   	console.log(event.target);
-   	console.log(event.currentTarget);
-   	console.log('inner 捕获');
-   	}, true);
-   	on('inner', 'click', function(event) {
-   	console.log('inner 点击冒泡');
-   	// event.stopPropagation();//阻止冒泡
-   	}, false);
-   </scrip>
-   <scrip>
-   	var obj = { name: 'xxx', num: 1 };
-   	for(var k in obj) {
-   	console.log(k + "xx");
-   	}
-   	var obj22 = {0:'aaa',1: 'bb',length:2};
-   	console.log(Array.prototype.map.call(obj22, function(item) {
-   	console.log(item+'tt');
-   	return item
-   	}) + ",,,ssss");
-   	var str = JSON.stringify(obj, function(k, v) {
-   	console.log('k',v);
-   	if(typeof v === 'number') {
-   	return;
-   	}
-   	return v;
-   	});
-   	console.log(str);
-   	var jsonStr = '{"name":"ttt","count":111}';
-   	var parseObj = JSON.parse(jsonStr, function(k, v) {
-   	console.log('k'+k+','+v);
-   	if(k === 'count') return undefined;
-   	return v;
-   	})
-   	console.log(parseObj);
+	on('inner', 'click', function (event) {
+		console.log(event.target);
+		console.log(event.currentTarget);
+		console.log('inner 捕获');
+	}, true);
+	on('inner', 'click', function (event) {
+		console.log('inner 点击冒泡');
+		// event.stopPropagation();//阻止冒泡
+	}, false);
+</script>
+<script>
+	var obj = { name: 'xxx', num: 1 };
+	for (var k in obj) {
+		console.log(k + "xx");
+	}
+	var obj22 = { 0: 'aaa', 1: 'bb', length: 2 };
+	console.log(Array.prototype.map.call(obj22, function (item) {
+		console.log(item + 'tt');
+		return item
+	}) + ",,,ssss");
+	var str = JSON.stringify(obj, function (k, v) {
+		console.log('k', v);
+		if (typeof v === 'number') {
+			return;
+		}
+		return v;
+	});
+	console.log(str);
+	var jsonStr = '{"name":"ttt","count":111}';
+	var parseObj = JSON.parse(jsonStr, function (k, v) {
+		console.log('k' + k + ',' + v);
+		if (k === 'count') return undefined;
+		return v;
+	})
+	console.log(parseObj);
 
-   	// (function() {
-   	// console.log(2);
-   	// })();
-   	//
-   	// function test1(x = 2, y = x) {
-   	// return [x, y];
-   	// }
-   	// console.log(test1());
+	// (function() {
+	// console.log(2);
+	// })();
+	//
+	// function test1(x = 2, y = x) {
+	// return [x, y];
+	// }
+	// console.log(test1());
 
-   	/*var x = 1;
-   	let x = x;*/
+	/*var x = 1;
+	let x = x;*/
 
-   	var A = { a: {} };
-   	var B = {};
-   	A.a = B;
+	var A = { a: {} };
+	var B = {};
+	A.a = B;
 
-   	B.str = 'hello';
-   	B.add = function(x, y) {
-   	return x + y;
-   	}
-   	B.print = function() {
-   	console.log("ai ni!");
-   	}
+	B.str = 'hello';
+	B.add = function (x, y) {
+		return x + y;
+	}
+	B.print = function () {
+		console.log("ai ni!");
+	}
 
-   	;
-   	(function() {
-   	console.log("yi wang nian");
-   	})();
-   	//$(B.print());
+		;
+	(function () {
+		console.log("yi wang nian");
+	})();
+	//$(B.print());
 
-   	// B = {name: "n",age: "12"};
-   	// console.log(B);
-   	// console.log(A.a);
+	// B = {name: "n",age: "12"};
+	// console.log(B);
+	// console.log(A.a);
 
-   	// B = A.a;
-   	// B = "hello";
-   	// console.log(A.a);
-   </scrip>
+	// B = A.a;
+	// B = "hello";
+	// console.log(A.a);
+</script>
