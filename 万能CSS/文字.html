@@ -48,4 +48,10 @@
     </div>
 </body>
 
+<script>
+
+    const cb = new Function("a", "b", "return a+b;");
+    console.log("sum:", cb(1, 2));
+</script>
+
 </html>
