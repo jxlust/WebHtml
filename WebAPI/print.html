@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://printjs-4de6.kxcdn.com/print.min.css">
+    <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+
+    <style>
+        .textBg1 {
+            background-image: linear-gradient(90deg, #147B96, #E6D205 25%, #147B96 50%, #E6D205 75%, #147B96);
+            background-size: 200% 100%;
+            /* 文字渐变的关键属性 */
+            /* 文字填充色透明 */
+            -webkit-text-fill-color: transparent;
+            /* 背景按文字裁剪 chrome私人用品 */
+            -webkit-background-clip: text;
+            animation: text1MaskedAnimation 3s infinite linear;
+        }
+
+        @-webkit-keyframes text1MaskedAnimation {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: -100% 0;
+            }
+        }
+
+        .text2 {
+            font-size: 30px;
+            display: inline-block;
+            color: transparent;
+            background-image: linear-gradient(90deg, skyblue, red);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        @media print {
+            .text2 {
+                font-size: 30px;
+                display: inline-block;
+                color: transparent;
+                background-image: linear-gradient(90deg, skyblue, red);
+                -webkit-background-clip: text;
+                background-clip: text;
+            }
+        }
+
+        .margin100 {
+            margin: 300px 0;
+        }
+    </style>
+</head>
+
+<body>
+    打印测试：
+    <a href="https://www.cnblogs.com/angia/p/17148241.html">https://www.cnblogs.com/angia/p/17148241.html</a>
+    <h1>测试</h1>
+    <button id="btn">打印</button>
+    <div class="box" id="boxId">
+        <h3>标题</h3>
+        <p>1</p>
+        <div class="textBg1">
+            <h2>我是一串神奇的文字</h2>
+        </div>
+        <div class="text2">
+            萨里的风景
+        </div>
+        <div class="text2">
+            萨里的风景
+        </div>
+        <div class="margin100">艰巨</div>
+    </div>
+
+
+</body>
+<script>
+    const btn = document.getElementById('btn')
+    btn.addEventListener('click', () => {
+        printJS({
+            printable: 'boxId', type: 'html', header: '',
+            css: 'http://127.0.0.1:5502/WebAPI/css/color.css',
+            // 继承样式
+            targetStyle: '*',
+            targetStyles: '*',
+            scanStyles: true,
+        })
+    })
+
+</script>
+
+</html>
