@@ -46,10 +46,10 @@
     <script>
         let range = new Range();
         let pDom = document.getElementById('pRangeTest');
-        range.setStart(pDom, 0);
-        range.setEnd(pDom, 2);
-        console.log('range:', range);// Test:<i>abc</i> 
-        console.log('range text:', range.toString());// Test: abc
+        range.setStart(pDom, 1);
+        range.setEnd(pDom, 4);
+        console.log('range1:', range);// Test:<i>abc</i> 
+        console.log('range text1:', range.toString());// Test: abc
         // document.getSelection().addRange(range);
     </script>
 
@@ -60,7 +60,7 @@
         range2.setStart(pDom2.firstChild, 2);
         range2.setEnd(pDom2.querySelector('span').firstChild, 1);
 
-        console.log('range text:', range2.toString());//st: abc and d
+        console.log('range text2:', range2.toString());//st: abc and d
         document.getSelection().addRange(range2);
 
         /**

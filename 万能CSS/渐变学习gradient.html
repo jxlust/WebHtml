@@ -229,7 +229,7 @@
 			background: linear-gradient(-135deg,
 					rgb(194, 214, 255) 15.5px,
 					transparent 0) 0 0/100% 50%,
-				
+
 				radial-gradient(circle at left top,
 					rgb(114, 164, 255) 5%,
 					rgb(72, 118, 255) 100%) 0 0/100% 100%;
@@ -283,6 +283,34 @@
 			background: repeating-linear-gradient(#999 0 1px, transparent 0px 2px) 40px 0px/1px 100% no-repeat;
 			/* background: linear-gradient(#999, #999) 40px 0px/1px 100% no-repeat; */
 		}
+
+		.w-400 {
+			width: 44%;
+		}
+
+		.text-bg-mask {
+			height: 60px;
+			background-size: 100% 100%;
+			display: block;
+			background-image: repeating-linear-gradient(180deg, #ddd4d4 0, #ddd4d4 24px, transparent 24px, transparent 30px);
+			background-repeat: repeat;
+			/* background-color: #999; */
+		}
+
+		.text-bg-mask2 {
+			background-color: transparent;
+			color: transparent;
+			background-image: linear-gradient(transparent 20%, #e2e2e280 20%, #e2e2e280 80%, transparent 0%);
+		}
+
+		.text-bg-mask2::after,
+		.text-bg-mask2::before {
+			background-color: #f7f7f7;
+			background-image: none;
+			color: transparent;
+			border-color: transparent;
+			border-radius: 0;
+		}
 	</style>
 </head>
 
@@ -330,7 +358,14 @@
 		<div class="textBg1">
 			<h2>我是一串神奇的文字</h2>
 		</div>
+	</div>
 
+	<div class="text-wrap w-400">
+		<span
+			class="text-bg-mask2">我是阿什拉夫结束了，发啥发啥发我是阿什拉夫结束了，发啥发啥发，是大法师的发sofas，是大法师的发，是大法师了放假啊了，是大法师的交流方式数据的法拉，是的法拉时间地方，是大法师的发sofas，是大法师的发，是大法师了放假啊了，是大法师的交流方式数据的法拉，是的法拉时间地方</span>
+
+
+		<div class="text-bg-mask"></div>
 	</div>
 
 	<div class="list" id="list">
@@ -354,7 +389,6 @@
 		<div class="item">18</div>
 		<div class="item">19</div>
 		<div class="item">20</div>
-
 	</div>
 </body>
 

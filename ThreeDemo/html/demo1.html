@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.js</title>
+</head>
+
+<body>
+
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "../js/three.module.js"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        let scene, camera, renderer, cube, container
+
+        init();
+        animation();
+
+        function init() {
+            container = document.createElement('div');
+            document.body.appendChild(container);
+            scene = new THREE.Scene()
+            camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 0.1, 1000)
+            renderer = new THREE.WebGL1Renderer()
+            console.log('s p:', scene.position)
+            console.log('c p:', camera.position)
+            //
+            camera.position.set(10, 10, 10)
+            camera.lookAt(scene.position) // 0,0,0
+            renderer.setSize(window.innerWidth, window.innerHeight)
+            container.appendChild(renderer.domElement)
+
+            const axesHelper = new THREE.AxesHelper(10)
+            scene.add(axesHelper)
+            const geometry = new THREE.BoxGeometry(1, 1, 1)
+            const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
+            cube = new THREE.Mesh(geometry, material)
+            scene.add(cube)
+
+        }
+        function animation() {
+            window.requestAnimationFrame(animation)
+
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+            cube.rotation.z += 0.01;
+
+            // 渲染
+            renderer?.render(scene, camera)
+
+        }
+
+    </script>
+
+</body>
+
+</html>
