@@ -28,7 +28,6 @@
     </style>
     <script src="./js/DrawSVG3.11.6.js"></script>
     <script src="./js/MotionPathPlugin.min.js"></script>
-    <script src="./js/MotionPathHelper.min.js"></script>
     <script src="https://unpkg.co/gsap@3/dist/gsap.min.js"></script>
 
 </head>
@@ -74,7 +73,7 @@
 
 <script>
 
-    gsap.registerPlugin(MotionPathPlugin, MotionPathHelper, DrawSVGPlugin);
+    gsap.registerPlugin(MotionPathPlugin, DrawSVGPlugin);
 
     let size = { width: 0, height: 0 };
 
