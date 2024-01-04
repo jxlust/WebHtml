@@ -77,6 +77,9 @@
             top: 1700px;
             background-color: #e26c16;
             will-change: transform;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .box-d {
@@ -87,6 +90,11 @@
 
         .box.active {
             background-color: blue;
+        }
+
+        .box-c p {
+            display: inline-block;
+            font-size: 20px;
         }
     </style>
 
@@ -106,7 +114,9 @@
 
             <div class="box box-a"></div>
             <div class="box box-b">b</div>
-            <div class="box box-c">c</div>
+            <div class="box box-c">
+                <p>c</p>
+            </div>
             <div class="box box-d">d</div>
 
 
@@ -153,8 +163,8 @@
             trigger: '.box-b',
             // onEnter, onLeave, onEnterBack, and onLeaveBack, i
             // "play", "pause", "resume", "reset", "restart", "complete", "reverse", and "none".
-            toggleActions: 'restart pause reverse pause',
-            // toggleActions: 'play pause resume reset',
+            // toggleActions: 'restart pause reverse pause',
+            toggleActions: 'play pause resume reset',
             start: "top center",
             end: "+=300 center",
             markers: true,
@@ -172,10 +182,19 @@
                 console.log('b on onLeaveBack..')
             }
         },
-        duration: 1,
+        duration: 3,
         backgroundColor: '#af18a8'
     })
 
+
+    /***** c scroll animation ***/
+    gsap.to('.box-c p', {
+        scrollTrigger: '.box-c',
+        scale: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: "power2"
+    })
 
 
 </script>
