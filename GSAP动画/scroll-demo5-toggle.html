@@ -101,7 +101,7 @@
 
         .purple {
             background-color: #8d3dae;
-            background-image: radial-gradient(circle at 47% 14%, rgba(205, 205, 205, 0.04) 0%, rgba(205, 205, 205, 0.04) 43%, transparent 43%, transparent 100%), radial-gradient(circle at 35% 12%, rgba(215, 215, 215, 0.04) 0%, rgba(215, 215, 215, 0.04) 4%, transparent 4%, transparent 100%), radial-gradient(circle at 1% 35%, rgba(24, 24, 24, 0.04) 0%, rgba(24, 24, 24, 0.04) 37%, transparent 37%, transparent 100%), radial-gradient(circle at 21% 1%, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0.04) 26%, transparent 26%, transparent 100%), radial-gradient(circle at 23% 82%, rgba(249, 249, 249, 0.04) 0%, rgba(249, 249, 249, 0.04) 60%, transparent 60%, transparent 100%), radial-gradient(circle at 11% 54%, rgba(251, 251, 251, 0.04) 0%, rgba(251, 251, 251, 0.04) 23%, transparent 23%, transparent 100%), radial-gradient(circle at 69% 68%, rgba(234, 234, 234, 0.04) 0%, rgba(234, 234, 234, 0.04) 10%, transparent 10%, transparent 100%), linear-gradient(90deg, #aa6bc5, #8d3dae);
+            background-image: radial-gradient(circle at 47% 14%, rgba(205, 205, 205, 0.04) 0%, rgba(205, 205, 205, 0.04) 43%, transparent 43%, transparent 100%), radial-gradient(circle at 35% 12%, rgba(215, 215, 215, 0.04) 0%, rgba(215, 215, 215, 0.04) 4%, transparent 4%, transparent 100%), radial-gradient(circle at 1% 35%, rgba(24, 24, 24, 0.04) 0%, rgba(24, 24, 24, 0.04) 37%, transparent 37%, transparent 100%), radial-gradient(circle at 21% 1%, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0.04) 26%, transparent 26%, transparent 100%), radial-gradient(circle at 23% 82%, rgba(249, 249, 249, 0.04) 0%, rgba(249, 249, 249, 0.04) 60%, transparent 60%, transparent 100%), radial-gradient(circle at 11% 54%, rgba(251, 251, 251, 0.04) 0%, rgba(251, 251, 251, 0.04) 23%, transparent 23%, transparent 100%), radial-gradient(circle at 69% 68%, rgba(234, 234, 234, 0.04) 0%, rgba(234, 234, 234, 0.04) 10%, transparent 10%, transparent 100%), linear-gradient(90deg, #8d3dae, #8d3dae);
         }
 
         .gray {
@@ -122,22 +122,29 @@
 <body>
     <div class="panel blue description">
         <div>
-            <h1>Scrub animations </h1>
-            <p>利用配置 <code>scrub: true </code> </p>
+            <h1>toggleActions </h1>
+            <p> 利用toggle actions 配置对应钩子动画怎么执行<br />
+                默认配置: play none none none<br />
+                钩子： onEnter, onLeave, onEnterBack, and onLeaveBack<br />
+                可选值： "play", "pause", "resume", "reset", "restart", "complete", "reverse", and "none".
+            </p>
+            <p>
+                <span class="line line-0"></span>
+            </p>
         </div>
     </div>
 
     <div class="panel red">
         <p>
             <span class="line line-1"></span>
-            测试scrub效果的一根线条
+            测试效果的一根线条
         </p>
     </div>
 
     <div class="panel orange">
         <p>
             <span class="line line-2"></span>
-            测试scrub效果的一根线条，其中panel利用pin固定
+            测试效果的一根线条
         </p>
     </div>
 
@@ -147,7 +154,6 @@
             我是一条线，我是文字，我也要动起来，滚动吧少年
         </p>
     </div>
-
 
 
     <div class="panel gray">
@@ -162,18 +168,26 @@
     gsap.registerPlugin(ScrollTrigger);
     // ScrollTrigger.normalizeScroll(true)
 
+    /*****  scroll line0 animation ***/
+    gsap.from('.line-0', {
+        scrollTrigger: '.line-0',
+        duration: 5,
+        scaleX: 0,
+        transformOrigin: 'left center',
+        ease: 'none'
+    })
+
     /*****  scroll line1 animation ***/
     gsap.from('.line-1', {
         scrollTrigger: {
             trigger: '.line-1',
-            scrub: true,
-            // scrub: 1,
-            start: 'top bottom',
-            end: 'top top',
+            // onEnter, onLeave, onEnterBack, and onLeaveBack
+            // "play", "pause", "resume", "reset", "restart", "complete", "reverse", and "none"
+            toggleActions: 'restart pause resume pause',
             // markers: true,
-            id: '1',
+            id: '1'
         },
-        // duration: 3,
+        duration: 5,
         scaleX: 0,
         transformOrigin: 'left center',
         ease: 'none'
@@ -182,42 +196,54 @@
     /*****  scroll line2 animation ***/
     gsap.from('.line-2', {
         scrollTrigger: {
-            trigger: '.orange',
-            scrub: true,
-            pin: true,
-            start: 'top top',
-            end: '30% top',
-            // markers: true,
-            id: '2'
+            trigger: '.line-2',
+            toggleActions: 'play complete reverse reset',
         },
+        duration: 5,
         scaleX: 0,
+        // 重复
+        repeat: -1,
         transformOrigin: 'left center',
         ease: 'none'
     })
 
     /*****  scroll line3 animation ***/
-    const timeline = gsap.timeline({
+    gsap.from('.line-3', {
         scrollTrigger: {
-            trigger: '.purple',
-            scrub: true,
-            pin: true,
-            start: 'top top',
-            end: '30% top',
-            // markers: true,
-            // id: '3'
-        }
-    })
-    timeline.from('.purple p', {
-        scale: 0.3,
-        autoAlpha: 0,
-        rotation: 45,
-    }).from('.line-3', {
+            trigger: '.line-3',
+            toggleActions: 'play pause resume pause',
+            // 滑动窗口
+            start: 'top center',
+            end: '30px 100px',
+            markers: true,
+            id: '3',
+            // 理解类似滑动窗口，trigger start -> end  在滚动触发区域 start -> end
+            // trigger start 进入 滚动触发区域【start ,end】，临界点start, onEnter
+            // trigger end 离开 滚动触发区域【start ,end】，临界点end ,onLeave
+            // trigger end 进入 触发区域【start ,end】，临界点end ,onEnterBack
+            // trigger start 离开 触发区域【start ,end】，临界点start, onLeaveBack
+            onEnter: () => {
+                console.log('line-3 on onEnter..')
+            },
+            onLeave: () => {
+                console.log('line-3 on onLeave..')
+            },
+            onEnterBack: () => {
+                console.log('line-3 on onEnterBack..')
+            },
+            onLeaveBack: () => {
+                console.log('line-3 on onLeaveBack..')
+            }
+        },
+        duration: 10,
         scaleX: 0,
+        // 重复
+        repeat: -1,
         transformOrigin: 'left center',
         ease: 'none'
-    }, 0).to('.purple', {
-        backgroundImage: 'radial-gradient(circle at 47% 14%, rgba(205, 205, 205, 0.04) 0%, rgba(205, 205, 205, 0.04) 43%, transparent 43%, transparent 100%), radial-gradient(circle at 35% 12%, rgba(215, 215, 215, 0.04) 0%, rgba(215, 215, 215, 0.04) 4%, transparent 4%, transparent 100%), radial-gradient(circle at 1% 35%, rgba(24, 24, 24, 0.04) 0%, rgba(24, 24, 24, 0.04) 37%, transparent 37%, transparent 100%), radial-gradient(circle at 21% 1%, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0.04) 26%, transparent 26%, transparent 100%), radial-gradient(circle at 23% 82%, rgba(249, 249, 249, 0.04) 0%, rgba(249, 249, 249, 0.04) 60%, transparent 60%, transparent 100%), radial-gradient(circle at 11% 54%, rgba(251, 251, 251, 0.04) 0%, rgba(251, 251, 251, 0.04) 23%, transparent 23%, transparent 100%), radial-gradient(circle at 69% 68%, rgba(234, 234, 234, 0.04) 0%, rgba(234, 234, 234, 0.04) 10%, transparent 10%, transparent 100%), linear-gradient(90deg, #7f22a7, #530375)'
-    }, 0)
+    })
+
+
 
 
     gsap.to('.gray span', {
@@ -225,7 +251,7 @@
             trigger: '.gray',
             start: 'center center',
             end: 'bottom bottom',
-            markers: true,
+            // markers: true,
             id: '4'
         },
         duration: 1,
