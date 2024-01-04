@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            background-color: #111;
+            font-family: "Signika Negative", sans-serif, Arial;
+            overscroll-behavior: none;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        #smooth-content {
+            overflow: visible;
+            width: 100%;
+            /* set a height because the contents are position: absolute, thus natively there's no height */
+            height: 4000px;
+
+            background-image:
+                linear-gradient(rgba(255, 255, 255, .07) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(255, 255, 255, .07) 2px, transparent 2px),
+                linear-gradient(rgba(255, 255, 255, .06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, .06) 1px, transparent 1px);
+            background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+            background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+
+        }
+
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .line {
+            width: 2px;
+            height: 4000px;
+            position: absolute;
+            left: 400px;
+            top: 0px;
+            background-color: #777;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: #28a92b;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            line-height: 100px;
+            font-size: 50px;
+            text-align: center;
+            will-change: transform;
+        }
+
+
+        .box-a {
+            top: 400px;
+            background-color: #8d3dae;
+        }
+
+        .box-b {
+            top: 1000px;
+        }
+
+        .box-c {
+            top: 1500px;
+            background-color: #e26c16;
+            will-change: transform;
+        }
+
+        .box-d {
+            top: 2300px;
+            background-color: skyblue;
+            will-change: transform;
+        }
+
+        .box-e {
+            top: 2800px;
+            background-color: rgb(162, 35, 149);
+            will-change: transform;
+        }
+
+
+        .box.active {
+            background-color: blue;
+        }
+
+        .box p {
+            text-align: center;
+
+        }
+    </style>
+
+
+    <script src="./js/gsap-latest-beta.min.js"></script>
+    <script src="./js/scrolltrigger.min.js"></script>
+    <script src="./gsap-plugins/ScrollSmoother.min.js"></script>
+
+
+</head>
+
+<body>
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
+
+
+
+            <div class="box box-a">
+                <p>a</p>
+            </div>
+            <div class="box box-b">b</div>
+            <div class="box box-c">c</div>
+            <div class="box box-d">d</div>
+            <div class="box box-e">e</div>
+
+
+            <div class="line"></div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+</body>
+
+<script>
+
+    gsap.registerPlugin(ScrollTrigger);
+    // ScrollTrigger.normalizeScroll(true)
+
+    /***** a scroll animation ***/
+    gsap.to('.box-a p', {
+        // 出现的时候
+        // scrollTrigger: '.box-a',
+        // 等价于
+        scrollTrigger: {
+            trigger: '.box-a',
+            markers: true,
+            id: 'a',
+        },
+        // 直接触发下面的动画
+        rotation: 360,
+        scale: 2,
+        duration: 1,
+        transformOrigin: '50% 100%'
+    })
+
+
+    /***** b scroll animation ***/
+    const timeline = gsap.timeline()
+    timeline.to('.box-b', {
+        x: 400, duration: 1
+    })
+    timeline.to('.box-b', {
+        rotation: 360, duration: 3
+    })
+    timeline.to('.box-b', {
+        x: 0,
+        duration: 1
+    })
+
+    ScrollTrigger.create({
+        trigger: ".box-b",
+        // 可以是timeline或者tween
+        animation: timeline,
+        // pin: true,
+        start: "top center",
+        end: "+=300 center",
+        scrub: 1,
+        // toggleClass: 'active',
+        // markers: true,
+        // id: 'b'
+    });
+
+    /***** c scroll animation ***/
+    const timeline3 = gsap.timeline({
+        scrollTrigger: {
+            trigger: '.box-c',
+            start: "top top",
+            end: "+=300",
+            // scrub 设置动画效果就是按照滚动的距离去计算触发 是什么阶段效果样式
+            scrub: 1,
+            // pin: true,
+            // markers: true,
+            // id: 'c'
+        }
+    })
+    // timeline3.to(".box", { yPercent: 300, duration: 1 })
+    timeline3.to(".box-c", { y: 300, duration: 1 })
+    timeline3.to(".box-c", { rotation: 360, duration: 3 })
+    // timeline3.to(".box", { xPercent: 350, duration: 1 })
+    timeline3.to(".box-c", { x: 150, duration: 1 })
+
+
+    /***** d scroll animation ***/
+    gsap.to('.box-d', {
+        x: 300,
+        rotation: 360,
+        scrollTrigger: {
+            trigger: '.box-d',
+            start: 'top top',
+            pin: true,// true默认已滚动的上边界fixed,也可以设置elment
+            end: '200px top',
+            scrub: 1,
+            // markers: true,
+            id: 'd'
+        },
+
+    })
+
+
+    /***** e scroll animation ***/
+    gsap.to('.box-e', {
+        x: 300,
+        rotation: 360,
+        scrollTrigger: {
+            trigger: '.box-e',
+            start: 'top center',
+            end: 'top 100px',
+            scrub: 1,
+            // markers: true,
+            id: 'e'
+        },
+    })
+
+
+
+
+</script>
+
+</html>
