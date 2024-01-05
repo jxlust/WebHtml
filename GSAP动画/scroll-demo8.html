@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>scroll animations</title>
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            -webkit-text-size-adjust: 100%;
+        }
+
+
+
+        body {
+            font-family: "Signika Negative", sans-serif, Arial;
+            overscroll-behavior: none;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        body {
+            margin: 0;
+            height: 4000px;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .blue {
+            background-color: #2c7ad2;
+            background-image: radial-gradient(circle at 47% 14%, rgba(205, 205, 205, 0.04) 0%, rgba(205, 205, 205, 0.04) 43%, transparent 43%, transparent 100%), radial-gradient(circle at 35% 12%, rgba(215, 215, 215, 0.04) 0%, rgba(215, 215, 215, 0.04) 4%, transparent 4%, transparent 100%), radial-gradient(circle at 1% 35%, rgba(24, 24, 24, 0.04) 0%, rgba(24, 24, 24, 0.04) 37%, transparent 37%, transparent 100%), radial-gradient(circle at 21% 1%, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0.04) 26%, transparent 26%, transparent 100%), radial-gradient(circle at 23% 82%, rgba(249, 249, 249, 0.04) 0%, rgba(249, 249, 249, 0.04) 60%, transparent 60%, transparent 100%), radial-gradient(circle at 11% 54%, rgba(251, 251, 251, 0.04) 0%, rgba(251, 251, 251, 0.04) 23%, transparent 23%, transparent 100%), radial-gradient(circle at 69% 68%, rgba(234, 234, 234, 0.04) 0%, rgba(234, 234, 234, 0.04) 10%, transparent 10%, transparent 100%), linear-gradient(90deg, #2c7ad2, #1568c6);
+        }
+
+        .red {
+            background-color: #bd5a64;
+            background-image: radial-gradient(circle at 19% 90%, rgba(190, 190, 190, 0.04) 0%, rgba(190, 190, 190, 0.04) 17%, transparent 17%, transparent 100%), radial-gradient(circle at 73% 2%, rgba(78, 78, 78, 0.04) 0%, rgba(78, 78, 78, 0.04) 94%, transparent 94%, transparent 100%), radial-gradient(circle at 45% 2%, rgba(18, 18, 18, 0.04) 0%, rgba(18, 18, 18, 0.04) 55%, transparent 55%, transparent 100%), radial-gradient(circle at 76% 60%, rgba(110, 110, 110, 0.04) 0%, rgba(110, 110, 110, 0.04) 34%, transparent 34%, transparent 100%), radial-gradient(circle at 68% 56%, rgba(246, 246, 246, 0.04) 0%, rgba(246, 246, 246, 0.04) 16%, transparent 16%, transparent 100%), radial-gradient(circle at 71% 42%, rgba(156, 156, 156, 0.04) 0%, rgba(156, 156, 156, 0.04) 47%, transparent 47%, transparent 100%), radial-gradient(circle at 46% 82%, rgba(247, 247, 247, 0.04) 0%, rgba(247, 247, 247, 0.04) 39%, transparent 39%, transparent 100%), radial-gradient(circle at 50% 47%, rgba(209, 209, 209, 0.04) 0%, rgba(209, 209, 209, 0.04) 45%, transparent 45%, transparent 100%), linear-gradient(90deg, #ef8791, #c15862);
+        }
+
+        .line03 {
+            fill: none;
+            stroke: #848407;
+            stroke-width: 28px;
+        }
+
+        .line01 {
+            fill: none;
+            stroke: #bc2121;
+            stroke-width: 20px;
+        }
+
+        .line02 {
+            fill: none;
+            stroke: skyblue;
+            stroke-width: 8px;
+        }
+    </style>
+
+
+    <script src="./js/gsap-latest-beta.min.js"></script>
+    <script src="./js/scrolltrigger.min.js"></script>
+    <script src="./gsap-plugins/ScrollSmoother.min.js"></script>
+    <script src="./gsap-plugins/DrawSVGPlugin3.min.js"></script>
+
+
+</head>
+
+<body>
+
+    <section id="section01" class="red">
+        <svg viewBox="0 0 700 400">
+            <path class="line03"
+                d="M -20 80 Q 100 80 520 80 C 600 80 600 160 520 160 L 100 160 C 40 160 40 220 100 220 L 520 220 C 600 220 600 300 520 300 L 100 300 L -20 300 " />
+            <path class="line01"
+                d="M -20 80 Q 100 80 520 80 C 600 80 600 160 520 160 L 100 160 C 40 160 40 220 100 220 L 520 220 C 600 220 600 300 520 300 L 100 300 L -20 300" />
+            <path class="line02"
+                d="M -20 80 Q 100 80 520 80 C 600 80 600 160 520 160 L 100 160 C 40 160 40 220 100 220 L 520 220 C 600 220 600 300 520 300 L 100 300 L -20 300" />
+        </svg>
+    </section>
+
+    <section class="blue">
+
+    </section>
+
+
+    <div class="panel gray">
+        <span>FOOTER</span>
+    </div>
+
+
+</body>
+
+<script>
+    gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin);
+
+
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: "#section01",
+            pin: true,
+            scrub: 0.5,
+            start: "top top",
+            end: "+=200% top",
+            toggleActions: "play pause resume reset",
+            markers: true,
+            id: '1',
+        }
+    })
+        .from(".line01", { drawSVG: 0, duration: 1 })
+        .from(".line02", { drawSVG: 0, duration: 1 }, 0)
+        .from(".line03", { drawSVG: 0, duration: 1 }, 0)
+
+
+
+    // gsap.timeline({
+    //     scrollTrigger: {
+    //         trigger: "#section01",
+    //         pin: true,
+    //         scrub: 1,
+    //         start: "top top",
+    //         end: "+=200%"
+    //     }
+    // })
+    //     .from(".line02", { drawSVG: 0, duration: 1 })
+
+    // var action = gsap.timeline({
+    //     scrollTrigger: {
+    //         trigger: "#section01",
+    //         pin: true,
+    //         scrub: 0.1,
+    //         start: "top top",
+    //         end: "+=200%"
+    //     }
+    // })
+    //     .from(".line03", { drawSVG: 0, duration: 1 })
+</script>
+
+</html>

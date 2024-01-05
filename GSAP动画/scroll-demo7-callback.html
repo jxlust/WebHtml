@@ -107,7 +107,6 @@
         .gray {
             background-color: #999;
             will-change: transform;
-
         }
     </style>
 
@@ -122,37 +121,32 @@
 <body>
     <div class="panel blue description">
         <div>
-            <h1>toggleActions </h1>
-            <p> 利用toggle actions 配置对应钩子动画怎么执行<br />
-                默认配置: play none none none<br />
-                钩子： onEnter, onLeave, onEnterBack, and onLeaveBack<br />
-                可选值： "play", "pause", "resume", "reset", "restart", "complete", "reverse", and "none".
-            </p>
-            <p>
-                <span class="line line-0"></span>
-            </p>
+            <h1>Callbacks </h1>
+            <ul>
+                <li><code>onEnter</code> - forward past "start" (typically when <code>trigger</code> is scrolled into
+                    view)</li>
+                <li><code>onLeave</code> - forward past "end" (typically when <code>trigger</code> is scrolled out of
+                    view)</li>
+                <li><code>onEnterBack</code> - backward past "end" (typically when <code>trigger</code> is scrolled back
+                    into view)</li>
+                <li><code>onLeaveBack</code> - backward past "start" (typically when <code>trigger</code> goes backward
+                    out of view)</li>
+                <li><code>onUpdate</code> - every time the scroll position changes while between "start" and "end".</li>
+                <li><code>onToggle</code> - passes the start or end in either direction</li>
+                <li><code>onRefreshInit</code> - immediately before measurements are recalculated (typically on resize)
+                </li>
+                <li><code>onRefresh</code> - after measurements are recalculated (typically on resize)</li>
+            </ul>
+
         </div>
     </div>
 
     <div class="panel red">
         <p>
             <span class="line line-1"></span>
-            测试效果的一根线条
+            测试效果的一根线条 <span id="processId">progress: 0</span>
         </p>
-    </div>
 
-    <div class="panel orange">
-        <p>
-            <span class="line line-2"></span>
-            测试效果的一根线条
-        </p>
-    </div>
-
-    <div class="panel purple">
-        <p>
-            <span class="line line-3"></span>
-            我是一条线，我是文字，我也要动起来，滚动吧少年
-        </p>
     </div>
 
 
@@ -164,88 +158,36 @@
 </body>
 
 <script>
-
     gsap.registerPlugin(ScrollTrigger);
     // ScrollTrigger.normalizeScroll(true)
+    const proDom = document.getElementById('processId')
+    /*****  scroll line0 animation ***/
+    const tween = gsap.from('.line-1', {
+        scaleX: 0,
+        transformOrigin: 'left center',
+        ease: 'none'
+    })
+    const logRed = (v) => {
+        console.log('回调钩子触发:', v)
+    }
+
+    ScrollTrigger.create({
+        trigger: '.red',
+        start: 'top 100px',
+        end: 'bottom bottom-=100px',
+        markers: { startColor: 'white', endColor: '#920202' },
+        id: '1',
+        scrub: true,
+        animation: tween,
+        onEnter: () => logRed("onEnter"),
+        onLeave: () => logRed("onLeave"),
+        onEnterBack: () => logRed("onEnterBack"),
+        onLeaveBack: () => logRed("onLeaveBack"),
+        onRefresh: () => logRed("onRefresh"),
+        onUpdate: self => proDom.innerText = "progress: " + self.progress.toFixed(3)
+    })
 
     /*****  scroll line0 animation ***/
-    gsap.from('.line-0', {
-        scrollTrigger: '.line-0',
-        duration: 5,
-        scaleX: 0,
-        transformOrigin: 'left center',
-        ease: 'none'
-    })
-
-    /*****  scroll line1 animation ***/
-    gsap.from('.line-1', {
-        scrollTrigger: {
-            trigger: '.line-1',
-            // onEnter, onLeave, onEnterBack, and onLeaveBack
-            // "play", "pause", "resume", "reset", "restart", "complete", "reverse", and "none"
-            toggleActions: 'restart pause resume pause',
-            // markers: true,
-            id: '1'
-        },
-        duration: 5,
-        scaleX: 0,
-        transformOrigin: 'left center',
-        ease: 'none'
-    })
-
-    /*****  scroll line2 animation ***/
-    gsap.from('.line-2', {
-        scrollTrigger: {
-            trigger: '.line-2',
-            toggleActions: 'play complete reverse reset',
-        },
-        duration: 5,
-        scaleX: 0,
-        // 重复
-        repeat: -1,
-        transformOrigin: 'left center',
-        ease: 'none'
-    })
-
-    /*****  scroll line3 animation ***/
-    gsap.from('.line-3', {
-        scrollTrigger: {
-            trigger: '.line-3',
-            toggleActions: 'play pause resume pause',
-            // 滑动窗口
-            start: 'top center',
-            end: '30px 100px',
-            markers: true,
-            id: '3',
-            // 理解类似滑动窗口，trigger start -> end  在滚动触发区域 start -> end
-            // trigger start 进入 滚动触发区域【start ,end】，临界点start, onEnter
-            // trigger end 离开 滚动触发区域【start ,end】，临界点end ,onLeave
-            // trigger end 进入 触发区域【start ,end】，临界点end ,onEnterBack
-            // trigger start 离开 触发区域【start ,end】，临界点start, onLeaveBack
-            onEnter: () => {
-                console.log('line-3 on onEnter..')
-            },
-            onLeave: () => {
-                console.log('line-3 on onLeave..')
-            },
-            onEnterBack: () => {
-                console.log('line-3 on onEnterBack..')
-            },
-            onLeaveBack: () => {
-                console.log('line-3 on onLeaveBack..')
-            }
-        },
-        duration: 10,
-        scaleX: 0,
-        // 重复
-        repeat: -1,
-        transformOrigin: 'left center',
-        ease: 'none'
-    })
-
-
-
-
     gsap.to('.gray span', {
         scrollTrigger: {
             trigger: '.gray',
