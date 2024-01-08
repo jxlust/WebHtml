@@ -145,16 +145,16 @@
     // stretch out the body height according to however many sections there are. 
     gsap.set("body", { height: (sections.length * 100) + "%" });
 
-    // sections.forEach((section, i) => {
-    //     ScrollTrigger.create({
-    //         start: () => (i - 0.5) * innerHeight,
-    //         end: () => (i + 0.5) * innerHeight,
-    //         onToggle: (self) => {
-    //             console.log(1, self, self.isActive)
-    //             self.isActive && setSection(section)
-    //         }
-    //     })
-    // });
+    sections.forEach((section, i) => {
+        ScrollTrigger.create({
+            start: () => (i - 0.5) * innerHeight,
+            end: () => (i + 0.5) * innerHeight,
+            onToggle: (self) => {
+                console.log(1, self, self.isActive)
+                self.isActive && setSection(section)
+            }
+        })
+    });
 
     function setSection(newSection) {
         if (currentSection !== newSection) {
@@ -172,23 +172,23 @@
     }
 
     // 让他无限滚动起来
-    ScrollTrigger.create({
-        // An exact scroll value, so 200 would trigger when the viewport/scroller scrolls by exactly 200 pixels.
-        // 如果start是数字表示的是一个滚动值，滚动了多少就触发
-        start: 1,
-        end: () => {
-            const max = ScrollTrigger.maxScroll(window) - 1
-            return max;
-        },
-        // 到底部了，重新滚动到头部，距离2px位置
-        onLeave: self => self.scroll(2),
-        // 向上滚动到顶部了,重新滚动到底部位置
-        onLeaveBack: (self) => {
-            return self.scroll(ScrollTrigger.maxScroll(window) - 2)
-        },
-        markers: true,
-        // 初始化滚动位置到2px
-    }).scroll(2)
+    // ScrollTrigger.create({
+    //     // An exact scroll value, so 200 would trigger when the viewport/scroller scrolls by exactly 200 pixels.
+    //     // 如果start是数字表示的是一个滚动值，滚动了多少就触发
+    //     start: 1,
+    //     end: () => {
+    //         const max = ScrollTrigger.maxScroll(window) - 1
+    //         return max;
+    //     },
+    //     // 到底部了，重新滚动到头部，距离2px位置
+    //     onLeave: self => self.scroll(2),
+    //     // 向上滚动到顶部了,重新滚动到底部位置
+    //     onLeaveBack: (self) => {
+    //         return self.scroll(ScrollTrigger.maxScroll(window) - 2)
+    //     },
+    //     markers: true,
+    //     // 初始化滚动位置到2px
+    // }).scroll(2)
 
 </script>
 

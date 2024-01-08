@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh" style="scroll-behavior: auto;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gsap animations</title>
+
+    <style>
+        html,
+        body {
+            -webkit-text-size-adjust: 100%;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        body {
+            overflow-x: hidden;
+            overflow-y: scroll;
+            overscroll-behavior: none;
+        }
+
+        .container {
+            padding: 100px 0;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+
+        }
+
+        .page {
+            width: 375px;
+            height: 667px;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            background-color: skyblue;
+            transform-style: preserve-3d;
+            perspective: 1200px;
+
+        }
+
+        .page2 {
+            background-color: blanchedalmond;
+        }
+
+        .page1-content {
+            height: 100%;
+        }
+
+        .page2-content {
+            height: 100%;
+        }
+    </style>
+
+
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../js/scrolltrigger.min.js"></script>
+
+
+</head>
+
+<body style="scroll-behavior: auto;">
+    <div class="container">
+        <div class="page page1">
+            <div class="page1-content">
+                <img src="../images/bg1.webp" />
+            </div>
+        </div>
+
+        <div class="page page2">
+            <div class="page2-content">
+                <img src="../images/bg2.webp" />
+            </div>
+        </div>
+    </div>
+
+</body>
+
+
+<script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.to('.page1-content', {
+        force3d: true,
+        duration: 5,
+        ease: 'power2.inOut',
+        opacity: 0,
+        scale: 3,
+        translateZ: 100,
+        rotateZ: 50,
+    })
+    // gsap.set('.page2-content',{
+    //     force3d: true,
+    //     duration: 5,
+    //     ease: 'power2.inOut',
+    //     autoAlpha: 0,
+    //     // scale: 0.2,
+    //     y: -100,
+    //     translateZ: -1000,
+    //     rotate: -10
+    // })
+    gsap.from('.page2-content', {
+        force3d: true,
+        duration: 5,
+        ease: 'power2.inOut',
+        autoAlpha: 0,
+        // scale: 0.2,
+        y: -100,
+        translateZ: -1000,
+        rotate: -10
+    })
+
+
+</script>
+
+</html>
