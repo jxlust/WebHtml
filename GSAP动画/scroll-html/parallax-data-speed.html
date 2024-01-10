@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh" style="scroll-behavior: auto;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gsap animations</title>
+
+    <style>
+        html,
+        body {
+            -webkit-text-size-adjust: 100%;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        body {
+            width: 100%;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        button {
+            cursor: pointer;
+            padding: 8px 16px;
+            margin: 10px 5px;
+        }
+
+        body {
+            display: flex;
+            position: relative;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .box-container {
+            position: relative;
+            top: 46vh;
+            height: 50vh;
+            display: flex;
+            justify-content: center;
+            flex: 1;
+            width: 100%;
+            overflow: visible;
+        }
+
+        .box {
+            font-size: 28px;
+            font-weight: 700;
+            background-color: blue;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100px;
+            width: 15%;
+            margin: 10px;
+        }
+
+        .scroll-main {
+            position: relative;
+            height: 60vh;
+            width: 80vw;
+            overflow-y: auto;
+            overflow-x: hidden;
+            background-color: #f8f8f8;
+        }
+    </style>
+
+
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../js/scrolltrigger.min.js"></script>
+
+
+</head>
+
+<body style="scroll-behavior: auto;">
+
+    <h1>不同参数，盒子的移动</h1>
+
+    <p>Add a <code>data-speed</code> attribute to any element. 1 = normal scroll speed, 0 = no movement, 0.5 =
+        half-speed, etc.</p>
+
+
+    <div class="scroll-main" id="scrollMain">
+        <div class="box-container" id="boxContainer">
+            <div class="box" data-speed="0.25">0.25</div>
+            <div class="box" data-speed="0.4">0.4</div>
+            <div class="box" data-speed="0">0</div>
+            <div class="box" data-speed="1">1</div>
+            <div class="box" data-speed="0.75">0.75</div>
+        </div>
+    </div>
+
+
+
+    <div class="box-container">
+        <div class="box abox">1</div>
+        <div class="box abox">2</div>
+        <div class="box abox">3</div>
+        <div class="box abox">4</div>
+        <div class="box abox">5</div>
+    </div>
+
+</body>
+
+<script>
+
+    const tl = gsap.timeline({
+        ease: 'none'
+    })
+    tl.to('.abox', {
+        y: (i, el) => {
+            return i * 100;
+        },
+        duration: 2,
+    })
+
+</script>
+<script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.set('.box', {
+        backgroundColor: 'rgb(random(0,190),random(0,190),random(0,190))'
+    })
+
+    // gsap.to('.box[data-speed]', {
+    //     y: (i, el) => {
+    //         console.log(i, el)
+    //         return i * 100
+    //     },
+    //     ease: 'none',
+    //     stagger: .2,
+    //     duration: 2
+    // })
+
+    // ScrollTrigger.defaults({
+    //     scroller: ".scroll-main"
+    // });
+
+    const scroller = document.querySelector(".scroll-main")
+
+    gsap.to('.box[data-speed]', {
+        y: (i, el) => {
+            console.log(i, el)
+            const speed = el.getAttribute('data-speed')
+            return (1 - speed) * ScrollTrigger.maxScroll(scroller)
+        },
+        scrollTrigger: {
+            scroller: "#scrollMain",
+            start: 0,
+            end: 'max',
+            // 每当refresh（）发生时（通常在调整大小时），与ScrollTrigger关联的动画都会调用其invalidate（）方法。这会清除所有内部记录的起始值。
+            invalidateOnRefresh: true,
+            scrub: 0,
+
+        },
+        ease: 'none',
+    })
+
+</script>
+
+</html>

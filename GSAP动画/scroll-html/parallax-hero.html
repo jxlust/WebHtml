@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh" style="scroll-behavior: auto;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gsap animations</title>
+
+    <style>
+        html,
+        body {
+            -webkit-text-size-adjust: 100%;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        body {
+            width: 100%;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+
+
+
+        #hero {
+            height: 800px;
+            overflow: hidden;
+            position: relative;
+            max-width: 1920px;
+            margin: 0 auto;
+        }
+
+        #content {
+            background-color: #130d0a;
+            color: white;
+        }
+
+        .container {
+            padding: 30px 0 0 0;
+            height: 1500px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .layer {
+            background-position: bottom center;
+            background-size: auto;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 800px;
+            position: fixed;
+            z-index: -1;
+        }
+
+        #hero-mobile {
+            display: none;
+            background: url("../images/hero/full_illustration.png") no-repeat center bottom / cover;
+            height: 320px;
+        }
+
+
+
+        h1 {
+            line-height: 120%;
+            margin-bottom: 30px;
+        }
+
+
+        #hero,
+        .layer {
+            min-height: 800px;
+        }
+
+        .layer-bg {
+            background-image: url('../images/hero/ilu_bg.jpeg');
+        }
+
+        .layer-1 {
+            background-image: url('../images/hero/ilu_03.png');
+            background-position: left bottom;
+        }
+
+        .layer-2 {
+            background-image: url('../images/hero/ilu_02.png');
+        }
+
+        .layer-3 {
+            background-image: url('../images/hero/ilu_man.png');
+            background-position: right bottom;
+        }
+
+        .layer-4 {
+            background-image: url('../images/hero/ilu_01.png');
+        }
+
+        .layer-overlay {
+            background-image: url('../images/hero/ilu_overlay.png');
+        }
+
+        @media only screen and (max-width: 768px) {
+            .layer-1 {
+                background-position: 26% bottom;
+            }
+
+            .layer-3 {
+                background-position: 35% bottom;
+            }
+        }
+    </style>
+
+
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../js/scrolltrigger.min.js"></script>
+
+
+</head>
+
+<body style="scroll-behavior: auto;">
+    <div id='hero'>
+        <div class='layer-bg layer parallax' data-depth='0.10'></div>
+        <div class='layer-1 layer parallax' data-depth='0.20'></div>
+        <div class='layer-2 layer parallax' data-depth='0.50'></div>
+        <div class='layer-3 layer parallax' data-depth='0.80'></div>
+        <div class='layer-overlay layer parallax' data-depth='0.85'></div>
+        <div class='layer-4 layer parallax' data-depth='1.00'></div>
+    </div>
+
+    <div id='content'>
+        <div class='container'>
+            <h1>我是一个英雄</h1>
+        </div>
+    </div>
+
+
+
+</body>
+
+
+<script>
+    gsap.registerPlugin(ScrollTrigger);
+
+
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: '#hero',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true,
+        },
+    })
+    // 根据layer data-depth 进行y轴的动画位移量设置
+    // gsap.utils.toArray('.parallax')
+
+    // 方法1
+    tl.to('.parallax', {
+        y: (i, el) => {
+            console.log(i, el)
+            const move = -el.dataset.depth * el.offsetHeight;
+            return move;
+        },
+        ease: 'none'
+    }, 0)
+
+    // 方法2
+    // gsap.utils.toArray(".parallax").forEach(layer => {
+    //     const depth = layer.dataset.depth;
+    //     const movement = -(layer.offsetHeight * depth)
+    //     tl.to(layer, { y: movement, ease: "none" }, 0)
+    // });
+
+</script>
+
+</html>

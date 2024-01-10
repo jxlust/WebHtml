@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh" style="scroll-behavior: auto;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gsap animations</title>
+
+    <style>
+        html,
+        body {
+            -webkit-text-size-adjust: 100%;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        body {
+            width: 100%;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        h1 {
+            max-width: 800px;
+        }
+
+        .header-section {
+            padding: 0 15px;
+            text-align: center;
+            margin: 40vh auto 50vh;
+        }
+
+        a {
+            color: #555;
+            font-weight: 400;
+        }
+
+        .pSection {
+            position: relative;
+            padding-top: 200px;
+            padding-bottom: 300px;
+        }
+
+        .container {
+            padding: 20px;
+            margin: 0 auto;
+            max-width: 1070px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .pContent {
+            width: 65%;
+            background-color: rgba(78, 152, 21, 0.8);
+            color: white;
+            padding: 40px 60px;
+        }
+
+        .pImage {
+            width: 70%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            max-height: 900px;
+        }
+
+        .footer-section {
+            margin: 100vh auto 50vh auto;
+            padding: 100px 0;
+        }
+    </style>
+
+
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../js/scrolltrigger.min.js"></script>
+
+
+</head>
+
+<body style="scroll-behavior: auto;">
+
+    <h1 class="header-section">视差效果</h1>
+
+    <section class="pSection">
+        <div class="container">
+            <div class="pContent">
+                <p>This is a super simple example of how to create a basic parallax effect using GSAP's ScrollTrigger!
+                </p>
+                <p>For more information about ScrollTrigger, check out <a href="https://greensock.com"
+                        target="_blank">the GreenSock website.</a></p>
+            </div>
+        </div>
+
+        <img class="pImage" src="../images/bg2.webp" alt="Filler image">
+    </section>
+
+    <h1 class="footer-section"> 底部填充 </h1>
+
+
+</body>
+
+
+<script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.to('.pContent', {
+        yPercent: -100,
+        scrollTrigger: {
+            trigger: '.pSection',
+            // start: "top bottom", // the default values
+            // end: "bottom top",
+            scrub: true,
+        },
+    })
+    gsap.to('.pImage', {
+        yPercent: 50,
+        scrollTrigger: {
+            trigger: '.pSection',
+            // start: "top bottom", // the default values
+            // end: "bottom top",
+            scrub: true,
+        }
+    })
+
+</script>
+
+</html>

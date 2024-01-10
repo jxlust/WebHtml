@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh" style="scroll-behavior: auto;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gsap animations</title>
+
+    <style>
+        html,
+        body {
+            -webkit-text-size-adjust: 100%;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        body {
+            width: 100%;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        .massiveImage {
+            height: 100vh;
+            width: 400vw;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .header-section {
+            padding-bottom: 50vh;
+            margin-bottom: 0;
+
+            /* padding: 0 15px;
+            text-align: center;
+            margin: 40vh auto 50vh; */
+        }
+
+        h1 {
+            max-width: 800px;
+        }
+    </style>
+
+
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../js/scrolltrigger.min.js"></script>
+
+
+</head>
+
+<body style="scroll-behavior: auto;">
+    <h1 class="header-section">Scroll down to see a horizontal scroll section</h1>
+
+    <div class="massiveImage"></div>
+
+    <h1 class="header-section">Now we're back to regular scrolling</h1>
+
+
+</body>
+
+
+<script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.set('.massiveImage', {
+        backgroundImage: `url(../images/larg-width-img.jpeg)`
+    })
+
+
+    gsap.to('.massiveImage', {
+        xPercent: -100,
+        x: () => innerWidth,
+        ease: 'none',
+        scrollTrigger: {
+            trigger: '.massiveImage',
+            start: 'top top',
+            end: () => innerWidth * 3,
+            markers: true,
+            id: 1,
+            pin: true,
+            scrub: true,
+            invalidateOnRefresh: true,
+            anticipatePin: 1
+        }
+    })
+
+</script>
+
+</html>

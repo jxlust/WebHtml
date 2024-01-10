@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh" style="scroll-behavior: auto;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gsap animations</title>
+
+    <style>
+        html,
+        body {
+            -webkit-text-size-adjust: 100%;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        body {
+            width: 100%;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        h1 {
+            max-width: 800px;
+        }
+
+        .horizSlider {
+            position: relative;
+            /* white-space: nowrap; */
+            overflow: auto;
+            width: 100%;
+            display: flex;
+            flex-wrap: nowrap;
+            column-gap: 4px;
+        }
+
+        .horizSlider .slide {
+            position: relative;
+        }
+
+        .slideText {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            text-shadow: 1px 1px 3px black;
+            z-index: 1;
+            font-size: 3em;
+            font-weight: 400;
+        }
+
+        .slideImage {
+            transform-origin: bottom left;
+        }
+    </style>
+
+
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../js/scrolltrigger.min.js"></script>
+
+
+</head>
+
+<body style="scroll-behavior: auto;">
+    <h1 class="header-section">Scroll the slider to the right to see some parallax effects</h1>
+
+    <section class="horizSlider">
+        <div class="slide">
+            <h2 class="slideText">Text title</h2>
+            <img width="1000" height="500" class="slideImage" src="../images/bg1.webp" alt="Filler image">
+        </div>
+
+        <div class="slide">
+            <h2 class="slideText">Text title</h2>
+            <img width="1000" height="500" class="slideImage" src="../images/bg2.webp" alt="Filler image">
+        </div>
+
+        <div class="slide">
+            <h2 class="slideText">Text title</h2>
+            <img width="1000" height="500" class="slideImage" src="../images/bg1.webp">
+        </div>
+
+        <div class="slide">
+            <h2 class="slideText">Text title</h2>
+            <img width="1000" height="500" class="slideImage" src="../images/bg2.webp">
+        </div>
+
+        <div class="slide">
+            <h2 class="slideText">Text title</h2>
+            <img width="1000" height="500" class="slideImage" src="../images/bg1.webp">
+        </div>
+    </section>
+
+    <h1 class="header-section">How do you like the photos?</h1>
+
+
+</body>
+
+
+<script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    ScrollTrigger.defaults({
+        scroller: ".horizSlider"
+    });
+    gsap.utils.toArray('.slideText').forEach((text, i) => {
+        gsap.timeline({
+            defaults: { ease: "none" },
+            scrollTrigger: {
+                horizontal: true,
+                trigger: text.closest('.slide'),
+                start: 'left right',
+                end: 'left left',
+                scrub: true,
+                // id: i + 1,
+                // markers: true,
+            }
+        })
+            .to(text, {
+                x: -250,
+            }, 0)
+            // .fromTo(text, {
+            //     x: 250,
+            // }, { x: -250 }, 0)
+            .from(text.nextElementSibling, {
+                scale: .8
+            }, 0)
+    })
+
+</script>
+
+</html>
