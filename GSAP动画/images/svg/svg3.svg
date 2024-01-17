@@ -1,0 +1,13 @@
+<svg viewBox="0 0 74 74" class="sparkle" js-hook="sparkle-pop" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="37" cy="37" r="0" fill="green" stroke="red" stroke-width="30" js-hook="pop-circle" />
+    <g js-hook="pop-group" stroke="" stroke-width="1" stroke-linecap="round">
+        <line x1="37" y1="37" y2="0" x2="37" fill="none" stroke-miterlimit="10" />
+        <line x1="37" y1="37" x2="63.16" y2="10.84" fill="none" stroke-miterlimit="10" />
+        <line x1="37" y1="37" x2="74" y2="37" fill="none" stroke-miterlimit="10" />
+        <line x1="37" y1="37" x2="63.16" y2="63.16" fill="none" stroke-miterlimit="10" />
+        <line x1="37" y1="37" x2="37" y2="74" fill="none" stroke-miterlimit="10" />
+        <line x1="37" y1="37" x2="10.84" y2="63.16" fill="none" stroke-miterlimit="10" />
+        <line x1="37" x2="0" y1="37" y2="37" fill="none" stroke-miterlimit="10" />
+        <line x1="37" y1="37" x2="10.84" y2="10.84" fill="none" stroke-miterlimit="10" />
+    </g>
+</svg>

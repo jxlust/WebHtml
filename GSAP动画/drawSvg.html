@@ -12,7 +12,7 @@
     <!-- <script src="https://assets.codepen.io/16327/DrawSVGPlugin3.min.js"></script> -->
     <!-- <script src="./js/DrawSVGPlugin3.min.js"></script> -->
     <script src="./js/DrawSVG3.11.6.js"></script>
-    <script src="https://unpkg.co/gsap@3/dist/gsap.min.js"></script>
+    <script src="./js/gsap-latest-beta.min.js"></script>
     <script src="./js/MotionPathPlugin.min.js"></script>
 
 </head>
@@ -63,19 +63,19 @@
     gsap.registerPlugin(DrawSVGPlugin);
     gsap.fromTo(
         "#myCircle", {
-            drawSVG: "0%"
-        }, {
-            duration: 3,
-            // repeat: -1,
-            drawSVG: "100%"
-        }
+        drawSVG: "0%"
+    }, {
+        duration: 3,
+        // repeat: -1,
+        drawSVG: "100%"
+    }
     );
-    gsap.fromTo('#myCircle',{
+    gsap.fromTo('#myCircle', {
         drawSVG: '100%'
-    },{
+    }, {
         duration: 2,
         drawSVG: '20% 60%'
-    },4)
+    }, 4)
 </script>
 
 </html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/DrawSVG3.11.6.js"></script>
+    <script src="./js/gsap-latest-beta.min.js"></script>
+    <script src="./js/MotionPathPlugin.min.js"></script>
+</head>
+
+<body>
+
+    <!-- 放大了一倍 因为实际宽高是view box的两倍 -->
+    <svg id="svg1" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 100 100">
+        <path d="M40,49.5 H70" stroke="skyblue" fill="none" stroke-width="1px"></path>
+        <rect x="10" y="30" rx="0" width="80" height="40" stroke="red" id="myPath" fill="none"></rect>
+    </svg>
+
+    <svg id="svg2" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 100 100">
+        <path d="M40,49.5 H70" stroke="skyblue" fill="none" stroke-width="1px"></path>
+        <rect x="10" y="30" rx="8" width="80" height="40" stroke="red" id="rect1" fill="none"></rect>
+    </svg>
+</body>
+<script>
+    gsap.registerPlugin(DrawSVGPlugin);
+    gsap.fromTo(
+        "#myPath", {
+        drawSVG: "0%"
+    }, {
+        duration: 3,
+        // repeat: -1,
+        drawSVG: "100%"
+    }
+    );
+    gsap.fromTo('#myPath', {
+        drawSVG: '100%'
+    }, {
+        duration: 2,
+        drawSVG: '16.67% 66.67%'
+    }, 4)
+</script>
+
+</html>
