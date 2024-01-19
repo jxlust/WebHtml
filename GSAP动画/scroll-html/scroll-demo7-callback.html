@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scrub animations</title>
+    <title>scroll animations</title>
 
     <style>
         html,
@@ -101,20 +101,19 @@
 
         .purple {
             background-color: #8d3dae;
-            background-image: radial-gradient(circle at 47% 14%, rgba(205, 205, 205, 0.04) 0%, rgba(205, 205, 205, 0.04) 43%, transparent 43%, transparent 100%), radial-gradient(circle at 35% 12%, rgba(215, 215, 215, 0.04) 0%, rgba(215, 215, 215, 0.04) 4%, transparent 4%, transparent 100%), radial-gradient(circle at 1% 35%, rgba(24, 24, 24, 0.04) 0%, rgba(24, 24, 24, 0.04) 37%, transparent 37%, transparent 100%), radial-gradient(circle at 21% 1%, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0.04) 26%, transparent 26%, transparent 100%), radial-gradient(circle at 23% 82%, rgba(249, 249, 249, 0.04) 0%, rgba(249, 249, 249, 0.04) 60%, transparent 60%, transparent 100%), radial-gradient(circle at 11% 54%, rgba(251, 251, 251, 0.04) 0%, rgba(251, 251, 251, 0.04) 23%, transparent 23%, transparent 100%), radial-gradient(circle at 69% 68%, rgba(234, 234, 234, 0.04) 0%, rgba(234, 234, 234, 0.04) 10%, transparent 10%, transparent 100%), linear-gradient(90deg, #aa6bc5, #8d3dae);
+            background-image: radial-gradient(circle at 47% 14%, rgba(205, 205, 205, 0.04) 0%, rgba(205, 205, 205, 0.04) 43%, transparent 43%, transparent 100%), radial-gradient(circle at 35% 12%, rgba(215, 215, 215, 0.04) 0%, rgba(215, 215, 215, 0.04) 4%, transparent 4%, transparent 100%), radial-gradient(circle at 1% 35%, rgba(24, 24, 24, 0.04) 0%, rgba(24, 24, 24, 0.04) 37%, transparent 37%, transparent 100%), radial-gradient(circle at 21% 1%, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0.04) 26%, transparent 26%, transparent 100%), radial-gradient(circle at 23% 82%, rgba(249, 249, 249, 0.04) 0%, rgba(249, 249, 249, 0.04) 60%, transparent 60%, transparent 100%), radial-gradient(circle at 11% 54%, rgba(251, 251, 251, 0.04) 0%, rgba(251, 251, 251, 0.04) 23%, transparent 23%, transparent 100%), radial-gradient(circle at 69% 68%, rgba(234, 234, 234, 0.04) 0%, rgba(234, 234, 234, 0.04) 10%, transparent 10%, transparent 100%), linear-gradient(90deg, #8d3dae, #8d3dae);
         }
 
         .gray {
             background-color: #999;
             will-change: transform;
-
         }
     </style>
 
 
-    <script src="./js/gsap-latest-beta.min.js"></script>
-    <script src="./js/scrolltrigger.min.js"></script>
-    <script src="./gsap-plugins/ScrollSmoother.min.js"></script>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../js/scrolltrigger.min.js"></script>
+    <script src="../gsap-plugins/ScrollSmoother.min.js"></script>
 
 
 </head>
@@ -122,32 +121,33 @@
 <body>
     <div class="panel blue description">
         <div>
-            <h1>Scrub animations </h1>
-            <p>利用配置 <code>scrub: true </code> </p>
+            <h1>Callbacks </h1>
+            <ul>
+                <li><code>onEnter</code> - forward past "start" (typically when <code>trigger</code> is scrolled into
+                    view)</li>
+                <li><code>onLeave</code> - forward past "end" (typically when <code>trigger</code> is scrolled out of
+                    view)</li>
+                <li><code>onEnterBack</code> - backward past "end" (typically when <code>trigger</code> is scrolled back
+                    into view)</li>
+                <li><code>onLeaveBack</code> - backward past "start" (typically when <code>trigger</code> goes backward
+                    out of view)</li>
+                <li><code>onUpdate</code> - every time the scroll position changes while between "start" and "end".</li>
+                <li><code>onToggle</code> - passes the start or end in either direction</li>
+                <li><code>onRefreshInit</code> - immediately before measurements are recalculated (typically on resize)
+                </li>
+                <li><code>onRefresh</code> - after measurements are recalculated (typically on resize)</li>
+            </ul>
+
         </div>
     </div>
 
     <div class="panel red">
         <p>
             <span class="line line-1"></span>
-            测试scrub效果的一根线条
+            测试效果的一根线条 <span id="processId">progress: 0</span>
         </p>
-    </div>
 
-    <div class="panel orange">
-        <p>
-            <span class="line line-2"></span>
-            测试scrub效果的一根线条，其中panel利用pin固定
-        </p>
     </div>
-
-    <div class="panel purple">
-        <p>
-            <span class="line line-3"></span>
-            我是一条线，我是文字，我也要动起来，滚动吧少年
-        </p>
-    </div>
-
 
 
     <div class="panel gray">
@@ -158,74 +158,42 @@
 </body>
 
 <script>
-
     gsap.registerPlugin(ScrollTrigger);
     // ScrollTrigger.normalizeScroll(true)
-
-    /*****  scroll line1 animation ***/
-    gsap.from('.line-1', {
-        scrollTrigger: {
-            trigger: '.line-1',
-            scrub: true,
-            // scrub: 1,
-            start: 'top bottom',
-            end: 'top top',
-            // markers: true,
-            id: '1',
-        },
-        // duration: 3,
+    const proDom = document.getElementById('processId')
+    /*****  scroll line0 animation ***/
+    const tween = gsap.from('.line-1', {
         scaleX: 0,
         transformOrigin: 'left center',
         ease: 'none'
     })
+    const logRed = (v) => {
+        console.log('回调钩子触发:', v)
+    }
 
-    /*****  scroll line2 animation ***/
-    gsap.from('.line-2', {
-        scrollTrigger: {
-            trigger: '.orange',
-            scrub: true,
-            pin: true,
-            start: 'top top',
-            end: '30% top',
-            // markers: true,
-            id: '2'
-        },
-        scaleX: 0,
-        transformOrigin: 'left center',
-        ease: 'none'
+    ScrollTrigger.create({
+        trigger: '.red',
+        start: 'top 100px',
+        end: 'bottom bottom-=100px',
+        markers: { startColor: 'white', endColor: '#920202' },
+        id: '1',
+        scrub: true,
+        animation: tween,
+        onEnter: () => logRed("onEnter"),
+        onLeave: () => logRed("onLeave"),
+        onEnterBack: () => logRed("onEnterBack"),
+        onLeaveBack: () => logRed("onLeaveBack"),
+        onRefresh: () => logRed("onRefresh"),
+        onUpdate: self => proDom.innerText = "progress: " + self.progress.toFixed(3)
     })
 
-    /*****  scroll line3 animation ***/
-    const timeline = gsap.timeline({
-        scrollTrigger: {
-            trigger: '.purple',
-            scrub: true,
-            pin: true,
-            start: 'top top',
-            end: '30% top',
-            // markers: true,
-            // id: '3'
-        }
-    })
-    timeline.from('.purple p', {
-        scale: 0.3,
-        autoAlpha: 0,
-        rotation: 45,
-    }).from('.line-3', {
-        scaleX: 0,
-        transformOrigin: 'left center',
-        ease: 'none'
-    }, 0).to('.purple', {
-        backgroundImage: 'radial-gradient(circle at 47% 14%, rgba(205, 205, 205, 0.04) 0%, rgba(205, 205, 205, 0.04) 43%, transparent 43%, transparent 100%), radial-gradient(circle at 35% 12%, rgba(215, 215, 215, 0.04) 0%, rgba(215, 215, 215, 0.04) 4%, transparent 4%, transparent 100%), radial-gradient(circle at 1% 35%, rgba(24, 24, 24, 0.04) 0%, rgba(24, 24, 24, 0.04) 37%, transparent 37%, transparent 100%), radial-gradient(circle at 21% 1%, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0.04) 26%, transparent 26%, transparent 100%), radial-gradient(circle at 23% 82%, rgba(249, 249, 249, 0.04) 0%, rgba(249, 249, 249, 0.04) 60%, transparent 60%, transparent 100%), radial-gradient(circle at 11% 54%, rgba(251, 251, 251, 0.04) 0%, rgba(251, 251, 251, 0.04) 23%, transparent 23%, transparent 100%), radial-gradient(circle at 69% 68%, rgba(234, 234, 234, 0.04) 0%, rgba(234, 234, 234, 0.04) 10%, transparent 10%, transparent 100%), linear-gradient(90deg, #7f22a7, #530375)'
-    }, 0)
-
-
+    /*****  scroll line0 animation ***/
     gsap.to('.gray span', {
         scrollTrigger: {
             trigger: '.gray',
             start: 'center center',
             end: 'bottom bottom',
-            markers: true,
+            // markers: true,
             id: '4'
         },
         duration: 1,
