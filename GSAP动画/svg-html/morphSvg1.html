@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draw Svg</title>
+    <style>
+
+    </style>
+
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../gsap-plugins/MorphSVGPlugin3.min.js"></script>
+
+</head>
+
+<body>
+    <svg id="circ" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="9 80 800 400">
+        <style type="text/css">
+            .st0 {
+                fill: #1D1D1D;
+                stroke: #000000;
+                stroke-miterlimit: 10;
+            }
+
+            .st1 {
+                fill: #0ae448;
+            }
+        </style>
+
+        <rect id="background" x="9" y="80" class="st0" width="800" height="400" />
+
+        <path id="circle" class="st1" d="M490.1,280.649c0,44.459-36.041,80.5-80.5,80.5s-80.5-36.041-80.5-80.5s36.041-80.5,80.5-80.5
+  S490.1,236.19,490.1,280.649z" />
+    </svg>
+</body>
+<script>
+    gsap.registerPlugin(MorphSVGPlugin);
+
+
+</script>
+
+
+
+</html>
