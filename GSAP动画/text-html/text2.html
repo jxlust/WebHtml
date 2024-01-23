@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>text plugin</title>
+    <style>
+        body {
+            background-color: #666;
+        }
+
+        strong {
+            color: orange;
+        }
+
+        .highlight {
+            color: red;
+            font-family: serif;
+        }
+
+        .code {
+            font-family: Courier;
+            color: rgb(221, 202, 126);
+        }
+
+
+
+        #demo {
+            position: relative;
+        }
+
+        #quote {
+            font-size: 36px;
+            line-height: 50px;
+            color: #dedede;
+            transform-style: preserve-3d;
+            perspective: 400px;
+        }
+
+        button {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        #nav {
+            padding-bottom: 20px;
+        }
+
+        a:visited,
+        a:link,
+        a:active {
+            color: #87CD02;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        a:hover {
+            background-color: #87CD02;
+            color: white;
+        }
+
+        span {
+            display: inline-block;
+        }
+
+        .btn-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 50px 0;
+        }
+
+        .inline {
+            display: inline !important;
+        }
+    </style>
+
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../gsap-plugins/SplitText3.min.js"></script>
+
+</head>
+
+<body>
+    <div id="demo">
+        <div id="quote">我是沙发上你哈哈 <strong>大老粗文字</strong> 喜欢 <span class="code">js代码</span>,
+            <span class="code">css代码</span>，和 <span class="code">html代码</span>。你喜欢吗哈哈是短发啦<a
+                href="https://www.greensock.com" target="_blank">没问题</a>。 你可以购买时发生了 <em>GO NUTS with EMOJI</em>
+            🐳 🍔 ❤️
+        </div>
+    </div>
+    </div>
+
+
+
+
+    <div class="btn-group">
+        <button id="chars">chars</button>
+        <button id="words">words</button>
+        <button id="words2">words2</button>
+        <button id="lines">lines</button>
+        <button id="charsWordsLines">chars words and lines</button>
+        <button id="revert">revert</button>
+    </div>
+
+
+
+
+</body>
+
+
+<script>
+
+    gsap.registerPlugin(SplitText);
+
+    // position:'absolute'
+    let tl = gsap.timeline(),
+        mySplitText = new SplitText("#quote", { type: "words", wordsClass: 'inline' });
+    // type: 'chars,words,lines'
+    // let chars = mySplitText.chars; //an array of all the divs that wrap each character
+    let words = mySplitText.words
+    console.log(words)
+    gsap.set("#quote", { perspective: 400 });
+
+    function kill() {
+        tl.clear().time(0);
+        mySplitText.revert();
+    }
+    document.getElementById('chars').addEventListener('click', () => {
+        kill();
+        mySplitText.split({ type: "chars" })
+        tl.from(mySplitText.chars,
+            {
+                duration: 0.6,
+                scale: 4,
+                autoAlpha: 0,
+                rotationX: -180,
+                transformOrigin: "100% 50%",
+                ease: "back",
+                stagger: 0.02
+            });
+    })
+
+    document.getElementById('words').addEventListener('click', () => {
+        kill();
+        mySplitText.split({ type: "words" })
+        const wordsDoms = mySplitText.words;
+        tl.from(wordsDoms, {
+            duration: .6,
+            opacity: 0,
+            force3D: true,
+            stagger: .1,
+            scale: (i) => {
+                return i % 2 === 0 ? 0 : 2
+            }
+        })
+    })
+    document.getElementById('words2').addEventListener('click', () => {
+        kill();
+        mySplitText.split({ type: "words" })
+        const wordsDoms = mySplitText.words
+        for (let index in wordsDoms) {
+            let el = wordsDoms[index]
+            tl.from(el, {
+                duration: .6,
+                opacity: 0,
+                force3D: true
+            }, index * 0.1)
+            tl.from(el, {
+                duration: 0.6,
+                // 偶数i放大效果，奇数i缩小效果
+                scale: index % 2 === 0 ? 0 : 2,
+            }, index * 0.1)
+        }
+
+    })
+    document.getElementById('lines').addEventListener('click', () => {
+        kill();
+        mySplitText.split({ type: "lines" })
+        tl.from(mySplitText.lines, {
+            duration: 0.5,
+            opacity: 0,
+            rotationX: -120,
+            force3D: true,
+            transformOrigin: 'top center -150',
+            stagger: .1
+        })
+    })
+    document.getElementById('charsWordsLines').addEventListener('click', () => {
+        kill();
+        mySplitText.split({ type: "chars, words, lines" })
+        tl.from(mySplitText.chars, {
+            duration: .2,
+            autoAlpha: 0,
+            scale: 4,
+            force3D: true,
+            stagger: .08
+        }, 0.1)
+            .to(mySplitText.words, {
+                duration: .1,
+                color: '#8FE402',
+                scale: 0.9,
+                stagger: .1
+            }, 'words')
+            .to(mySplitText.words, {
+                duration: 0.2,
+                color: 'white',
+                scale: 1,
+                stagger: .1
+            }, 'words+=0.1')
+            .to(mySplitText.lines, {
+                duration: .5,
+                x: 100,
+                autoAlpha: 0,
+                stagger: 0.2
+            }, '>')
+    })
+
+    document.getElementById('revert').addEventListener('click', () => {
+        // 还原
+        mySplitText.revert();
+    })
+</script>
+
+</html>

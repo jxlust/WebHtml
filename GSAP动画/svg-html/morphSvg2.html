@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draw Svg</title>
+    <style>
+        #hippo {
+            visibility: hidden;
+        }
+
+        svg {
+            position: relative;
+            display: block;
+            margin: 20px auto;
+            width: 700px;
+            max-height: 70vh;
+        }
+    </style>
+
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../gsap-plugins/MorphSVGPlugin3.min.js"></script>
+    <script src="../js/Draggable.min.js"></script>
+    <script src="./findShapeIndex.js"></script>
+    <script src="./findMorphOrigin.js"></script>
+</head>
+
+<body>
+    <svg id="circ" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" x="0px" y="0px" viewBox="0 0 800 400">
+        <style type="text/css">
+            .st0 {
+                fill: #1D1D1D;
+                stroke: #000000;
+                stroke-miterlimit: 10;
+            }
+
+            .st1 {
+                fill: #88C540;
+            }
+
+            .st2 {
+                fill: none;
+                stroke: #E5285D;
+                stroke-miterlimit: 10;
+            }
+        </style>
+        <path id="square" class="st1" d="M525.667,321.333H274.333V78.667h251.333V321.333z" />
+        <path id="star" class="st2" d="M400,82.531l38.168,77.336l85.346,12.401l-61.757,60.198l14.579,85.001L400,277.336l-76.336,40.132
+          l14.579-85.001l-61.757-60.198l85.346-12.401L400,82.531z" />
+    </svg>
+
+
+    <svg id="typeDemo" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" x="0px" y="0px" viewBox="0 0 800 400">
+        <style type="text/css">
+            .dolphin {
+                visibility: hidden;
+            }
+
+            .bird {
+                fill: #765e98;
+            }
+        </style>
+        <polygon class="bird" fill="#9d95ff"
+            points="77.2304688 91.9453125 159 106.492188 184 138.167969 226.898438 115.056641 253.035156 129.8125 226.898438 129.8125 209.027344 167 146.144531 198.804688 123.304688 240.269531 130.894531 167 69.1875 122.101562 91.6328125 115.056641">
+        </polygon>
+        <path
+            d="M175.676694,154.30152 L191.511695,155.82645 L210.962219,151.025394 L233.717151,155.82645 L242.95394,154.30152 C246.77832,152.244275 247.61217,151.123744 242.95394,146.194876 L230.087487,136.938053 L228.310365,127.939313 L217.984677,116.68971 L200.922897,107.825315 L172.061171,100.416322 L149.036371,93.2771959 L137.366057,93.2771959 L123.866769,96.9103958 L118.780525,101.045621 L136.032037,107.825315 L121.971801,121.095982 L107.78547,136.938053 L100.10543,164.102792 L101.795345,197.402607 L103.508829,211.042132 L94.1860125,234.383939 L94.1860125,252.182258 C94.9577165,256.086947 96.3827429,257.522276 100.10543,250.273149 L105.796225,238.164446 L118.300891,231.264549 L121.971801,226.980837 L133.751712,221.52927 L145.260577,219.924204 C147.809753,220.110729 149.728122,219.756979 147.910939,216.203798 L133.751712,205.522214 L121.971801,204.083311 L118.300891,199.915089 L121.971801,181.674847 L131.419535,162.505975 L147.047126,155.82645 L149.036371,162.505975 L145.260577,176.350553 L144.090364,181.744376 L147.047126,181.674847 L159,176.350553 L168.569976,167 L175.676694,154.30152 Z"
+            class="dolphin" stroke="#979797" fill="#D33838"></path>
+
+    </svg>
+</body>
+<script>
+    gsap.registerPlugin(MorphSVGPlugin);
+
+    findShapeIndex("#square", "#star");
+
+    gsap.to("#square", { duration: 3, morphSVG: { shape: "#star", shapeIndex: 5 } });
+
+</script>
+
+<script>
+    gsap.registerPlugin(Draggable);
+    MorphSVGPlugin.convertToPath(".bird");
+    // findShapeIndex(".bird", ".dolphin");
+
+    gsap.to(".bird", { yoyo: true, repeat: -1, duration: 3, morphSVG: { shape: ".dolphin" } });
+
+    findMorphOrigin(".bird", ".dolphin", { showLines: true });
+
+</script>
+
+
+
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draw Svg</title>
+    <style>
+        .box {
+            display: flex;
+            align-items: center;
+            transform-style: preserve-3d;
+            perspective: 400px;
+        }
+
+        .font {
+            /* width: 160px; */
+            /* height: auto; */
+        }
+
+        .ml1 {
+            margin-left: -7px;
+        }
+
+        .ml2 {
+            margin-left: 10px;
+        }
+    </style>
+    <script src="../js/DrawSVG3.11.6.js"></script>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../js/MotionPathPlugin.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="box">
+        <img class="font" src="../images/svg/font1.svg" />
+        <img class="font" src="../images/svg/font2.svg" />
+        <img class="font ml1" src="../images/svg/font3.svg" />
+        <img class="font ml2" src="../images/svg/font4.svg" />
+    </div>
+
+</body>
+
+<script>
+    // gsap.registerPlugin(DrawSVGPlugin, MotionPathPlugin);
+
+    // gsap.set('.font', {
+    //     autoAlpha: 0
+    // })
+
+    // gsap.fromTo('.font', {
+    //     autoAlpha: 0,
+    //  }, {
+    //     stagger: .3,
+    //     autoAlpha: 1,
+    //      duration: 1
+    // })
+
+    gsap.from('.font', {
+        duration: 0.8,
+        opacity: 0,
+        scale: 0,
+        y: 80,
+        rotationX: 180,
+        transformOrigin: "0% 50% -50",
+        ease: "back",
+        stagger: 0.3
+    })
+
+</script>
+
+</html>
