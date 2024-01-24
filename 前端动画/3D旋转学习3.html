@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #main {
+
+
+            display: flex;
+
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .parent {
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            width: 100px;
+            height: 100px;
+        }
+
+        .fixed-box {
+            position: absolute;
+            z-index: -1;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            background-color: #f8f8f8;
+        }
+
+        .box {
+            transform-style: preserve-3d;
+            position: relative;
+            z-index: 1;
+            width: 100px;
+            height: 100px;
+            background-color: skyblue;
+        }
+
+        .box1 {
+            transform-origin: top center;
+            transform: rotateX(-120deg) translate3d(0, 180px, -190px);
+            transition: all 1s;
+            transition-timing-function: ease-in;
+        }
+
+
+        .box1.active {
+            transform: rotateX(0deg) translate3d(0, 0, 0);
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="main">
+        <div class="parent">
+            <div class="box box1"></div>
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>
