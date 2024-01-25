@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cube 立方体</title>
+    <style>
+        body {
+            background-color: #888;
+            color: #FFF;
+            display: flex;
+            align-items: center;
+        }
+
+        h1 span {
+            color: #f00;
+        }
+
+
+        h2 {
+            color: #FFF;
+        }
+
+        #box {
+            width: 200px;
+            margin: 200px;
+            pointer-events: none;
+            perspective: 1000px;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            margin: 30px auto;
+            position: relative;
+            transform-style: preserve-3d;
+            /* perspective: 1000px;
+            perspective-origin: 0% 0%; */
+        }
+
+        .box div {
+            position: absolute;
+            text-align: center;
+            left: 0;
+            top: 0;
+            line-height: 200px;
+            font-weight: bold;
+            font-size: 40px;
+            width: 200px;
+            height: 200px;
+            color: #111;
+            transform-style: preserve-3d;
+            /*border: 1px solid #777;
+  transform-origin: 50% 50% -50px;*/
+        }
+
+        .box .side1 {
+            background: hsla(0, 100%, 50%, 0.7);
+        }
+
+        .box .side2 {
+            background: hsla(60, 100%, 50%, 0.7);
+        }
+
+        .box .side3 {
+            background: hsla(120, 100%, 50%, 0.7);
+        }
+
+        .box .side4 {
+            background: hsla(180, 100%, 50%, 0.7);
+        }
+
+
+        .box .side5 {
+            background: hsla(240, 100%, 50%, 0.7);
+        }
+
+        .box .side6 {
+            background: hsla(300, 100%, 50%, 0.7);
+        }
+
+        .my-rotate-ani {
+            animation: rotate3d 5s infinite linear;
+        }
+
+        @keyframes rotate3d {
+            0% {
+                transform: rotate3d(1, 1, 1, 0deg);
+            }
+
+            100% {
+                transform: rotate3d(1, 1, 1, 360deg);
+            }
+        }
+    </style>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+
+</head>
+
+<body>
+
+    <div id="box">
+        <div class="box" id="cubeBox">
+            <div class="side6 bottom">6</div>
+            <div class="side5 top">5</div>
+            <div class="side4 left">4</div>
+            <div class="side3 right">3 </div>
+            <div class="side2 back">2</div>
+            <div class="side1 front">1</div>
+        </div>
+    </div>
+
+
+    <div id="box2">
+        <div class="box my-rotate-ani">
+            <div class="side6 bottom">6</div>
+            <div class="side5 top">5</div>
+            <div class="side4 left">4</div>
+            <div class="side3 right">3 </div>
+            <div class="side2 back">2</div>
+            <div class="side1 front">1</div>
+        </div>
+    </div>
+</body>
+
+<script>
+
+    gsap.set('.box div', {
+        // transformStyle: "preserve-3d",
+        transformOrigin: "50% 50% -100",
+        // transformPerspective: 1000
+    })
+    gsap.set('.back', {
+        rotationY: 180
+    })
+    gsap.set('.right', {
+        rotationY: 90
+
+    })
+    gsap.set('.left', {
+        rotationY: 270,
+
+    })
+    gsap.set('.top', {
+        rotationX: 90
+    })
+    gsap.set('.bottom', {
+        rotationX: 270
+    })
+
+    gsap.to('#cubeBox', {
+        duration: 5,
+        repeat: -1,
+        rotationX: '+=360',
+        rotationY: '+=360',
+        transformOrigin: "50% 50% -100",
+        ease: 'none',
+        force3D: true,
+    })
+
+
+</script>
+
+</html>

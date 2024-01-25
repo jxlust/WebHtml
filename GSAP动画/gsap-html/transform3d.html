@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #666;
+        }
+
+        .demo {
+            padding: 300px 200px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 150px;
+            align-items: center;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .box {
+            width: 150px;
+            height: 70px;
+            background-color: skyblue;
+            /* transform-style: preserve-3d; */
+
+        }
+
+        #box2 {
+            background-color: antiquewhite;
+        }
+    </style>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+
+</head>
+
+<body>
+
+
+    <div class="demo">
+
+        <div class="box" id="box1">我是1</div>
+        <div class="box" id="box2">我是2</div>
+        <div class="box" id="box3">我是3</div>
+        <div class="box" id="box4">我是4</div>
+        <div class="box" id="box5">我是5</div>
+        <div class="box" id="box6">我是6</div>
+
+        <div class="box" id="box7">我是7</div>
+
+    </div>
+</body>
+
+<script>
+    const tween = gsap.to('#box1', {
+        duration: 2,
+        rotationX: 180,
+        // transformOrigin: '50% 50% -200px',
+        transformOrigin: '100% 0% -200px',
+        force3D: true,
+    })
+    gsap.from('#box2', {
+        duration: 2,
+        rotationX: -180,
+        transformOrigin: 'top center -200px',
+        force3D: true,
+    })
+    gsap.from('#box3', {
+        duration: 2,
+        rotationX: -180,
+        transformOrigin: 'center center 200px',
+        force3D: true,
+    })
+
+    gsap.from('#box4', {
+        duration: 2,
+        rotationX: 180,
+        transformOrigin: 'center center 200px',
+        force3D: true,
+    })
+
+    gsap.from('#box5', {
+        duration: 2,
+        rotationX: 180,
+        transformOrigin: 'center center -200px',
+        force3D: true,
+    })
+
+    gsap.to('#box6', {
+        transformOrigin: '100% 0%',
+        // transformOrigin: 'right top',
+        duration: 2,
+        rotationX: 180,
+        // y: -100,
+        // scaleX: 1,
+        z: -300,
+        force3D: true,
+    })
+
+    gsap.to('#box7', {
+        duration: 2,
+        rotationY: 360,
+        transformOrigin: 'center center -400px',
+        force3D: true,
+    })
+</script>
+
+</html>

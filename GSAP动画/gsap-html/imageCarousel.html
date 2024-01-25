@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旋转木马效果 图片展示</title>
+    <style>
+        html {
+            background-color: rgb(74, 164, 199);
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+        }
+
+        .demoWrapper {
+            width: 680px;
+            height: 400px;
+            -webkit-font-smoothing: antialiased;
+            margin: 50px auto;
+            padding: 1px;
+        }
+
+        .stage {
+            height: 325px;
+            margin-top: 15px;
+            margin-left: 15px;
+            color: #ddd;
+            margin-right: 10px;
+            font-family: Arial, Helvetica, Verdana;
+            position: relative;
+        }
+
+        .box {
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            background-color: #06f;
+            margin: 10px 20px 20px 235px;
+            display: inline-block;
+            overflow: hidden;
+        }
+
+        .box>img {
+            width: 180px;
+            height: auto;
+            border: 1px solid #DDD;
+            outline: 0 solid transparent;
+        }
+    </style>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="demoWrapper">
+        <div class="stage">
+            <div class="box">
+                <img src="../images/bg1.webp" width="285" height="285">
+            </div>
+            <div class="box">
+                <img src="../images/bg1.webp" width="285" height="285">
+            </div>
+            <div class="box">
+                <img src="../images/bg1.webp" width="285" height="285">
+            </div>
+            <div class="box">
+                <img src="../images/bg1.webp" width="285" height="285">
+            </div>
+            <div class="box">
+                <img src="../images/bg1.webp" width="285" height="285">
+            </div>
+            <div class="box">
+                <img src="../images/bg1.webp" width="285" height="285">
+            </div>
+            <div class="box">
+                <img src="../images/bg1.webp" width="285" height="285">
+            </div>
+            <div class="box">
+                <img src="../images/bg1.webp" width="285" height="285">
+            </div>
+            <div class="box">
+                <img src="../images/bg1.webp" width="285" height="285">
+            </div>
+            <div class="box">
+                <img src="../images/bg1.webp" width="285" height="285">
+            </div>
+            <div class="box">
+                <img src="../images/bg1.webp" width="285" height="285">
+            </div>
+            <div class="box">
+                <img src="../images/bg1.webp" width="285" height="285">
+            </div>
+            <div class="box">
+                <img src="../images/bg1.webp" width="285" height="285">
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="stage">
+    </div> -->
+
+</body>
+
+<script>
+    gsap.set('.stage', {
+        perspective: 1100,
+        transformStyle: "preserve-3d"
+    })
+    const boxes = gsap.utils.toArray('.box')
+    const count = boxes.length;
+    boxes.forEach((el, index) => {
+        gsap.set(el, {
+            rotationY: index * 360 / count,
+            transformOrigin: "50% 50% -450"
+        })
+
+        gsap.to(el, {
+            force3D: true,
+            z: 1,
+            rotationY: '+=360',
+            repeat: -1,
+            duration: 10,
+            ease: 'none'
+        })
+    });
+
+</script>
+
+
+</html>

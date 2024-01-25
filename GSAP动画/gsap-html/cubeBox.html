@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cube 立方体</title>
+    <style>
+        body {
+            background-color: #888;
+            color: #FFF;
+        }
+
+        h1 span {
+            color: #f00;
+        }
+
+
+        h2 {
+            color: #FFF;
+        }
+
+        #box {
+            width: 100px;
+            margin: 100px;
+            pointer-events: none;
+            perspective: 1000px;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            margin: 30px auto;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .box div {
+            position: absolute;
+            text-align: center;
+            left: 0;
+            top: 0;
+            line-height: 100px;
+            font-weight: bold;
+            font-size: 40px;
+            width: 100px;
+            height: 100px;
+            color: #111;
+            transform-style: preserve-3d;
+
+            /*border: 1px solid #777;
+  transform-origin: 50% 50% -50px;*/
+        }
+
+        .box .side1 {
+            background: hsla(0, 100%, 50%, 0.7);
+        }
+
+        .box .side2 {
+            background: hsla(60, 100%, 50%, 0.7);
+        }
+
+        .box .side3 {
+            /* background: hsla(120, 100%, 50%, 0.7); */
+        }
+
+        .box .side3 div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+            background: hsla(120, 100%, 50%, 0.7);
+        }
+
+        .box .side4 {
+            /* background: hsla(180, 100%, 50%, 0.7); */
+        }
+
+        .box .side4 div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+            background: hsla(180, 100%, 50%, 0.7);
+        }
+
+        .box .side5 {
+            background: hsla(240, 100%, 50%, 0.7);
+        }
+
+        .box .side6 {
+            background: hsla(300, 100%, 50%, 0.7);
+        }
+    </style>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+
+</head>
+
+<body>
+
+    <div id="box">
+        <div class="box">
+            <div class="side6 bottom">6</div>
+            <div class="side5 top">5</div>
+            <div class="side4 left">
+                <div>4</div>
+            </div>
+            <div class="side3 right">
+                <div>3</div>
+            </div>
+            <div class="side2 back">2</div>
+            <div class="side1 front">1</div>
+        </div>
+    </div>
+</body>
+
+<script>
+
+    gsap.set('.box div', {
+        // transformStyle: "preserve-3d",
+        transformOrigin: "50% 50% -50px",
+        transformPerspective: 1000
+    })
+    gsap.set('.back', {
+        rotationY: 180
+    })
+    gsap.set('.right', {
+        rotationY: 90
+
+    })
+    gsap.set('.left', {
+        rotationY: 270,
+
+    })
+    gsap.set('.top', {
+        rotationX: 90
+    })
+    gsap.set('.bottom', {
+        rotationX: 270
+    })
+
+    // const tl = gsap.timeline({
+    //     repeat: -1,
+    //     force3D: true,
+    //     defaults: {
+    //         ease: 'none',
+    //         duration: 6,
+    //         force3D: true,
+    //     }
+
+    // })
+    // tl
+    //     .to('.front', {
+    //         rotationX: '+=360',
+    //     })
+    //     .to('.back', {
+    //         rotationX: '-=360',
+    //     }, 0)
+    //     .to('.top', {
+    //         rotationX: '+=360',
+    //     }, 0)
+    //     .to('.bottom', {
+    //         rotationX: '+=360',
+    //     }, 0)
+    //     .to('.right div', {
+    //         rotationZ: '+=360',
+    //     }, 0)
+    //     .to('.left div', {
+    //         rotationZ: '-=360',
+    //     }, 0)
+    //     .to('.box > div', {
+    //         rotationY: '+=360',
+    //     }, 0)
+
+    // const tl2 = gsap.timeline({
+    //     repeat: -1,
+    //     force3D: true,
+    //     defaults: {
+    //         ease: 'none',
+    //         duration: 6,
+    //         force3D: true,
+    //     }
+    // })
+    // tl2.to('.box > div', {
+    //     rotationY: '+=360',
+    // })
+
+    // .to('.box > div', {
+    //     // rotationZ: '+=360',
+    //     // stagger: '0',
+    // }, '-=5')
+
+</script>
+
+</html>

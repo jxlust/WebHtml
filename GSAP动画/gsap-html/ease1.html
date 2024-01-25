@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #666;
+        }
+
+        .demo {
+            padding: 200px 200px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 150px;
+            align-items: center;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .box {
+            width: 150px;
+            height: 70px;
+            background-color: skyblue;
+            /* transform-style: preserve-3d; */
+        }
+
+        .yellow {
+            background-color: antiquewhite;
+        }
+
+        .green {
+            background-color: rgb(49, 100, 49);
+        }
+
+        .red {
+            background-color: rgb(124, 30, 30);
+        }
+    </style>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+
+</head>
+
+<body>
+
+    <a href="https://gsap.com/docs/v3/Eases/" target="_blank">https://gsap.com/docs/v3/Eases/</a>
+    <div class="demo">
+
+        <div class="box" id="box1">我是1</div>
+        <div class="box green" id="box2">我是2</div>
+        <div class="box" id="box3">我是3</div>
+        <div class="box red" id="box4">我是4</div>
+        <div class="box" id="box5">我是5</div>
+        <div class="box yellow" id="box6">我是6</div>
+        <div class="box" id="box7">我是7</div>
+
+    </div>
+</body>
+
+<script>
+
+    gsap.to('#box1', {
+        opacity: 0,
+        duration: 1,// Default 0.5
+        y: 50,
+        delay: 1,
+        ease: "back.in(8)",
+    })
+
+
+</script>
+
+</html>
