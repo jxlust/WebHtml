@@ -49,6 +49,44 @@
             border: 1px solid #DDD;
             outline: 0 solid transparent;
         }
+
+        .green {
+            background-color: rgb(82, 180, 82);
+        }
+
+        .blue {
+            background-color: rgb(111, 111, 206);
+        }
+
+        .red {
+            background-color: rgb(226, 113, 145);
+        }
+
+        .yellow {
+            background-color: rgb(121, 121, 21);
+        }
+
+        .gray {
+            background-color: #999;
+        }
+
+        .my-boxs {
+            width: 300px;
+            height: 100px;
+            border: 1px solid #666;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            justify-content: center;
+        }
+
+        .cxbox {
+            position: absolute;
+            width: 200px;
+            height: 100px;
+            margin: 0 auto;
+            opacity: 0;
+        }
     </style>
     <script src="../js/gsap-latest-beta.min.js"></script>
 
@@ -100,8 +138,13 @@
         </div>
     </div>
 
-    <!-- <div class="stage">
-    </div> -->
+    <div class="my-boxs">
+        <div class="cxbox gray"></div>
+        <div class="cxbox green"></div>
+        <div class="cxbox yellow"></div>
+        <div class="cxbox red"></div>
+        <div class="cxbox blue"></div>
+    </div>
 
 </body>
 
@@ -127,6 +170,36 @@
             ease: 'none'
         })
     });
+
+    const imgs = gsap.utils.toArray('.cxbox')
+    const tl = gsap.timeline({
+        onCompelte: () => {
+
+        },
+        repeat: -1
+    })
+    gsap.set(imgs[0], {
+        opacity: 1
+    })
+    imgs.forEach((el, index) => {
+        if (index === 0) {
+            tl.to(el, {
+                duration: 2,
+                opacity: 0,
+                xPercent: -100
+            })
+        } else {
+
+            tl.fromTo(el, {
+                xPercent: 100,
+                opacity: 1,
+            }, {
+                duration: 2,
+                opacity: 0,
+                xPercent: -100
+            }, '-=1')
+        }
+    })
 
 </script>
 

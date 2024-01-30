@@ -46,6 +46,7 @@
             top: 0;
             line-height: 200px;
             font-weight: bold;
+            /* border-radius: 50%; */
             font-size: 40px;
             width: 200px;
             height: 200px;
@@ -148,17 +149,16 @@
     gsap.set('.bottom', {
         rotationX: 270
     })
-
     gsap.to('#cubeBox', {
         duration: 5,
         repeat: -1,
         rotationX: '+=360',
         rotationY: '+=360',
+        rotationZ: '+=360',
         transformOrigin: "50% 50% -100",
         ease: 'none',
         force3D: true,
     })
-
 
 </script>
 
