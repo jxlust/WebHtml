@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+            background: #000;
+            font-size: 50px;
+            color: blue;
+        }
+
+        .circle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: sans-serif;
+            font-weight: 900;
+            background-color: #88ce02;
+            width: 100px;
+            height: 100px;
+            border-radius: 0%;
+            margin: 0.05rem;
+            background-color: hsl(180deg 59% 71%);
+        }
+    </style>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="circle">M</div>
+    <div class="circle">A</div>
+    <div class="circle">H</div>
+    <div class="circle">I</div>
+
+</body>
+
+<script>
+    gsap.to('.circle', {
+        yPercent: -200,
+        backgroundColor: "hsla(+=900, +=100%, +=0%)",
+        ease: 'sine.outIn',
+        duration: 1,
+        stagger: {
+            amount: 1,
+            repeat: -1,
+            yoyo: true,
+        }
+    }).progress(0.25)
+</script>
+
+</html>

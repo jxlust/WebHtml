@@ -128,9 +128,14 @@
             </div>
         </form>
 
-        <div class="box2-wrap">
-            <div class="box2" id="box5"></div>
+        <div>
+            <div class="box2-wrap">
+                <div class="box2" id="box5"></div>
+            </div>
+            <button id="toggle">toggle</button>
+
         </div>
+
 
 
     </div>
@@ -235,6 +240,16 @@
     })
     const tween5 = gsap.to('#box5', {
         repeat: -1,
+        onRepeat: () => {
+            console.log('onRepeat:', tween5.totalTime())
+        },
+        onUpdate: () => {
+            console.log('onUpdate:', tween5.totalTime())
+            if (tween5.totalTime() >= 1.5) {
+                tween5.pause()
+            }
+        },
+        onUpdateParams: [performance.now()],
         keyframes: {
             x: [-25, 175, 175, -25, -25],
             y: [-25, -25, 175, 175, -25],
@@ -243,12 +258,24 @@
         duration: 1,
         ease: 'none',
         paused: true,
-        runBackwards: true,
+        // runBackwards: true,
     })
-
+    let t5Flag = false;
+    document.getElementById('toggle').addEventListener('click', () => {
+        t5Flag = !t5Flag
+        if (t5Flag) {
+            tween5.play(0);
+        } else {
+            // tween5.pause();
+        }
+    })
+    // setTimeout(() => {
+    //     tween5.pause();
+    // }, 2200);
+    // tween5.seek(0.5, false)
     // tween5.pause(2);
-    tween5.play();
-    tween5.progress(0.8).pause();
+    // tween5.play();
+    // tween5.progress(0.8).pause();
     // tween5.play();
 
 

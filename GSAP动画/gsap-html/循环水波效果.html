@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .circle {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: red;
+            opacity: 0;
+        }
+    </style>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+
+</head>
+
+<body>
+
+    <div id="container">
+        <!-- <div class="circle"></div> -->
+    </div>
+</body>
+<script>
+    const container = document.getElementById("container");
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+
+    // Create circles
+    for (let i = 0; i < 6; i++) {
+        const circle = document.createElement("div");
+        circle.classList.add("circle");
+        container.appendChild(circle);
+    }
+
+    const circles = document.querySelectorAll(".circle");
+
+    // Animate circles
+    const tl = gsap.timeline({ repeat: -1, repeatDelay: 0 });
+
+    tl.set(circles, {
+        x: windowWidth / 2,
+        y: windowHeight / 2
+    })
+        .to(circles, {
+            duration: 2,
+            scale: 4,
+            opacity: 1,
+            stagger: 0.3,
+
+            yoyo: true,
+            ease: "power2.inOut",
+            backgroundColor: "white",
+            borderColor: "red",
+            borderWidth: "5px",
+            onStart: function () {
+                this.scale = 0.5;
+            },
+            onUpdate: function () {
+                this.scale += 0.1;
+            }
+        });
+</script>
+
+</html>
