@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>翻转的卡片效果</title>
+    <style>
+        .mysection {
+            width: 100vw;
+            padding: 30px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1000px;
+        }
+
+        .card-box {
+            position: relative;
+            perspective: 1000px;
+            width: 331px;
+            height: 568.5px;
+            transform-style: preserve-3d;
+            will-change: transform;
+
+        }
+
+        .card-img {
+            will-change: transform;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position: center;
+            transform-origin: 50% 50%;
+        }
+
+        .card-img:not(:first-child) {
+            opacity: 0;
+        }
+
+        .img1 {
+            background-image: url("../images/card/sign-card1.webp");
+        }
+
+        .img2 {
+            background-image: url("../images/card/sign-card2.webp");
+        }
+
+        .img3 {
+            background-image: url("../images/card/sign-card3.webp");
+        }
+
+        .img4 {
+            background-image: url("../images/card/sign-card4.webp");
+        }
+
+        .img5 {
+            background-image: url("../images/card/sign-card5.webp");
+        }
+    </style>
+
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../gsap-plugins/CustomEase3.min.js"></script>
+
+</head>
+
+<body>
+
+    <section class="mysection">
+        <div class="card-box transfrom-3d-box">
+            <div class="card-img img1"></div>
+            <div class="card-img img2"></div>
+            <div class="card-img img3"></div>
+            <div class="card-img img4"></div>
+            <div class="card-img img5"></div>
+
+            <!-- 结果 -->
+            <div class="card-img img1"></div>
+        </div>
+    </section>
+
+
+</body>
+
+<script>
+    // 贝塞尔曲线
+    // cubic-bezier(.175, .885, .32, 1.275)
+    // gsap.to('.card-box', {
+    //     duration: 2.5,
+    //     ease: CustomEase.create("custom", "M0,0 C0.175,0.885 0.32,1.275 1,1 "),
+    //     y: 100
+    // });
+    const allTl = gsap.timeline({
+        delay: 1,
+    })
+    const tl = gsap.timeline({
+        default: {
+            ease: 'none'
+        }
+    })
+    const imgs = gsap.utils.toArray('.card-img')
+
+    for (let i = 0; i < 5; i++) {
+        const cur = imgs[i];
+        const next = imgs[i + 1];
+        tl.to(cur, {
+            rotateY: 90,
+            z: -100,
+            duration: 0.2,
+            // ease: 'power1.in',
+        }).set(cur, {
+            opacity: 0
+        }).set(next, {
+            opacity: 1,
+        }).fromTo(next, {
+            rotateY: -90,
+            // ease: 'power1.out',
+            z: -100,
+        }, { rotateY: 0, duration: 0.2, z: 0 })
+    }
+    allTl.fromTo(
+        ".transfrom-3d-box",
+        {
+            scale: 0.2,
+            perspective: "1800px",
+            z: -250,
+        },
+        {
+            perspective: "1800px",
+            scale: 1,
+            ease: "power1.out",
+            duration: 2,
+            z: 0,
+        }
+    ).add(tl, 0)
+
+</script>
+
+<script>
+
+
+
+</script>
+
+</html>

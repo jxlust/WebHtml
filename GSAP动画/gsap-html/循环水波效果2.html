@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #container {
+            display: flex;
+            height: 60vh;
+            width: 100vw;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .circle {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border-color: red;
+            border-width: 1px;
+            /* background-color: red; */
+            opacity: 0;
+            /* background-color: skyblue; */
+            border-style: solid;
+        }
+    </style>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+
+</head>
+
+<body>
+
+    <div id="container">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+</body>
+<script>
+    const container = document.getElementById("container");
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+
+    const circles = document.querySelectorAll(".circle");
+
+    const tl = gsap.timeline({ repeat: -1, repeatDelay: 0 });
+
+    tl.to(circles, {
+        keyframes: {
+            '0%': {
+                scale: 0.5,
+                opacity: 0,
+                borderWidth: '1px'
+            },
+            '50%': {
+                opacity: 1,
+            },
+            '100%': {
+                scale: 4,
+                opacity: 0,
+                borderColor: "red",
+                borderWidth: "5px",
+            }
+        },
+        duration: 5,
+        stagger: 0.5,
+        // yoyo: true,
+        ease: "power2.inOut",
+
+    });
+</script>
+
+</html>

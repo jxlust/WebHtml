@@ -47,7 +47,7 @@
             /* backface-visibility: hidden; */
             transition-duration: .6s;
             transform-style: preserve-3d;
-            transition-property: transform,opacity;
+            transition-property: transform, opacity;
             transition-timing-function: cubic-bezier(.175, .885, .32, 1.275);
 
         }
@@ -76,8 +76,8 @@
 
         .main3 .flip-container {
             border: 1px solid #f8f8f8;
-            -webkit-perspective: 1000;
-            perspective: 1000;
+            -webkit-perspective: 1000px;
+            perspective: 1000px;
             width: 300px;
             height: 400px;
         }
@@ -107,15 +107,15 @@
         }
 
         .main3 .back {
-            transform: perspective(1000px)  rotateY(180deg);
+            transform: perspective(1000px) rotateY(180deg);
         }
 
         .main3 .flip-container.active .front {
-            transform: perspective(1000px)  rotateY(-180deg);
+            transform: perspective(1000px) rotateY(-180deg);
         }
 
         .main3 .flip-container.flip-container.active .back {
-            transform: perspective(1000px)  rotateY(0deg);
+            transform: perspective(1000px) rotateY(0deg);
         }
 
         @keyframes flip-ani {
@@ -124,6 +124,7 @@
                 animation-timing-function: ease-in;
                 opacity: 0;
             }
+
             40% {
                 transform: perspective(1000px) rotateY(-160deg) scale(.2);
                 animation-timing-function: ease-in;
@@ -131,11 +132,13 @@
             }
 
             60% {
-                transform: perspective(1000px) rotateY(-60deg) scale(.9);;
+                transform: perspective(1000px) rotateY(-60deg) scale(.9);
+                ;
             }
 
             80% {
-                transform: perspective(1000px) rotateY(-10deg) scale(.99);;
+                transform: perspective(1000px) rotateY(-10deg) scale(.99);
+                ;
             }
 
             100% {
@@ -149,22 +152,26 @@
                 animation-timing-function: ease-in;
                 opacity: 0;
             }
+
             20% {
                 transform: perspective(1000px) rotateY(-100deg) scale(.2);
                 animation-timing-function: ease-in;
                 opacity: 1;
             }
-            30%{
+
+            30% {
                 transform: perspective(1000px) rotateY(0deg) scale(.2);
                 animation-timing-function: ease-in;
             }
+
             /* 40%{
                 transform: perspective(1000px) rotateY(-100deg) scale(.3);
             } */
-            50%{
+            50% {
                 transform: perspective(1000px) rotateY(-180deg) scale(.5);
                 animation-timing-function: ease-in;
             }
+
             60% {
                 transform: perspective(1000px) rotateY(-90deg) scale(.9);
             }
@@ -194,7 +201,8 @@
             animation-duration: 1300ms;
             animation-fill-mode: both;
             animation-iteration-count: infinite;
-            animation-timing-function: cubic-bezier(.175, .885, .32, 1.275);;
+            animation-timing-function: cubic-bezier(.175, .885, .32, 1.275);
+            ;
         }
     </style>
 </head>
@@ -210,9 +218,10 @@
         <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
             <div class="flipper">
                 <div class="front" style="background-color: blueviolet;">
+                    FRONT
                 </div>
                 <div class="back" style="background-color: red;">
-
+                    BACK
                 </div>
             </div>
         </div>
