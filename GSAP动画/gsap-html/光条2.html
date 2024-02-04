@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: red;
+        }
+
+        .card {
+            overflow: hidden;
+            width: 501px;
+            height: 788px;
+            background-image: url('../images/card/sign-card1.webp');
+            /* -webkit-mask-image: linear-gradient(to bottom right, transparent 70%, black 30%); */
+            /* mask-image: linear-gradient(135deg, rgba(255, 255, 255, 0.5309) 70%, green 30%); */
+            background-size: cover;
+        }
+
+
+
+        .over {
+            position: relative;
+            width: 400px;
+            height: 600px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .mask {
+            position: absolute;
+            width: 1571px;
+            height: 1571px;
+            background-image: url('../images/light.png');
+            background-size: cover;
+        }
+    </style>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+
+</head>
+
+<body>
+    <div class="card">
+        <div class="over">
+            <div class="mask"></div>
+        </div>
+
+
+    </div>
+
+    <!-- <div class="reflect"></div> -->
+
+    <div>
+
+    </div>
+    <script>
+        gsap.fromTo('.mask', {
+            xPercent: -100,
+            yPercent: -100
+        }, {
+            duration: 3,
+            xPercent: 0,
+            yPercent: 0
+        })
+    </script>
+</body>
+
+</html>

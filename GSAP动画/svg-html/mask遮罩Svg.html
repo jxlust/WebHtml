@@ -40,12 +40,13 @@
         }
 
         .box1 {
+            position: relative;
             width: 500px;
             height: 709px;
             overflow: hidden;
             /* background-color: #8cffa0; */
-            -webkit-mask-image: url('../images/path.svg#path1');
-            mask-image: url('../images/path.svg#path1');
+            -webkit-mask-image: url('../images/path.svg');
+            mask-image: url('../images/path.svg');
             mask-repeat: no-repeat;
             -webkit-mask-repeat: no-repeat;
             mask-position: center;
@@ -55,24 +56,32 @@
 
         }
 
-        .box2 {
+        .move-box {
+            position: relative;
+            width: 500px;
+            height: 100%;
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+        }
+
+        .move-box .img-wrap {
             width: 500px;
             height: 709px;
-            overflow: hidden;
-            /* background-color: #8cffa0; */
-            -webkit-mask-image: url('../images/path.svg#path2');
-            mask-image: url('../images/path.svg#path2');
-            mask-repeat: no-repeat;
-            -webkit-mask-repeat: no-repeat;
-            mask-position: center;
-            -webkit-mask-position: center;
-            mask-size: 100% 100%;
-            -webkit-mask-size: 100% 100%;
-            /* -webkit-mask-image: url(#mask);
-            mask: url(#mask);
-            mask-image: url(#mask); */
+            /* flex-basis: 500px; */
+        }
+
+        .move-box img {
+            width: 500px;
+            height: 709px;
+            display: inline-block;
         }
     </style>
+
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../js/DrawSVG3.11.6.js"></script>
+    <script src="../js/MotionPathPlugin.min.js"></script>
+
 </head>
 
 <body>
@@ -104,9 +113,6 @@
         </div>
 
 
-        <div class="  box2">
-            <img src="../images/bg1.webp" class="" />
-        </div>
 
         <div class="box3">
             <svg width="500px" height="709px">
@@ -117,10 +123,67 @@
             </svg>
         </div>
 
+
+
+        <div class="box1">
+            <div class="move-box" id="moveSvgId">
+                <div class="img-wrap">
+                    <img src="../images/bg1.webp" class="" />
+                </div>
+                <div class="img-wrap">
+                    <img src="../images/bg2.webp" class="" />
+                </div>
+                <div class="img-wrap">
+                    <img src="../images/bg1.webp" class="" />
+                </div>
+                <div class="img-wrap">
+                    <img src="../images/bg2.webp" class="" />
+                </div>
+                <div class="img-wrap">
+                    <img src="../images/bg1.webp" class="" />
+                </div>
+                <div class="img-wrap">
+                    <img src="../images/bg1.webp" class="" />
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <button id="moveBtn">滚动吧卡片</button>
+
     </div>
 
 
 
 </body>
+
+
+<script>
+
+    const tween = gsap.to('#moveSvgId', {
+        ease: "none",
+        duration: 2,
+        paused: true,
+        keyframes: {
+            "0%": { xPercent: 0 },
+            "20%": { xPercent: -100 },
+            "40%": { xPercent: -200 },
+            "60%": { xPercent: -300 },
+            "80%": { xPercent: -400 },
+            "100%": { xPercent: -500 },
+            easeEach: "sine.inOut", // ease between keyframes
+            // xPercent: [0, -100, -200, -300, -400, -500],
+            // ease: "power4.inOut",
+            // ease: "sine.inOut",
+        },
+    })
+
+    document.getElementById('moveBtn').addEventListener('click', () => {
+        tween.play(0)
+    })
+
+</script>
 
 </html>
