@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绕圆弧旋转</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+
+    <style>
+        .circle-box {
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            border: 1px solid skyblue;
+        }
+
+        .container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            justify-content: center;
+        }
+
+        .box-item {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <div class="box circle-box" id="boxId">
+        </div>
+    </div>
+</body>
+
+<script>
+    const radius = 250;
+    const count = 9;
+    const everyR = 2 * Math.PI / count;
+    const boxWidth = 50;
+    const boxEl = document.getElementById('boxId')
+    function initImgDom() {
+        for (let i = 0; i < count; i++) {
+            const div = document.createElement('div');
+            div.className = 'box-item';
+            // 计算位置
+            // x=a+r*cos y=b+r*sin
+            // 360/count
+            x = radius * Math.cos(everyR * i);
+            y = radius * Math.sin(everyR * i);
+            let left = y + radius
+            let top = x + radius;
+
+            gsap.set(div, {
+                background: `rgba(random(0,255),random(0,255),random(0,255),0.5)`,
+                x: left - boxWidth / 2,
+                y: top - boxWidth / 2,
+            })
+            boxEl.appendChild(div)
+        }
+
+        gsap.to('#boxId', {
+            rotation: '+=360',
+            duration: 10,
+            ease: 'none',
+            repeat: -1
+        })
+    }
+
+    initImgDom();
+
+</script>
+
+</html>

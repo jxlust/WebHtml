@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+
+    <style>
+        body {
+            width: 100vw;
+            /* height: 100vh; */
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            background: #f8f8f8;
+            /* overflow: hidden; */
+
+        }
+
+        .box-test {
+            position: relative;
+            margin-top: 30px;
+            margin-right: 30px;
+            width: 300px;
+            height: 200px;
+            background-color: green;
+            overflow: hidden;
+        }
+
+        .light {
+            content: '';
+            display: block;
+            position: absolute;
+            top: -20%;
+            left: -100%;
+            width: 350px;
+            height: 100px;
+            transform: rotate(-45deg);
+            background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0));
+            /* 过度实现部分 */
+            /* transition: 0.8s; */
+        }
+
+        .box-test:hover .light {
+            /* 过度实现部分 */
+            /* transform: translate(200%,200%) rotate(-45deg); */
+            animation: cross 5.5s;
+        }
+
+        @keyframes cross {
+            from {}
+
+            to {
+
+                top: 80%;
+                left: 100%;
+                transform: rotate(-45deg);
+            }
+        }
+
+        .box-test2 {
+            position: relative;
+            margin-top: 30px;
+            margin-right: 30px;
+            width: 300px;
+            height: 200px;
+            background-color: red;
+            overflow: hidden;
+        }
+
+        .light2 {
+            width: 400px;
+            height: 100px;
+            opacity: 0.9;
+            filter: blur(10px);
+            background: linear-gradient(270deg, rgba(255, 253, 236, 0) -26%, rgba(255, 255, 255, 0.5309) 43%, rgba(255, 254, 247, 0) 123%);
+        }
+
+        .card {
+            position: relative;
+            width: 331px;
+            height: 568.5px;
+            background-image: url('../images/card/sign-card1.webp');
+            background-size: cover;
+            background-repeat: no-repeat;
+            /* background-size: 100%; */
+            background-position: center;
+        }
+
+        .swiper-mask-block {
+            position: absolute;
+            width: 272px;
+            height: 600px;
+            left: calc(50% - 134px);
+            top: -24px;
+            flex-wrap: nowrap;
+            overflow: hidden;
+            -webkit-mask-image: url("../images/my-frame.svg");
+            mask-image: url("../images/my-frame.svg");
+            mask-repeat: no-repeat;
+            -webkit-mask-repeat: no-repeat;
+            mask-position: center;
+            -webkit-mask-position: center;
+            mask-size: 100% 100%;
+            -webkit-mask-size: 100% 100%;
+            /* opacity: 0; */
+            /* visibility: hidden; */
+        }
+
+        .swiper-mask {
+            width: 784px;
+            height: 784px;
+            background-repeat: no-repeat;
+            /* background-size: 100%; */
+            /* background-position: center; */
+            /* background-image: url("../images/light.png"); */
+        }
+
+
+
+
+        .mask {
+            /* position: absolute; */
+            width: 1571px;
+            height: 1571px;
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body>
+
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" version="1.1"
+        viewBox="0 0 400 400" width="400" height="400" style="background-color: red;">
+        <defs>
+            <filter id="mask1" filterUnits="objectBoundingBox" color-interpolation-filters="sRGB" x="-10" y="-10"
+                width="100" height="200">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur stdDeviation="20" result="effect1_foregroundBlur" />
+            </filter>
+            <linearGradient x1="1.2664119005203247" y1="0.5" x2="-0.2380140721797943" y2="0.5" id="lg1">
+                <stop offset="0%" stop-color="#FFFDEC" stop-opacity="0" />
+                <stop offset="46.90938889980316%" stop-color="#FFFFFF" stop-opacity="0.530906081199646" />
+                <stop offset="100%" stop-color="#FFFEF7" stop-opacity="0" />
+            </linearGradient>
+        </defs>
+        <g style="opacity:0.8999999761581421;" filter="url(#mask1)">
+            <rect x="50" y="50" width="100" height="200" rx="0" fill="url(#lg1)" fill-opacity="1" />
+        </g>
+
+    </svg>
+
+
+    <div class="box-test">
+        <div class="light">
+        </div>
+    </div>
+
+    <div class="box-test2">
+        <div class="light2" id="light2"></div>
+    </div>
+
+
+    <div class="card">
+        <div class="swiper-mask-block">
+            <!-- <div class="swiper-mask"></div> -->
+            <svg id="maskSvgId" class="swiper-mask" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" version="1.1" width="" height=""
+                viewBox="0 0 1711.7913772186876 1711.7913772186876">
+                <defs>
+                    <filter id="master_svg0_316_0728" filterUnits="objectBoundingBox" color-interpolation-filters="sRGB"
+                        x="-200" y="-200" width="910" height="1510.838623046875">
+                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                        <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                        <feGaussianBlur stdDeviation="50" result="effect1_foregroundBlur" />
+                    </filter>
+                    <linearGradient x1="1.2664119005203247" y1="0.5" x2="-0.2380140721797943" y2="0.5"
+                        id="master_svg1_316_1309">
+                        <stop offset="0%" stop-color="#FFFDEC" stop-opacity="0" />
+                        <stop offset="46.90938889980316%" stop-color="#FFFFFF" stop-opacity="0.530906081199646" />
+                        <stop offset="100%" stop-color="#FFFEF7" stop-opacity="0" />
+                    </linearGradient>
+                </defs>
+                <g transform="matrix(0.7071067690849304,0.7071067690849304,-0.7071067690849304,0.7071067690849304,512.9049248391566,-672.5765711868555)"
+                    style="opacity:0.8999999761581421;" filter="url(#master_svg0_316_0728)">
+                    <rect x="1068.3242173514009" y="282.84270763397217" width="510" height="1110.838623046875" rx="0"
+                        fill="url(#master_svg1_316_1309)" fill-opacity="1" />
+                </g>
+            </svg>
+        </div>
+    </div>
+</body>
+
+<script>
+
+    gsap.set('#light2', {
+        rotation: -45,
+        xPercent: -70,
+        yPercent: -60,
+    })
+
+    gsap.fromTo('#light2', {
+        xPercent: -70,
+        yPercent: -70,
+    }, {
+        duration: 2,
+        xPercent: 40,
+        yPercent: 200,
+        // xPercent: -10,
+        // yPercent: 80,
+        ease: 'none',
+        repeat: -1,
+        repeatDelay: 0.2
+    })
+
+
+
+    gsap.fromTo('#maskSvgId', {
+        xPercent: -70,
+        yPercent: -70,
+    }, {
+        duration: 3,
+        xPercent: 50,
+        yPercent: 100,
+        ease: 'power1.inOut',
+        repeat: -1,
+        repeatDelay: 0.2
+    })
+
+</script>
+
+</html>

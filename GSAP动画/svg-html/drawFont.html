@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/DrawSVG3.11.6.js"></script>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../js/MotionPathPlugin.min.js"></script>
+    <style>
+        /* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap'); */
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #565659;
+            font-family: 'Poppins', sans-serif;
+            color: #F2F2F2;
+            text-align: center;
+            position: relative;
+        }
+
+        svg {
+            width: 100vw;
+            height: auto;
+            max-width: 1800px;
+
+
+        }
+
+        svg .strokes {
+            stroke: skyblue
+        }
+
+        .text {
+            position: absolute;
+            left: 50%;
+            top: 5%;
+            transform: translate(-50%, 0%);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+        <div class="text">Click to change colors</div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+            <defs>
+                <clipPath id="clip-path">
+                    <path
+                        d="M460 186q0-13-9-13a7 7 0 00-6 3 29 29 0 00-5 0l-5-1q-1-9-10-16 7 8 8 16h-1q-4-13-17-17 11 6 14 19a13 13 0 00-8 6v1l-34 12a13 13 0 011 1l31-10 2 1-1 2-56 18-2-2 1-2a60 60 0 0013-3 6 6 0 00-1-2q-38 12-70 12-5 0-15-5a69 69 0 01-15-9q8 12 25 21v1a69 69 0 01-27-17q6 11 22 22v1q-15-7-24-16 6 10 20 21a18 18 0 007 10 19 19 0 0012 4 53 53 0 0020-4l23-5a62 62 0 0013-2v-1h2l15-5 3-2 3-1h1l2-1h2l2-1q8-3 23-4l1-1h11l2-1h5q15-1 21-3 11-4 11-16 0-9-10-11z"
+                        fill="none" />
+                </clipPath>
+                <clipPath id="clip-path-2">
+                    <path d="M355 243a34 34 0 01-2-8s-13-4-23 5l3 6s10 23 20 16 2-19 2-19z" fill="none" />
+                </clipPath>
+                <clipPath id="clip-path-3">
+                    <path d="M396 221s-24 1-30 12a35 35 0 005 5v3l3 21c10-2 20-23 20-23l4-12z" fill="none" />
+                </clipPath>
+                <clipPath id="clip-path-4">
+                    <path
+                        d="M449 221l-4-3-7-2c-6-3-19 1-19 1l-3 2a34 34 0 003 10l-4 12-4 20c4-6 30-20 30-20a22 22 0 019-4 12 12 0 002-7l-3-9z"
+                        fill="none" />
+                </clipPath>
+                <clipPath id="clip-path-5">
+                    <path
+                        d="M299 259c-1-1-3-3-7-4s-6-3-6-5q-13 3-15 12a201 201 0 00-2 21l-2 11a42 42 0 00-2 10q0 10 8 12 6-4 14-16l11-18h1c5-9 0-23 0-23zm-28 36l-2 1-1-2q4-19 4-29l2-1 1 2q-2 24-4 29z"
+                        fill="none" />
+                </clipPath>
+                <clipPath id="clip-path-6">
+                    <path
+                        d="M500 241c-4-3-7-5-8-8-5 1-8 3-10 5a86 86 0 00-5 12l-36-9h-26l-21-2-23 2a93 93 0 00-16 2l-22 3q-14 4-34 13a34 34 0 00-18 18c-6 14-8 39-8 39s9-6 14-15 9-17 12-19a166 166 0 0126-9h2l34-5h1l25-1 23 1 18 2a156 156 0 0124 3l16 2h1a25 25 0 0012 0s21-10 24-18l3-8q-2-4-8-8z"
+                        fill="none" />
+                </clipPath>
+                <clipPath id="clip-path-7">
+                    <path
+                        d="M505 257s-27-11-28-7 4 25 4 25q7 28 17 35s3 4 4 3l3-5 6-24-6-27zm1 26l-3-19 1-2 2 2c3 12 3 15 3 19l-1 2z"
+                        fill="none" />
+                </clipPath>
+                <clipPath id="clip-path-8">
+                    <path
+                        d="M335 276q-2 7-13 23-9 15-9 23-8 6-14 5h-1l-8-7a83 83 0 01-1-16v-3q4-6 17-15a138 138 0 0119-12v-1h2z"
+                        fill="none" />
+                </clipPath>
+                <clipPath id="clip-path-9">
+                    <path
+                        d="M382 287l-8 9s-23 28-32 36l-2 1a2 2 0 010 1q-8 5-15 5a51 51 0 01-6 0 10 10 0 01-1-4q0-7 11-24l17-24q5-10 6-16l9-3h1l11 6q7 3 9 13z"
+                        fill="none" />
+                </clipPath>
+                <clipPath id="clip-path-10">
+                    <path
+                        d="M487 322q20-9 29-18l-11 4-3 5c-1 1-4-3-4-3a35 35 0 01-8 1h-8q-9 0-35-9a110 110 0 00-14-3l-15-3a121 121 0 00-22-2l-22 2c-4 3-46 32-55 43 0 0 13 1 22-6l2-1h-1l11-8q10-7 16-7 38 0 66 12l19 10q15 6 19 6 16 0 21-16 17-10 26-21a89 89 0 01-33 14zm-97-13q10 0 27 5l1 1-2 2q-15-5-26-5l-1-2zm45 19q-22-12-53-12l-1-2 1-1q31 0 54 12l1 2z"
+                        fill="none" />
+                </clipPath>
+                <clipPath id="clip-path-11">
+                    <path
+                        d="M429 270h-1l-12-6-6 4a67 67 0 00-4 7l-10 19-1 6 23-4a153 153 0 0117-12 29 29 0 001-4q0-5-7-10z"
+                        fill="none" />
+                </clipPath>
+                <clipPath id="clip-path-12">
+                    <path d="M469 275l-4-3-13 1-9 1-11 25v9l15-6 14-7q10-6 12-10a44 44 0 00-4-10z" fill="none" />
+                </clipPath>
+                <clipPath id="clip-path-13">
+                    <path
+                        d="M364 330a33 33 0 00-5 0l-7 11q-10 14-37 32-28 20-42 20-5 0-16-5a82 82 0 01-16-11q7 11 25 22v1a75 75 0 01-27-17q6 11 22 22-16-7-24-16 5 10 20 21 2 18 21 18 11 0 23-8l19-14q26-19 37-32c6-6 13-20 13-20q1-3 8-8t8-8q-4-8-22-8zm-42 48a229 229 0 01-20 13l-2-1 1-2a109 109 0 0020-13l1 1a1 1 0 011 1 3 3 0 01-1 1zm6-9q-18 16-38 23l-2-1 1-2a129 129 0 0038-23h2z"
+                        fill="none" />
+                </clipPath>
+                <clipPath id="clip-path-14">
+                    <path
+                        d="M439 355q-15 9-17 15l-22 25q-32 33-67 33a17 17 0 01-10-4q-5-3-6-7 3-11 16-18l23-9a44 44 0 0013-8l1-1 21-20 8-11-3-8 3-5q11-6 18-6t15 7a23 23 0 017 17z"
+                        fill="none" />
+                </clipPath>
+                <clipPath id="clip-path-15">
+                    <path d="M370 354s-15 8-13 20a53 53 0 0113 7c14-2 21-20 21-20l-21-7z" fill="none" />
+                </clipPath>
+                <clipPath id="clip-path-16">
+                    <path
+                        d="M515 410l-1-1q35-19 48-37-9 8-27 17t-29 12v-1q36-16 52-36-35 27-64 27t-72-21c-25 2-22 25-22 25q7 1 21 8l21 11h1v-1l-18-9v-2l1-1 47 26 1 2h-2l-22-12a4 4 0 00-1 1l23 14q17 10 24 10t14-8a55 55 0 0010-16q32-18 43-34-18 14-48 26zm-48 11l-33-18-1-2 2-1 33 18 1 2z"
+                        fill="none" />
+                </clipPath>
+            </defs>
+            <g id="Layer_4" data-name="Layer 4">
+                <g clip-path="url(#clip-path)">
+                    <path class="strokes" id="path1" d="M426 139s49 50 16 58-114 33-128 31-54-35-54-35" fill="none"
+                        stroke-linecap="round" stroke-miterlimit="10" stroke-width="47" />
+                </g>
+                <g clip-path="url(#clip-path-2)">
+                    <path class="strokes" id="path2" fill="none" stroke-linecap="round" stroke-miterlimit="10"
+                        stroke-width="47" d="M337 228l20 42" />
+                </g>
+                <g clip-path="url(#clip-path-3)">
+                    <path class="strokes" id="path3" fill="none" stroke-linecap="round" stroke-miterlimit="10"
+                        stroke-width="47" d="M385 215l-11 51" />
+                </g>
+                <g clip-path="url(#clip-path-4)">
+                    <path class="strokes" id="path4" fill="none" stroke-linecap="round" stroke-miterlimit="10"
+                        stroke-width="47" d="M445 208l-39 67" />
+                </g>
+                <g clip-path="url(#clip-path-5)">
+                    <path class="strokes" id="path5" fill="none" stroke-linecap="round" stroke-miterlimit="10"
+                        stroke-width="47" d="M289 242l-18 84" />
+                </g>
+                <g clip-path="url(#clip-path-6)">
+                    <path class="strokes" id="path6" d="M265 337s15-58 39-69 138-13 157-7 42-25 42-25" fill="none"
+                        stroke-linecap="round" stroke-miterlimit="10" stroke-width="47" />
+                </g>
+                <g clip-path="url(#clip-path-7)">
+                    <path class="strokes" id="path7" d="M494 217s-9 83 10 103" fill="none" stroke-linecap="round"
+                        stroke-miterlimit="10" stroke-width="47" />
+                </g>
+                <g clip-path="url(#clip-path-8)">
+                    <path class="strokes" id="path8" d="M335 268s-38 46-39 69" fill="none" stroke-linecap="round"
+                        stroke-miterlimit="10" stroke-width="47" />
+                </g>
+                <g clip-path="url(#clip-path-9)">
+                    <path class="strokes" id="path9" fill="none" stroke-linecap="round" stroke-miterlimit="10"
+                        stroke-width="47" d="M374 264l-59 81" />
+                </g>
+                <g clip-path="url(#clip-path-10)">
+                    <path class="strokes" id="path10" d="M312 348s29-49 81-40 67 21 81 18 57-24 57-24" fill="none"
+                        stroke-linecap="round" stroke-miterlimit="10" stroke-width="47" />
+                </g>
+                <g clip-path="url(#clip-path-11)">
+                    <path class="strokes" id="path11" fill="none" stroke-linecap="round" stroke-miterlimit="10"
+                        stroke-width="47" d="M428 261l-33 43" />
+                </g>
+                <g clip-path="url(#clip-path-12)">
+                    <path class="strokes" id="path12" fill="none" stroke-linecap="round" stroke-miterlimit="10"
+                        stroke-width="47" d="M473 264l-44 49" />
+                </g>
+                <g clip-path="url(#clip-path-13)">
+                    <path class="strokes" id="path13" d="M381 319s-64 85-89 88-62-32-62-32" fill="none"
+                        stroke-linecap="round" stroke-miterlimit="10" stroke-width="47" />
+                </g>
+                <g clip-path="url(#clip-path-14)">
+                    <path class="strokes" id="path14" d="M432 325s-66 106-128 103" fill="none" stroke-linecap="round"
+                        stroke-miterlimit="10" stroke-width="47" />
+                </g>
+                <g clip-path="url(#clip-path-15)">
+                    <path class="strokes" id="path15" fill="none" stroke-linecap="round" stroke-miterlimit="10"
+                        stroke-width="57" d="M350 352l44 23" />
+                </g>
+                <g clip-path="url(#clip-path-16)">
+                    <path class="strokes" id="path16" d="M400 379s84 48 95 40l76-55" fill="none" stroke-linecap="round"
+                        stroke-miterlimit="10" stroke-width="57" />
+                </g>
+            </g>
+        </svg>
+
+    </div>
+</body>
+
+<script>
+    console.clear()
+
+    gsap.registerPlugin(DrawSVGPlugin);
+
+    const bodyColor = ["#565659", "#3D5741", "#4C4F79", "#55C2CB", "#D7B4B2"];
+    const pathColor = ["#F2F2F2", "#84AC7F", "#C4AA7B", "#F3E7CA", "#414C61"];
+    index = 0;
+
+    gsap.set(".strokes", { drawSVG: 0, stroke: "#F2F2F2" });
+
+    let tl = gsap.timeline({
+        defaults: { ease: "none" },
+        repeat: -1,
+        repeatDelay: 1
+    });
+
+    tl.timeScale(2)
+
+
+
+    tl.to("#path1", {
+        drawSVG: true,
+        ease: "sine.in",
+        duration: 1,
+    })
+        .to("#path2, #path3", {
+            drawSVG: true,
+            ease: "sine.inOut",
+            duration: 0.4,
+            stagger: 0.3
+        }, "<1.2")
+        .to("#path4", {
+            drawSVG: true,
+            ease: "sine.in",
+            duration: 0.6
+        })
+        .to("#path5", {
+            drawSVG: true,
+            ease: "sine.in",
+            duration: 0.5
+        }, "+=0.5")
+        .to("#path6", {
+            drawSVG: true,
+            ease: "sine.inout",
+            duration: 1.5
+        }, "<0.4")
+        .to("#path7", {
+            drawSVG: true,
+            ease: "sine.in",
+            duration: 1
+        }, "<0.6")
+        .to("#path8", {
+            drawSVG: true,
+            ease: "sine.in",
+            duration: 0.5
+        }, "+=0.3")
+        .to("#path9", {
+            drawSVG: true,
+            ease: "sine.in",
+            duration: 0.6
+        })
+        .to("#path10", {
+            drawSVG: true,
+            ease: "sine.inout",
+            duration: 1.1
+        }, "<0.5")
+        .to("#path11, #path12", {
+            drawSVG: true,
+            ease: "sine.in",
+            duration: 0.4,
+            stagger: 0.3
+        }, "+=0.2")
+        .to("#path13", {
+            drawSVG: true,
+            ease: "power3.inout",
+            duration: 0.8,
+        }, "+=0.3")
+        .to("#path14", {
+            drawSVG: true,
+            ease: "power3.inout",
+            duration: 0.8,
+        }, "+=0.3")
+        .to("#path15", {
+            drawSVG: true,
+            ease: "sine.in",
+            duration: 0.3,
+        }, "+=0.6")
+        .to("#path16", {
+            drawSVG: true,
+            ease: "power2.inout",
+            duration: 1.3,
+        }, "-=0.1")
+        .to("svg", {
+            opacity: 0,
+            ease: "power2.inout",
+            duration: 2,
+        })
+
+
+
+
+    window.addEventListener('click', function () {
+        // tl.restart();
+        index = (index + 1) % bodyColor.length;
+        gsap.to("body", { backgroundColor: bodyColor[index], ease: "none" });
+        gsap.to(".strokes", { stroke: pathColor[index], ease: "none" });
+        gsap.to(".text", { color: pathColor[index], ease: "none" });
+
+    }, false);
+</script>
+
+</html>
