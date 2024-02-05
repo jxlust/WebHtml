@@ -18,7 +18,7 @@
             height: 667px;
             overflow: hidden;
             position: relative;
-            background-color: rgb(217, 110, 110);
+            background-color: #e62825;
         }
 
         .draw-swiper-block {
@@ -52,7 +52,6 @@
             background-size: 100%;
             background-position: center;
             margin: 0 -30px;
-
         }
 
         .img1 {
@@ -150,6 +149,7 @@
         let imgList = [];
         let boxWidth = 0, marginV = 0, initBoxOffset = 0, boxMoveValue = 0;
         const windowWidth = 375;
+        let endIndex = 0;
 
         function calcMoveOffset(boxWidth, margin) {
             const offset =
@@ -185,7 +185,7 @@
         }
 
 
-        function generateKeyFrames(initV, move, num) {
+        function generateKeyFrames(initV, move, end) {
             const keyframes = {
                 // easeEach: "sine.inOut", // ease between keyframes
                 easeEach: "none",
@@ -193,8 +193,7 @@
             // num 1-> 15 2-> 16 3-> 17 4-> 18 5-> 14
             // const end = num >= 5 ? 14 : num + 14;
             // const loop = 2;
-            const end = num >= 5 ? 9 : num + 9;
-            this.endIndex = end;
+
             // every
             const every = 100 / end;
             for (let i = 0; i <= end; i++) {
@@ -223,11 +222,39 @@
         }
 
         function startAni(num) {
+            // timeline 2
+            const totalTl = gsap.timeline({
+                delay: 0.5,
+                onComplete: () => {
 
+                },
+                defaults: {
+                    ease: "none",
+                },
+            });
+
+            const tl2 = gsap.timeline({
+                delay: 0,
+            });
+
+            const end = num >= 5 ? 9 : num + 9;
+            endIndex = end;
+
+            const keyframes = this.generateKeyFrames(
+                initBoxOffset,
+                boxMoveValue,
+                endIndex
+            );
+            tl2.to("#swiperWrap", {
+                duration: 2,
+                ease: "power1.out",
+                keyframes: keyframes,
+            });
+            // timeline 1
             const tl = gsap.timeline({});
-            const pre = imgList[this.endIndex];
-            // const cur = this.imgList[this.endIndex + 1];
-            const next = imgList[this.endIndex + 2];
+            const pre = imgList[endIndex];
+            // const cur = imgList[endIndex + 1];
+            const next = imgList[endIndex + 2];
             tl.set("#maskBlock", {
                 autoAlpha: 1,
             })
@@ -259,38 +286,8 @@
                     },
                     "<"
                 )
-
-
-            const totalTl = gsap.timeline({
-                delay: 0.5,
-                onComplete: () => {
-
-                },
-                defaults: {
-                    ease: "none",
-                },
-            });
-
-            const tl2 = gsap.timeline({
-                delay: 0,
-            });
-
-            const keyframes = this.generateKeyFrames(
-                initBoxOffset,
-                boxMoveValue,
-                num
-            );
-            tl2.to("#swiperWrap", {
-                duration: 2,
-                ease: "power1.out",
-                keyframes: keyframes,
-            });
-
-
             totalTl.add(tl2).add(tl, "-=0.4");
-
         }
-
 
         calcInit();
 

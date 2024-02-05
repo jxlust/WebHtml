@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片自动轮播滚动</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 0;
+            flex-direction: column;
+        }
+
+        .phone-box {
+            width: 375px;
+            height: 667px;
+            overflow: hidden;
+            position: relative;
+            background-color: #e62825;
+        }
+
+        .draw-swiper-block {
+            position: absolute;
+            top: 20px;
+            width: 375px;
+
+        }
+
+        .draw-swiper-wrap {
+            width: 100%;
+            height: 100%;
+            will-change: transform;
+            perspective: 1600px;
+            transform-style: preserve-3d;
+            position: relative;
+            display: flex;
+            transition-property: transform;
+            box-sizing: content-box;
+        }
+
+        .draw-sign-swiper {
+            position: relative;
+            flex-shrink: 0;
+            will-change: transform;
+            width: 331px;
+            height: 568.5px;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position: center;
+            margin: 0 -30px;
+        }
+
+        .img1 {
+            background-image: url("../images/card/sign-card1.webp");
+        }
+
+        .img2 {
+            background-image: url("../images/card/sign-card2.webp");
+        }
+
+        .img3 {
+            background-image: url("../images/card/sign-card3.webp");
+        }
+
+        .img4 {
+            background-image: url("../images/card/sign-card4.webp");
+        }
+
+        .img5 {
+            background-image: url("../images/card/sign-card5.webp");
+        }
+
+        .swiper-mask-block {
+            position: absolute;
+            width: 260px;
+            height: 520px;
+            left: calc(50% - 129px);
+            top: 18px;
+            flex-wrap: nowrap;
+            overflow: hidden;
+            -webkit-mask-image: url("../images/my-frame.svg");
+            mask-image: url("../images/my-frame.svg");
+            mask-repeat: no-repeat;
+            -webkit-mask-repeat: no-repeat;
+            mask-position: center;
+            -webkit-mask-position: center;
+            mask-size: 100% 100%;
+            -webkit-mask-size: 100% 100%;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .swiper-mask {
+            width: 784px;
+            height: 784px;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position: center;
+            background-image: url("../images/light.png");
+        }
+
+        .test-bg {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: skyblue;
+        }
+    </style>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../gsap-plugins/CustomEase3.min.js"></script>
+</head>
+
+<body>
+
+    <div class="phone-box">
+
+        <div class="draw-swiper-block">
+            <div class="draw-swiper-wrap" id="swiperWrap">
+                <div class="draw-sign-swiper img5"></div>
+                <div class="draw-sign-swiper img1"></div>
+                <div class="draw-sign-swiper img2"></div>
+                <div class="draw-sign-swiper img3"></div>
+                <div class="draw-sign-swiper img4"></div>
+                <div class="draw-sign-swiper img5"></div>
+                <div class="draw-sign-swiper img1"></div>
+                <div class="draw-sign-swiper img2"></div>
+                <div class="draw-sign-swiper img3"></div>
+                <div class="draw-sign-swiper img4"></div>
+                <div class="draw-sign-swiper img5"></div>
+                <div class="draw-sign-swiper img1"></div>
+                <div class="draw-sign-swiper img2"></div>
+                <div class="draw-sign-swiper img3"></div>
+                <div class="draw-sign-swiper img4"></div>
+                <div class="draw-sign-swiper img5"></div>
+            </div>
+            <div class="swiper-mask-block" id="maskBlock">
+                <div class="swiper-mask" id="maskId"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <p style="text-align: center;">
+        <button class="previous-button">Previous</button>
+        <button class="next-button">Next</button>
+    </p>
+
+
+</body>
+
+
+
+<script>
+
+    let imgList = [];
+    let boxWidth = 0, marginV = 0, initBoxOffset = 0, boxMoveValue = 0;
+    const windowWidth = 375;
+    let endIndex = 0;
+
+    function calcMoveOffset(boxWidth, margin) {
+        const offset =
+            0.5 * boxWidth +
+            2 * margin +
+            (boxWidth + margin - 0.5 * windowWidth);
+        return offset;
+    }
+
+    function calcInit() {
+        imgList = gsap.utils.toArray(".draw-sign-swiper");
+        const el = imgList[0];
+        boxWidth = el.clientWidth;
+        let styles = window.getComputedStyle(el);
+        let marginLeft = styles.marginLeft;
+        marginV = parseFloat(marginLeft) || 0;
+        // 计算一次的偏移量
+        initBoxOffset = calcMoveOffset(boxWidth, marginV);
+        boxMoveValue = 2 * marginV + boxWidth;
+
+        // 初始化一些展示样式
+        gsap.set("#swiperWrap", {
+            translateX: `-${initBoxOffset}`,
+        });
+        gsap.set(imgList, {
+            scale: 0.87,
+            opacity: 0.5,
+        });
+        gsap.set(imgList[1], {
+            scale: 1,
+            opacity: 1,
+        });
+    }
+
+
+
+
+
+    calcInit();
+
+    // startAni(3)
+
+</script>
+
+</html>

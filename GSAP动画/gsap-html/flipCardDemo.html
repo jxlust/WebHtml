@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flip card</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        .scene {
+            width: 200px;
+            height: 260px;
+            border: 1px solid #CCC;
+            margin: 40px 0;
+            perspective: 600px;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            /* transition: transform 1s; */
+            transform-style: preserve-3d;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .card.is-flipped {
+            transform: rotateY(180deg);
+        }
+
+        /* .card { transform-origin: center right; } */
+
+        .card2.is-flipped {
+            transform: translateX(-100%) rotateY(-180deg);
+        }
+
+        .card__face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            line-height: 260px;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            font-size: 40px;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .card__face--front {
+            background: red;
+        }
+
+        .card__face--back {
+            background: blue;
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="scene">
+        <div class="card" id="card1">
+            <div class="card__face card__face--front">front</div>
+            <div class="card__face card__face--back">back</div>
+        </div>
+    </div>
+
+
+    <div class="scene">
+        <div class="card" id="card2">
+            <div class="card__face card__face--front">front</div>
+            <div class="card__face card__face--back">back</div>
+        </div>
+    </div>
+
+    <p>Click card to flip.</p>
+
+</body>
+
+<script>
+    const card1El = document.getElementById('card1')
+    const card2El = document.getElementById('card2')
+
+    gsap.set(card1El, {
+        transformOrigin: '50% 50%'
+    })
+    const tween1 = gsap.to(card1El, {
+        rotateY: 180,
+        duration: 1,
+        paused: true,
+        // yoyo: true,
+        // repeat: -1,
+        // repeatDelay: 2
+    })
+    gsap.set(card2El, {
+        transformOrigin: '100% 50%'
+    })
+    const tween2 = gsap.to(card2El, {
+        rotateY: -180,
+        duration: 1,
+        xPercent: -100,
+        ease: 'power1.inOut',
+        paused: true,
+    })
+    let flag = false;
+
+    card1El.addEventListener('click', () => {
+        flag = !flag;
+        if (flag) {
+            tween1.play(0)
+        } else {
+            tween1.reverse()
+        }
+    })
+    let flag2 = false;
+
+    card2El.addEventListener('click', () => {
+        flag2 = !flag2
+        flag2 ? tween2.play() : tween2.reverse();
+    })
+</script>
+
+</html>
