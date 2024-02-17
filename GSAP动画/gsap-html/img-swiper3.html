@@ -127,14 +127,6 @@
                 <div class="draw-sign-swiper img5"></div>
                 <div class="draw-sign-swiper img1"></div>
                 <div class="draw-sign-swiper img2"></div>
-                <div class="draw-sign-swiper img3"></div>
-                <div class="draw-sign-swiper img4"></div>
-                <div class="draw-sign-swiper img5"></div>
-                <div class="draw-sign-swiper img1"></div>
-                <div class="draw-sign-swiper img2"></div>
-                <div class="draw-sign-swiper img3"></div>
-                <div class="draw-sign-swiper img4"></div>
-                <div class="draw-sign-swiper img5"></div>
             </div>
             <div class="swiper-mask-block" id="maskBlock">
                 <div class="swiper-mask" id="maskId"></div>
@@ -154,7 +146,6 @@
 
 
 <script>
-
     let imgList = [];
     let boxWidth = 0, marginV = 0, initBoxOffset = 0, boxMoveValue = 0;
     const windowWidth = 375;
@@ -182,22 +173,22 @@
         // 初始化一些展示样式
         gsap.set("#swiperWrap", {
             translateX: `-${initBoxOffset}`,
+            transformOrigin: '50% -426px'
         });
         gsap.set(imgList[0], {
             // scale: 0.87,
             rotation: 20,
-            y: 0,
             // opacity: 0.5,
         });
         gsap.set(imgList[1], {
             scale: 1,
             opacity: 1,
         });
-        gsap.set(imgList[2], {
-            rotation: -20,
-            y: 0,
-            // opacity: 0.5,
-        })
+        for (let i = 1; i <= 7; i++) {
+            gsap.set(imgList[i], {
+                rotation: -20 * (i - 1),
+            })
+        }
     }
 
     calcInit();
@@ -220,7 +211,7 @@
             y: 0,
         }, '<').to(prevEl, {
             rotation: 20,
-            y: 0,
+            y: 0
         }, '<').to(nextEl, {
             rotation: -20,
         }, '<')
@@ -232,16 +223,9 @@
         let nextEl = imgList[cur + 1];
         let nextNextEl = imgList[cur + 2]
         tl.to('#swiperWrap', {
-            translateX: `-=${boxMoveValue}`
-        }).to(curEl, {
-            rotation: 20,
-            y: 0,
-        }, '<').to(nextEl, {
-            rotation: 0,
-            y: 0
-        }, '<').to(nextNextEl, {
-            rotation: -20,
-        }, '<')
+            // translateX: `-=${boxMoveValue}`
+            rotation: '+=20'
+        })
     })
 </script>
 
