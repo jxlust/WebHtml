@@ -97,7 +97,7 @@
     let cur = 0;
     let showIndex = 0;
     gsap.set(carouselEl, {
-        transformOrigin: `50% -1000px ${-transitionZ}`
+        transformOrigin: `50% 50% ${-transitionZ}`
 
     })
 
@@ -111,7 +111,7 @@
             background: `rgba(random(0,255),random(0,255),random(0,255),0.5)`,
             rotationY: rotate,
             // 3d 旋转 z中心点往后位移一段距离
-            transformOrigin: `50% -1000px ${-transitionZ}`
+            transformOrigin: `50% 50% ${-transitionZ}`
 
             // z: transitionZ,
         })

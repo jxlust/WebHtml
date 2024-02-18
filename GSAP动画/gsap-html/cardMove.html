@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 0;
+            flex-direction: column;
+        }
+
+        .phone-box {
+            width: 375px;
+            height: 667px;
+            overflow: hidden;
+            position: relative;
+            background-color: #b47776;
+        }
+
+        .draw-swiper-block {
+            position: absolute;
+            top: 50px;
+            width: 375px;
+
+        }
+
+        .draw-swiper-wrap {
+            width: 100%;
+            height: 100%;
+            will-change: transform;
+            perspective: 1600px;
+            transform-style: preserve-3d;
+            position: relative;
+            display: flex;
+            transition-property: transform;
+            box-sizing: content-box;
+            transform: translateX(-350px);
+        }
+
+        .box {
+            width: 200px;
+            height: 500px;
+            margin: 80px;
+            flex-shrink: 0;
+
+        }
+
+        .box1 {
+            background-color: skyblue;
+        }
+
+        .box2 {
+            background-color: bisque;
+        }
+
+        .box3 {
+            background-color: rebeccapurple;
+        }
+    </style>
+
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../gsap-plugins/CustomEase3.min.js"></script>
+</head>
+
+<body>
+
+    <div class="phone-box">
+        <div class="draw-swiper-block">
+            <div class="draw-swiper-wrap" id="wrap">
+                <!-- <div class="box box1"></div>
+                <div class="box box2"></div>
+                <div class="box box3"></div> -->
+            </div>
+        </div>
+    </div>
+
+    <button id="btn">start</button>
+
+</body>
+<script>
+    function calcShowIndex(cur, count) {
+        console.log('cur:', cur)
+        if (cur < 0) {
+            showIndex = (-cur % count) + 1;
+        } else {
+            showIndex = (cur % count) === 0 ? 1 : count - (cur % count) + 1;
+        }
+        console.log('showIndex:', showIndex)
+    }
+
+    const count = 9
+    const boxList = []
+    const carouselEl = document.getElementById('wrap')
+    let cur = 1;
+    let showIndex = 0;
+    gsap.set(carouselEl, {
+        // transformOrigin: `50% 50% -100px`
+    })
+
+
+    for (let i = 0; i < 9; i++) {
+        const div = document.createElement('div')
+        div.className = 'box'
+        div.innerText = i + 1;
+        boxList.push(div)
+        // const rotate = (360 / count) * i;
+        let rotate = i === 1 ? 0 : (i > 1 ? -30 : 30)
+        let offsetY = i === 1 ? 0 : -50
+        gsap.set(div, {
+            background: `rgba(random(100,255),random(100,255),random(100,255),0.8)`,
+            // rotationY: rotate,
+            rotate: rotate,
+            y: offsetY,
+            // 3d 旋转 z中心点往后位移一段距离
+            // transformOrigin: `50% 50% -100px`
+
+        })
+        carouselEl.appendChild(div)
+    }
+
+
+
+    // gsap.set('.box1', {
+    //     y: -50,
+    //     // x: -10,
+    //     z: -10,
+    //     // scale: 0.5,
+    //     rotate: 30
+    // })
+    // gsap.set('.box3', {
+    //     y: -50,
+    //     // x: 10,
+    //     z: -10,
+    //     // scale: 0.5,
+    //     rotate: -30
+    // })
+
+
+    document.getElementById('btn').addEventListener('click', () => {
+
+        const tl = gsap.timeline({
+            defaults: {
+                ease: 'none',
+                // duration: 1,
+            }
+        })
+        let preEl = boxList[cur - 1];
+        let curEl = boxList[cur];
+        let nextEl = boxList[cur + 1]
+        tl.to('#wrap', {
+            x: '-=360',
+        }).to(preEl, {
+            rotate: 30,
+            y: '-=50'
+        }, '<').to(curEl, {
+            rotate: 30,
+            y: '-=50',
+            z: '-=10',
+        }, '<').to(nextEl, {
+            rotate: 0,
+            y: '+=50',
+            z: 0,
+        }, '<')
+
+        cur++;
+
+    })
+</script>
+
+</html>

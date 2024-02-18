@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draw Svg</title>
+    <style>
+        body,
+        html {
+            padding: 0;
+            margin: 0;
+        }
+
+        svg {
+            position: relative;
+            margin: 20px;
+            width: 400px;
+        }
+
+        .box,
+        #box {
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+            width: 50px;
+            height: 50px;
+            background-color: skyblue;
+        }
+
+        .circle {
+            position: relative;
+            z-index: 1;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: red;
+        }
+
+        .st1 {
+            fill: bisque;
+            /* fill: none; */
+            /* stroke: red; */
+        }
+    </style>
+
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../js/MotionPathPlugin.min.js"></script>
+    <script src="../gsap-plugins/MotionPathHelper.min.js"></script>
+</head>
+
+<body>
+
+
+
+    <svg id="svg" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 200 200">
+        <rect id="box" width="50" height="50" fill="red"></rect>
+        <path id="myPath" fill="none" stroke="gray"
+            d="M23.519,26.95 C23.519,57.942 57.074,72.683 75.735,74.648 112.992,78.571 140.168,60.643 147.266,39.493 " />
+    </svg>
+
+
+
+
+
+</body>
+<script>
+    gsap.registerPlugin(MotionPathPlugin);
+
+    gsap.to('#box', {
+        motionPath: {
+            path: "#myPath",
+            align: "#myPath",
+            alignOrigin: [0.5, 0.5],
+            autoRotate: true,
+        },
+        transformOrigin: "50% 50%",
+        duration: 5,
+    })
+
+
+    MotionPathHelper.create('#box');
+
+</script>
+
+<script>
+
+
+</script>
+
+
+
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(45deg, rgb(26, 18, 61), rgb(8, 12, 28));
+
+        }
+
+        .lottie-player {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+    <!-- https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js -->
+    <!-- https://cdnjs.com/libraries/lottie-web -->
+</head>
+
+<body>
+
+    <div id="app" class="lottie-player"></div>
+
+</body>
+<script>
+    const el = document.getElementById('app')
+    lottie.loadAnimation({
+        container: el, // the dom element that will contain the animation
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        speed: 10,
+        background: 'transparent',
+        path: './assets/data-404.json' // the path to the animation json
+    });
+</script>
+
+</html>
