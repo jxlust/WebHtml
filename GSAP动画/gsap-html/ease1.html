@@ -38,6 +38,12 @@
         .red {
             background-color: rgb(124, 30, 30);
         }
+
+        #box7 {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+        }
     </style>
     <script src="../js/gsap-latest-beta.min.js"></script>
 
@@ -68,6 +74,41 @@
         delay: 1,
         ease: "back.in(8)",
     })
+
+
+    gsap.set('#box7', {
+        opacity: 0,
+        scale: 0,
+        x: 200,
+        y: 100,
+        rotation: () => gsap.utils.random([-180, 180])
+    })
+    const tl = gsap.timeline({
+        defaults: {
+            ease: "expo.out",
+            duration: 1
+        }
+    })
+    tl.to('#box7', {
+        duration: .3,
+        opacity: 1,
+        scale: 1,
+        ease: "back.out",
+        rotation: 0
+    }, 0).to('#box7', {
+        x: '+=50',
+        y: '-=50',
+    }, 0).to('#box7', {
+        rotation: () => gsap.utils.random([-600, 600, -300, 300]),
+        ease: "power3.in"
+    }, .1).to('#box7', {
+        opacity: 0,
+        ease: "power1.in",
+        duration: .8
+    }, .4).to('#box7', {
+        y: "100vh",
+        ease: "power3.inOut"
+    }, .4)
 
 
 </script>

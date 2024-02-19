@@ -6,12 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        .simple-box {
+            width: 100%;
+            /* background-color: rgba(6, 6, 6, 0.2); */
+            border: 1px solid black;
+            height: 500px;
+            border-radius: 4px;
+            position: relative;
+            margin: 100px 0 500px 0;
+        }
+
         .container-tf {
             margin-left: auto;
             margin-right: auto;
             max-width: 120rem;
-            padding-left: max(1.5rem, min(6.73139vw - 0.0776699rem, 8rem));
-            padding-right: max(1.5rem, min(6.73139vw - 0.0776699rem, 8rem));
+
             width: 100%;
         }
 
@@ -29,6 +38,38 @@
             height: auto;
             border-style: none;
         }
+
+        .test-content {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 0 auto;
+            max-width: 1150px;
+            min-height: 300px;
+            padding-bottom: max(4rem, min(4.1424vw + 3.02913rem, 8rem));
+            width: 100%;
+            background-color: rgba(6, 6, 6, 0.9);
+            color: white;
+            font-size: 26px;
+        }
+
+        .color-btn {
+            margin: 10px;
+            color: transparent;
+            text-align: center;
+            font-weight: 700;
+            background-image: linear-gradient(90deg, #409eff, #ff2e45 25%, #409eff 50%, #ff2e45 75%, #409eff);
+            background-size: 200% 100%;
+            /* background-image: linear-gradient(90deg,#409eff,#ff2e45); */
+            -webkit-background-clip: text;
+            background-clip: text;
+            cursor: pointer;
+            border: 1px solid #cdc6c6;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
     </style>
 
     <script src="../js/gsap-latest-beta.min.js"></script>
@@ -38,33 +79,198 @@
 <body>
 
     <!-- https://gsap.com/img/Flair-0.png -->
-    <div class="container-tf">
-        <img class="flair-anim" src="/img/Flair-0.png">
-        <img class="flair-anim" src="/img/Flair-18.png">
-        <img class="flair-anim" src="/img/Flair-1.png">
-        <img class="flair-anim" src="/img/Flair-2.png">
-        <img class="flair-anim" src="/img/Flair-3.png">
-        <img class="flair-anim" src="/img/Flair-4.png">
-        <img class="flair-anim" src="/img/Flair-5.png">
-        <img class="flair-anim" src="/img/Flair-6.png">
-        <img class="flair-anim" src="/img/Flair-7.png">
-        <img class="flair-anim" src="/img/Flair-8.png">
-        <img class="flair-anim" src="/img/Flair-9.png">
-        <img class="flair-anim" src="/img/Flair-10.png">
-        <img class="flair-anim" src="/img/Flair-11.png">
-        <img class="flair-anim" src="/img/Flair-12.png">
-        <img class="flair-anim" src="/img/Flair-15.png">
-        <img class="flair-anim" src="/img/Flair-16.png">
-        <img class="flair-anim" src="/img/Flair-17.png">
-        <img class="flair-anim" src="/img/Flair-19.png">
-        <img class="flair-anim" src="/img/Flair-20.png">
-        <img class="flair-anim" src="/img/Flair-21.png">
-        <img class="flair-anim" src="/img/Flair-22.png">
-        <img class="flair-anim" src="/img/Flair-23.png">
+    <div class="container-tf" id="container">
         <!-- <img class="learning-flair learning-flair--green" src="/img/Flair-learning-1.png">
         <img class="learning-flair learning-flair--pink" src="/img/Flair-learning-2.png">
         <img class="learning-flair learning-flair--purple" src="/img/Flair-learning-3.png"> -->
+
+        <div class="test-content" id="content">
+            <h1>我是数据展示标题</h1>
+        </div>
+    </div>
+
+    <div class="simple-box">
+        <img class="flair-anim" src="../images/scene/Flair-18.png" id="simpleImg" />
+
+        <button class="color-btn" id="startBtn">开始</button>
     </div>
 </body>
+
+<script>
+    function createImgItem(id) {
+        let item = document.createElement("img");
+        item.className = "flair-anim";
+        item.src = `https://gsap.com/img/Flair-${id}.png`
+        return item;
+    }
+
+    const imgList = [];
+    const container = document.getElementById('container');
+    const ids = [0, 18, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16, 17, 19, 20, 21, 22, 23]
+
+    let fragment = document.createDocumentFragment();
+
+    for (let id of ids) {
+        let imgItem = createImgItem(id);
+        imgList.push(imgItem)
+        fragment.appendChild(imgItem)
+    }
+    container.appendChild(fragment)
+
+    let position = {
+        x: 0,
+        y: 0
+    }
+    let lastPosition = position;
+    let transfromPosition = position;
+    let count = 0;
+    const wrapNumberFunc = gsap.utils.wrap(0, imgList.length)
+
+
+    const contentEl = document.getElementById('content')
+
+    function setPosition(e) {
+        position = {
+            x: e.x,
+            y: e.y
+        }
+        console.log('pointer move:', position)
+    }
+    contentEl.addEventListener('pointermove', (e) => {
+        setPosition(e)
+    })
+
+    const mm = gsap.matchMedia()
+
+    function myFunction(time, deltaTime, frame) {
+        // frmae第几帧绘制
+        console.log('myFunction', time, deltaTime, frame)
+        //executes on every tick after the core engine updates
+    }
+    // 知识点：
+    // 1. 媒体查询 @media (prefers-reduced-motion: no-preference) 应用于不想减少动画效果的用户，比如 .class{animation:xxx 2s}
+    // 2. @media(prefers - reduced - motion: reduce) 应用于想要减少动画效果的用户，比如    animation: none; 可以选择移除动画或者使动画变得平滑
+
+    function gsapAnimation() {
+        let wrapNum = wrapNumberFunc(count)
+            , curImg = imgList[wrapNum];
+
+        gsap.killTweensOf(curImg)
+        gsap.set(curImg, {
+            opacity: 0,
+            x: transfromPosition.x,
+            y: transfromPosition.y,
+            xPercent: -50,
+            yPercent: -50,
+            scale: 0,
+            rotation: () => gsap.utils.random([-180, 180])
+        })
+        gsap.timeline({
+            defaults: {
+                ease: "expo.out",
+                duration: 1
+            }
+        }).to(curImg, {
+            duration: .3,
+            opacity: 1,
+            scale: 1,
+            ease: "back.out",
+            rotation: 0
+        }, 0).to(curImg, {
+            x: position.x,
+            y: position.y,
+            xPercent: -50,
+            yPercent: -50
+        }, 0).to(curImg, {
+            rotation: () => gsap.utils.random([-600, 600, -300, 300]),
+            ease: "power3.in"
+        }, .1).to(curImg, {
+            opacity: 0,
+            ease: "power1.in",
+            duration: .8
+        }, .4).to(curImg, {
+            y: "100vh",
+            ease: "power3.inOut"
+        }, .4)
+
+        count++;
+
+    }
+    mm.add("(prefers-reduced-motion: no-preference)", (e) => {
+        console.log('@media (prefers-reduced-motion: no-preference)')
+        function animationTicker() {
+            // 两点之间的距离
+            let distance = Math.hypot(lastPosition.x - position.x, lastPosition.y - position.y);
+            // interpolate 在某个位置插值后的结果
+            transfromPosition.x = gsap.utils.interpolate(transfromPosition.x || position.x, position.x, .1)
+            transfromPosition.y = gsap.utils.interpolate(transfromPosition.y || position.y, position.y, .1)
+            // console.log('distance:', distance)
+            if (distance > 100) {
+                if (distance > 400) {
+                    transfromPosition = position;
+                }
+                // 鼠标移动的点和上一个点距离100才会触发动画，move>100
+                gsapAnimation()
+                lastPosition = position;
+            }
+
+        }
+        gsap.ticker.add(animationTicker)
+        return () => {
+            gsap.ticker.remove(animationTicker)
+        }
+
+    })
+
+
+</script>
+
+<script>
+
+    document.getElementById('startBtn').addEventListener('click', () => {
+        const simpleImg = document.getElementById('simpleImg')
+        gsap.killTweensOf(simpleImg)
+
+        gsap.set(simpleImg, {
+            opacity: 0,
+            x: 100,
+            y: 100,
+            xPercent: -50,
+            yPercent: -50,
+            scale: 0,
+            rotation: () => gsap.utils.random([-180, 180])
+        })
+
+        const tl = gsap.timeline({
+            defaults: {
+                ease: "expo.out",
+                duration: 1
+            }
+        })
+
+        tl.to(simpleImg, {
+            duration: .3,
+            opacity: 1,
+            scale: 1,
+            ease: "back.out",
+            rotation: 0
+        }, 0).to(simpleImg, {
+            x: 80,
+            y: 80,
+            xPercent: -50,
+            yPercent: -50
+        }, 0).to(simpleImg, {
+            rotation: () => gsap.utils.random([-600, 600, -300, 300]),
+            ease: "power3.in"
+        }, .1).to(simpleImg, {
+            opacity: 0,
+            ease: "power1.in",
+            duration: .8
+        }, .4).to(simpleImg, {
+            y: "100vh",
+            ease: "power3.inOut"
+        }, .4)
+    })
+</script>
 
 </html>
