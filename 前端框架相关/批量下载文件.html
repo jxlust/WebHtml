@@ -5,10 +5,131 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="./js/FileSaver.js"></script>
+    <script src="./js/jszip.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-content: flex-start;
+            align-self: flex-start;
+        }
+
+        body>* {
+            align-self: start;
+        }
+    </style>
 </head>
 
-<body>
 
+<body>
+    <img src="https://gsap.com/img/Flair-2.png">
+
+    <button id="btn1">打包图片</button>
+
+    <canvas id="myCanvas">
+    </canvas>
+
+    <button id="btn2">canvas生成</button>
+
+
+    <div>
+        <button id="btn3">打包gsap flair imag</button>
+        <span>https://gsap.com/img/Flair-0.png</span>
+    </div>
 </body>
+
+<script>
+    /** @type {HTMLCanvasElement} */
+    const canvas = document.getElementById('myCanvas')
+    canvas.width = 150;
+    canvas.height = 150;
+    const ctx = canvas.getContext('2d')
+    ctx.strokeStyle = 'red'
+    ctx.lineWidth = 1
+    ctx.strokeRect(1, 1, 148, 148);
+    ctx.fillStyle = 'skyblue';
+    ctx.beginPath();
+    ctx.moveTo(20, 20)
+    ctx.lineTo(130, 20)
+    ctx.lineTo(130, 120)
+    ctx.fill();
+
+</script>
+<script>
+    document.getElementById('btn2').addEventListener('click', () => {
+        canvas.toBlob(function (blob) {
+            saveAs(blob, "myImage.png");
+        });
+    })
+</script>
+
+<script>
+    function getCanvasBlob(c) {
+        return new Promise((resolve, reject) => {
+            c.toBlob((blob) => {
+                resolve(blob)
+            })
+        })
+    }
+    async function batImage() {
+        const zip = new JSZip();
+        zip.file("Hello.txt", "Hello World\n");
+        const imgDir = zip.folder("images");
+        // const imgData = canvas.toDataURL("image/png")
+        const imgData = await getCanvasBlob(canvas)
+        imgDir.file('test.png', imgData, { base64: true })
+        const content = await zip.generateAsync({ type: "blob" })
+        saveAs(content, 'example.zip')
+
+    }
+    document.getElementById('btn1').addEventListener('click', () => {
+        batImage()
+    })
+</script>
+
+<script>
+
+
+
+    async function fectImgData(url, fileName, zip) {
+        const response = await fetch(url, {
+            mode: "no-cors", // no-cors, *cors, same-origin
+        })
+        const blob = await response.blob()
+        console.log(1, blob)
+        zip.file(fileName, blob, {
+            base64: true
+        })
+        return true;
+    }
+
+    async function batGsapImg() {
+        const zip = new JSZip();
+        // const list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16, 17, 18, 19, 20, 21, 22, 23];
+        const list = [0, 1, 2];
+        const allP = [];
+        for (let i of list) {
+            const url = `https://gsap.com/img/Flair-${i}.png`;
+            const imgName = `Flair-${i}.png`;
+            allP.push(fectImgData(url, imgName, zip))
+        }
+        let cur = 0;
+        for (let p of allP) {
+            await p;
+            cur++;
+        }
+        if (cur === list.length) {
+            console.log('ok.')
+            const content = await zip.generateAsync({ type: "blob" })
+            saveAs(content, 'gsapImage.zip')
+        }
+
+    }
+    document.getElementById('btn3').addEventListener('click', () => {
+        batGsapImg()
+    })
+</script>
 
 </html>
