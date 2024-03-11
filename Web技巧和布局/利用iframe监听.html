@@ -54,9 +54,34 @@
         </div>
 
         <div class="button" id="button">change</div>
+
+
+        <div class="box-test">
+            <span style="display: inline-block;" id="boxText">box test</span>
+            <img class="box-img" id="boxImg"
+                src="https://img1.baidu.com/it/u=2005056479,139681251&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1710262800&t=1a506a44501eab4cf76b7c97a73c05e1" />
+        </div>
     </div>
 
+
 </body>
+
+<script>
+    const boxText = document.getElementById('boxText')
+    const boxImg = document.getElementById('boxImg')
+    const resizeObserver1 = new ResizeObserver((entries) => {
+        console.log(entries)
+        for (let e of entries) {
+            // const w = e.target.offsetWidth;
+            const w = e.target.clientWidth;
+            console.log('resizeObserver1 width:', w)
+        }
+        console.log('resizeObserver1 change ...');
+    })
+    resizeObserver1.observe(boxImg)
+    resizeObserver1.observe(boxText)
+</script>
+
 
 <script>
     // 这里用iframe resize来监听 兼容性较好
@@ -73,8 +98,10 @@
             str += '测试数据，我是一段测试数据，我是一段测试数据，我是一段测试数据，我是一段测试数据，';
         }
         mainContentEl.innerText = str;
+        boxText.innerText = '设法了解收到了发，收费的爱上';
     })
 
 </script>
+
 
 </html>
