@@ -222,6 +222,7 @@
     }
 
 
+
     //builds a grid of <div class="box"> elements, dropped into #container (unrelated to animation code)
     buildGrid({
         grid: grid,
@@ -346,9 +347,9 @@
             className = vars.className || "",
             w = (width - cols * gutter) / cols,
             parent = (typeof (vars.parent) === "string") ? document.querySelector(vars.parent) : vars.parent ? vars
-            .parent : document.body,
+                .parent : document.body,
             css = "display: inline-block; margin: 0 " + (gutter / width * 100) + "% " + (gutter / width * 100) +
-            "% 0; width: " + (w / width * 100) + "%;",
+                "% 0; width: " + (w / width * 100) + "%;",
             l = rows * cols,
             i, box;
         for (i = 0; i < l; i++) {

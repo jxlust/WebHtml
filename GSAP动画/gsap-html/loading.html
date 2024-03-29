@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        #loading {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9;
+            background: #010826;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: #409eff;
+            font-size: 15px;
+            letter-spacing: 2px;
+            overflow: hidden;
+        }
+
+        .loading-boxs {
+            width: 40px;
+            height: 40px;
+            will-change: transform;
+            position: relative;
+        }
+
+        .boxs-item {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .dot {
+            width: 20%;
+            height: 20%;
+            background-color: #409eff;
+            border-radius: 100%;
+            display: block;
+        }
+
+        .loading-text {
+            margin-top: 20px;
+        }
+    </style>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+</head>
+
+<body>
+    <div id="loading">
+        <div class="loading-boxs">
+            <div class="boxs-item">
+                <div class="dot"></div>
+            </div>
+            <div class="boxs-item">
+                <div class="dot"></div>
+            </div>
+            <div class="boxs-item">
+                <div class="dot"></div>
+            </div>
+            <div class="boxs-item">
+                <div class="dot"></div>
+            </div>
+            <div class="boxs-item">
+                <div class="dot"></div>
+            </div>
+            <div class="boxs-item">
+                <div class="dot"></div>
+            </div>
+        </div>
+        <div class="loading-text" id="btn">加载资源中...</div>
+
+
+    </div>
+
+</body>
+
+<script>
+    gsap.config({
+        // autoSleep: 60,
+        force3D: 'auto',
+        // nullTargetWarn: false,
+        // trialWarn: false,
+        // units: { left: "%", top: "%", rotation: "rad" },
+    });
+
+    const tl = gsap.timeline({
+        // repeat: -1,
+        // repeatDelay: -1,
+    });
+
+    tl.to(".boxs-item", {
+        rotation: "+=360",
+        stagger: 0.1,
+        ease: "power1.inOut",
+        duration: 2,
+        repeat: -1,
+    })
+        .to(
+            ".boxs-item > .dot",
+            {
+                keyframes: {
+                    scale: [1, 0.4, 1],
+                    ease: "power1.inOut",
+                    easeEach: "none",
+                },
+                duration: 2,
+                repeat: -1,
+                stagger: 0.1,
+            },
+            0
+        )
+        .to(
+            ".loading-boxs",
+            {
+                rotation: "+=360",
+                // rotate: 360,
+                ease: "none",
+                duration: 2.5,
+                repeat: -1,
+            },
+            0
+        );
+
+    // to('.boxs-item', {
+
+    // }, 0)
+    document.getElementById('btn').addEventListener('click', () => {
+        gsap.to('#loading', {
+            duration: 1,
+            opacity: 0,
+            ease: 'power1.inOut',
+            scale: 1.3
+        })
+    })
+</script>
+
+</html>

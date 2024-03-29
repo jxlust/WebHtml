@@ -57,7 +57,8 @@
             background-color: skyblue;
             /* transform: translate(-50%,-50%); */
         }
-        .content2{
+
+        .content2 {
             position: relative;
             z-index: 2;
             display: flex;
@@ -68,7 +69,8 @@
             justify-content: center;
             flex-direction: column;
         }
-        .ball{
+
+        .ball {
             position: absolute;
             top: 0;
             background-color: skyblue;
@@ -76,7 +78,8 @@
             width: 50px;
             height: 50px;
         }
-        .shadow{
+
+        .shadow {
             position: absolute;
             bottom: 0;
             background-color: rgba(0, 0, 0, .2);
@@ -84,9 +87,8 @@
             height: 25px;
             border-radius: 50%;
         }
- 
     </style>
-    <script src="https://unpkg.co/gsap@3/dist/gsap.min.js"></script>
+    <script src="./js/gsap-latest-beta.min.js"></script>
 </head>
 
 <body>
@@ -107,9 +109,9 @@
     let timeline = gsap.timeline({
         force3D: true
     });
-    const tween = gsap.to('.box',{
+    const tween = gsap.to('.box', {
         keyframes: {
-            y: [0,80,-10,30,0],
+            y: [0, 80, -10, 30, 0],
             ease: 'none',
             easeEach: 'power2.inOut'
         },
@@ -121,7 +123,7 @@
 </script>
 <script>
 
-    const ballTween = gsap.to('#shadow',{
+    const ballTween = gsap.to('#shadow', {
         scale: .7,
         duration: .4,
         repeat: -1,
