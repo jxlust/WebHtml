@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>录音示例</title>
+</head>
+
+<body>
+    <button onclick="startRecording()">开始录音</button>
+    <button onclick="stopRecording()">停止录音</button>
+    <script>
+        let mediaRecorder;
+        let chunks = [];
+
+        function startRecording() {
+            console.log(1)
+            navigator.mediaDevices
+                .getUserMedia({ audio: true })
+                .then((stream) => {
+                    mediaRecorder = new MediaRecorder(stream);
+                    mediaRecorder.start();
+
+                    mediaRecorder.ondataavailable = (event) => {
+                        chunks.push(event.data);
+                    };
+                })
+                .catch((error) => {
+                    console.error("Error starting recording:", error);
+                });
+        }
+
+        function stopRecording() {
+            mediaRecorder.stop();
+
+            mediaRecorder.onstop = () => {
+                const blob = new Blob(chunks, { type: "audio/wav" });
+                chunks = [];
+                const audioURL = URL.createObjectURL(blob);
+                const audio = new Audio(audioURL);
+                console.log(1, audio)
+                audio.play();
+            };
+        }
+    </script>
+</body>
+
+</html>
