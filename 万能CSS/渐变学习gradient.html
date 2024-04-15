@@ -153,8 +153,7 @@
 			width: 300px;
 			height: 100%;
 			/* background-image: ; */
-			background: linear-gradient(-30deg, rgb(250, 176, 214) 25px, transparent 0px) 0px -1px/ 50px 30px,
-				linear-gradient(150deg, rgb(247, 212, 226) 24px, transparent 0px) 2px 1px/ 50px 30px;
+			background: linear-gradient(-30deg, rgb(250, 176, 214) 25px, transparent 0px) 0px -1px/ 50px 30px;
 			background-color: rgb(236, 177, 210);
 		}
 
@@ -300,7 +299,7 @@
 		.text-bg-mask2 {
 			background-color: transparent;
 			color: transparent;
-			background-image: linear-gradient(transparent 20%, #e2e2e280 20%, #e2e2e280 80%, transparent 0%);
+			background-image: linear-gradient(transparent 20%, #999 20%, #999 80%, transparent 0%);
 		}
 
 		.text-bg-mask2::after,
@@ -310,6 +309,26 @@
 			color: transparent;
 			border-color: transparent;
 			border-radius: 0;
+		}
+
+		.pinto-line {
+			/* width: 50px; */
+			/* height: 100px; */
+			/* background: linear-gradient(90deg, #01316D 5%, rgba(1, 48, 107, 0) 100%); */
+		}
+
+		:root {
+			--v1: 3.4px;
+			--v2: 6.4px;
+			--v3: 9.4px;
+		}
+
+		.pinto-line {
+			width: 200px;
+			height: 11px;
+			/* background: linear-gradient(90deg, #01316D 5%, rgba(1, 48, 107, 0) 100%); */
+			background-image: repeating-linear-gradient(70deg, red var(--v1), red var(--v2), transparent var(--v2), transparent var(--v3));
+			mask-image: linear-gradient(90deg, #fff, transparent)
 		}
 	</style>
 </head>
@@ -389,6 +408,10 @@
 		<div class="item">18</div>
 		<div class="item">19</div>
 		<div class="item">20</div>
+	</div>
+
+	<div class="pinto-line">
+
 	</div>
 </body>
 

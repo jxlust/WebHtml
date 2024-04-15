@@ -1,3 +1,4 @@
+// link:https://mp.weixin.qq.com/s/llPl_xhROs01wicNYiEhjQ
 //  RegExp
 //1. test
 const reg1 = new RegExp(/\d{5}/); //匹配五个数字
@@ -40,3 +41,4 @@ console.log(repStr1); // abcd \1\2\3
 
 let repStr2 = "Aa123".replace(/(\D)/gi, "<span>$1</span>");
 console.log(repStr2); //<span>A</span><span>a</span>123
+

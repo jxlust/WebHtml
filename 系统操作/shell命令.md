@@ -6,6 +6,9 @@ hash -r
 ## shell配置
 shell配置文件（如.bashrc、.bash_profile或.zshrc），看看是否有自定义的补全函数或别名导致了这个问题。如果有必要，你可以修改或删除这些配置，然后重新加载配置（例如，通过source ~/.bashrc或重新登录你的shell会话）。
 
+## 查看系统的shells
+cat /etc/shells
+
 ## 基本路径操作
 
 1. 相对路径
