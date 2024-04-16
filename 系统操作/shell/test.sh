@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 name="jxl"
 echo ${name}
 echo "文件名：$0"

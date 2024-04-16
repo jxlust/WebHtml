@@ -1,85 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      .box1 {
-        width: 100px;
-        height: 100px;
-        background-color: skyblue;
-      }
 
-      .box2 {
-        width: 200px;
-        margin-top: 100px;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    .box1 {
+      width: 100px;
+      height: 100px;
+      background-color: skyblue;
+    }
 
-      .box22 {
-        width: 200px;
-        height: 0;
-        padding: 25% 0;
-        background-color: salmon;
-      }
-    </style>
-  </head>
+    .box2 {
+      width: 200px;
+      margin-top: 100px;
+    }
 
-  <body>
-    <div class="box1" draggable="true"></div>
-    <div class="box2" draggable="false">
-      <div class="box22"></div>
-    </div>
+    .box22 {
+      width: 200px;
+      height: 0;
+      padding: 25% 0;
+      background-color: salmon;
+    }
+  </style>
+</head>
 
-    <script type="module" defer>
-      /**
-       * dragstart: 源对象开始被拖动时触发
-       * drag: 源对象被拖动过程中反复触发
-       * dragend: 源对象拖动结束时触发
-       * dragenter: 源对象开始进入目标对象范围内触发
-       * dragover: 源对象在目标对象范围内移动时触发
-       * dragleave: 源对象离开目标对象范围时触发
-       * drop: 源对象在目标对象范围内被释放时触发
-       */
-			/**
-			 * 注意：
-			 * 1. dragenter和dragover事件的默认行为是拒绝接受任何被拖放的元素，显示的鼠标样式也是〼,所以得用preventDefault来阻止浏览器默认行为
-			 * 2. 目标对象想要变成为可释放区域，必须设置dragover和drop事件处理程序属性，drop只有设置了dragover才生效；
-			 *  
-			 */
-      const dragBox = document.querySelector('.box1')
-      const targetBox = document.querySelector('.box2')
+<body>
+  <div class="box1" draggable="true"></div>
+  <div class="box2" draggable="false">
+    <div class="box22"></div>
+  </div>
 
-      dragBox.addEventListener('dragstart', function (e) {
-        console.log('开始拖动了，dragstart:', e)
-      })
+  <script type="module" defer>
+    /**
+     * dragstart: 源对象开始被拖动时触发
+     * drag: 源对象被拖动过程中反复触发
+     * dragend: 源对象拖动结束时触发
+     * dragenter: 源对象开始进入目标对象范围内触发
+     * dragover: 源对象在目标对象范围内移动时触发
+     * dragleave: 源对象离开目标对象范围时触发
+     * drop: 源对象在目标对象范围内被释放时触发
+     */
+    /**
+     * 注意：
+     * 1. dragenter和dragover事件的默认行为是拒绝接受任何被拖放的元素，显示的鼠标样式也是〼,所以得用preventDefault来阻止浏览器默认行为
+     * 2. 目标对象想要变成为可释放区域，必须设置dragover和drop事件处理程序属性，drop只有设置了dragover才生效；
+     *  
+     */
+    const dragBox = document.querySelector('.box1')
+    const targetBox = document.querySelector('.box2')
 
-      // dragBox.addEventListener('drag', function (e) {
-      // 	console.log('反复拖动，drag:',e);
-      // })
+    dragBox.addEventListener('dragstart', function (e) {
+      console.log('开始拖动了，dragstart:', e)
+    })
 
-      dragBox.addEventListener('dragend', function (e) {
-        console.log('结束拖动，dragend:', e)
-      })
+    // dragBox.addEventListener('drag', function (e) {
+    //   console.log('反复拖动，drag:', e);
+    // })
 
-      targetBox.addEventListener('dragenter', function (e) {
-        console.log('源对象开始进入目标对象范围内 enter：', e)
-				e.preventDefault();
-      })
+    dragBox.addEventListener('dragend', function (e) {
+      console.log('结束拖动，dragend:', e)
+    })
 
-      targetBox.addEventListener('dragover',function (e) {
-      	// console.log('源对象在目标对象范围内移动:',e);
-				e.preventDefault();
-      })
+    targetBox.addEventListener('dragenter', function (e) {
+      console.log('源对象开始进入目标对象范围内 enter：', e)
+      e.preventDefault();
+    })
 
-      targetBox.addEventListener('dragleave', function (e) {
-        console.log('源对象离开目标对象范围 leave:', e)
-      })
+    targetBox.addEventListener('dragover', function (e) {
+      // console.log('源对象在目标对象范围内移动:',e);
+      e.preventDefault();
+    })
 
-			targetBox.addEventListener('drop', function (e) {
-        console.log('源对象在目标对象范围内被释放 drop:', e)
-      })
-    </script>
-  </body>
+    targetBox.addEventListener('dragleave', function (e) {
+      console.log('源对象离开目标对象范围 leave:', e)
+    })
+
+    targetBox.addEventListener('drop', function (e) {
+      console.log('源对象在目标对象范围内被释放 drop:', e)
+    })
+  </script>
+</body>
+
 </html>

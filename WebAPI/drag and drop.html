@@ -1,62 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      .box {
-        display: grid;
-        row-gap: 300px;
-        grid-template-columns: repeat(3, 100px);
-        grid-template-rows: repeat(3, 100px);
-        grid-auto-flow: dense;
-        grid-auto-columns: 100px;
-        grid-auto-rows: 100px;
-      }
-      .box-target {
-        background-color: skyblue;
-        grid-row: 2/4;
-        grid-column: 6/8;
-      }
-      .box-drag {
-        background-color: red;
-        cursor: pointer;
-      }
 
-      .tips {
-        display: flex;
-        flex-direction: column;
-        font-size: 14px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="box">
-      <div class="box-drag" id="boxDrag" draggable="true">11111</div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    .box {
+      display: grid;
+      row-gap: 300px;
+      grid-template-columns: repeat(3, 100px);
+      grid-template-rows: repeat(3, 100px);
+      grid-auto-flow: dense;
+      grid-auto-columns: 100px;
+      grid-auto-rows: 100px;
+    }
 
-      <div class="box-target" id="boxTarget">22222</div>
-    </div>
+    .box-target {
+      background-color: skyblue;
+      grid-row: 2/4;
+      grid-column: 6/8;
+    }
 
-    <div class="tips">
-      <a
-        href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API"
-      >
-        HTML_Drag_and_Drop_API(H5 Dnd)</a
-      >
-      <a href="https://zh.javascript.info/mouse-drag-and-drop">
-        mouse-drag-and-drop(mouse event)
-      </a>
-    </div>
-  </body>
+    .box-drag {
+      background-color: red;
+      cursor: pointer;
+    }
 
-  <script>
-    //预加载图片
-    new Image().src = "http://127.0.0.1:5502/icon.png";
+    .tips {
+      display: flex;
+      flex-direction: column;
+      font-size: 14px;
+    }
+  </style>
+</head>
 
-    const boxDrag = document.getElementById("boxDrag");
-    const boxTarget = document.getElementById("boxTarget");
+<body>
+  <div class="box">
+    <div class="box-drag" id="boxDrag" draggable="true">11111</div>
+
+    <div class="box-target" id="boxTarget">22222</div>
+  </div>
+
+  <div class="tips">
+    <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API">
+      HTML_Drag_and_Drop_API(H5 Dnd)</a>
+    <a href="https://zh.javascript.info/mouse-drag-and-drop">
+      mouse-drag-and-drop(mouse event)
+    </a>
+
+
+  </div>
+</body>
+
+<script>
+  function getCanvas() {
+    const canvas = document.createElement("canvas");
+    canvas.width = canvas.height = 50;
+    const ctx = canvas.getContext("2d");
+    ctx.lineWidth = 4;
+    ctx.moveTo(0, 0);
+    ctx.lineTo(50, 50);
+    ctx.moveTo(0, 50);
+    ctx.lineTo(50, 0);
+    ctx.stroke();
+    return canvas
+  }
+  //预加载图片
+  new Image().src = "/WebDemo/images/test1_1.png";
+
+  const boxDrag = document.getElementById("boxDrag");
+  const boxTarget = document.getElementById("boxTarget");
+
+  const myCanvas = getCanvas();
+  document.body.appendChild(myCanvas)
+  let img = document.createElement('img');
+  img.src = "/WebDemo/images/test1_1.png";
+
+  // img load ok 才能 setDragImage
+  img.onload = () => {
 
     //拖拽对象事件
     boxDrag.addEventListener("dragstart", (ev) => {
@@ -64,12 +87,15 @@
       //存入数据
       //text/html text/uri-list
       ev.dataTransfer.setData("text/plain", ev.target.id);
-      let img = new Image();
-      img.src = "http://127.0.0.1:5502/icon.png";
+      // let img = new Image();
 
-      ev.dataTransfer.setDragImage(img, 10, 10);
+      console.log('okk.')
+      ev.dataTransfer.setDragImage(img, 138 / 2, 138 / 2);
       ev.dataTransfer.dropEffect = "copy";
+      // const img = document.getElementById('myImg')
     });
+
+
 
     // boxDrag.addEventListener("drag", (ev) => {
     //   console.log("drag start:", ev);
@@ -106,5 +132,11 @@
       e.preventDefault();
     });
     //目标事件都要 preventDefault(), 阻止额外的事件处理（例如触摸事件或指针事件）。
-  </script>
+
+
+  }
+
+
+</script>
+
 </html>
