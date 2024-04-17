@@ -50,8 +50,9 @@
       mouse-drag-and-drop(mouse event)
     </a>
 
-
   </div>
+
+
 </body>
 
 <script>
@@ -73,8 +74,8 @@
   const boxDrag = document.getElementById("boxDrag");
   const boxTarget = document.getElementById("boxTarget");
 
-  const myCanvas = getCanvas();
-  document.body.appendChild(myCanvas)
+  // const myCanvas = getCanvas();
+  // document.body.appendChild(myCanvas)
   let img = document.createElement('img');
   img.src = "/WebDemo/images/test1_1.png";
 
@@ -97,9 +98,9 @@
 
 
 
-    // boxDrag.addEventListener("drag", (ev) => {
-    //   console.log("drag start:", ev);
-    // });
+    boxDrag.addEventListener("drag", (ev) => {
+      console.log("drag start:", ev);
+    });
 
     boxDrag.addEventListener("dragend", (ev) => {
       console.log("结束拖动，dragend:", ev);

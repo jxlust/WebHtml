@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模拟自定义滚动</title>
+    <style>
+        .wp-p {
+            width: 500px;
+            height: 300px;
+            overflow: hidden;
+            background-color: skyblue;
+            margin: auto;
+            position: relative;
+        }
+
+        .wp-c {
+            height: fit-content;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            cursor: move;
+
+        }
+
+        .item {
+            height: 50px;
+            width: 100%;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 50px;
+            padding: 0 10px;
+        }
+
+        .item:nth-child(2n) {
+            background-color: rgb(100, 16, 16);
+        }
+
+        .item:nth-child(2n+1) {
+            background-color: rgb(12, 116, 116);
+        }
+
+
+        .scrollbar {
+            position: absolute;
+            top: 2px;
+            bottom: 2px;
+            right: 2px;
+            z-index: 1;
+            border-radius: 4px;
+            width: 6px;
+        }
+
+        .scrollbar__thumb {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 0;
+            cursor: pointer;
+            border-radius: inherit;
+            background-color: skyblue;
+            transition: background-color .3s;
+            opacity: .3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wp-p" id="parentWrap">
+        <div class="wp-c" id="moveChild">
+        </div>
+        <div class="scrollbar">
+            <div class="scrollbar__thumb" id="myThumb"></div>
+        </div>
+    </div>
+</body>
+
+
+<script>
+    const moveChildDom = document.getElementById('moveChild')
+    const myThumbEl = document.getElementById('myThumb')
+    const parentEl = document.getElementById('parentWrap')
+    let dragging = false;
+    let startY, scrollTop = 0, lastScrollTop = 0;
+
+    // 间隙，滚动条上下有个间隙，也就是跟固定的父容器高度有个边距
+    const GAP = 2;
+    myThumbEl.parentElement.style.top = `${GAP}px`
+    myThumbEl.parentElement.style.bottom = `${GAP}px`
+
+
+    // 插入内容
+    for (let i = 0; i < 20; i++) {
+        const item = document.createElement('div')
+        item.className = 'item';
+        item.innerText = i + '   text....'
+        moveChild.appendChild(item)
+    }
+
+
+    // 滚动的滑块和滚动的内容的比例关系。
+    // 因为滑块是在固定滑槽里滚动的，所以为了保持同步滑块和内容滚动的同步比例，滑块滚动距离 和 内容滚动距离 就有以下等量关系
+    // 对于垂直滚动公式： 滑块的高度/滑槽的高度 = 滑槽的高度/滚动内容的高度 = 滑块的滚动距离/内容的滚动距离
+    // 横向滚动同理
+
+    // 对于可以滚动的元素来说, 滑槽的高度/滚动内容的高度 = el.offsetHeight / el.scrollHeight
+
+    function calcThumbHeight(fixedH, contentH) {
+        // (thumbH / (fixedH - 2 * GAP)) = (fixedH - 2 * GAP) / contentH;
+        return (fixedH - 2 * GAP) ** 2 / contentH
+    }
+
+
+    const containerH = parentEl.offsetHeight;
+    const contentH = moveChildDom.offsetHeight;
+    const diffH = contentH - containerH;
+    const thumbH = calcThumbHeight(containerH, contentH)
+
+    myThumbEl.style.height = `${thumbH}px`;
+
+
+    function updateThumbPostion(top) {
+        // x/top = (fixedH - 2 * GAP) / contentH;
+
+        // 方法1: 按像素位移，利用等比关系计算出滑块的top像素值即可
+        // const thumbTop = (containerH - 2 * GAP) / contentH * -top
+        // myThumbEl.style.transform = `translateY(${thumbTop}px)`;
+
+        // 方法2: 按百分比位移
+        // thumTop/thumbH = top/containerH
+        const percent = top / containerH * 100;
+        console.log(percent)
+        myThumbEl.style.transform = `translateY(${percent}%)`;
+
+    }
+
+    moveChildDom.addEventListener('mousedown', function (e) {
+        e.stopImmediatePropagation();
+        dragging = true;
+        startY = e.clientY;
+    });
+
+    // moveChildDom.addEventListener('mouseleave', (e) => {
+    //     dragging = false;
+    //     lastScrollTop = scrollTop
+    // })
+
+    document.addEventListener('mousemove', function (e) {
+        if (dragging) {
+            const currentY = e.clientY;
+            scrollTop = lastScrollTop + startY - currentY;
+            // scrollTop -> [0,diffH]
+            scrollTop = Math.max(0, scrollTop)
+            scrollTop = Math.min(diffH, scrollTop)
+            // console.log('scroll top:', scrollTop)
+
+            moveChildDom.style.transform = `translateY(${-scrollTop}px)`;
+            updateThumbPostion(scrollTop)
+        }
+    });
+    document.addEventListener('mouseup', function () {
+        dragging = false;
+        lastScrollTop = scrollTop
+    });
+
+
+
+    let originalOnSelectStart = null;
+    let cursorDown = false;
+
+    const restoreOnselectstart = () => {
+        if (document.onselectstart !== originalOnSelectStart)
+            document.onselectstart = originalOnSelectStart
+    }
+
+    const mouseMoveDocumentHandler = (e) => {
+        if (cursorDown) {
+            const currentY = e.clientY;
+            scrollTop = lastScrollTop + currentY - startY;
+            scrollTop = Math.max(0, scrollTop)
+            scrollTop = Math.min(diffH, scrollTop)
+            console.log('bar scroll top:', scrollTop)
+            moveChildDom.style.transform = `translateY(${-scrollTop}px)`;
+            updateThumbPostion(scrollTop)
+        }
+    }
+    const mouseUpDocumentHandler = (e) => {
+        cursorDown = false
+        lastScrollTop = scrollTop
+
+        document.removeEventListener('mousemove', mouseMoveDocumentHandler)
+        document.removeEventListener('mouseup', mouseUpDocumentHandler)
+        restoreOnselectstart();
+    }
+
+    myThumbEl.addEventListener('mousedown', (e) => {
+        window.getSelection()?.removeAllRanges()
+        e.stopImmediatePropagation()
+        cursorDown = true;
+        startY = e.clientY;
+        document.addEventListener('mousemove', mouseMoveDocumentHandler)
+        document.addEventListener('mouseup', mouseUpDocumentHandler)
+        originalOnSelectStart = document.onselectstart
+        document.onselectstart = () => false
+    })
+</script>
+
+<script>
+
+
+</script>
+
+</html>

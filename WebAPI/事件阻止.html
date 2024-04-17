@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #outer {
+            background-color: skyblue;
+            width: 300px;
+            height: 300px;
+        }
+
+        #inner {
+            background-color: #999;
+            width: 200px;
+            height: 200px;
+        }
+
+        #btn {}
+    </style>
+</head>
+
+<body>
+
+    <div id="outer">
+        <div id="inner">
+            <button id="btn">Click me</button>
+        </div>
+    </div>
+
+</body>
+<script>
+    document.getElementById('outer').addEventListener('click', function (e) {
+        // 阻止本元素的其他事件以及向上阻止事件冒泡
+        e.stopImmediatePropagation();
+        console.log('Outer clicked1');
+        //Outer clicked2 就不会执行了
+    });
+
+    document.getElementById('outer').addEventListener('click', function () {
+        console.log('Outer clicked2');
+    });
+
+    document.getElementById('inner').addEventListener('click', function (e) {
+        //向上阻止事件冒泡
+        e.stopPropagation();
+        console.log('Inner clicked');
+    });
+
+    document.getElementById('btn').addEventListener('click', function () {
+        console.log('Button clicked');
+    });
+</script>
+
+</html>
