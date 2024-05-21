@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+            /* auto  container none 详细查看MDN*/
+            overscroll-behavior: none;
+            scroll-behavior: auto;
+        }
+
+        .grid-border {
+            overscroll-behavior: none;
+            scroll-behavior: auto;
+            height: 4000px;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.2) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.2) 2px, transparent 2px),
+                linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 100% 100px, 100px 100%, 100% 20px, 20px 100%;
+            background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+        }
+
+        .test-box {
+            z-index: 2;
+            position: absolute;
+            width: 100px;
+            height: 200px;
+            background-color: #d36363;
+        }
+
+        .test-box:nth-of-type(1) {
+            top: 200px;
+
+        }
+
+        .test-box:nth-of-type(2) {
+            top: 400px;
+            left: 300px;
+            background-color: #6de9b5;
+
+        }
+
+        .test-box:nth-of-type(3) {
+            top: 900px;
+            left: 600px;
+            background-color: #e9ce8a;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="grid-border">
+        <div class="test-box"></div>
+        <div class="test-box"></div>
+        <div class="test-box"></div>
+    </div>
+
+</body>
+
+</html>
