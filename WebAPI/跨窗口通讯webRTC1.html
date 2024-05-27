@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    const rtcConnect = new RTCPeerConnection();
+
+    function receiveChannelCallback(event) {
+        console.log('e:', event)
+        const receiveChannel = event.channel;
+        receiveChannel.onmessage = (e) => {
+            console.log('Received message: ', e.data)
+        }
+    }
+    rtcConnect.ondatachannel = receiveChannelCallback
+</script>
+
+</html>

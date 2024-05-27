@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <input type="file" id="fileId" />
+
+
+</body>
+<script>
+
+    function readFile(file) {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+            fileReader.onload = () => {
+                if (fileReader.readyState === 2) {
+                    const { type } = file;
+                    if (type.includes('image')) {
+                        const img = new Image();
+                        img.src = fileReader.result;
+                        img.onload = () => {
+                            resolve(img)
+                        }
+                    } else if (type.includes('video')) {
+                        const video = new Video();
+                        video.src = fileReader.result;
+                        video.addEventListener('loadedmetadata', () => {
+                            resolve(video)
+                        })
+                    }
+
+                    // 图片就是 onload
+                }
+            }
+            fileReader.onerror = () => {
+                reject();
+            }
+        })
+    }
+    function readBlob(blob) {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.readAsText(blob, 'utf-8');
+            fileReader.onloadend = () => {
+                const dataJson = JSON.parse(fileReader.result);
+                console.log(dataJson)
+                resolve(dataJson)
+            }
+            fileReader.onerror = () => {
+                reject('read blob data fail')
+                // throw Error('read blob data fail')
+            }
+        })
+
+    }
+
+    const fileInput = document.getElementById('fileId')
+    fileInput.addEventListener('change', async (e) => {
+        console.log(e.target)
+        const file = e.target.files[0]
+        console.log('%cobject: %o', 'color: red', file)
+        const ret = await readFile(file)
+        console.log(ret.width, ret.height)
+    })
+</script>
+
+</html>

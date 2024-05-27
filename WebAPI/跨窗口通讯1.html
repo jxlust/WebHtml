@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IndexedDB</title>
+</head>
+
+<body>
+    <div>
+        <button id="save">save</button>
+
+        <button id="get">get</button>
+    </div>
+
+    <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/IndexedDB_API/Using_IndexedDB">
+        MDN
+    </a>
+
+
+</body>
+<script>
+
+    const saveBtn = document.getElementById('save')
+    const getBtn = document.getElementById('get')
+    const dbName = "jxl_db";
+    let db;
+    // 我们的客户数据看起来像这样。
+    const customerData = [
+        { ssn: "444-44-4444", name: "Bill", age: 35, email: "bill@company.com" },
+        { ssn: "555-55-5555", name: "Donna", age: 32, email: "donna@home.org" },
+    ];
+
+    saveBtn.addEventListener('click', () => {
+        const request = indexedDB.open(dbName, 1);
+        request.onupgradeneeded = (event) => {
+            db = event.target.result;
+            console.log(db)
+            const objectStore = db.createObjectStore('customers', { keyPath: "ssn" });
+            objectStore.createIndex("name", "name", { unique: false });
+            // 使用邮箱建立索引，我们想确保客户的邮箱不会重复，所以我们使用 unique 索引。
+            objectStore.createIndex("email", "email", { unique: true });
+
+
+            // 使用事务的 oncomplete 事件确保在插入数据前对象存储已经创建完毕。
+            objectStore.transaction.oncomplete = (event) => {
+                // 将数据保存到新创建的对象存储中。
+                const customerObjectStore = db
+                    .transaction("customers", "readwrite")
+                    .objectStore("customers");
+                customerData.forEach((customer) => {
+                    customerObjectStore.add(customer);
+                });
+
+            }
+            request.onerror = (event) => {
+                console.error("为什么不允许我的 web 应用使用 IndexedDB！");
+            };
+
+        }
+    })
+
+    getBtn.addEventListener('click', () => {
+        const openRequest = indexedDB.open(dbName, 1);
+        openRequest.onsuccess = (event) => {
+            db = event.target.result;
+            console.log('db:', db)
+            const transaction = db.transaction(["customers"]);
+            const objectStore = transaction.objectStore("customers");
+            const request = objectStore.get("444-44-4444");
+            request.onerror = (event) => {
+                // 错误处理！
+            };
+            request.onsuccess = (event) => {
+                // 对 request.result 做些操作！
+                console.log(`SSN 444-44-4444 对应的名字是 ${request.result.name}`);
+            };
+        }
+
+    })
+</script>
+
+</html>

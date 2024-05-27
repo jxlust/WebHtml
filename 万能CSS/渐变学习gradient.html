@@ -330,6 +330,59 @@
 			background-image: repeating-linear-gradient(70deg, red var(--v1), red var(--v2), transparent var(--v2), transparent var(--v3));
 			mask-image: linear-gradient(90deg, #fff, transparent)
 		}
+
+		/* https://developer.mozilla.org/zh-CN/docs/Web/CSS/gradient/linear-gradient */
+
+		/* 默认情况下，颜色会从一个色标的颜色到后续的色标的颜色平滑过渡，颜色的中点是颜色过渡中的中间点。
+		你可以将这个中点移动到两个色标之间的任何位置，方法就是在两个颜色之间的中点所在的位置添加一个没有加标签的 % 颜色提示。
+		下面这个例子中，起始点到 10% 是纯红色，90% 到结束点是纯蓝色。10% 和 90% 之间是颜色从红色过渡到蓝色的地方，但是，过渡的中点是 30% 的位置，假如没有这个 30% 的颜色提示，就会是 50% 的位置。 */
+		.img-mask {
+			width: 400px;
+			height: 600px;
+			background-color: transparent;
+			background-image: linear-gradient(rgba(255, 255, 255, 0) 0%, 80%, red);
+			background-position: 0 0;
+			background-repeat: repeat;
+			background-size: 100%;
+			background-attachment: scroll;
+			background-origin: padding-box;
+			background-clip: border-box;
+		}
+
+		.mt {
+			margin-top: 10px;
+		}
+
+		.box-img {
+			width: 200px;
+			height: 200px;
+			background-image: linear-gradient(45deg, red 0 50%, blue 50% 100%)
+		}
+
+		.box-img2 {
+			width: 200px;
+			height: 200px;
+			background-image: linear-gradient(red 10%, 30%, blue 90%)
+		}
+
+		.box-img3 {
+			width: 200px;
+			height: 200px;
+			background-image: linear-gradient(red 40%, yellow 30%, blue 65%);
+		}
+
+		.box-img4 {
+			width: 200px;
+			height: 200px;
+			background: linear-gradient(to right,
+					red 20%,
+					orange 20% 40%,
+					yellow 40% 60%,
+					green 60% 80%,
+					blue 80%);
+		}
+
+		.box-img5 {}
 	</style>
 </head>
 
@@ -413,6 +466,15 @@
 	<div class="pinto-line">
 
 	</div>
+
+	<div class="img-mask">
+
+	</div>
+	<div class="box-img"></div>
+	<div class="box-img2 mt"></div>
+	<div class="box-img3 mt"></div>
+	<div class="box-img4 mt"></div>
+
 </body>
 
 <script>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    let sendChannel;
+    function handleSendChannelChange(event) {
+        console.log(1, 2, event)
+        console.log(111, sendChannel)
+
+        if (sendChannel) {
+            const state = sendChannel.readyState;
+            if (state === 'open') {
+
+            }
+            sendChannel.send('jxl hello....')
+
+        }
+
+    }
+
+    setTimeout(() => {
+        const rtcConnect = new RTCPeerConnection();
+        sendChannel = rtcConnect.createDataChannel('myChannel')
+        sendChannel.onopen = handleSendChannelChange
+
+    }, 1000);
+
+
+
+</script>
+
+</html>
