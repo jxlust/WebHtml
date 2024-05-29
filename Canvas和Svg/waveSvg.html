@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        }
+
+        .circle {
+            position: relative;
+            height: 400px;
+            width: 400px;
+        }
+
+        .circle .circle__svg,
+        .circle .circle__svg--two,
+        .circle .circle__svg--three {
+            height: 400px;
+            width: 400px;
+            position: absolute;
+        }
+
+        .circle .circle__svg path,
+        .circle .circle__svg--two path,
+        .circle .circle__svg--three path {
+            fill: #d3c3f7;
+        }
+
+        .circle .circle__svg {
+            animation: spinnAnim 4s infinite linear;
+        }
+
+        .circle .circle__svg--two {
+            height: 370px;
+            width: 370px;
+            animation: spinnAnim 5s infinite linear;
+        }
+
+        .circle .circle__svg--three {
+            height: 390px;
+            width: 390px;
+            animation: spinnAnim 3.5s infinite linear 0.2s;
+        }
+
+        @keyframes spinnAnim {
+            0% {
+                transform: rotate(0) scale(1);
+            }
+
+            50% {
+                transform: rotate(180deg) scale(1.5);
+            }
+
+            100% {
+                transform: rotate(360deg) scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="circle">
+        <svg class="circle__svg" viewBox="0 0 165 165" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M165 82.5C165 120.167 152.104 149.886 117.5 159.5C110.499 161.445 90.6208 164.5 83 164.5C69.2867 164.5 49.3596 162.951 38 157C20.1467 147.647 9.07682 134.591 1.99999 115.5C-1.2906 106.623 1.00001 92.5215 1.00001 82.5C1.00001 65.451 2.59514 44.1172 11.5 31C26.2492 9.27383 54.7617 0.5 83 0.5C102.972 0.5 126.277 13.633 140.5 25.5C158.528 40.5417 165 57.1848 165 82.5Z"
+                fill="#FF6714" />
+        </svg>
+        <svg class="circle__svg--two" viewBox="0 0 165 165" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M165 82.5C165 120.167 152.104 149.886 117.5 159.5C110.499 161.445 90.6208 164.5 83 164.5C69.2867 164.5 49.3596 162.951 38 157C20.1467 147.647 9.07682 134.591 1.99999 115.5C-1.2906 106.623 1.00001 92.5215 1.00001 82.5C1.00001 65.451 2.59514 44.1172 11.5 31C26.2492 9.27383 54.7617 0.5 83 0.5C102.972 0.5 126.277 13.633 140.5 25.5C158.528 40.5417 165 57.1848 165 82.5Z"
+                fill="#FF6714" />
+        </svg>
+        <svg class="circle__svg--three" viewBox="0 0 165 165" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M165 82.5C165 120.167 152.104 149.886 117.5 159.5C110.499 161.445 90.6208 164.5 83 164.5C69.2867 164.5 49.3596 162.951 38 157C20.1467 147.647 9.07682 134.591 1.99999 115.5C-1.2906 106.623 1.00001 92.5215 1.00001 82.5C1.00001 65.451 2.59514 44.1172 11.5 31C26.2492 9.27383 54.7617 0.5 83 0.5C102.972 0.5 126.277 13.633 140.5 25.5C158.528 40.5417 165 57.1848 165 82.5Z"
+                fill="#FF6714" />
+        </svg>
+
+    </div>
+
+
+</body>
+
+</html>

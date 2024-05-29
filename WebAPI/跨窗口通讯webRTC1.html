@@ -9,18 +9,53 @@
 
 <body>
 
+    <div>
+        <button id="btn">链接</button>
+    </div>
+
 </body>
 <script>
-    const rtcConnect = new RTCPeerConnection();
 
-    function receiveChannelCallback(event) {
-        console.log('e:', event)
-        const receiveChannel = event.channel;
-        receiveChannel.onmessage = (e) => {
-            console.log('Received message: ', e.data)
+    document.getElementById('btn').addEventListener('click', () => {
+
+        const rtcConnect = new RTCPeerConnection();
+
+        // 监听来自信令服务器的 offer，并设置为远端 description
+        const offerMessage = localStorage.getItem('rtc-offer');
+        const iceMessage = localStorage.getItem('rtc-ice');
+
+        const offerObj = JSON.parse(offerMessage);
+        const iceObj = JSON.parse(iceMessage);
+
+        rtcConnect.setRemoteDescription(new RTCSessionDescription(offerObj));
+        rtcConnect.addIceCandidate(new RTCIceCandidate(iceObj));
+
+        // 创建 answer，设置本地 description，并通过信令发送回窗口 1
+        rtcConnect.createAnswer().then(answer => {
+            rtcConnect.setLocalDescription(answer);
+            // 发送 answer 到信令服务器
+        }).catch(error => console.error(error));
+
+        // 处理来自窗口 1 的 data channel 的情况
+
+        function receiveChannelCallback(event) {
+            console.log('e:', event)
+            const receiveChannel = event.channel;
+            receiveChannel.onmessage = (e) => {
+                console.log('Received message: ', e.data)
+            }
+            receiveChannel.onopen = function (event) {
+                receiveChannel.send("Hi back!");
+            };
+
         }
-    }
-    rtcConnect.ondatachannel = receiveChannelCallback
+        rtcConnect.ondatachannel = receiveChannelCallback
+
+    })
+
+
+
+
 </script>
 
 </html>

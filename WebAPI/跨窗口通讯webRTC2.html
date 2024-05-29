@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
     <meta charset="UTF-8">
@@ -8,7 +8,9 @@
 </head>
 
 <body>
-
+    <div>
+        <button>发送</button>
+    </div>
 </body>
 <script>
     let sendChannel;
@@ -27,13 +29,39 @@
 
     }
 
-    setTimeout(() => {
-        const rtcConnect = new RTCPeerConnection();
-        sendChannel = rtcConnect.createDataChannel('myChannel')
-        sendChannel.onopen = handleSendChannelChange
+    const rtcConnect = new RTCPeerConnection();
+    // sendChannel = rtcConnect.createDataChannel('myChannel', { negotiated: true, id: 0 })
+    sendChannel = rtcConnect.createDataChannel('myChannel')
 
-    }, 1000);
+    sendChannel.onopen = handleSendChannelChange;
 
+    sendChannel.onmessage = function (event) {
+        console.log("received: " + event.data);
+    };
+
+    sendChannel.onclose = function () {
+        console.log("datachannel close");
+    };
+
+    // 创建 offer，设置本地 description，并通过信令发送给窗口2
+    rtcConnect.createOffer().then(offer => {
+        console.log('offer:', offer)
+        rtcConnect.setLocalDescription(offer);
+        // 发送 offer 到信令服务器
+        localStorage.setItem('rtc-offer', JSON.stringify(offer))
+    }).catch(error => console.error(error));
+
+
+    rtcConnect.addEventListener('icecandidate', function (event) {
+        var iceCandidate = event.candidate;
+        console.log(`iceCandidate is ${JSON.stringify(iceCandidate)}`);
+        if (iceCandidate) {
+            localStorage.setItem('rtc-ice', JSON.stringify(iceCandidate))
+            // 同步补充描述信息给目的端（通过SDP协商结果进行信息交换），描述信息包括协议、IP、端口、优先级等等信息
+            // 问题：为什么这些描述信息不可以放在信令中
+            // socket.emit('ice', iceCandidate);
+        }
+    });
 
 
 </script>

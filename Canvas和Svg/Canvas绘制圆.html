@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+</body>
+
+<script>
+
+    function drawingBackdrop() {
+        const canvas = document.createElement("canvas");
+        document.body.appendChild(canvas);
+        const style = canvas.style;
+        style.width = "100%";
+        style.position = "absolute";
+        style.zIndex = "-1";
+        style.top = "0";
+        style.left = "0";
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+
+
+        let x, y, width, height, degree;
+        let step = 0;
+
+        const initCanvas = () => {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+            const offset = 135;
+            x = width / 2;
+            y = height - offset;
+            degree = Math.max(width, height, 1000) / 14;
+            // y = Math.max(width, height, 1000) / 2;
+            drawCircles();
+        };
+
+        function drawCircle(radius, index) {
+            console.log(radius, ',r')
+            ctx.beginPath();
+            const color = Math.round(255 * (1 - radius / Math.max(width, height)));
+            // console.log('c:', color)
+            ctx.strokeStyle = "rgba(" + color + "," + color + "," + color + ",.1)";
+            // ctx.strokeStyle = 'red';
+            // const opacity = index / 8 * 0.1 + '';
+            // console.log('o:', opacity)
+            // ctx.strokeStyle = `rgba(10,10,10,${opacity})`;
+
+            ctx.arc(x, y, radius, 0, 2 * Math.PI);
+            ctx.stroke();
+            ctx.lineWidth = 2;
+        }
+
+        function drawCircles() {
+            ctx.clearRect(0, 0, width, height);
+            for (let i = 0; i < 8; i++) {
+                drawCircle(degree * i + (step % degree), i);
+            }
+            step = (step + 1) % Number.MAX_SAFE_INTEGER;
+        }
+
+        function drawingAnimation() {
+            const handler = () => {
+                drawCircles();
+                // requestAnimationFrame(handler)
+                drawingAnimation();
+            }
+
+            requestAnimationFrame(handler)
+        }
+
+        initCanvas();
+        drawingAnimation();
+
+    }
+
+
+    drawingBackdrop();
+
+</script>
+
+</html>
