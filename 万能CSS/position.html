@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postion 之 sticky</title>
+    <style>
+        .test-area {
+            display: grid;
+            grid-template-columns: repeat(3, 33.33%);
+            grid-auto-rows: minmax(150px, auto);
+            /* grid-template-rows: 150px 150px 150px; */
+            gap: 10px 20px;
+        }
+
+        .box {
+
+            background-color: #f8f8f8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <a
+        href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/position">https://developer.mozilla.org/zh-CN/docs/Web/CSS/position</a>
+    <div class="test-area">
+        <div class="box over-hidden">
+
+        </div>
+
+        <div class="box over-auto">
+
+
+        </div>
+        <div class="box over-auto">
+
+
+        </div>
+        <div class="box over-auto">
+
+
+        </div>
+        <div class="box over-auto">
+
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>

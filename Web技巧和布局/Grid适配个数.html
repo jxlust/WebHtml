@@ -1,85 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Grid适配个数</title>
-    <style>
-      .box-container {
-        /* width: 50%; */
-        margin-top: 50px;
-      }
-      .box {
-        display: grid;
-        grid-gap: 10px;
-        /* grid-template-columns: repeat(auto-fill, 100px); */
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        /* grid-template-rows: repeat(200px); */
-        /* grid-template-rows: repeat(auto-fill,200px); */
-      }
-      .box-item {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: skyblue;
-        height: 100px;
-        color: #fff;
-        font-size: 26px;
-      }
-      .box2 {
-        display: grid;
-        grid-template-columns: repeat(3, 100px);
-        grid-template-rows: repeat(3, 100px);
-        grid-gap: 10px;
-        grid-auto-rows: 50px;
-      }
-      .box2 .box-item2:nth-child(7) {
-        /* grid-row-start: 3;
-        grid-column-start: 2; */
-        grid-row-start: 2;
-        grid-row-end: 4;
-        grid-column-end: 3;
-        grid-column-start: 1;
-      }
-      .box-item2 {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: skyblue;
-        color: #fff;
-        font-size: 26px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="box-container">
-      <div class="box">
-        <div class="box-item">1</div>
-        <div class="box-item">2</div>
-        <div class="box-item">3</div>
-        <div class="box-item">4</div>
-        <div class="box-item">5</div>
-        <div class="box-item">6</div>
-        <div class="box-item">7</div>
-        <div class="box-item">8</div>
-        <div class="box-item">9</div>
-      </div>
-    </div>
 
-    <div class="box-container">
-      <div class="box2">
-        <div class="box-item2">1</div>
-        <div class="box-item2">2</div>
-        <div class="box-item2">3</div>
-        <div class="box-item2">4</div>
-        <div class="box-item2">5</div>
-        <div class="box-item2">6</div>
-        <div class="box-item2">7</div>
-        <div class="box-item2">8</div>
-        <div class="box-item2">9</div>
-        <div class="box-item2">10</div>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grid适配个数</title>
+  <style>
+    .box-container {
+      /* width: 50%; */
+      margin-top: 50px;
+    }
+
+    .grid {
+      display: grid;
+      grid-gap: 10px;
+    }
+
+    .box {
+      display: grid;
+      grid-gap: 10px;
+      /* grid-template-columns: repeat(auto-fill, 100px); */
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      /* grid-template-rows: repeat(200px); */
+      /* grid-template-rows: repeat(auto-fill,200px); */
+    }
+
+    .box-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: skyblue;
+      height: 100px;
+      color: #fff;
+      font-size: 26px;
+    }
+
+    .box2 {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-template-rows: repeat(3, 100px);
+      grid-gap: 10px;
+      grid-auto-rows: 50px;
+    }
+
+    .box2 .box-item2:nth-child(7) {
+      /* grid-row-start: 3;
+        grid-column-start: 2; */
+      grid-row-start: 2;
+      grid-row-end: 4;
+      grid-column-end: 3;
+      grid-column-start: 1;
+    }
+
+    .box-item2 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: skyblue;
+      color: #fff;
+      font-size: 26px;
+    }
+
+    .box3 {
+      /* auto-fill 正常设置minmax值计算 */
+      /* grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); */
+      /* auto-fit就会铺满剩余区域 */
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .box4 {
+      grid-template-columns: repeat(auto-fill, 300px);
+      /* grid-auto-columns: 300px; */
+      justify-content: center;
+    }
+
+    .box5 {
+
+      grid-auto-columns: 300px;
+      justify-content: center;
+    }
+
+    .box5>div:first-child {
+      grid-area: 1 / 1 / 2 / 2;
+      /* grid-row: 1/2;
+      grid-column: 1/2; */
+
+    }
+
+    .box5>div:nth-child(2) {
+      grid-area: 1/2/2/3;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box-container">
+    <div class="box">
+      <div class="box-item">1</div>
+      <div class="box-item">2</div>
+      <div class="box-item">3</div>
+      <div class="box-item">4</div>
+      <div class="box-item">5</div>
+      <div class="box-item">6</div>
+      <div class="box-item">7</div>
+      <div class="box-item">8</div>
+      <div class="box-item">9</div>
     </div>
-  </body>
+  </div>
+
+  <div class="box-container">
+    <div class="box2">
+      <div class="box-item2">1</div>
+      <div class="box-item2">2</div>
+      <div class="box-item2">3</div>
+      <div class="box-item2">4</div>
+      <div class="box-item2">5</div>
+      <div class="box-item2">6</div>
+      <div class="box-item2">7</div>
+      <div class="box-item2">8</div>
+      <div class="box-item2">9</div>
+      <div class="box-item2">10</div>
+    </div>
+  </div>
+
+
+  <div class="box-container">
+    <p>
+      Behaves the same as auto-fill, except that after placing the grid items any empty repeated tracks are collapsed.
+      行为与 auto-fill 相同，除了放置网格项目后，所有空的重复轨道都将消失。
+    </p>
+    <p>简单来说，如果元素数量不够放满一行，则 auto-fit 会将元素平铺，铺满一行。</p>
+    <p>
+      当栅格系统设置了 auto-fill ，其内元素不会 fill 铺满整个容器，而是会预留空的网格。
+      当栅格系统设置了 auto-fit，其内元素会铺满整个容器，不会留下任何空的网格。
+    </p>
+    <p>注：对于auto-fill: minmax(300px,1fr)的计算，其实很简单，就是先尽可能先按300px 铺满，计算至少多少列，然后多余部分按1fr分配给每一列，最终得到最终的列宽度</p>
+
+
+    <div class="box box3">
+      <div class="box-item">1</div>
+      <div class="box-item">2</div>
+      <!-- <div class="box-item">2</div>
+      <div class="box-item">3</div>
+      <div class="box-item">4</div>
+      <div class="box-item">5</div>
+      <div class="box-item">6</div>
+      <div class="box-item">7</div>
+      <div class="box-item">8</div>
+      <div class="box-item">9</div> -->
+    </div>
+  </div>
+
+  <div class="box-container">
+    <div class="box box4">
+      <div class="box-item">1</div>
+      <div class="box-item">2</div>
+      <div class="box-item">3</div>
+      <div class="box-item">4</div>
+      <div class="box-item">5</div>
+      <div class="box-item">5</div>
+      <div class="box-item">7</div>
+      <div class="box-item">8</div>
+      <div class="box-item">9</div>
+      <div class="box-item">10</div>
+    </div>
+  </div>
+
+  <div class="box-container">
+    <div class="grid box5">
+      <div class="box-item">1</div>
+      <div class="box-item">2</div>
+      <div class="box-item">3</div>
+      <div class="box-item">4</div>
+      <div class="box-item">5</div>
+      <div class="box-item">5</div>
+      <div class="box-item">7</div>
+      <div class="box-item">8</div>
+      <div class="box-item">9</div>
+      <div class="box-item">10</div>
+    </div>
+  </div>
+</body>
+
 </html>
