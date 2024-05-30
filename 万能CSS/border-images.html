@@ -76,91 +76,6 @@
 
         }
 
-        .reel {
-            position: sticky;
-            top: 10px;
-            height: 28px;
-            margin: 0px 15px 0 15px;
-            /* border-image: url('./images/reel.png') fill 42 36/14px 12px/0 12px; */
-            border-image-source: url('./images/reel.png');
-            border-image-slice: 42;
-            border-image-width: 14px;
-            border-image-outset: 0 12px;
-
-            overflow: hidden;
-            box-shadow: 0 5px 10px 5px rgba(0, 0, 0, .3), 0 10px 20px 10px rgba(0, 0, 0, .5);
-
-        }
-
-        .over-bg::before {
-            content: '';
-            position: sticky;
-            display: block;
-            height: 30px;
-            background-color: #3a9c87;
-            /* background-image: radial-gradient(circle at 19% 90%, rgba(190, 190, 190, 0.04) 0%, rgba(190, 190, 190, 0.04) 17%, transparent 17%, transparent 100%), radial-gradient(circle at 73% 2%, rgba(78, 78, 78, 0.04) 0%, rgba(78, 78, 78, 0.04) 94%, transparent 94%, transparent 100%), radial-gradient(circle at 45% 2%, rgba(18, 18, 18, 0.04) 0%, rgba(18, 18, 18, 0.04) 55%, transparent 55%, transparent 100%), radial-gradient(circle at 76% 60%, rgba(110, 110, 110, 0.04) 0%, rgba(110, 110, 110, 0.04) 34%, transparent 34%, transparent 100%), radial-gradient(circle at 68% 56%, rgba(246, 246, 246, 0.04) 0%, rgba(246, 246, 246, 0.04) 16%, transparent 16%, transparent 100%), radial-gradient(circle at 71% 42%, rgba(156, 156, 156, 0.04) 0%, rgba(156, 156, 156, 0.04) 47%, transparent 47%, transparent 100%), radial-gradient(circle at 46% 82%, rgba(247, 247, 247, 0.04) 0%, rgba(247, 247, 247, 0.04) 39%, transparent 39%, transparent 100%), radial-gradient(circle at 50% 47%, rgba(209, 209, 209, 0.04) 0%, rgba(209, 209, 209, 0.04) 45%, transparent 45%, transparent 100%), linear-gradient(90deg, #ef8791, #c15862); */
-            top: 0;
-        }
-
-        .over-bg2::before {
-            content: '';
-            position: sticky;
-            display: block;
-            height: 10px;
-            background-color: #3a9c87;
-            /* background-image: radial-gradient(circle at 19% 90%, rgba(190, 190, 190, 0.04) 0%, rgba(190, 190, 190, 0.04) 17%, transparent 17%, transparent 100%), radial-gradient(circle at 73% 2%, rgba(78, 78, 78, 0.04) 0%, rgba(78, 78, 78, 0.04) 94%, transparent 94%, transparent 100%), radial-gradient(circle at 45% 2%, rgba(18, 18, 18, 0.04) 0%, rgba(18, 18, 18, 0.04) 55%, transparent 55%, transparent 100%), radial-gradient(circle at 76% 60%, rgba(110, 110, 110, 0.04) 0%, rgba(110, 110, 110, 0.04) 34%, transparent 34%, transparent 100%), radial-gradient(circle at 68% 56%, rgba(246, 246, 246, 0.04) 0%, rgba(246, 246, 246, 0.04) 16%, transparent 16%, transparent 100%), radial-gradient(circle at 71% 42%, rgba(156, 156, 156, 0.04) 0%, rgba(156, 156, 156, 0.04) 47%, transparent 47%, transparent 100%), radial-gradient(circle at 46% 82%, rgba(247, 247, 247, 0.04) 0%, rgba(247, 247, 247, 0.04) 39%, transparent 39%, transparent 100%), radial-gradient(circle at 50% 47%, rgba(209, 209, 209, 0.04) 0%, rgba(209, 209, 209, 0.04) 45%, transparent 45%, transparent 100%), linear-gradient(90deg, #ef8791, #c15862); */
-            top: 0;
-        }
-
-        @keyframes scroll {
-            0% {
-                transform: translateY(-50%);
-            }
-
-            100% {
-                transform: translateY(-0%);
-            }
-        }
-
-        .reel-bg {
-            position: absolute;
-            left: 0;
-            width: 100%;
-            height: 368px;
-            background: url("./images/reel-bg.jpg") 50% 0/auto 50%;
-            animation: scroll 3s linear forwards infinite;
-            /* animation-timeline: scroll(root); */
-            /* 背景混合模式 multiply正片叠底*/
-            mix-blend-mode: multiply;
-
-        }
-
-        .reel-js-bg {
-            position: absolute;
-            left: 0;
-            width: 100%;
-            height: 368px;
-            background: url("./images/reel-bg.jpg") 50% 0/auto 50%;
-            /* animation-timeline: scroll(root); */
-            /* 背景混合模式 multiply正片叠底*/
-            mix-blend-mode: multiply;
-            transform: translateY(-50%);
-            will-change: transform;
-        }
-
-        .time-name {
-            scroll-timeline-name: --squareTimeline;
-
-        }
-
-        .time-name .reel-bg {
-            --s: 999999;
-            /* animation: scroll 1.3s linear forwards 2; */
-            animation: scroll 1s linear forwards calc(var(--s)/184/3.14);
-            animation-timeline: --squareTimeline;
-            animation-range: 0 calc(var(--s) * 1px);
-        }
-
 
         .border-img1 {
             position: relative;
@@ -173,34 +88,141 @@
             border-image-slice: fill;
         }
 
-        article {
-            background-color: #F5EBD4;
-            padding: 1em 0.5em;
-            border-left: 10px solid #405C53;
-            border-right: 10px solid #405C53;
+        .flex-col {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 20px;
+        }
+
+
+        .border-img2 {
+            position: relative;
+            height: 28px;
             margin: 0 15px;
+            /* source | slice | width | outset | repeat */
+            border-image-source: url('./images/border.png');
+            /* 尺寸，用于将源图像分割为多个区域。最多可以指定四个值  */
+            border-image-slice: 27 fill;
+            /* 边框图像的宽度。最多可以指定四个值 */
+            border-image-width: 10px 20px;
+            /* 偏移量 边框图像到元素外部边缘的距离。最多可以指定四个值 */
+            border-image-outset: 10px;
+            /* border-image-width: 20px 10px 5px 2px; */
+            /* border-image-outset: 10px 5px 2px 1px; */
+            /* 定义源图像边缘区域适配边框图像尺寸的方式。最多可以指定两个值 */
+            border-image-repeat: round;
+        }
+
+        .border-img3 {
+            position: relative;
+            height: 60px;
+            margin: 0 15px;
+            /* source | slice | width | outset | repeat */
+            border-image-source: url('./images/border.png');
+            /* 尺寸，用于将源图像分割为多个区域。最多可以指定四个值  */
+            border-image-slice: 27 fill;
+            /* 边框图像的宽度。最多可以指定四个值 */
+            border-image-width: 10px;
+            /* 偏移量 边框图像到元素外部边缘的距离。最多可以指定四个值 */
+            border-image-outset: 0;
+            /* 定义源图像边缘区域适配边框图像尺寸的方式。最多可以指定两个值 */
+            border-image-repeat: round;
+        }
+
+        .border-img4 {
+            position: relative;
+            height: 60px;
+            margin: 0 15px;
+            border: 5px solid;
+            /* source | slice | width | outset | repeat */
+            border-image-source: url('./images/border.png');
+            /* 尺寸，用于将源图像分割为多个区域。最多可以指定四个值  */
+            border-image-slice: 27 fill;
+            /* border-width 的2倍*/
+            border-image-width: 2;
+            /* 偏移量 边框图像到元素外部边缘的距离。最多可以指定四个值 */
+            border-image-outset: 0;
+            /* 定义源图像边缘区域适配边框图像尺寸的方式。最多可以指定两个值 */
+            border-image-repeat: round;
+        }
+
+        .border-img5 {
+            position: relative;
+            height: 60px;
+            margin: 0 15px;
+            /* source | slice | width | outset | repeat */
+            border-image-source: url('./images/border.png');
+            /* 尺寸，用于将源图像分割为多个区域。最多可以指定四个值  */
+            border-image-slice: 10 fill;
+            /* border-width 的2倍*/
+            border-image-width: 10px;
+            /* 偏移量 边框图像到元素外部边缘的距离。最多可以指定四个值 */
+            border-image-outset: 0;
+            /* 定义源图像边缘区域适配边框图像尺寸的方式。最多可以指定两个值 */
+            border-image-repeat: round;
+        }
+
+        .border-img6 {
+            position: relative;
+            height: 60px;
+            margin: 0 15px;
+            /* source | slice | width | outset | repeat */
+            border-image-source: url('./images/border.png');
+            /* 尺寸，用于将源图像分割为多个区域。最多可以指定四个值  */
+            border-image-slice: 10;
+            /* border-width 的2倍*/
+            border-image-width: 10px;
+            /* 偏移量 边框图像到元素外部边缘的距离。最多可以指定四个值 */
+            border-image-outset: 0;
+            /* 定义源图像边缘区域适配边框图像尺寸的方式。最多可以指定两个值 */
+            border-image-repeat: round;
+        }
+
+
+        .border-img7 {
+            position: relative;
+            height: 0;
+            margin: 0 15px;
+            margin-top: 50px;
+            /* source | slice | width | outset | repeat */
+            border-image-source: url('./images/border.png');
+            /* 尺寸，用于将源图像分割为多个区域。最多可以指定四个值  */
+            /* 整个图标裁剪了 */
+            border-image-slice: 81;
+            /* border-width 的2倍*/
+            border-image-width: 20px;
+            /* 偏移量 边框图像到元素外部边缘的距离。最多可以指定四个值 */
+            border-image-outset: 40px 0;
+            /* 定义源图像边缘区域适配边框图像尺寸的方式。最多可以指定两个值 */
+            border-image-repeat: round;
+        }
+
+        article {
+            background-color: transparent;
+            padding: 1em 0.5em;
+            margin: 0 5px;
+            word-break: break-all;
+            color: #2C402E;
         }
 
         p {
             margin: 0;
             padding: 0.2em 0;
-            color: #2C402E;
             line-height: 150%;
             text-indent: 2em;
         }
 
-        h1 {
-            text-align: center;
-            color: #F5EBD4;
+        img {
+            display: inline-block;
+            max-width: 100%;
         }
 
-        @supports (animation-timeline: scroll()) {
-            .reel-bg {
-                /* --s: 999999;
-                animation: scroll 1s linear forwards calc(var(--s)/184/3.14);
-                animation-timeline: scroll(root);
-                animation-range: 0 calc(var(--s) * 1px); */
-            }
+        h1 {
+            text-align: center;
+            color: #000;
         }
     </style>
 </head>
@@ -208,89 +230,52 @@
 <body>
     <div class="grid">
 
-        <div class="iphone green">
+        <div class="iphone orange">
             <div class="content over-bg">
                 <!-- 内容 -->
-                <div class="reel">
-                    <div class="reel-bg"></div>
-                </div>
                 <article>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
+                    <h1>border-image</h1>
+                    <a
+                        href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/border-image">https://developer.mozilla.org/zh-CN/docs/Web/CSS/border-image</a>
+                    <h1>border-image-source</h1>
+                    <p>属性使用图像来替换默认的边框样式，可以是图片和渐变</p>
+                    <p> 如果 border-image-source 的计算值为 none，或图像无法显示，则将显示 border-style。</p>
+                    <h1>border-image-slice </h1>
+                    <p>
+                        理解关键点，对应四个值，就是会用四条线把切割图片，用作border，四条线会把图片给切割成9个区域
+                    </p>
+                    <img src="./images/border-slice.png" />
+                    <h1>border-image-width </h1>
+                    <p>
+                        边框图像的宽度。最多可以指定四个值
+                    </p>
+                    <h1>border-image-outset </h1>
+                    <p>
+                        偏移量 边框图像到元素外部边缘的距离。最多可以指定四个值 </p>
+                    <h1>border-image-repeat </h1>
+                    <p>
+                        定义源图像边缘区域适配边框图像尺寸的方式。最多可以指定两个值 </p>
                 </article>
-            </div>
-        </div>
 
-        <div class="iphone green">
-            <div class="content over-bg2 time-name">
-                <!-- 内容 -->
-                <div class="reel">
-                    <div class="reel-bg"></div>
-                </div>
-                <article>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                </article>
-            </div>
-        </div>
-
-
-        <div class="iphone orange">
-            <div class="content over-bg" id="jsContent">
-                <!-- 内容 -->
-                <div class="reel">
-                    <div class="reel-js-bg"></div>
-                </div>
-                <article>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p style="height: 5000px;">回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                    <p>回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下，回到这里，先把整个布局完善一下</p>
-                </article>
             </div>
         </div>
 
         <div class="iphone gray">
-            <div class="content">
+            <div class="content flex-col">
                 <!-- 内容 -->
                 <div class="border-img1"></div>
-                <div class="border-img2"></div>
+                <div>
+                    <img src="./images/border.png" />
+                </div>
+                <div class="border-img2">
+                    22222
+                </div>
                 <div class="border-img3"></div>
+                <div class="border-img4"></div>
+                <div class="border-img5"></div>
+                <div class="border-img6"></div>
+                <div class="border-img7"></div>
+
             </div>
         </div>
 
@@ -302,24 +287,6 @@
 
 <script>
 
-    if (!CSS.supports('animation-timeline: scroll()')) {
-        console.log('不支持animation-timeline')
-
-    }
-    const bg = document.querySelector('.reel-js-bg')
-    const scrollDom = document.getElementById('jsContent')
-    scrollDom.addEventListener('scroll', function (e) {
-        console.log(1, e.target.scrollTop)
-        const top = e.target.scrollTop;
-        // 这里可以可以找出top 和 translateY 的关系，是一个线性关系
-        // 这里斜率设置为 1，建立x,y轴，关键点为(0,-184) (184,0),斜率为1，即可得出方程 y = -184 + x;
-        // 周期函数模184， % 184
-        // %y = (-184 + x % 184) / 368 * 100 
-        // 为方便 取50%区段做动画位移，确保滚动的背景图片一定会覆盖在滚轴上
-        const yPercent = (-184 + top % 184) / 368 * 100;
-        // bg.style.transform = `translateY(${top / Math.PI % 184 / 368 * 100 - 80}%)`
-        bg.style.transform = `translateY(${yPercent}%)`
-    })
 </script>
 
 </html>
