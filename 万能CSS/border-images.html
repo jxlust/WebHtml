@@ -69,6 +69,10 @@
             position: absolute;
             inset: 0;
             overflow: auto;
+            scrollbar-gutter: stable;
+            overscroll-behavior: none;
+            scroll-behavior: auto;
+            /* 设置滚动条始终在容器内部 */
 
         }
 
@@ -140,7 +144,8 @@
             /* animation-timeline: scroll(root); */
             /* 背景混合模式 multiply正片叠底*/
             mix-blend-mode: multiply;
-
+            transform: translateY(-50%);
+            will-change: transform;
         }
 
         .time-name {
@@ -306,7 +311,14 @@
     scrollDom.addEventListener('scroll', function (e) {
         console.log(1, e.target.scrollTop)
         const top = e.target.scrollTop;
-        bg.style.transform = `translateY(${top / Math.PI % 184 / 368 * 100 - 80}%)`
+        // 这里可以可以找出top 和 translateY 的关系，是一个线性关系
+        // 这里斜率设置为 1，建立x,y轴，关键点为(0,-184) (184,0),斜率为1，即可得出方程 y = -184 + x;
+        // 周期函数模184， % 184
+        // %y = (-184 + x % 184) / 368 * 100 
+        // 为方便 取50%区段做动画位移，确保滚动的背景图片一定会覆盖在滚轴上
+        const yPercent = (-184 + top % 184) / 368 * 100;
+        // bg.style.transform = `translateY(${top / Math.PI % 184 / 368 * 100 - 80}%)`
+        bg.style.transform = `translateY(${yPercent}%)`
     })
 </script>
 
