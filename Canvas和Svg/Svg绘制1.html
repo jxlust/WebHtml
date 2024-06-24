@@ -13,11 +13,20 @@
             margin: 0;
         }
 
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            grid-auto-rows: 500px;
+            gap: 50px;
+            padding: 0 50px 50px 50px;
+        }
+
         .shape-svg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
+            /* position: absolute; */
+            /* width: 100%;
+            height: 100%; */
             z-index: 1;
+            background-color: #f9f9f9;
         }
     </style>
 </head>
@@ -35,12 +44,22 @@
             href="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke">https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke</a>
     </p>
 
-    <svg class="shape-svg" id="svgId" xmlns="http://www.w3.org/2000/svg">
-        <path id="pathId" fill="none" stroke="red" stroke-width="10" d="M30 30 Q100 170,200,300"></path>
-        <path id="line2" fill="none" stroke="skyblue" stroke-width="10" d="M100 100 L200 300"></path>
-        <path id="line2" fill="none" stroke="skyblue" stroke-width="10" d="M100 100 L300 100"></path>
+    <div class="grid">
+        <svg x="0" y="0" viewBox="0 0 500 500" width="500" height="500" class="shape-svg" id="svgId"
+            xmlns="http://www.w3.org/2000/svg">
+            <path id="pathId" fill="none" stroke="red" stroke-width="10" d="M30 30 Q100 170,200,300"></path>
+            <path id="line2" fill="none" stroke="skyblue" stroke-width="10" d="M100 100 L200 300"></path>
+            <path id="line2" fill="none" stroke="skyblue" stroke-width="10" d="M100 100 L300 100"></path>
+            <path d="M 10 -5 0 0 10 5Z" fill="yellow" stroke="green" stroke-width="2"></path>
+        </svg>
 
-    </svg>
+        <svg viewBox="-10 -10 500 500" width="500" height="500" class="shape-svg">
+            <path d="M0 0 L10 -5 L7.5 0 L10 5Z" fill="#0069EB" stroke="#0069EB" stroke-width="1"></path>
+            <!-- <path d="M 10 -5 0 0 10 5Z" fill="yellow" stroke="green" stroke-width="2"></path> -->
+
+        </svg>
+    </div>
+
 
 </body>
 
