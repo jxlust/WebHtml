@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tab {
+            display: flex;
+            background-color: #EFC0B8;
+            padding: 10px 15px 0 15px;
+            font-size: 14px;
+        }
+
+        .tab-item {
+            position: relative;
+            background-color: transparent;
+            padding: 10px 15px;
+            border-radius: 12px 12px 0 0;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .tab-item::before,
+        .tab-item::after {
+            position: absolute;
+            bottom: 0;
+            content: '';
+            width: 20px;
+            height: 20px;
+            border-radius: 100%;
+            box-shadow: 0 0 0 40px transparent;
+            transition: .2s;
+        }
+
+        .tab-item::before {
+            left: -20px;
+            clip-path: inset(50% -10px 0 50%);
+        }
+
+        .tab-item::after {
+            right: -20px;
+            clip-path: inset(50% 50% 0 -10px);
+        }
+
+        .tab-item:hover {
+            background-color: #F2D0CA;
+            /* color: #000; */
+        }
+
+        .tab-item:hover::before,
+        .tab-item:hover::after {
+            box-shadow: 0 0 0 30px #F2D0CA;
+        }
+
+        .tab-item.active {
+            background-color: #F8EAE7;
+            z-index: 1;
+            /* color: #000; */
+        }
+
+        .tab-item.active::before,
+        .tab-item.active::after {
+            box-shadow: 0 0 0 30px #F8EAE7;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="https://www.jb51.net/css/784321.html"> https://www.jb51.net/css/784321.html </a>
+
+    <nav class="tab">
+        <a class="tab-item">Svelte API</a>
+        <a class="tab-item active">Svelte API</a>
+        <a class="tab-item">Svelte API</a>
+        <a class="tab-item">Svelte API</a>
+    </nav>
+
+</body>
+
+</html>

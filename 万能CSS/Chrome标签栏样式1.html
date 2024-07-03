@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tab {
+            display: flex;
+            background-color: #EFC0B8;
+            padding: 10px 15px 0 15px;
+            font-size: 14px;
+        }
+
+        .tab-item {
+            position: relative;
+            padding: 10px 35px;
+            cursor: pointer;
+            margin: 0 -15px;
+            color: transparent;
+            background-image:
+                radial-gradient(circle at 27px 12px, var(--color, rgba(33, 150, 243, .8)) 12px, transparent 0),
+                linear-gradient(var(--color, #4caf50), var(--color, #4caf50)),
+                linear-gradient(var(--color, #F44336), var(--color, #F44336)),
+                radial-gradient(circle at 15px 0, transparent 15px, var(--color, #9C27B0) 0);
+            background-size: calc(100% - 54px), calc(100% - 30px) calc(100% - 12px), calc(100% - 54px) 100%, 100% 15px;
+            background-position: left top, center bottom, center bottom, -15px bottom;
+            background-repeat: repeat-x, no-repeat, no-repeat, repeat-x;
+        }
+
+        .tab.fix .tab-item {
+            --color: transparent;
+            color: #000;
+        }
+
+        .tab.fix .tab-item:hover {
+            --color: #F2D0CA;
+        }
+
+        .tab.fix .tab-item.active {
+            --color: #F8EAE7;
+            z-index: 1;
+            /* color: #000; */
+        }
+    </style>
+</head>
+
+<body>
+    <a href="https://www.jb51.net/css/784321.html"> https://www.jb51.net/css/784321.html </a>
+
+    <nav class="tab">
+        <a class="tab-item">Svelte API</a>
+    </nav>
+    <hr>
+    <nav class="tab fix">
+        <a class="tab-item">Svelte API</a>
+        <a class="tab-item active">Svelte API</a>
+        <a class="tab-item">Svelte API</a>
+        <a class="tab-item">Svelte API</a>
+    </nav>
+
+</body>
+
+</html>
