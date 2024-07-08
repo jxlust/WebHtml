@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --dim: 9em;
+            --lum: 65%;
+        }
+
+        @function stop-list($precision: 5) {
+            $list: (
+            );
+        $unit: 360 / $precision;
+
+        @for $i from 0 to $precision {
+            $a1: $i * $unit;
+            $list: $list, hsl($a1, 100%, 65%) $a1 * 1deg,
+                hsl(($i + 1) * $unit, 100%, 65%) 0deg;
+        }
+
+        @return $list;
+        }
+
+        @property --a0 {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        body {
+            display: grid;
+            place-content: center;
+            margin: 0;
+            min-height: 100vh;
+            background: url(./images/bg-1.jpeg) 50% / cover #333;
+            background-blend-mode: overlay;
+            color: #fff;
+        }
+
+        h3 {
+            --b: 4px;
+            display: grid;
+            place-content: center;
+            position: relative;
+            border: solid var(--b) transparent;
+            padding: 1.5em;
+            width: var(--dim);
+            border-radius: 1em;
+            font: 900 2em/ 1.5 segoe script, cursive;
+            text-align: center;
+
+            &:before {
+                --o: calc(-1 * var(--b));
+                position: absolute;
+                inset: var(--o);
+                border: inherit;
+                padding: var(--b);
+                border-radius: inherit;
+                /* background: conic-gradient(stop-list()) border-box;
+                background: linear-gradient(rgba(#000, 0.5), rgba(#fff, 0.5)) padding-box,
+                    conic-gradient(from var(--a0), stop-list()) border-box; */
+
+                background: conic-gradient(#ff4d4d 0deg, #dbff4d 0deg, #dbff4d 72deg, #4dff94 0deg, #4dff94 144deg, #4d94ff 0deg, #4d94ff 216deg, #db4dff 0deg, #db4dff 288deg, #ff4d4d 0deg) border-box;
+                background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.5)) padding-box, conic-gradient(from var(--a0), #ff4d4d 0deg, #dbff4d 0deg, #dbff4d 72deg, #4dff94 0deg, #4dff94 144deg, #4d94ff 0deg, #4d94ff 216deg, #db4dff 0deg, #db4dff 288deg, #ff4d4d 0deg) border-box;
+
+                --full: linear-gradient(red, red);
+
+                mask: var(--full) border-box, var(--full) content-box;
+                mask-composite: exclude;
+                animation: a0 4s linear infinite;
+                content: "";
+            }
+        }
+
+        @keyframes a0 {
+            to {
+                --a0: 1turn;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h3>Hello, I have a rotating border!</h3>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>css动态渐变</title>
+    <style>
+        @property --range {
+            initial-value: 0deg;
+            syntax: '<angle>';
+            inherits: false;
+        }
+
+        body {
+            background-color: black;
+        }
+
+        .container {
+            position: relative;
+            background-color: black;
+            border-radius: 8px;
+            width: 200px;
+            height: 200px;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: -10px;
+            width: calc(100% + 20px);
+            /* calc方法可以用来动态计算长度 */
+            height: calc(100% + 20px);
+            border-radius: 10px;
+            z-index: -1;
+            background: repeating-conic-gradient(from var(--range), #0ff, #f0f, #0ff, #ff0, #0f0);
+            animation: rotating 4s linear infinite;
+        }
+
+        @keyframes rotating {
+            0% {
+                --range: 0deg;
+            }
+
+            100% {
+                --range: 360deg;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="container">
+            <span></span>
+        </div>
+    </div>
+</body>
+
+</html>

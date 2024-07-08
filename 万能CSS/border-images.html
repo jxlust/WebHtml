@@ -224,6 +224,35 @@
             text-align: center;
             color: #000;
         }
+
+        .border-card {
+            position: relative;
+            height: 100%;
+            margin: 0 15px;
+            /* source | slice | width | outset | repeat */
+            border-image-source: url('./images/text_card.png');
+            /* 尺寸，用于将源图像分割为多个区域。最多可以指定四个值  */
+            border-image-slice: 40 360 400 284 fill;
+            /* border-width 的2倍*/
+            border-image-width: 0px;
+            /* 偏移量 边框图像到元素外部边缘的距离。最多可以指定四个值 */
+            border-image-outset: 0Px 15Px 0 15Px;
+            /* 定义源图像边缘区域适配边框图像尺寸的方式。最多可以指定两个值 */
+            border-image-repeat: round;
+        }
+
+        .border-card-bg {
+            background-image: url('./images/text_card.png');
+            /* 替换为您的图片路径 */
+            background-size: 100% auto;
+            background-repeat: no-repeat;
+            background-position: center center;
+            /* 根据需要调整位置 */
+            height: 200px;
+            /* 根据需要设置容器的高度 */
+            width: 100%;
+            /* 根据需要设置容器的宽度 */
+        }
     </style>
 </head>
 
@@ -277,6 +306,26 @@
                 <div class="border-img7"></div>
 
             </div>
+        </div>
+
+        <div class="iphone gray">
+            <div class="content flex-col">
+                <div class="border-card">
+
+                    <p style="height: 1000px;">x</p>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="iphone gray">
+            <div class="content flex-col">
+                <div class="border-card-bg">
+                    <p style="height: 10000px;">3</p>
+                </div>
+            </div>
+
         </div>
 
     </div>
