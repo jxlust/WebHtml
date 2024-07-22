@@ -214,6 +214,12 @@ Javascript 中可以通过以下两种方式写正则:
    function strToCamel(str) {
      return str.replace(/(^|_)(\w)/g, (m, $1, $2) => $2.toUpperCase());
    }
+   // 小驼峰命名
+   const camelizeRE = /-(\w)/g;
+   const camelize = (str) => {
+     return str.replace(camelizeRE, (_, c) => (c ? c.toUpperCase() : ""));
+   };
+   // 'sfa-jj-xx-ll'.match(camelizeRE) // 返回 ['-j', '-x', '-l']
    ```
 
 3. 实现一个模板引擎，能够满足如下场景使用 let template = '我是{{name}}，年龄{{age}}，性别{{sex}}'; let data = { name: '姓名', age: 18 } render(template, data); // 我是姓名，年龄 18，性别 undefined
