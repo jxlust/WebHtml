@@ -61,6 +61,11 @@ function startTaskFunc(sourceDir, targetDir) {
             console.error('读取目录失败：', error)
         }
         const items = readDirs.sort((v1, v2) => compareFileNameByCode(v1, v2));
+
+        if (readDirs.length > 0 && !curNode.items) {
+            curNode.items = []
+        }
+
         let index = 0;
         for (let item of items) {
             const curPath = nodePath.join(curDir, item);
@@ -74,11 +79,6 @@ function startTaskFunc(sourceDir, targetDir) {
                 text: item.replace(/\.md$/, ''),
                 level: newLevel
             }
-
-            if (!curNode.items) {
-                curNode.items = []
-            }
-
 
             if (isDir) {
                 // 文件夹
