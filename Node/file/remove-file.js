@@ -41,12 +41,12 @@ function startTaskFunc(sourceDir, targetDir) {
     // 重新创建文件夹
     fs.mkdirSync(targetDir);
 
-    const newRoot = {
-        items: []
-    }
     const baseName = nodePath.basename(sourceDir);
-    newRoot.text = baseName.replace(/\.md$/, '');
-    // newRoot.level = '0';
+    const newRoot = {
+        items: [],
+        text: baseName.replace(/\.md$/, ''),
+        level: '0'
+    }
 
     const stack = [[sourceDir, newRoot, '0']];
     while (stack.length) {
@@ -55,53 +55,58 @@ function startTaskFunc(sourceDir, targetDir) {
         let readDirs = [];
         try {
             // 这里可以过滤一些无用文件
-            readDirs = fs.readdirSync(curDir).filter(item => item !== '.DS_Store');
+            // .filter(item => item !== '.DS_Store');
+            readDirs = fs.readdirSync(curDir)
         } catch (error) {
             console.error('读取目录失败：', error)
         }
         const items = readDirs.sort((v1, v2) => compareFileNameByCode(v1, v2));
-        for (let index = 0, len = items.length; index < len; index++) {
-            const newLevel = `${curlevel}.${index + 1}`;
-            const item = items[index];
+        let index = 0;
+        for (let item of items) {
             const curPath = nodePath.join(curDir, item);
             const isDir = fs.lstatSync(curPath).isDirectory();
 
+            const newLevel = `${curlevel}.${index + 1}`;
+            // 文件夹
+            const paths = newLevel.split('.').slice(1);
+
+            const newNode = {
+                text: item.replace(/\.md$/, ''),
+                level: newLevel
+            }
+
+            if (!curNode.items) {
+                curNode.items = []
+            }
+
+
             if (isDir) {
                 // 文件夹
-                const paths = newLevel.split('.').slice(1);
                 // 目标目录需要创建文件夹目录
                 const targetPath = nodePath.join(targetDir, ...paths);
                 fs.mkdirSync(targetPath);
-                const newNode = {
-                    text: item.replace(/\.md$/, ''),
-                    // level: newLevel
-                }
-                if (!curNode.items) {
-                    curNode.items = []
-                }
-                curNode.items.push(newNode)
 
+                curNode.items.push(newNode)
                 stack.push([curPath, newNode, newLevel])
 
+                index++;
             } else if (mdRegex.test(item)) {
-                // 是.md结尾的文件 
-                const paths = newLevel.split('.').slice(1);
+                // 文件 .md
                 const linkStr = paths.join('/');
+                newNode.link = linkStr;
+                curNode.items.push(newNode)
 
                 let top = paths.pop();
                 top = top + '.md';
                 const targetPath = nodePath.join(targetDir, ...paths, top);
-                fs.copyFileSync(curPath, targetPath);
+                // fs.copyFileSync(curPath, targetPath);
+                fs.copyFile(curPath, targetPath, (err) => {
+                    if (err) {
+                        console.error('复制文件失败：', err);
+                    }
+                });
 
-                if (!curNode.items) {
-                    curNode.items = []
-                }
-                curNode.items.push({
-                    text: item.replace(/\.md$/, ''),
-                    // level: newLevel,
-                    link: linkStr
-                })
-
+                index++;
             }
         }
     }
