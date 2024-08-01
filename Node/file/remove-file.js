@@ -82,13 +82,13 @@ function startTaskFunc(sourceDir, targetDir) {
 
             if (isDir) {
                 // 文件夹
-                // 目标目录需要创建文件夹目录
-                const targetPath = nodePath.join(targetDir, ...paths);
-                fs.mkdirSync(targetPath);
-
                 curNode.items.push(newNode)
                 stack.push([curPath, newNode, newLevel])
 
+                // 目标目录需要创建文件夹目录
+                const targetPath = nodePath.join(targetDir, ...paths);
+                fs.mkdirSync(targetPath);
+                
                 index++;
             } else if (mdRegex.test(item)) {
                 // 文件 .md
