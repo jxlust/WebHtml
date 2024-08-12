@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {}
+
+        .h-box {
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .h-box>div {
+            margin-left: -8px;
+        }
+
+        .h-arrow1 {
+            width: 300px;
+            height: 30px;
+            border-radius: 4px 0 0 4px;
+            background:
+                linear-gradient(-135deg, transparent 0 10.6px, red 10.6px 100%) 100% 0%,
+                linear-gradient(-45deg, transparent 0 10.6px, red 10.6px 100%) 100% 100%;
+            background-repeat: no-repeat;
+            /* background-size: 50% 50%; */
+            background-size: 100% 51%;
+        }
+
+        .h-arrow2 {
+            width: 300px;
+            height: 30px;
+            background: linear-gradient(45deg, transparent 0 10.6px, red 10.6px 100%) 0% 0%,
+                linear-gradient(-135deg, transparent 0 10.6px, red 10.6px 100%) 100% 0%,
+                linear-gradient(135deg, transparent 0 10.6px, red 10.6px 100%) 0% 100%,
+                linear-gradient(-45deg, transparent 0 10.6px, red 10.6px 100%) 100% 100%;
+            background-repeat: no-repeat;
+            /* background-size: 50% 50%; */
+            background-size: 51% 51%;
+        }
+
+        .h-arrow3 {
+            width: 300px;
+            height: 30px;
+            border-radius: 0px 4px 4px 0px;
+            background: linear-gradient(45deg, transparent 0 10.6px, red 10.6px 100%) 0% 0%,
+                linear-gradient(135deg, transparent 0 10.6px, red 10.6px 100%) 0% 100%;
+            background-repeat: no-repeat;
+            /* background-size: 50% 50%; */
+            background-size: 100% 51%;
+        }
+
+        .v-box {
+            margin-top: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .v-box>div {
+            margin-top: -10px;
+        }
+
+        .v-arrow {
+            height: 200px;
+            width: 30px;
+            background: linear-gradient(135deg, transparent 0 10.6px, red 10.6px 100%) 100% 0%,
+                linear-gradient(-135deg, transparent 0 10.6px, red 10.6px 100%) 0% 0%,
+                linear-gradient(45deg, transparent 0 10.6px, red 10.6px 100%) 0% 100%,
+                linear-gradient(-45deg, transparent 0 10.6px, red 10.6px 100%) 100% 100%;
+            background-repeat: no-repeat;
+            /* background-size: 50% 50%; */
+            background-size: 51% 51%;
+        }
+
+        .v-arrow:first-child {
+            border-radius: 4px 4px 0 0;
+            background:
+                linear-gradient(45deg, transparent 0 10.6px, red 10.6px 100%) 0% 100%,
+                linear-gradient(-45deg, transparent 0 10.6px, red 10.6px 100%) 100% 100%;
+            background-repeat: no-repeat;
+            /* background-size: 50% 50%; */
+            background-size: 51% 100%;
+        }
+
+        .v-arrow:last-child {
+            border-radius: 0 0 4px 4px;
+            background: linear-gradient(135deg, transparent 0 10.6px, red 10.6px 100%) 100% 0%,
+                linear-gradient(-135deg, transparent 0 10.6px, red 10.6px 100%) 0% 0%;
+            background-repeat: no-repeat;
+            background-size: 51% 100%;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="h-box">
+        <div class="h-arrow1"></div>
+        <div class="h-arrow2"></div>
+        <div class="h-arrow3"></div>
+    </div>
+
+    <div class="v-box">
+        <div class="v-arrow"></div>
+        <div class="v-arrow"></div>
+        <div class="v-arrow"></div>
+    </div>
+
+
+
+</body>
+
+</html>

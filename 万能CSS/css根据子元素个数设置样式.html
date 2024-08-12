@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            grid-auto-rows: 100px;
+        }
+
+        .box:has(> div:nth-child(1)) {
+            color: aqua;
+            background-color: aliceblue;
+        }
+
+        .box:has(> div:nth-child(2)) {
+            color: red;
+            background-color: antiquewhite;
+        }
+
+        .box:has(> div:nth-child(3)) {
+            color: yellow;
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+        <div>1</div>
+    </div>
+
+    <div class="box">
+        <div>1</div>
+        <div>2</div>
+    </div>
+
+    <div class="box">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+    </div>
+</body>
+
+</html>
