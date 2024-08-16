@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .table-render {
+            position: relative;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-size: 12px;
+        }
+
+        .main {
+            position: relative;
+            background-color: #f8f8f8;
+        }
+
+
+        .table-header {
+            height: 50px;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            background-color: antiquewhite;
+        }
+
+        .header {
+            height: 100%;
+            display: flex;
+            align-items: stretch;
+            justify-content: space-between;
+        }
+
+        .table-body {
+            height: 300px;
+            min-height: 100px;
+            overflow-x: auto;
+            overflow-y: auto;
+            scroll-behavior: auto;
+        }
+
+        .data-body {}
+
+        .data-item {
+            display: flex;
+            align-items: stretch;
+            height: 80px;
+            border-bottom: 1px solid rgb(47, 3, 226);
+        }
+
+        .data-item:nth-child(odd) {
+            background-color: aquamarine;
+        }
+
+        .data-item:nth-child(even) {
+            background-color: rgb(136, 211, 211);
+        }
+
+        .th-col,
+        .td-col {
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .th-col:nth-child(1),
+        .td-col:nth-child(1) {
+            width: 60px;
+            border-right: 1px dashed red;
+        }
+
+        .th-col:nth-child(2),
+        .td-col:nth-child(2) {
+            width: 940px;
+        }
+
+        .table-fixed {}
+
+        .fixed-left {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 5;
+            overflow: hidden;
+            background-color: inherit;
+            transition: box-shadow .3s;
+        }
+
+        .fixed-left.is--shadow {
+            box-shadow: 8px 0 10px -5px rgba(0, 0, 0, 0.12);
+        }
+
+        .fixed-header-block {
+            position: absolute;
+            left: 0;
+            top: 0;
+            overflow: hidden;
+            background-color: antiquewhite;
+        }
+
+        .fixed-header {
+            height: 50px;
+            display: flex;
+            align-items: stretch;
+        }
+
+        .fixed-body-block {
+            position: absolute;
+            left: 0;
+            width: calc(100% + 40px);
+            overflow: hidden;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 8px;
+            background: red;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: #f8f8f8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="table-render">
+        <div class="main">
+            <div class="table-header" id="tbHeader">
+                <div class="header" style="width: 1000px">
+                    <div class="th-col">头部1</div>
+                    <div class="th-col">头部2</div>
+                </div>
+            </div>
+            <div class="table-body" id="tableBody">
+                <div class="data-body" id="dataBody" style="width:1000px;">
+
+                </div>
+            </div>
+        </div>
+        <div class="tabel-fixed">
+            <div class="fixed-left" id="fixedLeft" style="width: 60px;height: 350px;">
+                <div class="fixed-header-block">
+                    <div class="fixed-header" style="width: 1000px">
+                        <div class="th-col">头部1</div>
+                        <div class="th-col">头部2</div>
+                    </div>
+                </div>
+                <div class="fixed-body-block" id="fixedBody" style="top: 50px;">
+                    <div class="fixed-data" id="fixedData" style="width: 60px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+<script>
+    const tbHeader = document.getElementById('tbHeader');
+    const fixedData = document.getElementById('fixedData');
+    const fixedLeft = document.getElementById('fixedLeft');
+
+    const fixedBody = document.getElementById('fixedBody');
+
+    function createItemElement(index) {
+        const item = document.createElement('div');
+        item.className = 'data-item';
+        const col1 = document.createElement('div');
+        col1.className = 'td-col';
+        col1.innerText = `${index}.1`;
+        item.appendChild(col1);
+        const col2 = document.createElement('div');
+        col2.className = 'td-col';
+        col2.innerText = `${index}.2`;
+        item.appendChild(col2);
+        return item;
+    }
+    function createFixedItemElement(index) {
+        const item = document.createElement('div');
+        item.className = 'data-item';
+        const col1 = document.createElement('div');
+        col1.className = 'td-col';
+        col1.innerText = `${index}.1`;
+        item.appendChild(col1);
+        return item;
+    }
+
+    const dataBody = document.getElementById('dataBody');
+    for (let i = 0; i < 30; i++) {
+        dataBody.appendChild(createItemElement(i + 1))
+
+        fixedData.appendChild(createFixedItemElement(i + 1));
+    }
+
+
+    const tableBody = document.getElementById('tableBody');
+    const bodyH = tableBody.clientHeight;
+    fixedBody.style.height = bodyH + 'px';
+
+    tableBody.addEventListener('scroll', function (e) {
+        console.log(e.target.scrollTop, e.target.scrollLeft)
+        const scrollTop = e.target.scrollTop;
+        const scrollLeft = e.target.scrollLeft;
+
+        fixedBody.scrollTop = scrollTop;
+        tbHeader.scrollLeft = scrollLeft;
+
+        if (scrollLeft > 0) {
+            fixedLeft.classList.add('is--shadow');
+        } else {
+            fixedLeft.classList.remove('is--shadow');
+        }
+
+
+    })
+
+
+</script>
+
+</html>

@@ -87,12 +87,23 @@
             background-color: skyblue;
             clip-path: path('M16,19.99999L16,631C16,635.418,19.58172,639,24,639L351,639C355.418,639,359,635.418,359,631L359,39.1096C359,34.6913,355.418,31.1096,351,31.1096L183.39,31.1096C181.522,31.1096,179.714,30.4562,178.277,29.2628L159.723,13.84672C158.286,12.65331,156.478,12,154.61,12L24,12C19.58172,12,16,15.58172,16,19.99999Z');
         }
+
+        .clip-arrow {
+            width: 300px;
+            height: 100px;
+            background: linear-gradient(180deg, skyblue 50%, orange 50%);
+            /* 50/(Math.sin(0.25*Math.PI)) ≈ 70.71 */
+            clip-path: polygon(0 0, calc(100% - 70.71px) 0, 100% 50%, calc(100% - 70.71px) 100%, 0 100%);
+        }
     </style>
 </head>
 
 <body>
     <div class="content">
         <div class="box box1"></div>
+
+        <div class="box clip-arrow"> </div>
+
 
         <div class="box box2">
             <img class="img" src="../Web技巧和布局/images/fruit3.jpeg" alt="">
@@ -105,7 +116,12 @@
         <div class="box box5"></div>
 
         <div class="box-bg"></div>
+
     </div>
+
+
+
+
 
 </body>
 
