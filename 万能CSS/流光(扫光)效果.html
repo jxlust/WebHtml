@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1 {
+            font-size: 60px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: normal;
+            color: #9747ff;
+        }
+
+        .bg1 {
+            width: 200px;
+            height: 100px;
+            color: rgb(227, 59, 59);
+            background-image: linear-gradient(45deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 60%);
+            background-repeat: no-repeat;
+            background-color: currentColor;
+            background-size: 50%;
+            background-position: 0%;
+            /* 背景的百分比偏移量是相对于容器的，当背景尺寸等于容器尺寸，百分比偏移是失效的 可以查看MDN background-position */
+            /* https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-position */
+        }
+
+        .shark-text {
+            -webkit-text-fill-color: transparent;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 60%) -100%/50% no-repeat currentColor;
+            -webkit-background-clip: text;
+            animation: shark-pos 2s linear infinite;
+        }
+
+        @keyframes shark-pos {
+            from {
+                background-position: -100%;
+            }
+
+            to {
+                background-position: 200%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg1"></div>
+    <h1 class="shark-text">我是文字扫光</h1>
+
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: grid;
+            place-items: center;
+            height: 100vh;
+            width: 100vw;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            background-color: skyblue;
+        }
+
+        @keyframes shark-transform {
+            to {
+                transform: translateX(100%)
+            }
+        }
+
+
+        .img-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .img1 {
+            width: 500px;
+            -webkit-mask: url('./images/img1.png') 0 0 / 100%;
+            mask: url('./images/img1.png') 0 0 / 100%;
+            --animation-tf: shark-transform 2s infinite ease-in-out;
+        }
+
+        .img-card img {
+            width: 100%;
+            display: block;
+        }
+
+        .img2 {
+            width: 150px;
+            -webkit-mask: url('./images/img2.png') 0 0 / 100%;
+            mask: url('./images/img2.png') 0 0 / 100%;
+            --animation-tf: shark-transform 2s infinite ease-in-out;
+        }
+
+        .shark-wrap::after {
+            content: '';
+            position: absolute;
+            inset: -20%;
+            background-image: linear-gradient(45deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 60%);
+            transform: translateX(-100%);
+            will-change: transform;
+            animation: var(--animation-tf);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="shark-wrap img-card img1">
+        <img src="./images/img1.png" />
+    </div>
+
+    <div class="shark-wrap img-card img2">
+        <img src="./images/img2.png" />
+    </div>
+
+
+
+
+
+</body>
+
+</html>
