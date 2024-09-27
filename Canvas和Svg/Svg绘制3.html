@@ -45,11 +45,53 @@
     <p>二阶贝塞尔Q q T t, 三阶贝塞尔曲线C c S s</p>
 
 
+
+    <svg version="1.1" class="svg" height="400px">
+        <defs>
+            <linearGradient x1="0%" y1="100%" x2="100%" y2="100%" id="linearGradient-1" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#2090F8" offset="0%"></stop>
+                <stop stop-color="#01FCE4" offset="41.7610013%"></stop>
+                <stop stop-color="#0BFF8C" offset="78.6870217%"></stop>
+                <stop stop-color="#51FF00" offset="100%"></stop>
+            </linearGradient>
+        </defs>
+        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <path d="M10 80 Q 50 10, 90 80 T 170 80" id="Path-1" stroke="url(#linearGradient-1)"
+                stroke-dasharray="10 10" stroke-width="2" class="path"></path>
+
+            <path d="M10 40 l200 0" stroke-linecap="round" stroke-width="6" fill="none" stroke="url(#linearGradient-1)">
+            </path>
+
+        </g>
+    </svg>
+
+
+
     <svg class="shape-svg" id="svgId" xmlns="http://www.w3.org/2000/svg" stroke-width="2">
+        <defs>
+            <!-- 从上中->下中 -->
+            <linearGradient x1=".5" y1="0" x2=".5" y2="1" id="lgcolor1">
+                <stop offset="0" stop-color="red" stop-opacity="1"></stop>
+                <stop offset="1" stop-color="green" stop-opacity="0"></stop>
+            </linearGradient>
+
+            <!-- 从左中->右中 -->
+            <linearGradient x1="0%" y1="50%" x2="50%" y2="50%" id="lgcolor2" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="red" stop-opacity="1"></stop>
+                <stop offset="90%" stop-color="green" stop-opacity="0.2"></stop>
+                <stop offset="100%" stop-color="green" stop-opacity="0"></stop>
+            </linearGradient>
+        </defs>
         <g fill="none" stroke-width="2" stroke="red">
             <path d="M30 30 H100"></path>
             <!-- 小写都是相对量 即x0+x -->
             <path d="M30 50 h100"></path>
+
+            <path d="M150 40 h200" stroke-linecap="round" stroke-width="10" fill="none" stroke="url(#lgcolor2)">
+            </path>
+            <path d="M300,100,m-50,0, a50 50 0 1 1 100,0 a50 50 0 1 1 -100,0" fill="none" stroke-width="10"
+                stroke="url(#lgcolor1)">
+            </path>
         </g>
 
         <!-- 椭圆的绘制 -->

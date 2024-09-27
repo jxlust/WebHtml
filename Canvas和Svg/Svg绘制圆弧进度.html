@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .arc-block {
+            width: 148px;
+            height: 148px;
+        }
+
+        .test-block {
+            margin: 60px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 渐变可能会失效，需要加入gradientUnits="userSpaceOnUse" -->
+    <div class="test-block">
+
+        <svg viewBox="0 0 100 100" width="100" height="100">
+            <defs>
+                <linearGradient x1=".5" y1="0" x2=".5" y2="1" id="arc-ring">
+                    <stop offset="0" stop-color="#e8f0ff" stop-opacity="1"></stop>
+                    <stop offset="1" stop-color="#f0f0f5" stop-opacity="0"></stop>
+                </linearGradient>
+            </defs>
+            <path d="M50 50 m0 45 a45 45 0 1 1 0 -90 a45 45 0 1 1 0 90" stroke-width="10" fill="none" stroke="red">
+            </path>
+        </svg>
+    </div>
+
+    <div class="arc-block" id="arcId">
+
+    </div>
+
+</body>
+
+<script>
+    // R      WIDTH      stroke-width
+    // 60     148     28
+    // 
+
+    // 60     120+14+14   14+14
+    // 40.54  100         18.9
+    // const outerR = 60;
+
+    // 按100宽度来算，画笔宽度x
+    const generateArcPath = (strokeWidth) => {
+        const R = parseInt(50 - strokeWidth / 2, 10);
+        const d = `M50 50 m0 ${R} a${R} ${R} 0 1 1 0 -${2 * R} a${R} ${R} 0 1 1 0 ${2 * R}`
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', d);
+        path.setAttribute('stroke-width', strokeWidth);
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke', 'url(#arc-ring)');
+        return path;
+    }
+
+    const arcId = document.getElementById('arcId');
+
+    const createSvg = () => {
+        const arcSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        arcSvg.setAttribute('viewBox', '0 0 100 100');
+        arcSvg.appendChild(generateArcPath(18.9));
+        arcId.appendChild(arcSvg);
+    }
+
+    createSvg();
+
+
+
+
+</script>
+
+</html>

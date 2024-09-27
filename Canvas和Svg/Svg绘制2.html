@@ -16,6 +16,13 @@
             transition: 1s all ease
         }
 
+        #shape2 {
+            stroke-width: 6px;
+            /* fill: #009FFD; */
+            fill: transparent;
+            stroke: #999;
+        }
+
         /* #shape &:hover{
                 
             } */
@@ -128,6 +135,51 @@
                 transform: rotate(450deg);
             }
         }
+
+        .grid {
+            padding: 20px 0;
+            width: 100vw;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            grid-auto-rows: 50px;
+        }
+
+        #rect3 {
+            fill: transparent;
+            stroke-width: 6px;
+            stroke: #c6bebe;
+            stroke-linejoin: round;
+
+        }
+
+        #rect4 {
+            fill: transparent;
+            stroke-width: 6px;
+            stroke: red;
+            stroke-dasharray: 75;
+        }
+
+        #rect5 {
+            fill: transparent;
+            stroke-width: 6px;
+            stroke: rgb(240, 110, 4);
+            stroke-dasharray: 75 115;
+        }
+
+        #rect6 {
+            fill: transparent;
+            stroke-width: 6px;
+            stroke: rgb(220, 10, 10);
+            stroke-dasharray: 75 305;
+            transition: stroke-dashoffset 0.6s ease 0s, stroke .5s ease-in-out 0s;
+        }
+
+        /* - (75+40+75) */
+        #rect6:hover {
+            stroke-dashoffset: -190;
+            stroke: #2c08e2;
+        }
     </style>
     <style>
         /* 
@@ -189,9 +241,10 @@ $duration: 1.4s;
 </head>
 
 <body>
-    <p>stroke-dasharray 一个参数时： 表示一段虚线长度和每段虚线之间的间距 两个参数或者多个参数时：一个表示长度，一个表示间距 </p>
+    <p>stroke-dasharray 一个参数时： 表示一段虚线长度和每段虚线之间的间距; 两个参数或者多个参数时：一个表示长度，一个表示间距 </p>
     <p>stroke-dashoffset : 定义一条线，文本或元素距离（相当于基于position：relative；设置left值。只是不像left单纯的基于x方向设置，
         stroke-dashoffset是基于svg路径设置的）</p>
+
     <p>stroke-linejoin 描边转角的表现方式: stroke-linejoin = miter
         stroke-linejoin = round
         stroke-linejoin = bevel
@@ -203,11 +256,6 @@ $duration: 1.4s;
 
     <p>strokelinecap属性定义不同类型的开放路径的终结。 </p>
 
-    <svg height="40" width="150">
-        <rect id="shape" height="40" width="150" />
-
-
-    </svg>
 
     <svg>
         <g fill='none' stroke='black' stroke-width='10'>
@@ -247,6 +295,64 @@ $duration: 1.4s;
 
 
 
+    <div class="grid">
+        <svg height="40" width="150">
+            <rect id="shape2" height="40" width="150"></rect>
+            <rect id="shape" height="40" width="150" />
+        </svg>
+        <svg height="40" width="150">
+            <rect id="rect3" height="40" width="150"></rect>
+            <rect id="rect4" height="40" width="150"></rect>
+        </svg>
+
+        <svg height="40" width="150">
+            <rect id="rect3" height="40" width="150" rx="10" ry="10"></rect>
+            <rect id="rect5" height="40" width="150" rx="0" ry="0"></rect>
+        </svg>
+
+        <svg height="40" width="150">
+            <rect id="rect3" height="40" width="150"></rect>
+            <rect id="rect6" height="40" width="150" rx="0" ry="0"></rect>
+        </svg>
+
+
+
+    </div>
+
+
+    <div style="width: 500px;height: 500px;">
+
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
+
+            <g stroke-width="16" stroke="Darkgray" fill="none">
+                <path d="M 20 60 L 100 60 A 40 40 0 0 0 180 60" stroke-linejoin="miter" />
+                <path d="M 20 160 L 100 160 A 40 40 0 0 0 180 160" stroke-linejoin="round" />
+                <path d="M 20 260 L 100 260 A 40 40 0 0 0 180 260" stroke-linejoin="bevel" />
+                <rect x="260" y="40" width="100" height="70" stroke-linejoin="miter" />
+                <rect x="260" y="140" width="100" height="70" stroke-linejoin="round" />
+                <rect x="260" y="240" width="100" height="70" stroke-linejoin="bevel" />
+            </g>
+
+            <g stroke="Black" fill="none">
+                <path d="M 20 60 L 100 60 A 40 40 0 0 0 180 60" />
+                <path d="M 20 160 L 100 160 A 40 40 0 0 0 180 160" />
+                <path d="M 20 260 L 100 260 A 40 40 0 0 0 180 260" />
+                <rect x="260" y="40" width="100" height="70" />
+                <rect x="260" y="140" width="100" height="70" />
+                <rect x="260" y="240" width="100" height="70" />
+            </g>
+
+
+        </svg>
+    </div>
+
+
+    <a
+        href="https://blog.csdn.net/wenrui7868/article/details/135656766">https://blog.csdn.net/wenrui7868/article/details/135656766</a>
+
+
+
 </body>
+
 
 </html>
