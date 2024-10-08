@@ -57,8 +57,7 @@
     // const outerR = 60;
 
     // 按100宽度来算，画笔宽度x
-    const generateArcPath = (strokeWidth) => {
-        const R = parseInt(50 - strokeWidth / 2, 10);
+    const generateArcRingPath = (strokeWidth, R) => {
         const d = `M50 50 m0 ${R} a${R} ${R} 0 1 1 0 -${2 * R} a${R} ${R} 0 1 1 0 ${2 * R}`
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         path.setAttribute('d', d);
@@ -68,13 +67,75 @@
         return path;
     }
 
+
+    const generateArcTrackPath = (pWidth, R) => {
+        const strokeWidth = parseInt(pWidth / 3);
+        const d = `M50 50 m0 ${R} a${R} ${R} 0 1 1 0 -${2 * R} a${R} ${R} 0 1 1 0 ${2 * R}`
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', d);
+        path.setAttribute('stroke-width', strokeWidth);
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke-linecap', 'round');
+        path.setAttribute('stroke', '#aab9d7');
+        const Rate = 0.65;
+        const perimeter = 2 * Math.PI * R;
+        path.setAttribute('stroke-dasharray', `${perimeter * Rate}px, ${perimeter}px`)
+        // offset负数时 -1 顺时针旋转
+        const offset = -1 * (perimeter * (1 - Rate) / 2);
+        path.setAttribute('stroke-dashoffset', `${offset}px`);
+        return path;
+    }
+    const generateArcPath = (pWidth, R, percentage = 100) => {
+        const strokeWidth = parseInt(pWidth / 3);
+        const d = `M50 50 m0 ${R} a${R} ${R} 0 1 1 0 -${2 * R} a${R} ${R} 0 1 1 0 ${2 * R}`
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.style.cssText = `transition: stroke-dasharray 0.6s ease 0s,stroke .6s ease 0s`
+        path.setAttribute('d', d);
+        path.setAttribute('stroke-width', percentage === 0 ? 0 : strokeWidth);
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke-linecap', 'round');
+        path.setAttribute('stroke', 'red');
+
+        const Rate = 0.65;
+        const perimeter = 2 * Math.PI * R;
+        path.setAttribute('stroke-dasharray', `${perimeter * Rate * (percentage / 100)}px, ${perimeter}px`)
+        // offset负数时 -1 顺时针旋转
+        const offset = -1 * (perimeter * (1 - Rate) / 2);
+        path.setAttribute('stroke-dashoffset', `${offset}px`);
+
+        return path;
+    }
+    const updateSvgPath = (pWidth, path, R, percentage) => {
+        const strokeWidth = parseInt(pWidth / 3);
+
+        const Rate = 0.65;
+        const perimeter = 2 * Math.PI * R;
+        path.setAttribute('stroke-width', percentage === 0 ? 0 : strokeWidth);
+
+        path.setAttribute('stroke-dasharray', `${perimeter * Rate * (percentage / 100)}px, ${perimeter}px`)
+        // offset负数时 -1 顺时针旋转
+        const offset = -1 * (perimeter * (1 - Rate) / 2);
+        path.setAttribute('stroke-dashoffset', `${offset}px`);
+    }
+
     const arcId = document.getElementById('arcId');
 
     const createSvg = () => {
         const arcSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         arcSvg.setAttribute('viewBox', '0 0 100 100');
-        arcSvg.appendChild(generateArcPath(18.9));
+        const pWidth = 20;
+        // 同心圆
+        const R = parseInt(50 - pWidth / 2, 10);
+
+        arcSvg.appendChild(generateArcRingPath(pWidth, R));
+        arcSvg.appendChild(generateArcTrackPath(pWidth, R))
+        const path = generateArcPath(pWidth, R, 0);
+        arcSvg.appendChild(path);
         arcId.appendChild(arcSvg);
+
+        setTimeout(() => {
+            updateSvgPath(pWidth, path, R, 40)
+        }, 1000);
     }
 
     createSvg();
