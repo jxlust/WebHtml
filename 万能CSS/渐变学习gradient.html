@@ -382,7 +382,16 @@
 					blue 80%);
 		}
 
-		.box-img5 {}
+		.box-img5 {
+			height: 200px;
+			background-size: 50% 50%;
+			background-image: linear-gradient(red, yellow), linear-gradient(red, blue);
+			background-repeat: no-repeat;
+			/* 这里图片大小都设置成了50% 50%，也就是100 * 100, position的百分比是根据background-size计算的
+				这里等价于 0 0, 100px 100px
+			*/
+			background-position: 0 0, 100% 100%;
+		}
 
 		.grid {
 			padding: 20px;
@@ -592,6 +601,7 @@
 		<div class="box-bmline"></div>
 		<div class="box-bmline2"></div>
 
+		<div class="box-img5"></div>
 
 
 
@@ -634,6 +644,8 @@
 
 			</div>
 		</div>
+
+
 
 	</div>
 
