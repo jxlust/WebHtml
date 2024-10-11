@@ -7,10 +7,18 @@
     <title>Document</title>
     <style>
         body {
+            padding: 100px;
             height: 70vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-rows: auto;
+            grid-auto-rows: 200px;
+            gap: 50px;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
         }
 
         .arc-block {
@@ -18,8 +26,24 @@
             height: 148px;
         }
 
-        .test-block {
-            margin: 60px;
+
+        .mask-bg {
+            width: 100%;
+            height: 100%;
+            background: conic-gradient(from 0deg, rgb(135, 208, 104) 0%, rgb(255, 229, 143) 50%, rgb(255, 204, 199) 100%);
+        }
+
+        .mask-bg2 {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgb(135, 208, 104) 0%, rgb(255, 229, 143) 50%, rgb(255, 204, 199) 100%)
+        }
+
+        .mask-bg3 {
+            /* #2CCAFF  #004DFF */
+            width: 100%;
+            height: 100%;
+            background: conic-gradient(from -180deg, #2CCAFF 12.5%, #004DFF 50%, #004DFF 100%);
         }
     </style>
 </head>
@@ -41,10 +65,110 @@
         </svg>
     </div>
 
+    <div class="test-block">
+
+        <svg viewBox="0 0 100 100" width="100" height="100">
+            <circle r="48" stroke-width="4" cx="50" cy="50" fill="none" stroke="skyblue">
+            </circle>
+            <circle r="48" stroke-width="4" cx="50" cy="50" fill="none" stroke="red" stroke-dasharray="100.48 301">
+            </circle>
+        </svg>
+    </div>
+
+
+    <div class="test-block" style="width: 200px;height: 200px;">
+        <svg viewBox="0 0 100 100">
+            <circle r="45" stroke-width="10" cx="50" cy="50" fill="none" stroke="#e8f0ff" stroke-dasharray="212 282.6"
+                stroke-dashoffset="-35.3" style="transform: rotate(90deg);transform-origin: 50% 50%;"
+                stroke-linecap="round">
+            </circle>
+
+            <circle r="45" stroke-width="10" cx="50" cy="50" fill="none" stroke="red" stroke-dasharray="42.4 282.6"
+                stroke-linecap="round" stroke-dashoffset="-35.3"
+                style="transform: rotate(90deg);transform-origin: 50% 50%;">
+            </circle>
+        </svg>
+    </div>
+
+
+    <div class="test-block" style="width: 200px;height: 200px;">
+        <svg viewBox="0 0 100 100">
+            <circle r="45" stroke-width="10" cx="50" cy="50" fill="none" stroke="#e8f0ff" stroke-dasharray="212 282.6"
+                stroke-dashoffset="-35.3" style="transform: rotate(90deg);transform-origin: 50% 50%;"
+                stroke-linecap="round">
+            </circle>
+
+            <mask id="mask1">
+                <circle r="45" stroke-width="10" cx="50" cy="50" fill="none" stroke="#fff" stroke-dasharray="106 282.6"
+                    stroke-linecap="round" stroke-dashoffset="-35.3" fill-opacity="0"
+                    style="transform: rotate(90deg);transform-origin: 50% 50%;">
+                </circle>
+            </mask>
+
+            <foreignObject x="0" y="0" width="100" height="100" mask="url(#mask1)">
+                <div class="mask-bg3"></div>
+            </foreignObject>
+
+
+        </svg>
+    </div>
+
+    <div class="test-block" style="width: 200px;height: 200px;">
+
+        <svg viewBox="0 0 100 100">
+            <circle r="45" stroke-width="10" cx="50" cy="50" fill="none" stroke="#e8f0ff" stroke-dasharray="212 282.6"
+                stroke-dashoffset="-35.3" style="transform: rotate(90deg);transform-origin: 50% 50%;"
+                stroke-linecap='butt'>
+            </circle>
+
+            <mask id="mask2">
+                <circle r="45" stroke-width="10" cx="50" cy="50" fill="none" stroke="#fff" stroke-dasharray="106 282.6"
+                    stroke-linecap="butt" stroke-dashoffset="-35.3" fill-opacity="0"
+                    style="transform: rotate(90deg);transform-origin: 50% 50%;">
+                </circle>
+            </mask>
+
+            <foreignObject x="0" y="0" width="100" height="100" mask="url(#mask2)">
+                <div class="mask-bg3"></div>
+            </foreignObject>
+        </svg>
+    </div>
+
+    <div class="test-block" style="width: 200px;height: 200px;">
+        <svg viewBox="0 0 100 100">
+            <circle r="45" stroke-width="10" cx="50" cy="50" fill="none" stroke="#e8f0ff" stroke-dasharray="212 282.6"
+                stroke-dashoffset="-35.3" style="transform: rotate(90deg);transform-origin: 50% 50%;"
+                stroke-linecap='round'>
+            </circle>
+
+            <mask id="mask3">
+                <circle r="45" stroke-width="10" cx="50" cy="50" fill="none" stroke="#fff" stroke-dasharray="106 282.6"
+                    stroke-linecap="round" stroke-dashoffset="-35.3" fill-opacity="0"
+                    style="transform: rotate(90deg);transform-origin: 50% 50%;">
+                </circle>
+            </mask>
+
+            <foreignObject x="0" y="0" width="100" height="100" mask="url(#mask3)">
+                <div class="mask-bg3"></div>
+            </foreignObject>
+        </svg>
+    </div>
+
+
     <div class="arc-block" id="arcId">
 
     </div>
 
+
+    <div style="width: 100px;height: 100px;">
+        <div class="mask-bg"></div>
+    </div>
+    <div style="width: 100px;height: 100px;">
+        <div class="mask-bg2"></div>
+    </div>
+    <div style="width: 100px;height: 100px;">
+        <div class="mask-bg3"></div>
+    </div>
 </body>
 
 <script>
