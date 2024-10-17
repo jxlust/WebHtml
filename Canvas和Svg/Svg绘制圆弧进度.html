@@ -46,6 +46,12 @@
             /* 终止的点50%需要根据进度条计算的 */
             background: conic-gradient(from -180deg, #2CCAFF 12.5%, #004DFF 50%, #004DFF 100%);
         }
+
+        .ring-circle-path {
+            transition: stroke-dashoffset 0.3s, stroke-dasharray 0.3s, stroke 0.3s, stroke-width 0.06s 0.3s, opacity 0.3s;
+            transform: rotate(90deg);
+            transform-origin: 50% 50%;
+        }
     </style>
 </head>
 
@@ -160,6 +166,25 @@
 
     </div>
 
+    <div class="test-block" style="width: 146px;height: 146px;">
+        <svg viewBox="0 0 100 100">
+            <circle r="40.75" stroke-width="18.5" cx="50" cy="50" fill="none" stroke="url(#arc-ring)"
+                stroke-linecap='round'>
+            </circle>
+            <circle r="40.75" stroke-width="5.5" cx="50" cy="50" fill="none" stroke="#aab9d7" stroke-linecap='round'
+                stroke-dasharray="166.4 256" stroke-dashoffset="-44.8"
+                style="transform: rotate(90deg);transform-origin: 50% 50%;">
+            </circle>
+            <mask id="mask4">
+                <circle r="40.75" stroke-width="5.5" cx="50" cy="50" fill="none" stroke="#fff" stroke-dasharray="83 256"
+                    stroke-linecap="round" stroke-dashoffset="-44.8" fill-opacity="0" class="ring-circle-path">
+                </circle>
+            </mask>
+            <foreignObject x="0" y="0" width="100" height="100" mask="url(#mask4)">
+                <div class="mask-bg3"></div>
+            </foreignObject>
+        </svg>
+    </div>
 
     <div style="width: 100px;height: 100px;">
         <div class="mask-bg"></div>
@@ -264,8 +289,6 @@
     }
 
     createSvg();
-
-
 
 
 </script>
