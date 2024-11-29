@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
+        <path d="
+          M 10,100 
+          C 20,100 20,50 50,50 
+          S 80,50 80,100 
+          C 80,150 50,150 50,100 
+          S 20,100 20,100
+        " fill="none" stroke="blue" stroke-width="2" />
+    </svg>
+
+    <svg width="100" height="100" id="mySvg">
+
+    </svg>
+</body>
+
+<script>
+
+    function generateCurvePath(points) {
+        if (points.length < 2) {
+            return '';
+        }
+
+        let path = `M${points[0].x},${points[0].y}`; // 移动到起始点
+
+        for (let i = 1; i < points.length - 1; i++) {
+            // 使用前一个点和后一个点作为控制点，当前点作为终点
+            const prev = points[i - 1];
+            const curr = points[i];
+            const next = points[i + 1];
+
+            // 这里简单地将控制点设置为前一个点和后一个点的中点，
+            // 您可以根据需要调整这些控制点的位置以获得更圆滑的曲线
+            const c1x = (prev.x + curr.x) / 2;
+            const c1y = (prev.y + curr.y) / 2;
+            const c2x = (curr.x + next.x) / 2;
+            const c2y = (curr.y + next.y) / 2;
+
+            path += `C${c1x},${c1y} ${c2x},${c2y} ${curr.x},${curr.y} S${c2x},${c2y} ${next.x},${next.y}`; // 绘制三次贝塞尔曲线
+        }
+
+        // 如果需要闭合路径，可以在这里添加'Z'
+
+        return path;
+    }
+    const testPoints = [{
+        x: 10, y: 100
+    }, {
+        x: 20, y: 90
+    }, {
+        x: 30, y: 100
+    }, {
+        x: 40, y: 80
+    }, {
+        x: 50, y: 50
+    }, {
+        x: 60, y: 60
+    }, {
+        x: 70, y: 60
+    }, {
+        x: 80, y: 50
+    },
+    {
+        x: 90, y: 100
+    },
+    {
+        x: 90, y: 100
+    },]
+
+    const svg = document.querySelector('#mySvg');
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', generateCurvePath(testPoints));
+    path.setAttribute('stroke', 'red');
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke-width', '2');
+    svg.appendChild(path);
+    console.log(path);
+    console.log(svg);
+
+</script>
+
+</html>

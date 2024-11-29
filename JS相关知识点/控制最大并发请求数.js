@@ -36,12 +36,8 @@ async function run() {
 
 }
 
-
 // run();
-
-
 // 控制最大并发数量
-
 const run2Results = []
 function limitQueueRun(max = 6) {
     const queue = [];
