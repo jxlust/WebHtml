@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+</head>
+
+<body>
+    <div id="Ford"></div>
+    <div id="Jarrah"></div>
+    <div id="Kwon"></div>
+    <div id="Locke"></div>
+    <div id="Reyes"></div>
+    <div id="Shephard"></div>
+
+
+</body>
+<script type="module">
+    import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+    const data = [
+        { name: "Locke", number: 4 },
+        { name: "Reyes", number: 8 },
+        { name: "Ford", number: 15 },
+        { name: "Jarrah", number: 16 },
+        { name: "Shephard", number: 23 },
+        { name: "Kwon", number: 42 }
+    ];
+
+    d3.selectAll("div")
+        .data(data, function (d) { return d ? d.name : this.id; })
+        .text(d => d.number + '-' + d.name);
+
+</script>
+
+
+
+</html>

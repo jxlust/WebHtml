@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+            font-family: "Signika Negative", sans-serif;
+            text-align: center;
+            background-color: #111;
+        }
+
+        h1 {
+            margin: 20px;
+            text-align: center;
+        }
+
+        svg {
+            overflow: visible;
+            height: 100%;
+            max-width: 100%;
+        }
+
+        circle {
+            fill: white;
+        }
+
+        path {
+            stroke-width: 3px;
+            stroke: #88ce02;
+            fill: none;
+        }
+
+        #path2 {
+            transform: translateY(20px);
+            stroke: red;
+            fill: none;
+            stroke-width: 3px;
+        }
+    </style>
+
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../js/DrawSVG3.11.6.js"></script>
+    <script src="../js/MotionPathPlugin.min.js"></script>
+    <script src="../gsap-plugins/MotionPathHelper.min.js"></script>
+</head>
+
+<body>
+    <h1>arrayToRawPath() GSAP Demo</h1>
+
+    <svg id="svg" viewBox="0 0 900 200">
+        <path id="path" />
+        <path id="path2" />
+    </svg>
+
+
+    <script>
+        gsap.registerPlugin(MotionPathPlugin, DrawSVGPlugin);
+
+
+        // helper function for creating SVG elements
+        function createSVG(type, container, attributes) {
+            var element = document.createElementNS("http://www.w3.org/2000/svg", type),
+                reg = /([a-z])([A-Z])/g,
+                p;
+            for (p in attributes) {
+                element.setAttributeNS(null, p.replace(reg, "$1-$2").toLowerCase(), attributes[p]);
+            }
+            container.appendChild(element);
+            return element;
+        }
+
+
+        let anchors = [{ x: 50, y: 130 }, { x: 300, y: 10 }, { x: 510, y: 100 }, { x: 700, y: 190 }, { x: 850, y: 100 }], // anchor coordinates (feel free to change these if you want)
+            rawPath = MotionPathPlugin.arrayToRawPath(anchors, { curviness: 0.5 }),
+            path = document.querySelector("#path"),
+            svg = document.querySelector("#svg");
+
+        console.log('rawPath: ', rawPath)
+        console.log('rawpath Str:', MotionPathPlugin.rawPathToString(rawPath));
+
+        path.setAttribute("d", MotionPathPlugin.rawPathToString(rawPath));
+
+        // place the anchors as <circle> elements
+        for (let i = 0; i < anchors.length; i++) {
+            createSVG("circle", svg, { cx: anchors[i].x, cy: anchors[i].y, r: 5 });
+        }
+
+        // animate with drawSVG
+        gsap.from(path, {
+            drawSVG: false,
+            duration: 4,
+            ease: "power1.inOut"
+        });
+
+
+    </script>
+
+</body>
+
+<script type="module">
+    import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+    const path2 = document.querySelector("#path2");
+
+    const d3Line = d3.line() // 使用d3.line()生成线条
+        .x(function (d) { return d.x; }) // 定义x坐标
+        .y(function (d) { return d.y; }) // 定义y坐标
+        .curve(d3.curveCatmullRom.alpha(.5)) // 设置曲线平滑度
+    // 创建一条路径
+    // var d3Path = svg.append('path')
+    //     .attr('fill', 'none')
+    //     .attr('stroke', 'blue')
+    //     .attr('stroke-width', 3)
+    //     .attr('d', d3Line(anchors));
+    var d3Path = d3Line(anchors);
+    console.log('d3Path:', d3Path);
+    path2.setAttribute("d", d3Path);
+
+
+</script>
+
+</html>

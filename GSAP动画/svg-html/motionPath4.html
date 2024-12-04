@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draw Svg</title>
+    <style>
+        svg {
+            position: relative;
+            margin: 20px auto;
+            width: 700px;
+            max-height: 70vh;
+        }
+
+
+        .circle {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: red;
+        }
+    </style>
+
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../js/MotionPathPlugin.min.js"></script>
+    <script src="../gsap-plugins/MotionPathHelper.min.js"></script>
+</head>
+
+<body>
+
+
+    <div id="circle" class="circle"></div>
+
+    <div id="circle2" class="circle"></div>
+
+</body>
+<script>
+    gsap.registerPlugin(MotionPathPlugin);
+    gsap.to('#circle', {
+        motionPath: {
+            // type: "cubic" 将通过这些坐标绘制一条曲线路径，或设置类型：“立方体”，将其解释为连续的三次贝塞尔坐标（顺序如下：锚点、两个控制点、锚点、两种控制点等）
+            path: [
+                { x: 0, y: 0 },
+                { x: 20, y: 0 },
+                { x: 30, y: 50 },
+                { x: 50, y: 50 },
+                { x: 60, y: 40 },
+                { x: 70, y: 30 },
+                { x: 80, y: 80 },
+                { x: 90, y: 100 },
+                { x: 100, y: 100 },
+                { x: 100, y: 100 }
+            ],
+            type: "cubic"
+        },
+        transformOrigin: "50% 50%",
+        duration: 5,
+    })
+
+    gsap.to('#circle2', {
+        motionPath: [
+            { scale: 1, rotation: 10, x: 0, y: 0 },
+            { scale: 0.5, rotation: -10, x: 30, y: 50 },
+            { scale: 1, rotation: 0, x: 70, y: 120 },
+            { scale: 0.8, rotation: 3, x: 100, y: 100 },
+        ],
+        transformOrigin: "50% 50%",
+        duration: 5,
+    })
+</script>
+
+</html>
