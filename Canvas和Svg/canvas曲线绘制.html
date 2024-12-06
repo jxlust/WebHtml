@@ -41,7 +41,7 @@
             <option value="4">curveBumpX</option>
             <option value="5">curveBundle</option>
             <option value="6">curveCardinal</option>
-            <option value="7">curveLinear</option>
+            <option value="7">curveMonotoneX</option>
             <option value="8">curveLinear</option>
             <option value="9">curveNatural</option>
             <option value="10">curveStep</option>
@@ -245,7 +245,7 @@
         } else if (index === 6) {
             d3Curve = d3.curveCardinal
         } else if (index === 7) {
-            d3Curve = d3.curveLinear
+            d3Curve = d3.curveMonotoneX
         } else if (index === 8) {
             d3Curve = d3.curveLinear
         } else if (index === 9) {
