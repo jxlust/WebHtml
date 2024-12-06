@@ -1,3 +1,29 @@
+function appendRound(digits) {
+    let d = Math.floor(digits);
+    if (!(d >= 0)) throw new Error(`invalid digits: ${digits}`);
+    if (d > 15) return append;
+    const k = 10 ** d;
+    return function (strings) {
+        let str = '';
+        console.log('sss:', strings)
+        str += strings[0];
+        for (let i = 1, n = strings.length; i < n; ++i) {
+            str += Math.round(arguments[i] * k) / k + strings[i];
+        }
+        return str;
+    };
+}
+
+function limitDigits(strings) {
+    let d = Math.floor(digits);
+    const k = 10 ** d;
+    let str = ''
+    str += strings[0];
+    for (let i = 1, n = strings.length; i < n; ++i) {
+        str += Math.round(arguments[i] * k) / k + strings[i];
+    }
+    return str;
+}
 
 /**
  * 生成贝塞尔曲线路径
@@ -25,7 +51,7 @@ function getBezierCurvePath(that, x, y) {
         x2 = (x2 * b + that._x1 * that._l23_2a - x * that._l12_2a) / m;
         y2 = (y2 * b + that._y1 * that._l23_2a - y * that._l12_2a) / m;
     }
-    return `C${x1},${y1} ${x2},${y2} ${that._x2},${that._y2}`
+    return that._append`C${+x1},${+y1} ${+x2},${+y2} ${+that._x2},${+that._y2}`
 }
 /**
  * Catmull-Rom样条曲线
@@ -38,10 +64,11 @@ function getBezierCurvePath(that, x, y) {
  *  const ccr = new CurveCatmullRom(pointsList)
  *  const curvePath = ccr.generatePath()
  */
-class CurveCatmullRom {
+export class CurveCatmullRom {
     constructor(points, alpha = 0.5) {
         this.points = points;
         this.alpha = alpha;
+        this._append = appendRound(3)
     }
     buildPointPath(x, y) {
         x = +x, y = +y;
@@ -53,7 +80,7 @@ class CurveCatmullRom {
         switch (this._point) {
             case 0:
                 this._point = 1;
-                this._path += `M${x},${y}`;
+                this._path += this._append`M${+x},${+y}`;
                 break;
             case 1: this._point = 2; break;
             case 2: this._point = 3; // falls through
@@ -82,7 +109,7 @@ class CurveCatmullRom {
         return this._path
     }
     lineToPath(x, y) {
-        this._path += `L${x},${y}`;
+        this._path += this._append`L${+x},${+y}`;
     }
     handleLineEnd() {
         let len = this.points.length;
@@ -102,7 +129,6 @@ class CurveCatmullRom {
         this._path = ''
     }
 }
-
 
 const pointsList = [[0, 0], [10, 20], [20, 30], [30, 79]]
 const ccr = new CurveCatmullRom(pointsList)
