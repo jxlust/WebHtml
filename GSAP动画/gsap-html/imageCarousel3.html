@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carousel</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: sans-serif;
+        }
+
+        .scene {
+            border: 1px solid #CCC;
+            margin: 40px 0;
+            position: relative;
+            width: 210px;
+            height: 140px;
+            margin: 40px auto;
+            perspective: 1000px;
+        }
+
+        .carousel {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            /* transform: translateZ(-288px); */
+            transform-style: preserve-3d;
+            /* transition: transform 1s; */
+        }
+
+        .carousel__cell {
+            position: absolute;
+            width: 190px;
+            height: 120px;
+            left: 10px;
+            top: 10px;
+            border: 2px solid black;
+            line-height: 116px;
+            font-size: 80px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="scene">
+        <div class="carousel" id="carousel">
+            <!-- <div class="carousel__cell">1</div> -->
+        </div>
+    </div>
+
+
+
+</body>
+
+
+<script>
+    // https://3dtransforms.desandro.com/carousel
+    function calcTranslateZ(cellSize, numberOfCells) {
+        // var tz = Math.round((cellSize / 2) /
+        //     Math.tan(((Math.PI * 2) / numberOfCells) / 2));
+        // or simplified to
+        return Math.round((cellSize / 2) / Math.tan(Math.PI / numberOfCells));
+    }
+</script>
+<script>
+
+    const count = 9;
+    const sceneWidth = 210;
+    const transitionZ = calcTranslateZ(sceneWidth, count);
+
+    const cells = [];
+    const cells2 = []
+
+    const carouselEl = document.getElementById('carousel')
+    let cur = 0;
+    let showIndex = 0;
+    gsap.set(carouselEl, {
+        transformOrigin: `50% 50% ${-transitionZ}`
+
+    })
+
+    for (let i = 0; i < 9; i++) {
+        const div = document.createElement('div')
+        div.className = 'carousel__cell'
+        div.innerText = i + 1;
+        cells.push(div)
+        const rotate = (360 / count) * i;
+        gsap.set(div, {
+            background: `rgba(random(0,255),random(0,255),random(0,255),0.5)`,
+            rotationY: rotate,
+            // 3d 旋转 z中心点往后位移一段距离
+            transformOrigin: `50% 50% ${-transitionZ}`
+
+            // z: transitionZ,
+        })
+        carouselEl.appendChild(div)
+    }
+
+    // 相框旋转动画
+    gsap.to(carouselEl, {
+        // rotationY: 360,
+        // duration: 10,
+        // repeat: -1
+        force3D: true,
+        z: 1,
+        rotationY: '+=360',
+        repeat: -1,
+        duration: 10,
+        // ease: 'none'
+        ease: 'power1.inOut',
+
+    })
+
+
+</script>
+
+
+
+</html>

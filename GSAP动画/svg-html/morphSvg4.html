@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draw Svg</title>
+    <style>
+        #background {
+            visibility: hidden;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        svg {
+            position: relative;
+            display: block;
+            width: 400px;
+            height: 200px;
+        }
+    </style>
+
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../gsap-plugins/MorphSVGPlugin3.min.js"></script>
+
+</head>
+
+<body>
+    <svg id="circ" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 400 200">
+        <style type="text/css">
+            .st0 {
+                fill: #1D1D1D;
+                stroke: #000000;
+                stroke-miterlimit: 10;
+            }
+
+            .st1 {
+                fill: skyblue;
+            }
+        </style>
+
+        <!-- <rect id="background" x="10" y="80" class="st0" width="800" height="400" /> -->
+        <path d="M200,0 L400,0 L400,100 L400,200 L200,200 L0,200 L0,0 z" id="background"></path>
+        <circle id="circle" r="10" class="st1" cx="200" cy="100"></circle>
+        <!-- <path class="st1" id="circle" d="M510,280 C510,335.22847 465.22847,380 410,380 354.77153,380 310,335.22847 310,280 310,224.77153 354.77153,180 410,180 465.22847,180 510,224.77153 510,280 z"></path> -->
+        <!-- <path d="M10,80 h100 v100 h-100 z" fill="red"></path> -->
+
+
+    </svg>
+</body>
+<script>
+    gsap.registerPlugin(MorphSVGPlugin);
+
+    MorphSVGPlugin.convertToPath("#circle");
+
+
+    gsap.to('#circle', {
+        duration: .5,
+        morphSVG: '#background',
+        // morphSVG: {
+        //     // type: "rotational",//linear
+        //     type: 'linear',
+        //     // type: 'rotational',
+        //     shape: '#background',
+        //     // precompile: "log"
+        //     // origin: "50% 50%"
+        // },
+        // repeat: 1,
+        // yoyo: true,
+        repeatDelay: 0.2
+    })
+</script>
+
+
+
+
+</html>

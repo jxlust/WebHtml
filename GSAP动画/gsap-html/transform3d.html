@@ -50,6 +50,8 @@
 
         <div class="box" id="box7">我是7</div>
 
+        <div class="box" id="box8">我是8</div>
+
     </div>
 </body>
 
@@ -103,6 +105,14 @@
         duration: 2,
         rotationY: 360,
         transformOrigin: 'center center -400px',
+        force3D: true,
+    })
+
+
+    gsap.to('#box8', {
+        duration: 2,
+        rotationZ: 360,
+        transformOrigin: '50% 50% -400px',
         force3D: true,
     })
 </script>
