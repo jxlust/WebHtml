@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../gsap-plugins/TextPlugin.min.js"></script>
+
+    <style>
+        body {
+            background-color: #000;
+            margin: 15px;
+            color: #CCC;
+            font-family: Arial, Helvetica, sans-serif;
+            width: 600px;
+        }
+
+        h1,
+        h2 {
+            color: #fff;
+        }
+
+        h2 {
+            font-weight: normal;
+            font-size: 20px;
+            color: #999;
+        }
+
+        #radio {
+            padding: 18px;
+            background-color: #333;
+        }
+
+        #demo {
+            width: 250px;
+            height: 250px;
+            position: relative;
+            left: 200px;
+            margin-top: 20px;
+            visibility: hidden;
+        }
+
+        #arrow {
+            position: absolute;
+            left: 75px;
+            top: 75px;
+            background: url(../images/arow.png);
+            width: 100px;
+            height: 100px;
+        }
+
+        .degree {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            padding: 10px;
+            background-color: white;
+            text-align: center;
+            cursor: pointer;
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e0e0e0), color-stop(50%, #e0e0e0), color-stop(50%, #d3d3d3), color-stop(100%, #d3d3d3));
+            background: -moz-linear-gradient(center top, #e0e0e0 0%, #e0e0e0 50%, #d3d3d3 50%, #d3d3d3 100%);
+            -webkit-border-radius: 6px;
+            -moz-border-radius: 6px;
+            border-radius: 6px;
+            display: inline-block;
+            font-family: Helvetica Neue;
+            font-size: 12px;
+            line-height: 20px;
+            color: #666666;
+            font-weight: bold;
+            cursor: pointer;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .degree:hover {
+            background-color: #666;
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f06196), color-stop(50%, #ef6196), color-stop(50%, #ee4d88), color-stop(100%, #ee4d88));
+            background: -moz-linear-gradient(center top, #f06196 0%, #ef6196 50%, #ee4d88 50%, #ee4d88 100%);
+            color: #FFFFFF;
+        }
+
+        #output {
+            padding: 20px;
+            font-family: "Courier New", Courier, monospace;
+            background-color: #333;
+            color: #ddd;
+            margin-top: 20px;
+            border-left: solid 10px #91e600;
+            font-weight: bold;
+        }
+
+        #notes p {
+            margin-top: 20px;
+            line-height: 24px;
+        }
+
+        label {
+            margin-right: 15px;
+            color: #ddd;
+        }
+
+        a:link,
+        a:active,
+        a:hover,
+        a:visited {
+            color: #91e600;
+        }
+    </style>
+</head>
+
+<body translate="no">
+    <h1>Directional Rotation Visualizer</h1>
+    <h2>1: Select direction</h2>
+
+    <form id="radio">
+        <input type="radio" name="direction" value="_short" checked="checked" id="short"><label
+            for="short">shortest</label>
+        <input type="radio" name="direction" value="_ccw" id="ccw"><label for="ccw">counter-clockwise</label>
+        <input type="radio" name="direction" value="_cw" id="cw"><label for="cw">clockwise</label>
+    </form>
+
+    <h2>2: Click on any of the numeric degree markers</h2>
+    <div id="demo">
+        <div class="degree"></div>
+        <div class="degree"></div>
+        <div class="degree"></div>
+        <div class="degree"></div>
+        <div class="degree"></div>
+        <div class="degree"></div>
+        <div class="degree"></div>
+        <div class="degree"></div>
+        <div id="arrow"></div>
+    </div>
+    <div id="output">gsap.to("#arrow", 0.5, {rotation:"45_short"});</div>
+    <div id="notes">
+        <p>GSAP's directional rotation functionality allows you to easily specify rotation in a particular direction
+            which can be either clockwise ("_cw" suffix), counter-clockwise ("_ccw" suffix), or in the shortest
+            direction ("_short" suffix) in which case the plugin chooses the direction for you based on the shortest
+            path.</p>
+        <p>Directional rotation can be used with rotationX, rotationY, and rotationZ.</p>
+        <p>Directional rotation functionality is built into <a
+                href="https://greensock.com/docs/#/HTML5/Plugins/CSSPlugin/">CSSPlugin</a>. For animations not tied to
+            css values, check out the <a
+                href="https://greensock.com/docs/#/HTML5/Plugins/DirectionalRotationPlugin/">DirectionalRotationPlugin</a>.
+        </p>
+    </div>
+
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.9.7/plugins/TextPlugin.min.js"></script> -->
+    <script>
+
+        gsap.registerPlugin(TextPlugin);
+
+        function getRadioValue(name) {
+            // 假设有一组单选按钮的name都是"myRadio"
+            var radios = document.getElementsByName(name);
+            for (var i = 0; i < radios.length; i++) {
+                if (radios[i].checked) {
+                    // 获取选中的单选按钮的值
+                    var value = radios[i].value;
+                    console.log(value); // 输出选中的单选按钮的值
+                    return value;
+                    // break; // 只有一个按钮可以被选中，所以退出循环
+                }
+            }
+        }
+
+        let degrees = document.querySelectorAll('.degree'),
+            output = document.getElementById('output'),
+            arrow = document.getElementById('arrow'),
+            rotation,
+            type = getRadioValue('direction');
+
+        function setTweenValues(e) {
+            rotation = Number(e.target.innerText)
+            var tweenCode = 'gsap.to("#arrow", 0.5, {rotation:"' + rotation + type + '"});';
+            output.innerText = tweenCode;
+        }
+
+        function doTween(e) {
+            gsap.to(arrow, 0.5, { rotation: `${rotation}${type}` })
+        }
+
+
+        degrees.forEach(function (elem, index) {
+            gsap.set(elem, {
+                // left: 105,
+                x: 105,
+                rotation: 90 + index * 45,
+                transformOrigin: "50% 125px",
+                text: String(index * 45),
+                borderRadius: 10
+            });
+            console.log(elem, 'elem')
+            elem.addEventListener('click', doTween);
+            elem.addEventListener('mouseenter', setTweenValues);
+        });
+
+        document.getElementById('radio').addEventListener('change', (event) => {
+            if (event.target.type === 'radio' && event.target.name === 'direction') {
+                type = event.target.value;
+                output.innerHTML = "&nbsp;";
+            }
+        })
+
+
+        gsap.to("#demo", 1, { autoAlpha: 1, delay: 0.3 });
+
+    </script>
+
+</body>
+
+</html>

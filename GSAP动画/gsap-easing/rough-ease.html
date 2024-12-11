@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <!-- <script src="../gsap-plugins/CustomEase3.min.js"></script> -->
+    <script src="../gsap-plugins/EasePack3.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+        }
+
+        #expo {
+            /*display: none;*/
+        }
+
+        #container {
+            display: flex;
+            min-height: 100vh;
+
+        }
+
+        #expo,
+        #linear {
+            flex-grow: 1;
+            overflow: hidden;
+            position: relative;
+            font-size: 6rem;
+            color: skyblue;
+        }
+
+        #linear {
+            border-left: 2px solid white;
+        }
+
+
+
+        .label {
+            position: relative;
+            top: 0px;
+            padding: 10px;
+            text-align: center;
+            font-family: "Signika Negative", sans-serif;
+            /* background-color: rgba(0, 0, 0, 0.2); */
+            color: #fff;
+            font-size: 2rem;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="container">
+        <div id="expo">
+            <div id="box1">Box 1</div>
+            <div class="label">rough 1</div>
+        </div>
+
+
+        <div id="linear">
+            <div id="box2">Box2</div>
+            <div class="label">rough 2</div>
+        </div>
+
+    </div>
+
+</body>
+<script>
+    gsap.registerPlugin(EasePack);
+
+    //use the default values
+    gsap.from('#box1', { duration: 1, opacity: 0, ease: "rough" });
+
+    //or customize the configuration
+    gsap.to('#box2', { duration: 2, y: 100, ease: "rough({strength: 3, points: 50, template: strong.inOut, taper: both, randomize: false})" });
+
+
+</script>
+
+</html>

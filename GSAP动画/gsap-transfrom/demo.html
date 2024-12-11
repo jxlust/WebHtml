@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+        }
+
+        .container {
+            padding: 50px;
+            display: grid;
+            place-items: center;
+            grid-template-columns: repeat(auto-fill, 100px);
+            grid-template-rows: 100px;
+            gap: 100px;
+            color: red;
+            font-weight: bold;
+            font-size: 26px;
+        }
+
+        .box {
+            border-radius: 10px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: azure;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="box" id="box1">1</div>
+        <div class="box" id="box2">2</div>
+        <div class="box" id="box3">3</div>
+    </div>
+
+
+</body>
+
+<script>
+
+    gsap.to('#box1', {
+        duration: 2,
+        rotation: '-170_short'
+    })
+
+    gsap.to('#box2', {
+        duration: 2,
+        rotation: '-170'
+    })
+
+    //or even use it on 3D rotations and use relative prefixes:
+    gsap.to('#box3', {
+        duration: 2,
+        // rotation: "-170_short",
+        rotationX: "-=30_ccw",
+        // rotationX: '-30'
+
+        // rotationY: "1.5rad_ccw",
+    });
+</script>
+
+</html>

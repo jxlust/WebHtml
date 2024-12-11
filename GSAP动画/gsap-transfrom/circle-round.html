@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            row-gap: 20px;
+            height: 100vh;
+        }
+
+        .container {
+            width: 250px;
+            height: 250px;
+            position: relative;
+            background-color: #f8f8f8;
+        }
+
+        .box {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            padding: 10px;
+            background-image: linear-gradient(90deg, red 50%, yellow 50% 100%);
+            font-size: 16px;
+            font-weight: bold;
+            color: rgb(10, 146, 199);
+
+        }
+
+        .arrow {
+            width: 12px;
+            height: 12px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <svg id="myArrow" class="arrow" width="20" height="20" viewBox="0 0 20 20">
+            <!-- <polygon points="0,20 10,0 20,20"   fill="blue"></polygon> -->
+            <path d="M0,20 L10,0 L20,20" stroke-width="4" stroke="blue" fill="none" stroke-linecap="round"></path>
+        </svg>
+    </div>
+
+    <button class="btn" id="startBtn">开启转盘</button>
+
+</body>
+
+<script>
+
+    const count = 8;
+    const boxList = []
+    const containerSize = 250;
+    const halfSize = containerSize / 2;
+    const boxSize = 20;
+
+    for (let i = 0; i < count; i++) {
+        const box = document.createElement('div');
+        box.classList.add('box');
+
+        const degree = (360 / count * i) | 0;
+        box.innerText = degree;
+        gsap.set(box, {
+            // transformOrigin: `125px 50%`,
+            transformOrigin: `50% ${halfSize}px`,
+            x: halfSize - boxSize,
+            // y: halfSize-boxSize,
+            rotate: degree
+        })
+        box.addEventListener('click', boxClick);
+        boxList.push(box);
+        document.querySelector('.container').appendChild(box);
+    }
+
+    function boxClick(e) {
+        const text = e.currentTarget.innerText;
+        const degree = +text;
+        gsap.to('#myArrow', {
+            rotation: degree + '_short',
+            duration: .5
+        })
+    }
+
+    document.getElementById('startBtn').addEventListener('click', function () {
+        const result = Math.floor(Math.random() * count);
+        console.log('result:', result);
+        // 720 +
+        const rotatedDegree = (360 / count * result) | 0;
+        gsap.killTweensOf('#myArrow');
+        gsap.set('#myArrow', {
+            rotation: 0,
+        })
+
+        const degreeMap = {
+            0: 720 + rotatedDegree,
+            1: 720 + rotatedDegree,
+            2: 720 + rotatedDegree,
+        }
+        const addedDegree = (result < 4 ? 720 : 360) + rotatedDegree;
+        const duration = result < 4 ? 4 : 3
+        gsap.to('#myArrow', {
+            rotation: `+=${addedDegree}`,
+            // repeat: -1,
+            duration: duration,
+            ease: 'power4.out',
+            // ease: 'back.out(2)',
+            // ease: 'expo.out(5)',
+            // ease: "steps(8)"
+        })
+        // gsap.to(boxList, {
+        //     rotation: '+=360',
+        //     duration: 10,
+        //     repeat: -1,
+        //     ease: "steps(8)"
+        // })
+    })
+
+
+</script>
+
+</html>

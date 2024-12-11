@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <!-- <script src="../gsap-plugins/CustomEase3.min.js"></script> -->
+    <script src="../gsap-plugins/EasePack3.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+        }
+
+        #expo {
+            /*display: none;*/
+        }
+
+        #container {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            row-gap: 20px;
+            /* display: grid;
+            /* min-height: 100vh; */
+            /* grid-template-columns: 1fr;
+            gap: 20px;
+            grid-auto-rows: 50px; */
+        }
+
+        .box {
+            position: relative;
+            padding: 10px;
+            text-align: center;
+            font-family: "Signika Negative", sans-serif;
+            background-color: rgba(236, 124, 124, 0.5);
+            color: #fff;
+            border-radius: 10px;
+            font-size: 2rem;
+            width: 500px;
+
+        }
+
+        .desc {
+            font-size: 16px;
+            color: rgb(187, 186, 166);
+            padding: 0 100px;
+            margin-top: 20px;
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+
+    <div id="container">
+        <div class="box" id="text1">slow text1 default</div>
+        <div class="box" id="text2">slow text2(0.5,0.8)</div>
+        <div class="box" id="text2_p0">slow text2 power 0</div>
+        <div class="box" id="text2_p1">slow text2 power 1</div>
+        <div class="box" id="text2_p2">slow text2 power more than 1</div>
+        <div class="box" id="text3">slow text3 from </div>
+        <div class="box" id="text3_1">slow text3 to</div>
+
+    </div>
+
+
+    <div class="desc">
+
+        <p>SlowMo is a configurable ease that produces a slow-motion effect that decelerates initially, then moves
+            linearly for a certain portion of the ease (which you can choose) and then accelerates again at the end;
+            it's great for effects like zooming text onto the screen, smoothly moving it long enough for people to read
+            it, and then zooming it off the screen. </p>
+
+        <p>
+            Without SlowMo, animators would often try to get the same effect by sequencing 3 tweens, one with an ease
+            .out, then another with no ease (ease: "none"), and finally an ease .in. But the problem was that the eases
+            didn't smoothly transition into one another so you'd see sudden shifts in velocity at the joints. SlowMo
+            solves this problem and gives you complete control over how strong the eases are on each end and what
+            portion of the movement in the middle is linear.</p>
+
+        <p>
+            The first parameter, linearRatio, determines the proportion of the ease during which the rate of change will
+            be linear (steady pace). This should be a number between 0 and 1. For example, 0.5 would be half, so the
+            first 25% of the ease would be easing out (decelerating), then 50% would be linear, then the final 25% would
+            be easing in (accelerating). If you choose 0.8, that would mean 80% of the ease would be linear, leaving 10%
+            on each end to ease. The default is 0.7.</p>
+
+        <p>
+            The second parameter, power, determines the strength of the ease at each end. If you define a value greater
+            than 1, it will actually reverse the linear portion in the middle which can create interesting effects. The
+            default is 0.7.</p>
+
+        <p>
+            The third parameter, yoyoMode, provides an easy way to create companion tweens that sync with normal SlowMo
+            tweens. For example, let's say you have a SlowMo tween that is zooming some text onto the screen and moving
+            it linearly for a while and then zooming off, but you want to tween that alpha of the text at the beginning
+            and end of the positional tween. Normally, you'd need to create 2 separate alpha tweens, 1 for the fade-in
+            at the beginning and 1 for the fade-out at the end and you'd need to calculate their durations manually to
+            ensure that they finish fading in by the time the linear motion begins and then they start fading out at the
+            end right when the linear motion completes. But to make this whole process much easier, all you'd need to do
+            is create a separate tween for the alpha and use the same duration but a SlowMo ease that has its yoyoMode
+            parameter set to true.
+        </p>
+
+    </div>
+
+
+</body>
+<script>
+    gsap.registerPlugin(EasePack);
+
+    //use the default SlowMo ease (linearRatio of 0.7 and power of 0.7)
+    // slow第一个参数是linearRatio, 第二个参数是power 默认都是0.7
+    gsap.to('#text1', { duration: 5, x: 600, ease: "slow" });
+
+    // 理解：slow(0.5, 0.8) 第一个参数是linearRatio, 第二个参数是power，0.5 代表着有50%时间是线性的，然后25%开头是减速，25%结尾是加速
+
+    //this gives the exact same effect as the line above, but uses a different syntax
+    gsap.to('#text2', { duration: 5, x: 600, ease: "slow(0.5, 0.8)" });
+    gsap.to('#text2_p0', { duration: 5, x: 600, ease: "slow(0.5, 0)" });
+    gsap.to('#text2_p1', { duration: 5, x: 600, ease: "slow(0.5, 1)" });
+    gsap.to('#text2_p2', { duration: 5, x: 600, ease: "slow(0.5, 1.8)" });
+    //now let's create an opacity tween that syncs with the above positional tween, fading it in at the beginning and out at the end
+    // 理解：yoyoMode: true 代表着是反向的效果
+    gsap.from('#text3', { duration: 5, x: 100, opacity: 0, ease: "slow(0.5, 0.8, true)" });
+    gsap.to('#text3_1', { duration: 5, x: 100, opacity: 0, ease: "slow(0.5, 0.8, true)" });
+
+
+</script>
+
+</html>

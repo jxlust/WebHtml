@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            row-gap: 20px;
+            height: 100vh;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 400px;
+            height: 400px;
+            position: relative;
+            background-color: #e98181;
+            padding: 20px;
+            border-radius: 20px;
+            box-sizing: border-box;
+        }
+
+        .content {
+            width: 100%;
+            height: 100%;
+            background-color: #d40a0a;
+            border-radius: 8px;
+        }
+
+        .box {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            padding: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+            font-weight: bold;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            border-width: 2px;
+            border-style: solid;
+            border-color: transparent;
+        }
+
+        .box.active {
+            font-weight: bold;
+            /* box-shadow: 0px -5px #FF9A01 inset; */
+            border: 2px solid #fff;
+        }
+
+        .center {
+            width: 100px;
+            height: 100px;
+            box-sizing: border-box;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgb(7, 230, 11);
+            display: flex;
+            font-weight: bold;
+            font-size: 22px;
+            color: white;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="content" id="prize">
+            <div class="center" id="start">START</div>
+        </div>
+
+    </div>
+
+</body>
+
+<script>
+
+
+    const count = 8;
+    const boxList = []
+    const containerSize = 400;
+    const halfSize = containerSize / 2;
+    const boxSize = 100;
+    const marginNum = 15; // 60 / 4
+
+    const prizeElement = document.querySelector('#prize');
+    for (let i = 0; i < count; i++) {
+        const box = document.createElement('div');
+        box.classList.add('box');
+        // const degree = (360 / count * i) | 0;
+
+        // 0  1   2
+        // 7      3
+        // 6  5   4
+        // 分段函数
+
+        const row = i <= 2 ? 0 : i <= 4 ? i - 2 : i <= 6 ? 2 : 1;
+        const col = i < 2 ? i : i <= 4 ? 2 : i <= 6 ? 6 - i : 0;
+        box.innerText = i + 1;
+
+        const x = marginNum * (col + 1) + col * boxSize
+        const y = marginNum * (row + 1) + row * boxSize
+        gsap.set(box, {
+            // transformOrigin: `125px 50%`,
+            // transformOrigin: `50% ${halfSize}px`,
+            background: `rgba(random(100,255),random(100,255),random(100,255),0.8)`,
+            x: x,
+            y: y,
+
+        })
+        // gsap.to(box, {
+        //     background: `rgba(random(100,255),random(100,255),random(100,255),0.8)`,
+        //     duration: 1,
+        //     repeat: -1,
+        //     ease: 'none'
+        // })
+        boxList.push(box);
+        prizeElement.appendChild(box);
+    }
+
+    document.getElementById('start').addEventListener('click', () => {
+        let numberObj = {
+            value: 0,
+            endValue: 50,
+        }
+        let numberTL = gsap.to(numberObj, {
+            value: numberObj.endValue,
+            // roundProps: "value",
+            ease: "power4.out(4)",
+            // ease: 'none',
+            duration: 6,
+            onUpdate: () => {
+                const curNum = numberObj.value;
+                // console.log('cur:', curNum);
+                const curStep = Math.round(curNum) % 8;
+                console.log('step:', curStep)
+                for (let el of boxList) {
+                    el.classList.remove('active')
+                }
+                boxList[curStep].classList.add('active')
+
+            }
+        })
+    })
+
+</script>
+
+</html>

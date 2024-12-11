@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+        }
+
+        #expo {
+            /*display: none;*/
+        }
+
+        #container {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            row-gap: 20px;
+            /* display: grid;
+            /* min-height: 100vh; */
+            /* grid-template-columns: 1fr;
+            gap: 20px;
+            grid-auto-rows: 50px; */
+        }
+
+        .box {
+            position: relative;
+            padding: 10px;
+            text-align: center;
+            font-family: "Signika Negative", sans-serif;
+            background-color: rgba(236, 124, 124, 0.5);
+            color: #fff;
+            border-radius: 10px;
+            font-size: 2rem;
+            width: 500px;
+
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="container">
+        <div class="box" id="text1">slow text1 default</div>
+    </div>
+</body>
+<script>
+
+    // clearProps: 'transform'
+    gsap.to('#text1', { duration: 5, x: 600, ease: "steps(5)" });
+
+
+</script>
+
+</html>
