@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .textBg1 {
+            background-image: linear-gradient(90deg, #147B96, #E6D205 25%, #147B96 50%, #E6D205 75%, #147B96);
+            background-size: 200% 100%;
+            /* 文字渐变的关键属性 */
+            /* 文字填充色透明 */
+            -webkit-text-fill-color: transparent;
+            /* 背景按文字裁剪 chrome私人用品 */
+            -webkit-background-clip: text;
+            animation: text1MaskedAnimation 3s infinite linear;
+        }
+
+        @-webkit-keyframes text1MaskedAnimation {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: -100% 0;
+            }
+        }
+
+        .text2 {
+            font-size: 30px;
+            display: inline-block;
+            color: transparent;
+            background-image: linear-gradient(90deg, skyblue, red);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        .text3 {
+            color: #cce7f8;
+            font-size: 2.5rem;
+            -webkit-animation: shining 0.5s alternate infinite;
+            animation: shining 0.5s alternate infinite;
+        }
+
+        @-webkit-keyframes shining {
+            from {
+                text-shadow: 0 0 10px lightblue, 0 0 20px lightblue, 0 0 30px lightblue, 0 0 40px skyblue, 0 0 50px skyblue, 0 0 60px skyblue;
+            }
+
+            to {
+                text-shadow: 0 0 5px lightblue, 0 0 10px lightblue, 0 0 15px lightblue, 0 0 20px skyblue, 0 0 25px skyblue, 0 0 30px skyblue;
+            }
+        }
+
+        .text-wraper {
+            margin-top: 20px;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .typing-text {
+            color: white;
+            font-size: 2em;
+            width: 21em;
+            height: 1.5em;
+            /* border-right: 2px solid transparent; */
+            /* animation: typing 2s steps(42, end), blink-caret .75s step-end infinite; */
+            font-family: Consolas, Monaco;
+            word-break: break-all;
+            overflow: hidden;
+            animation: typing 2s steps(42, end);
+
+            &::after {
+                animation: blink-caret .75s step-end infinite;
+                content: '';
+                display: inline-block;
+                position: relative;
+                top: 4px;
+                height: 28px;
+                border-right: 2px solid transparent;
+            }
+        }
+
+        .typing-text2 {
+            color: white;
+            font-size: 2em;
+            width: 21em;
+            height: 1.5em;
+            border-right: 2px solid transparent;
+            animation: typing 2s steps(42, end), blink-caret .75s step-end infinite;
+            font-family: Consolas, Monaco;
+            word-break: break-all;
+            overflow: hidden;
+        }
+
+        /* 打印效果 */
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 21em;
+            }
+        }
+
+        /* 光标 */
+        @keyframes blink-caret {
+
+            from,
+            to {
+                border-color: transparent;
+            }
+
+            50% {
+                border-color: currentColor;
+            }
+        }
+
+        @keyframes animation-before {
+            0% {
+                clip-path: inset(0 0 0 0);
+            }
+
+            100% {
+                clip-path: inset(.62em 0 .29em 0);
+            }
+        }
+
+        @keyframes animation-after {
+            0% {
+                clip-path: inset(0 0 0 0);
+            }
+
+            100% {
+                clip-path: inset(.29em 0 .62em 0);
+            }
+        }
+
+        .error-text::before {
+            content: attr(data-text);
+            position: absolute;
+            left: -2px;
+            width: 100%;
+            background: black;
+            text-shadow: 2px 0 red;
+            animation: animation-before 3s infinite linear alternate-reverse;
+        }
+
+        .error-text::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 2px;
+            width: 100%;
+            background: black;
+            text-shadow: -2px 0 blue;
+            animation: animation-after 3s infinite linear alternate-reverse;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="textBg1">
+        <h2>我是一串神奇的文字</h2>
+    </div>
+    <div class="text2">
+        萨里的风景
+    </div>
+
+    <div class="text-wraper">
+        <div class="text3">我是一串神奇的文字</div>
+    </div>
+
+    <div class="text-wraper">
+        <div class="typing-text">Jxlust, I love you! Hello, world! </div>
+    </div>
+
+    <div class="text-wraper">
+        <div class="typing-text2">Jxlust, I love you! Hello, world! </div>
+    </div>
+
+
+    <div class="text-wraper">
+        <div class="error-text" data-text="Jxlust, I love you! Hello, world!">Jxlust, I love you! Hello, world! </div>
+    </div>
+
+</body>
+
+<script>
+
+    const cb = new Function("a", "b", "return a+b;");
+    console.log("sum:", cb(1, 2));
+</script>
+
+</html>

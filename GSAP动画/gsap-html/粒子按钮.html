@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <!-- <script src="../js/tsparticles.all.min.js"></script> -->
+    <script src="../js/tsparticles.confetti.bundle.min.js"></script>
+    <script src="../gsap-plugins/SplitText3.min.js"></script>
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            background-color: #e4ebf2;
+            color: #b6bbc2;
+            font-weight: 300;
+            font-style: normal;
+            font-size: 12px;
+            margin: 0;
+            padding: 75px;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 25px 0;
+        }
+
+        .button-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        #button1,
+        #button2 {
+            background-image: linear-gradient(90deg,
+                    rgba(35, 210, 255, 1) 0.3%,
+                    rgba(74, 104, 247, 1) 18.2%,
+                    rgba(133, 80, 255, 1) 36.4%,
+                    rgba(198, 59, 243, 1) 52.5%,
+                    rgba(250, 84, 118, 1) 68.8%,
+                    rgba(255, 223, 67, 1) 99.9%);
+        }
+
+        #button3,
+        #button4 {
+            background-image: linear-gradient(101.5deg,
+                    rgba(221, 91, 190, 1) 4.7%,
+                    rgba(253, 96, 135, 1) 38.2%,
+                    rgba(249, 172, 35, 1) 69.2%,
+                    rgba(246, 249, 35, 1) 100.2%);
+        }
+
+        #button5,
+        #button6 {
+            background-image: linear-gradient(68.7deg,
+                    rgba(29, 173, 235, 1) 13.2%,
+                    rgba(137, 149, 250, 1) 29.8%,
+                    rgba(229, 109, 212, 1) 48.9%,
+                    rgba(255, 68, 128, 1) 68.2%,
+                    rgba(255, 94, 0, 1) 86.4%);
+        }
+
+        button {
+            border-radius: 50px;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            text-shadow: 0px 2px 0px rgba(0, 0, 0, 0.15);
+            font-family: "Poppins", sans-serif;
+            font-weight: 700;
+            font-size: 30px;
+            position: relative;
+            text-decoration: none;
+            overflow: hidden;
+            box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 4px,
+                rgba(0, 0, 0, 0.2) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -4px 0px inset;
+            flex-shrink: 0;
+
+            span {
+                display: block;
+                padding: 12px 30px;
+            }
+
+            .active-text {
+                position: absolute;
+
+                div {
+                    transform: translatey(-60px);
+                }
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div class="button-wrapper">
+            <button class="btn" id="button1">
+                <span class="active-text text-node">Click me please!</span>
+                <span class="inactive-text text-node">Click me please!</span>
+            </button>
+        </div>
+
+        <div class="button-wrapper">
+            <button class="btn" id="button2">
+                <span class="active-text text-node">Click me please!</span>
+                <span class="inactive-text text-node">Click me please!</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <div class="button-wrapper">
+            <button class="btn" id="button3">
+                <span class="active-text text-node">Click me please!</span>
+                <span class="inactive-text text-node">Click me please!</span>
+            </button>
+        </div>
+
+        <div class="button-wrapper">
+            <button class="btn" id="button4">
+                <span class="active-text text-node">Click me please!</span>
+                <span class="inactive-text text-node">Click me please!</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <div class="button-wrapper">
+            <button class="btn" id="button5">
+                <span class="active-text text-node">Click me please!</span>
+                <span class="inactive-text text-node">Click me please!</span>
+            </button>
+        </div>
+
+        <div class="button-wrapper">
+            <button class="btn" id="button6">
+                <span class="active-text text-node">Click me please!</span>
+                <span class="inactive-text text-node">Click me please!</span>
+            </button>
+        </div>
+    </div>
+</body>
+
+<script>
+
+
+    class ButtonEffect {
+        constructor(effect) {
+            if (effect.config.random) {
+                this.randomizeArray(effect.textNodes.chars);
+                this.matchArraySort(effect.textNodes.chars, effect.activeTextNodes.chars);
+            }
+
+            effect.element.addEventListener("click", (e) => {
+                let reverse = effect.element.classList.contains("active") ? true : false;
+                effect.element.classList.toggle("active");
+                effect.handler(
+                    effect.element,
+                    effect.textNodes,
+                    effect.activeTextNodes,
+                    effect.nodes,
+                    effect.config,
+                    reverse
+                );
+                e.preventDefault();
+            });
+        }
+
+        randomizeArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        matchArraySort(referenceArr, arr) {
+            const referenceMap = new Map(
+                referenceArr.map((el, index) => [el.textContent, index])
+            );
+            arr.sort(
+                (a, b) =>
+                    referenceMap.get(a.textContent) - referenceMap.get(b.textContent)
+            );
+        }
+    }
+
+    const svgBounceEffect = (
+        element,
+        textNodes,
+        activeTextNodes,
+        nodes,
+        config,
+        reverse
+    ) => {
+        const {
+            duration,
+            ease,
+            y1,
+            y2,
+            scale1,
+            scale2,
+            elementDuration1,
+            elementDuration2,
+            textNodeDuration,
+            textNodeY1,
+            textNodeY2,
+            stagger,
+            confettiConfig,
+            confettiActive
+        } = config;
+        const tl = gsap.timeline();
+
+        if (confettiActive) {
+            confetti(element.id, confettiConfig);
+        }
+
+        tl.add("start")
+            .to(element, {
+                scale: scale1,
+                y: y1,
+                duration: elementDuration1
+            })
+            .to(element, {
+                scale: scale2,
+                y: y2,
+                duration: elementDuration2
+            })
+            .to(
+                textNodes.chars,
+                {
+                    duration: textNodeDuration,
+                    y: reverse ? textNodeY2 : textNodeY1,
+                    stagger: stagger,
+                    ease: ease
+                },
+                "start"
+            )
+            .to(
+                activeTextNodes.chars,
+                {
+                    duration: textNodeDuration,
+                    y: reverse ? textNodeY1 * -1 : textNodeY2,
+                    stagger: stagger,
+                    ease: ease
+                },
+                "start"
+            );
+    };
+
+    document.addEventListener("DOMContentLoaded", (event) => {
+        gsap.registerPlugin(SplitText);
+
+        const config = {
+            stagger: 0.05,
+            duration: 1,
+            random: true,
+            ease: "elastic.out(0.8, 0.3)",
+            y1: 12,
+            y2: 0,
+            scale1: 0.9,
+            scale2: 1,
+            elementDuration1: 0.1,
+            elementDuration2: 0.2,
+            textNodeDuration: 1,
+            textNodeY1: 60,
+            textNodeY2: 0,
+            confettiActive: true,
+            confettiConfig: {
+                particleCount: 50,
+                spread: 40,
+                origin: { y: 0.5 },
+                scalar: 1,
+                zIndex: -1
+            }
+        };
+
+        const button1 = document.getElementById("button1");
+        const button1Config = {
+            random: false
+        };
+        const button1Effect = {
+            element: button1,
+            handler: svgBounceEffect,
+            textNodes: new SplitText([button1.querySelector(".inactive-text")], {
+                type: "chars"
+            }),
+            activeTextNodes: new SplitText([button1.querySelector(".active-text")], {
+                type: "chars"
+            }),
+            config: { ...config, ...button1Config }
+        };
+
+        const button2 = document.getElementById("button2");
+        const button2Effect = {
+            element: button2,
+            handler: svgBounceEffect,
+            textNodes: new SplitText([button2.querySelector(".inactive-text")], {
+                type: "chars"
+            }),
+            activeTextNodes: new SplitText([button2.querySelector(".active-text")], {
+                type: "chars"
+            }),
+            config: config
+        };
+
+        const button3 = document.getElementById("button3");
+        const button3Config = {
+            ease: "steps(4)",
+            random: false,
+            textNodeDuration: 0.3,
+            confettiActive: true
+        };
+
+        const button3Effect = {
+            element: button3,
+            handler: svgBounceEffect,
+            textNodes: new SplitText([button3.querySelector(".inactive-text")], {
+                type: "chars"
+            }),
+            activeTextNodes: new SplitText([button3.querySelector(".active-text")], {
+                type: "chars"
+            }),
+            config: { ...config, ...button3Config }
+        };
+
+        const button4 = document.getElementById("button4");
+        const button4Config = {
+            ease: "steps(4)",
+            random: true,
+            textNodeDuration: 0.3,
+            confettiActive: true
+        };
+
+        const button4Effect = {
+            element: button4,
+            handler: svgBounceEffect,
+            textNodes: new SplitText([button4.querySelector(".inactive-text")], {
+                type: "chars"
+            }),
+            activeTextNodes: new SplitText([button4.querySelector(".active-text")], {
+                type: "chars"
+            }),
+            config: { ...config, ...button4Config }
+        };
+
+        const button5 = document.getElementById("button5");
+        const button5Config = {
+            ease: "circ.out",
+            random: false,
+            textNodeDuration: 0.3,
+            confettiActive: true
+        };
+
+        const button5Effect = {
+            element: button5,
+            handler: svgBounceEffect,
+            textNodes: new SplitText([button5.querySelector(".inactive-text")], {
+                type: "chars"
+            }),
+            activeTextNodes: new SplitText([button5.querySelector(".active-text")], {
+                type: "chars"
+            }),
+            config: { ...config, ...button5Config }
+        };
+
+        const button6 = document.getElementById("button6");
+        const button6Config = {
+            ease: "circ.out",
+            random: true,
+            textNodeDuration: 0.3,
+            confettiActive: true
+        };
+
+        const button6Effect = {
+            element: button6,
+            handler: svgBounceEffect,
+            textNodes: new SplitText([button6.querySelector(".inactive-text")], {
+                type: "chars"
+            }),
+            activeTextNodes: new SplitText([button6.querySelector(".active-text")], {
+                type: "chars"
+            }),
+            config: { ...config, ...button6Config }
+        };
+
+        new ButtonEffect(button1Effect);
+        new ButtonEffect(button2Effect);
+        new ButtonEffect(button3Effect);
+        new ButtonEffect(button4Effect);
+        new ButtonEffect(button5Effect);
+        new ButtonEffect(button6Effect);
+    });
+
+</script>
+
+</html>

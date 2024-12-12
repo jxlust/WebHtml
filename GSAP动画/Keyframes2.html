@@ -118,7 +118,12 @@
         rotate: 180,
         ease: 'elastic',
         duration: 5,
-        stagger: .5,
+        // stagger: .5,
+        stagger: {
+            amount: 2.5
+            // amount: 5 // 间隔总数秒，会平均分配到each
+            // each: 1 // 每个间隔时长 秒
+        }
     })
 </script>
 <script>

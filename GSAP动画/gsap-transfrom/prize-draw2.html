@@ -131,7 +131,17 @@
     }
 
     document.getElementById('start').addEventListener('click', () => {
-
+        gsap.to(boxList, {
+            rotation: '+=360',
+            ease: 'elastic',
+            duration: 5,
+            // stagger: .5,
+            stagger: {
+                amount: 4
+                // amount: 5 // 间隔总数秒，会平均分配到each
+                // each: 1 // 每个间隔时长 秒
+            }
+        })
     })
 
 </script>
