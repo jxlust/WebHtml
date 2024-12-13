@@ -243,7 +243,8 @@
         onRepeat: () => {
             console.log('onRepeat:', tween5.totalTime())
         },
-        onUpdate: () => {
+        onUpdate: (p) => {
+            console.log('onUpdateParams:', p)
             console.log('onUpdate:', tween5.totalTime())
             if (tween5.totalTime() >= 1.5) {
                 tween5.pause()

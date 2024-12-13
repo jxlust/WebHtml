@@ -9,6 +9,7 @@
     <!-- <script src="../js/tsparticles.all.min.js"></script> -->
     <!-- <script src="../js/tsparticles.confetti.bundle.min.js"></script> -->
     <script src="../gsap-plugins/SplitText3.min.js"></script>
+    <script src="../gsap-plugins/GSDevTools3.min.js"></script>
 
     <style>
         .grid {
@@ -61,6 +62,20 @@
                     rgba(255, 94, 0, 1) 86.4%);
         }
 
+        #btn3 {
+            background-image: linear-gradient(90deg,
+                    rgba(35, 210, 255, 1) 0.3%,
+                    rgba(74, 104, 247, 1) 18.2%,
+                    rgba(133, 80, 255, 1) 36.4%,
+                    rgba(198, 59, 243, 1) 52.5%,
+                    rgba(250, 84, 118, 1) 68.8%,
+                    rgba(255, 223, 67, 1) 99.9%);
+        }
+
+        #btn3 {
+            text-shadow: 0px 2px 0px rgb(255 88 255 / 60%);
+        }
+
         .color-text {
             font-size: 30px;
             display: inline-block;
@@ -74,6 +89,12 @@
             display: flex;
             align-items: center;
             column-gap: 20px;
+        }
+
+        button .active-text {
+            >div {
+                transform: translateY(-60px);
+            }
         }
     </style>
 </head>
@@ -91,8 +112,14 @@
 
         <div class="button-wrapper">
             <button id="btn2">
-                <span class="my-text active-text">我是一个有趣按钮文字一个一个来吧</span>
-                <span class="my-text inactive-text">我是一个有趣按钮文字一个一个来吧</span>
+                <span class="my-text active-text">我是一个有趣按钮点击吧一个一个来文字快乐起来吧</span>
+                <span class="my-text inactive-text">我是一个有趣按钮点击吧一个一个来文字快乐起来吧</span>
+            </button>
+        </div>
+
+        <div class="button-wrapper">
+            <button id="btn3">
+                <span class="my-text">我是一个有趣按钮</span>
             </button>
         </div>
 
@@ -102,6 +129,8 @@
 
 <script>
     const gloablTl = gsap.timeline();
+    gsap.registerPlugin(GSDevTools)
+
     function startEffect(element, mySplitText) {
         // tl.kill();
         if (gloablTl.isActive()) {
@@ -152,7 +181,7 @@
             textNodeY1: 60,
             textNodeY2: 0,
         }
-        
+
         const { ease, stagger, textNodeDuration, textNodeY1, textNodeY2 } = config;
         tl.add("start")
             .to(element, {
@@ -180,6 +209,7 @@
 
     document.addEventListener("DOMContentLoaded", (event) => {
         gsap.registerPlugin(SplitText);
+
         const btn1El = document.querySelector("#btn1");
         const mySplitText = new SplitText([btn1El.querySelector(".my-text")], {
             type: "chars"
@@ -192,6 +222,7 @@
         const activeTextNodes = new SplitText([btn2El.querySelector(".active-text")], {
             type: 'chars'
         });
+
         const textNodes = new SplitText([btn2El.querySelector(".inactive-text")], {
             type: 'chars'
         });
@@ -202,7 +233,48 @@
             startEffect2(btn2El, activeTextNodes, textNodes, reverse);
             e.preventDefault();
         });
+
+
     });
+
+</script>
+
+<script>
+    const btn3El = document.querySelector("#btn3");
+    btn3El.addEventListener("click", () => {
+        const tl = gsap.timeline({
+            id: 'tl3'
+        });
+        // tl.timeScale(2)
+        tl.to(btn3El, {
+            // keyframes: {
+            //     scale: [0.9, 1],
+            //     y: [12, 0]
+            // },
+            keyframes: [
+                {
+                    scale: 0.9,
+                    y: 12,
+                    duration: .1,
+                    // ease: 'none'
+                },
+                {
+                    scale: 1,
+                    y: 0,
+                    duration: .2,
+                    // ease: 'none'
+                }
+            ],
+            ease: 'power1.inOut',
+            // ease: 'circ.inOut',
+            // ease: 'elastic.inOut(1,0.3)',
+            duration: 0.3,
+        });
+        GSDevTools.create({
+            animation: tl
+        })
+        // GSDevTools.create();
+    })
 
 </script>
 
