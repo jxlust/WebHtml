@@ -243,8 +243,11 @@ $duration: 1.4s;
 <body>
     <p>stroke-dasharray 一个参数时： 表示一段虚线长度和每段虚线之间的间距; 两个参数或者多个参数时：一个表示长度，一个表示间距 </p>
     <p>stroke-dashoffset : 定义一条线，文本或元素距离（相当于基于position：relative；设置left值。只是不像left单纯的基于x方向设置，
-        stroke-dashoffset是基于svg路径设置的）</p>
-
+        stroke-dashoffset是基于svg路径设置的）偏移量就是正值(向左或者逆时针)/负值(向右或者顺时针)偏移stroke-dashoffset参数的大小。</p>
+    <p>偏移量计算具体可以看文档<a
+            href="https://developer.mozilla.org/en-US/docs/Web/CSS/stroke-dashoffset">https://developer.mozilla.org/en-US/docs/Web/CSS/stroke-dashoffset</a>，正常理解按
+        <b>正值(向左或者逆时针)/负值(向右或者顺时针)偏移stroke-dashoffset参数的大小</b>理解就行
+    </p>
     <p>stroke-linejoin 描边转角的表现方式: stroke-linejoin = miter
         stroke-linejoin = round
         stroke-linejoin = bevel

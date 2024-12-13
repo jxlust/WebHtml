@@ -38,6 +38,10 @@
                 display: block;
                 padding: 12px 30px;
             }
+
+            .active-text {
+                position: absolute;
+            }
         }
 
         #btn1 {
@@ -48,6 +52,15 @@
                     rgba(246, 249, 35, 1) 100.2%);
         }
 
+        #btn2 {
+            background-image: linear-gradient(68.7deg,
+                    rgba(29, 173, 235, 1) 13.2%,
+                    rgba(137, 149, 250, 1) 29.8%,
+                    rgba(229, 109, 212, 1) 48.9%,
+                    rgba(255, 68, 128, 1) 68.2%,
+                    rgba(255, 94, 0, 1) 86.4%);
+        }
+
         .color-text {
             font-size: 30px;
             display: inline-block;
@@ -55,6 +68,12 @@
             background-image: linear-gradient(90deg, #371add, #1d7b24 25%, #6a05ef 40%, #25b6cc 55%, #c1082d);
             -webkit-background-clip: text;
             background-clip: text;
+        }
+
+        .button-wrapper {
+            display: flex;
+            align-items: center;
+            column-gap: 20px;
         }
     </style>
 </head>
@@ -64,20 +83,37 @@
     <div class="grid">
         <div class="button-wrapper">
             <button id="btn1">
-                <span class="color-text">我是一个有趣按钮</span>
+                <span class="my-text">我是一个有趣按钮</span>
             </button>
+            <div class="box1">移动的文字</div>
         </div>
 
 
-        <div class="box1">box1</div>
+        <div class="button-wrapper">
+            <button id="btn2">
+                <span class="my-text active-text">我是一个有趣按钮文字一个一个来吧</span>
+                <span class="my-text inactive-text">我是一个有趣按钮文字一个一个来吧</span>
+            </button>
+        </div>
+
     </div>
 
 </body>
 
 <script>
-    function startEffect(element) {
-        const tl = gsap.timeline();
-        tl.add("start")
+    const gloablTl = gsap.timeline();
+    function startEffect(element, mySplitText) {
+        // tl.kill();
+        if (gloablTl.isActive()) {
+            return;
+        }
+        const textNodeDuration = 0.3;
+        const ease = "elastic.out(0.8, 0.3)"
+        const stagger = 0.05;
+        const textNodeY2 = 0;
+        const textNodeY1 = -60;
+        const reverse = false;
+        gloablTl.add("start")
             .to(element, {
                 scale: 0.9,
                 y: 12,
@@ -90,14 +126,81 @@
             }).to('.box1', {
                 x: '+=100',
                 duration: 1
+            }, 'start').from(mySplitText.chars, {
+                duration: textNodeDuration,
+                y: reverse ? textNodeY2 : textNodeY1,
+                stagger: stagger,
+                ease: ease
             }, 'start')
     }
+
+    function startEffect2(element, activeSplitText, splitText, reverse) {
+        console.log('rev:', reverse)
+        const tl = gsap.timeline();
+        const config = {
+            stagger: 0.05,
+            duration: 1,
+            random: false,
+            ease: "elastic.out(0.8, 0.3)",
+            y1: 12,
+            y2: 0,
+            scale1: 0.9,
+            scale2: 1,
+            elementDuration1: 0.1,
+            elementDuration2: 0.2,
+            textNodeDuration: 1,
+            textNodeY1: 60,
+            textNodeY2: 0,
+        }
+        
+        const { ease, stagger, textNodeDuration, textNodeY1, textNodeY2 } = config;
+        tl.add("start")
+            .to(element, {
+                scale: 0.9,
+                y: 12,
+                duration: 0.1
+            })
+            .to(element, {
+                scale: 1,
+                y: 0,
+                duration: 0.2
+            }).to(splitText.chars, {
+                duration: textNodeDuration,
+                y: reverse ? textNodeY2 : textNodeY1,
+                stagger: stagger,
+                ease: ease
+            }, 'start').to(activeSplitText.chars, {
+                duration: textNodeDuration,
+                y: reverse ? textNodeY1 * -1 : textNodeY2,
+                stagger: stagger,
+                ease: ease
+            }, 'start')
+    }
+
 
     document.addEventListener("DOMContentLoaded", (event) => {
         gsap.registerPlugin(SplitText);
         const btn1El = document.querySelector("#btn1");
+        const mySplitText = new SplitText([btn1El.querySelector(".my-text")], {
+            type: "chars"
+        })
         btn1El.addEventListener("click", () => {
-            startEffect(btn1El);
+            startEffect(btn1El, mySplitText);
+        });
+
+        const btn2El = document.querySelector("#btn2");
+        const activeTextNodes = new SplitText([btn2El.querySelector(".active-text")], {
+            type: 'chars'
+        });
+        const textNodes = new SplitText([btn2El.querySelector(".inactive-text")], {
+            type: 'chars'
+        });
+
+        btn2El.addEventListener("click", (e) => {
+            let reverse = btn2El.classList.contains("active") ? true : false;
+            btn2El.classList.toggle("active");
+            startEffect2(btn2El, activeTextNodes, textNodes, reverse);
+            e.preventDefault();
         });
     });
 

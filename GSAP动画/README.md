@@ -98,6 +98,17 @@ tl.to("#green", { duration: 1, x: 750 })
 
 ![图片2](./images/gsaptimeline2.png)
 
+position 理解[https://gsap.com/resources/position-parameter/](https://gsap.com/resources/position-parameter/)
+“+=” “-=” 是相对于当前 timeline 来计算的
+“<” “>”是相对于上一个动画来计算的
+
+- "+=1" - 1 second past the end of the timeline (creates a gap)
+- "-=1" - 1 second before the end of the timeline (overlaps)
+- "myLabel+=2" - 2 seconds past the label "myLabel"
+- "<+=3" - 3 seconds past the start of the previous animation
+- "<3" - same as "<+=3" (see above) ("+=" is implied when following "<" or ">")
+- ">-0.5" - 0.5 seconds before the end of the previous animation. It's like saying "the end of the previous animation plus -0.5"
+
 5. **管理时间轴**
 
    > 主时间轴添加模块化的各个动画时间轴,时间轴嵌套时间轴

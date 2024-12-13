@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../gsap-plugins/GSDevTools3.min.js"></script>
     <style>
         body {
             margin: 0;
@@ -49,26 +50,39 @@
 </body>
 
 <script>
+    gsap.registerPlugin(GSDevTools)
 
-    gsap.to('#box1', {
+
+
+    // link it to this specific timeline:
+    // GSDevTools.create({ animation: tl });
+    const tl = gsap.timeline({
+        id: 'timeline'
+    });
+    tl.to('#box1', {
         duration: 2,
-        rotation: '-170_short'
+        rotation: '-170_short',
+        id: 'box1'
     })
 
-    gsap.to('#box2', {
+    tl.to('#box2', {
         duration: 2,
-        rotation: '-170'
-    })
+        rotation: '-170',
+        id: 'box2'
+    }, '>')
 
     //or even use it on 3D rotations and use relative prefixes:
-    gsap.to('#box3', {
+    tl.to('#box3', {
         duration: 2,
         // rotation: "-170_short",
         rotationX: "-=30_ccw",
+        id: 'box3'
         // rotationX: '-30'
-
         // rotationY: "1.5rad_ccw",
-    });
+    }, '>1');
+
+    GSDevTools.create();
+
 </script>
 
 </html>

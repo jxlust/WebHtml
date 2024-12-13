@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .myPath {
+            stroke-dashoffset: 1px;
+            stroke-dasharray: 666px 0;
+            transform-origin: center;
+            stroke: skyblue;
+            animation: sign-name 10s ease forwards infinite;
+            animation-delay: 0s;
+
+        }
+
+        /*** 签名动画 **/
+        @keyframes sign-name {
+            0% {
+                stroke-dashoffset: 1px;
+                stroke-dasharray: 0 666px;
+                opacity: 0;
+                stroke: skyblue;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            40% {
+                stroke-dashoffset: 666px 0;
+                stroke: orange;
+            }
+
+            85% {
+                stroke-dashoffset: 666px 0;
+                stroke: green;
+            }
+
+            95%,
+            to {
+                stroke-dashoffset: 0 666px;
+                stroke: pink;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <p>
+        svg的动画效果可以使用gsap+DrawSVG3实现
+    </p>
+    <p> 这里利用纯css实现简单签名动画</p>
+
+
+    <svg width="204" height="141" viewBox="0 0 204 141" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path class="myPath"
+            d="M10 65C26 89 24.6667 105.667 22 111H10H1V105L39 74L75 105V65L45 105L124 2L120 115L158 140L203 105V89" />
+    </svg>
+
+
+</body>
+
+</html>
