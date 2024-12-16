@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- https://cdn.jsdelivr.net/npm/@tsparticles/fireworks@3.7.1/tsparticles.fireworks.bundle.min.js -->
+    <script src="./js/tsparticles.fireworks.bundle.min.js"> </script>
+    <style>
+        body {
+            margin: 0;
+            background-color: #dfdcdc;
+            padding: 20px;
+        }
+
+        .grid {
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fff;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, 100px);
+            grid-auto-rows: 32px;
+            gap: 20px;
+        }
+
+        .btn {
+            min-width: 0;
+            min-height: 0;
+            position: relative;
+            border-radius: 6px;
+            background-color: #dfdcdc;
+            z-index: 2;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        code {
+            padding: 2px 4px;
+            font-size: 90%;
+            color: #c7254e;
+            background-color: #f9f2f4;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="grid">
+        <div class="btn" id="effect1">effect1</div>
+        <div class="btn" id="effect2">effect2</div>
+        <div class="btn" id="effect3">effect3</div>
+    </div>
+
+
+    <div id="bg"></div>
+
+
+    <ul>
+        <li><code>background</code> String: The background color of the canvas, it can be any valid CSS color, can be
+            transparent as well.</li>
+        <li><code>brightness</code> Number or { min: number; max: number; }: The brightness offset applied to the
+            particles color, from -100
+            to 100.</li>
+        <li><code>colors</code> String or <em>Array&lt;String&gt;</em>: An array of color strings, in the HEX format...
+            you know, like <code>#bada55</code>.</li>
+        <li><code>gravity</code> Number or { min: number; max: number; }: The gravity applied to the fireworks
+            particles.</li>
+        <li><code>minHeight</code> Number or { min: number; max: number; }: The minimum height for fireworks explosions
+            (the lesser, the
+            higher).</li>
+        <li><code>rate</code> Number or { min: number; max: number; }: The rate of the fireworks explosions.</li>
+        <li><code>saturation</code> Number or { min: number; max: number; }: The saturation offset applied to the
+            particles color, from -100
+            to 100.</li>
+        <li><code>sounds</code> Boolean: Whether to play sounds or not.</li>
+        <li><code>speed</code> Number or { min: number; max: number; }: The speed of the fireworks particles.</li>
+        <li><code>splitCount</code> Number or { min: number; max: number; }: The number of particles to split the
+            emitter in.</li>
+    </ul>
+</body>
+
+<script>
+    document.getElementById('effect1').addEventListener('click', () => {
+        fireworks.create(document.getElementById('bg'), {
+            colors: ["#ffffff", "#ff0000"],
+            // sounds: true,
+        });
+    })
+
+    document.getElementById('effect2').addEventListener('click', () => {
+    })
+
+    document.getElementById('effect3').addEventListener('click', () => {
+    })
+</script>
+
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/tsparticles.bundle.min.js">
+
+    </script>
+    <style>
+        body {
+            margin: 0;
+            background-color: #dfdcdc;
+            padding: 20px;
+        }
+
+        .grid {
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fff;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, 200px);
+            grid-auto-rows: 200px;
+            gap: 20px;
+        }
+
+        .btn {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* transform: scale(1); */
+            transform: translate(0, 0);
+            /* filter: blur(1px); */
+            z-index: 2;
+        }
+
+        .box {
+            display: block;
+            min-width: 0;
+            min-height: 0;
+            position: relative;
+            border-radius: 6px;
+            background-color: #dfdcdc;
+            z-index: 2;
+        }
+
+        .box:nth-child(2n) {
+            background-color: aquamarine;
+        }
+
+        .box:nth-child(2n+1) {
+            background-color: burlywood;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="grid">
+        <div class="box">
+            <div id="btn1" class="btn"></div>
+        </div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+
+    <div id="bg"></div>
+</body>
+
+<script>
+    function addClick(id, callback) {
+        document.getElementById(id).addEventListener('click', callback)
+    }
+
+
+    async function init() {
+        await loadFull(tsParticles);
+        await tsParticles.load({
+            id: "bg",
+            options: {
+                /* options */
+                background: {
+                    color: {
+                        value: "#0d47a1",
+                    },
+                },
+                fpsLimit: 120,
+                interactivity: {
+                    events: {
+                        onClick: {
+                            enable: true,
+                            mode: "push",
+                        },
+                        onHover: {
+                            enable: true,
+                            mode: "repulse",
+                        },
+                        resize: true,
+                    },
+                    modes: {
+                        push: {
+                            quantity: 4,
+                        },
+                        repulse: {
+                            distance: 200,
+                            duration: 0.4,
+                        },
+                    },
+                },
+                particles: {
+                    color: {
+                        value: "#ffffff",
+                    },
+                    links: {
+                        color: "#ffffff",
+                        distance: 150,
+                        enable: true,
+                        opacity: 0.5,
+                        width: 1,
+                    },
+                    move: {
+                        direction: "none",
+                        enable: true,
+                        outModes: {
+                            default: "bounce",
+                        },
+                        random: false,
+                        speed: 6,
+                        straight: false,
+                    },
+                    number: {
+                        density: {
+                            enable: true,
+                            area: 800,
+                        },
+                        value: 80,
+                    },
+                    opacity: {
+                        value: 0.5,
+                    },
+                    shape: {
+                        type: "circle",
+                    },
+                    size: {
+                        value: { min: 1, max: 5 },
+                    },
+                },
+                detectRetina: true,
+            },
+        });
+    }
+
+    init();
+
+    addClick('btn1', async () => {
+
+        // css层叠上下文，这里生成的canvas是fixed定位，所以会脱离文档流
+        // Fixed定位脱离Viewport的bug
+        // 对于声明transfrom值非none元素，其子元素中若存在position: fixed将以声明transform的最近祖先作为基准而定位，
+        // 这是因为transfrom值非none的元素定义了一个局部坐标系统，导致postion: fixed以此坐标系统计算布局。
+
+
+        const json = {
+            "fullScreen": {
+                "zIndex": 1
+            },
+            "particles": {
+                "number": {
+                    "value": 0
+                },
+                "color": {
+                    "value": [
+                        "#00FFFC",
+                        "#FC00FF",
+                        "#fffc00"
+                    ]
+                },
+                "shape": {
+                    "type": [
+                        "circle",
+                        "square"
+                    ],
+                    "options": {}
+                },
+                "opacity": {
+                    "value": {
+                        "min": 0,
+                        "max": 1
+                    },
+                    "animation": {
+                        "enable": true,
+                        "speed": 2,
+                        "startValue": "max",
+                        "destroy": "min"
+                    }
+                },
+                "size": {
+                    "value": {
+                        "min": 2,
+                        "max": 4
+                    }
+                },
+                "links": {
+                    "enable": false
+                },
+                "life": {
+                    "duration": {
+                        "sync": true,
+                        "value": 5
+                    },
+                    "count": 1
+                },
+                "move": {
+                    "enable": true,
+                    "gravity": {
+                        "enable": true,
+                        "acceleration": 10
+                    },
+                    "speed": {
+                        "min": 10,
+                        "max": 20
+                    },
+                    "decay": 0.1,
+                    "direction": "none",
+                    "straight": false,
+                    "outModes": {
+                        "default": "destroy",
+                        "top": "none"
+                    }
+                },
+                "rotate": {
+                    "value": {
+                        "min": 0,
+                        "max": 360
+                    },
+                    "direction": "random",
+                    "move": true,
+                    "animation": {
+                        "enable": true,
+                        "speed": 60
+                    }
+                },
+                "tilt": {
+                    "direction": "random",
+                    "enable": true,
+                    "move": true,
+                    "value": {
+                        "min": 0,
+                        "max": 360
+                    },
+                    "animation": {
+                        "enable": true,
+                        "speed": 60
+                    }
+                },
+                "roll": {
+                    "darken": {
+                        "enable": true,
+                        "value": 25
+                    },
+                    "enable": true,
+                    "speed": {
+                        "min": 15,
+                        "max": 25
+                    }
+                },
+                "wobble": {
+                    "distance": 30,
+                    "enable": true,
+                    "move": true,
+                    "speed": {
+                        "min": -15,
+                        "max": 15
+                    }
+                }
+            },
+            "emitters": {
+                "life": {
+                    "count": 1,
+                    "duration": 0.1,
+                    "delay": 0.4
+                },
+                "rate": {
+                    "delay": 0.1,
+                    "quantity": 150
+                },
+                "size": {
+                    "width": 0,
+                    "height": 0
+                }
+            }
+        }
+
+        tsParticles.load({
+            id: 'btn1',
+            options: json,
+        })
+    })
+
+
+</script>
+
+</html>
