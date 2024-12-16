@@ -53,7 +53,8 @@
                     rgba(246, 249, 35, 1) 100.2%);
         }
 
-        #btn2 {
+        #btn2,
+        #btn4 {
             background-image: linear-gradient(68.7deg,
                     rgba(29, 173, 235, 1) 13.2%,
                     rgba(137, 149, 250, 1) 29.8%,
@@ -123,7 +124,15 @@
             </button>
         </div>
 
+
+        <div class="button-wrapper">
+            <button id="btn4">
+                <span class="my-text active-text">我是一个有趣按钮点击吧一个一个来文字快乐起来吧</span>
+                <span class="my-text inactive-text">我是一个有趣按钮点击吧一个一个来文字快乐起来吧</span>
+            </button>
+        </div>
     </div>
+
 
 </body>
 
@@ -131,13 +140,34 @@
     const gloablTl = gsap.timeline();
     gsap.registerPlugin(GSDevTools)
 
+    function randomizeTextChars(chars, activeChars) {
+        const replaceHistory = new Map();
+        const length = chars.length;
+        for (let i = length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            replaceHistory.set(i, j)
+        }
+        // [chars[i], chars[j]] = [chars[j], chars[i]];
+        for (let i = length - 1; i > 0; i--) {
+            const j = replaceHistory.get(i);
+            // swap the characters
+            [chars[i], chars[j]] = [chars[j], chars[i]];
+            [activeChars[i], activeChars[j]] = [activeChars[j], activeChars[i]];
+        }
+        console.log('replaceHistory:', replaceHistory)
+        // console.log('t:', chars.map(item => item.textContent))
+        // console.log('a:', activeChars.map(item => item.textContent))
+    }
+
     function startEffect(element, mySplitText) {
         // tl.kill();
         if (gloablTl.isActive()) {
             return;
         }
         const textNodeDuration = 0.3;
-        const ease = "elastic.out(0.8, 0.3)"
+        // const ease = "elastic.out(0.8, 0.3)"
+        const ease = "circ.out";
+        // const ease = 'steps(4)';
         const stagger = 0.05;
         const textNodeY2 = 0;
         const textNodeY1 = -60;
@@ -206,6 +236,28 @@
             }, 'start')
     }
 
+    function registerBtnClick(selector, options = {
+        random: false,
+    }) {
+        const { random } = options;
+        const btnEl = document.querySelector(selector);
+        const activeTextNodes = new SplitText([btnEl.querySelector(".active-text")], {
+            type: 'chars'
+        });
+        const textNodes = new SplitText([btnEl.querySelector(".inactive-text")], {
+            type: 'chars'
+        });
+        if (random) {
+            randomizeTextChars(activeTextNodes.chars, textNodes.chars)
+        }
+
+        btnEl.addEventListener("click", (e) => {
+            let reverse = btnEl.classList.contains("active") ? true : false;
+            btnEl.classList.toggle("active");
+            startEffect2(btnEl, activeTextNodes, textNodes, reverse);
+            e.preventDefault();
+        });
+    }
 
     document.addEventListener("DOMContentLoaded", (event) => {
         gsap.registerPlugin(SplitText);
@@ -218,22 +270,11 @@
             startEffect(btn1El, mySplitText);
         });
 
-        const btn2El = document.querySelector("#btn2");
-        const activeTextNodes = new SplitText([btn2El.querySelector(".active-text")], {
-            type: 'chars'
-        });
+        registerBtnClick('#btn2')
 
-        const textNodes = new SplitText([btn2El.querySelector(".inactive-text")], {
-            type: 'chars'
+        registerBtnClick('#btn4', {
+            random: true,
         });
-
-        btn2El.addEventListener("click", (e) => {
-            let reverse = btn2El.classList.contains("active") ? true : false;
-            btn2El.classList.toggle("active");
-            startEffect2(btn2El, activeTextNodes, textNodes, reverse);
-            e.preventDefault();
-        });
-
 
     });
 
@@ -241,6 +282,7 @@
 
 <script>
     const btn3El = document.querySelector("#btn3");
+    let flag = true;
     btn3El.addEventListener("click", () => {
         const tl = gsap.timeline({
             id: 'tl3'
@@ -270,10 +312,14 @@
             // ease: 'elastic.inOut(1,0.3)',
             duration: 0.3,
         });
-        GSDevTools.create({
-            animation: tl
-        })
-        // GSDevTools.create();
+        if (flag) {
+            GSDevTools.create({
+                animation: tl
+            })
+            // GSDevTools.create();
+        }
+        flag = false;
+
     })
 
 </script>
