@@ -87,11 +87,15 @@
     document.getElementById('effect1').addEventListener('click', () => {
         fireworks.create(document.getElementById('bg'), {
             colors: ["#ffffff", "#ff0000"],
-            // sounds: true,
+            sounds: false,
         });
     })
 
     document.getElementById('effect2').addEventListener('click', () => {
+        fireworks.create(document.getElementById('bg'), {
+            sounds: false,
+            background: '#ff0000',
+        });
     })
 
     document.getElementById('effect3').addEventListener('click', () => {
