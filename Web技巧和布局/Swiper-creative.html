@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .motion {
+            padding: 0 24px;
+            height: 240px;
+            position: relative;
+            overflow: hidden;
+            perspective: 1200px;
+            transform-style: preserve-3d;
+            /* border: 1px solid var(--color-outline-variant) */
+        }
+
+        .motion * {
+            transform-style: preserve-3d
+        }
+
+        .page {
+            background: #fff;
+            width: 320px;
+            height: 100%;
+            position: relative;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0 16px;
+            overflow: hidden
+        }
+
+        .swiper {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%
+        }
+
+        .swiper .wrapper {
+            transform: translateX(calc(-80px - 16px - 16px));
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start
+        }
+
+        .swiper-slide {
+            height: 200px;
+            width: 160px;
+            margin-right: 16px;
+            flex-shrink: 0
+        }
+
+        .swiper-slide-bg {
+            background: rgb(238, 173, 173);
+            border-radius: 16px;
+            width: 100%;
+            height: 100%
+        }
+
+        .motion {
+            border: none;
+            padding: 0;
+            height: 100%
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        .motion-creative .swiper {
+            perspective: 1200px
+        }
+
+        .motion-creative .wrapper {
+            transform: translateX(calc(160px / 2 - 16px));
+            width: 160px;
+            height: 200px
+        }
+
+        .motion-creative .swiper-slide {
+            position: absolute;
+            left: 0
+        }
+
+        .motion-creative .swiper-slide:first-child {
+            animation: motion-creative-slide-1 4s infinite
+        }
+
+        .motion-creative .swiper-slide:nth-child(2) {
+            animation: motion-creative-slide-2 4s infinite;
+            left: 240px
+        }
+
+        .motion-creative .swiper-slide:nth-child(3) {
+            animation: motion-creative-slide-3 4s infinite;
+            left: 0;
+            transform-origin: right;
+            transform: rotateY(-90deg)
+        }
+
+        @keyframes motion-creative-slide-1 {
+            0% {
+                transform: translateX(0);
+                opacity: 1
+            }
+
+            25% {
+                transform: translateZ(-200px);
+                opacity: .33
+            }
+
+            100%,
+            50% {
+                opacity: 0
+            }
+        }
+
+        @keyframes motion-creative-slide-2 {
+            0% {
+                transform: translateX(0) rotate(90deg);
+                transform-origin: center
+            }
+
+            25%,
+            50% {
+                transform: translateX(-240px);
+                transform-origin: center
+            }
+
+            50.01% {
+                transform-origin: left
+            }
+
+            100%,
+            75% {
+                transform-origin: left;
+                transform: translateX(-360px) rotateY(90deg)
+            }
+        }
+
+        @keyframes motion-creative-slide-3 {
+
+            0%,
+            50% {
+                transform: translateX(120px) rotateY(-90deg)
+            }
+
+            100%,
+            75% {
+                transform: translateX(0) rotateY(0)
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="motion motion-creative">
+        <div class="page">
+            <div class="swiper">
+                <div class="wrapper">
+                    <div class="swiper-slide">
+                        <div class="swiper-slide-bg"></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="swiper-slide-bg"></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="swiper-slide-bg"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

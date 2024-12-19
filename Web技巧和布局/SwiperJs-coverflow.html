@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Swiper demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <!-- Demo styles -->
+    <style>
+        html,
+        body {
+            position: relative;
+            height: 100%;
+
+        }
+
+        .iphone {
+            position: relative;
+            width: 375px;
+            height: 667px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            background-color: #f8f8f8;
+        }
+
+        body {
+            background: #eee;
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: #000;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, 375px);
+            grid-auto-rows: 667px;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .swiper {
+            width: 100%;
+        }
+
+        .mySwiper {
+            perspective: 1200px;
+        }
+
+        .swiper-slide {
+            background-position: center;
+            background-size: cover;
+            width: 240px;
+            height: 300px;
+            transition-timing-function: ease-out;
+            /* transition-timing-function: ease-in; */
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 240px;
+            height: 300px;
+            object-fit: cover;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="iphone">
+        <!-- Swiper -->
+        <div class="swiper mySwiper" id="swiper1">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+                </div>
+            </div>
+            <div class="swiper-pagination" id="pag1"></div>
+        </div>
+    </div>
+
+
+    <div class="iphone">
+        <!-- Swiper -->
+        <div class="swiper mySwiper" id="swiper2">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+                </div>
+            </div>
+            <!-- <div class="swiper-pagination"></div> -->
+        </div>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        // 3D perspective translateZ 尺寸之间的关系
+        // 1 + (translateZ * -1) / perspective
+        // 比如这里 1 + (-400 * -1)/1200 = 1.33333
+        // 240 * 300 => 180 * 225
+
+        var swiper = new Swiper("#swiper1", {
+            effect: "coverflow",
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: "auto",
+            coverflowEffect: {
+                rotate: 0,
+                // scale: 0.8,
+                stretch: 0,
+                depth: 400,
+
+                // depth和rotate和stretch的倍率，相当于depth*modifier、rotate*modifier、stretch*modifier，值越大这三个参数的效果越明显。
+                modifier: 1,
+                //  是否开启阴影，开启后会有左右两个阴影的div
+                slideShadows: false,
+                // 间隙
+                stretch: -60
+            },
+            // pagination: false,
+            pagination: {
+                el: "#pag1",
+                clickable: true,
+                // renderBullet: function (index, className) {
+                //     return '<span class="' + className + '">' + (index + 1) + "</span>";
+                // },
+            },
+        });
+
+
+        var swiper = new Swiper("#swiper2", {
+            effect: "coverflow",
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: "auto",
+            coverflowEffect: {
+                rotate: 0,
+                scale: 0.8,
+                stretch: 0,
+                depth: 0,
+                // depth和rotate和stretch的倍率，相当于depth*modifier、rotate*modifier、stretch*modifier，值越大这三个参数的效果越明显。
+                modifier: 1,
+                //  是否开启阴影，开启后会有左右两个阴影的div
+                slideShadows: false,
+                // 间隙
+                stretch: 0
+            },
+            pagination: false,
+            // pagination: {
+            //     el: ".swiper-pagination",
+            // },
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            transform-style: preserve-3d;
+            perspective: 100px;
+            position: relative;
+            width: 100px;
+            background-color: gray;
+        }
+
+        .box {
+            display: block;
+            transform: translateZ(50px);
+            width: 100px;
+            height: 100px;
+            background-color: skyblue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="box"></div>
+    </div>
+</body>
+<script>
+    // ‌perspective属性与容器宽度（W）和Z轴距离（Z）之间的关系可以通过以下公式表示‌：
+
+    // [ \frac{W \times Z}{P - Z} + W = D ]
+
+    // 1 + (translateZ * -1) / perspective
+    //scale  1 + （50 * -1）/ 100 = 1 - 0.5 = 0.5
+    
+
+    // 其中，D是最终浏览器渲染的大小，P是perspective的值‌1。
+
+    // 公式解释
+    // ‌W‌：容器的宽度。
+    // ‌Z‌：物体在Z轴上的位移距离。
+    // ‌P‌：perspective的值。
+    // ‌D‌：最终渲染的大小。
+</script>
+
+</html>

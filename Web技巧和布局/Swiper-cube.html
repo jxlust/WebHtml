@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .motion {
+            padding: 0 24px;
+            height: 240px;
+            position: relative;
+            overflow: hidden;
+            perspective: 1200px;
+            transform-style: preserve-3d;
+            /* border: 1px solid var(--color-outline-variant) */
+        }
+
+        .motion * {
+            transform-style: preserve-3d
+        }
+
+        .page {
+            background: #fff;
+            width: 320px;
+            height: 100%;
+            position: relative;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0 16px;
+            overflow: hidden
+        }
+
+        .swiper {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%
+        }
+
+        .swiper .wrapper {
+            transform: translateX(calc(-80px - 16px - 16px));
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start
+        }
+
+        .swiper-slide {
+            height: 200px;
+            width: 160px;
+            margin-right: 16px;
+            flex-shrink: 0
+        }
+
+        .swiper-slide-bg {
+            background: #b5e8f6;
+            border-radius: 16px;
+            width: 100%;
+            height: 100%
+        }
+
+        .motion {
+            border: none;
+            padding: 0;
+            height: 100%
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        .motion-cube .swiper {
+            perspective: 1200px
+        }
+
+        .motion-cube .wrapper {
+            animation: motion-cube 2s infinite;
+            width: 160px;
+            height: 200px;
+            transform: translateX(calc(80px - 16px));
+            transform-origin: 50% 50% -80px
+        }
+
+        .motion-cube .swiper-slide {
+            border-radius: 0;
+            margin-right: 0;
+            backface-visibility: hidden
+        }
+
+        .motion-cube .swiper-slide:first-child {
+            animation: motion-cube-slide-1 2s infinite
+        }
+
+        .motion-cube .swiper-slide:nth-child(2) {
+            transform-origin: left;
+            transform: rotateY(90deg);
+            animation: motion-cube-slide-2 2s infinite
+        }
+
+        .motion-cube .swiper-slide-bg {
+            border-radius: 0
+        }
+
+        @keyframes motion-cube {
+            0% {
+                transform: translateX(calc(80px - 16px)) rotateY(0)
+            }
+
+            50% {
+                transform: translateX(calc(80px - 16px)) rotateY(-90deg)
+            }
+
+            100% {
+                transform: translateX(calc(80px - 16px)) rotateY(-90deg)
+            }
+        }
+
+        @keyframes motion-cube-slide-1 {
+            0% {
+                opacity: 1
+            }
+
+            100%,
+            50% {
+                opacity: .25
+            }
+        }
+
+        @keyframes motion-cube-slide-2 {
+            0% {
+                opacity: .25
+            }
+
+            100%,
+            50% {
+                opacity: 1
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="motion motion-cube">
+        <div class="page">
+            <div class="swiper">
+                <div class="wrapper">
+                    <div class="swiper-slide">
+                        <div class="swiper-slide-bg"></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="swiper-slide-bg"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .motion {
+            padding: 0 24px;
+            height: 240px;
+            position: relative;
+            overflow: hidden;
+            perspective: 1200px;
+            transform-style: preserve-3d;
+            /* border: 1px solid var(--color-outline-variant) */
+        }
+
+        .motion * {
+            transform-style: preserve-3d
+        }
+
+        .page {
+            background: #fff;
+            width: 320px;
+            height: 100%;
+            position: relative;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0 16px;
+            overflow: hidden
+        }
+
+        .swiper {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%
+        }
+
+        .swiper .wrapper {
+            transform: translateX(calc(-80px - 16px - 16px));
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start
+        }
+
+        .swiper-slide {
+            height: 200px;
+            width: 160px;
+            margin-right: 16px;
+            flex-shrink: 0
+        }
+
+        .swiper-slide-bg {
+            background: #e9eefa;
+            border-radius: 16px;
+            width: 100%;
+            height: 100%
+        }
+
+        .motion {
+            border: none;
+            padding: 0;
+            height: 100%
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        .motion-coverflow .swiper {
+            perspective: 1200px
+        }
+
+        .motion-coverflow .swiper-slide {
+            animation: motion-coverflow 2s infinite
+        }
+
+        .motion-coverflow .swiper-slide:first-child .swiper-slide-bg {
+            animation: motion-coverflow-slide-1 2s infinite
+        }
+
+        .motion-coverflow .swiper-slide:nth-child(2) .swiper-slide-bg {
+            animation: motion-coverflow-slide-2 2s infinite
+        }
+
+        .motion-coverflow .swiper-slide:nth-child(3) .swiper-slide-bg {
+            animation: motion-coverflow-slide-3 2s infinite
+        }
+
+        .motion-coverflow .swiper-slide:nth-child(4) .swiper-slide-bg {
+            animation: motion-coverflow-slide-4 2s infinite
+        }
+
+        @keyframes motion-coverflow {
+            0% {
+                transform: translateX(0)
+            }
+
+            50% {
+                transform: translateX(calc(-100% - 16px))
+            }
+
+            100% {
+                transform: translateX(calc(-100% - 16px))
+            }
+        }
+
+        @keyframes motion-coverflow-slide-1 {
+            0% {
+                opacity: .33;
+                transform: translateX(16px) translateZ(-164px) rotateY(45deg)
+            }
+
+            100%,
+            50% {
+                opacity: .33;
+                transform: translateX(16px) translateZ(-164px) rotateY(45deg)
+            }
+        }
+
+        @keyframes motion-coverflow-slide-2 {
+            0% {
+                transform: none;
+                opacity: 1
+            }
+
+            100%,
+            50% {
+                opacity: .33;
+                transform: translateX(16px) translateZ(-164px) rotateY(45deg)
+            }
+        }
+
+        @keyframes motion-coverflow-slide-3 {
+            0% {
+                opacity: .33;
+                transform: translateX(-16px) translateZ(-164px) rotateY(-45deg)
+            }
+
+            100%,
+            50% {
+                transform: none;
+                opacity: 1
+            }
+        }
+
+        @keyframes motion-coverflow-slide-4 {
+            0% {
+                opacity: .33;
+                transform: translateX(-16px) translateZ(-164px) rotateY(-45deg)
+            }
+
+            100%,
+            50% {
+                opacity: .33;
+                transform: translateX(-16px) translateZ(-164px) rotateY(-45deg)
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="motion motion-coverflow">
+        <div class="page">
+            <div class="swiper">
+                <div class="wrapper">
+                    <div class="swiper-slide">
+                        <div class="swiper-slide-bg"></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="swiper-slide-bg"></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="swiper-slide-bg"></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="swiper-slide-bg"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
