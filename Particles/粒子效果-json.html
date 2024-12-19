@@ -112,10 +112,33 @@
             height: 100vh;
             z-index: 9;
         }
+
+        .btn>span {
+            margin: 0 6px;
+        }
     </style>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"
-        integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+    <style>
+        @font-face {
+            font-family: 'jxl-iconfont';
+            src: url('./webfonts/iconfont.woff2?t=1734410083464') format('woff2'),
+                url('./webfonts/iconfont.woff?t=1734410083464') format('woff'),
+                url('./webfonts/iconfont.ttf?t=1734410083464') format('truetype');
+        }
+
+        .myiconfont {
+            color: #fff;
+            font-family: "jxl-iconfont" !important;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: bold;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"
+        integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" /> -->
 
 </head>
 
@@ -129,13 +152,26 @@
             <div id="btn2" class="btn">font-awesome</div>
         </div>
         <div class="box">
-            <div id="btn3" class="btn"></div>
+            <div id="btn3" class="btn">snow</div>
         </div>
+
         <div class="box">
-            <div id="btn4" class="btn">
+            <div id="btn4" class="btn">snow-shape</div>
+        </div>
+
+        <div class="box">
+            <div class="btn">
                 <span class="fa"></span>
+                <span class="fab">&#xf179;</span>
+                <span class="fa">&#xf5d1;</span>
             </div>
         </div>
+
+        <div class="box">
+            <!-- "\ue602" -->
+            <span class="myiconfont">&#xe602;</span>
+        </div>
+
     </div>
 
     <div id="bg"></div>
@@ -173,12 +209,18 @@
         })
     })
 
-    document.getElementById('btn3').addEventListener('click', () => {
+    document.getElementById('btn3').addEventListener('click', async () => {
+        await tsParticles.load({
+            id: 'bg',
+            url: './json/snow.json'
+        })
     })
 
-    document.getElementById('btn4').addEventListener('click', () => {
-
-
+    document.getElementById('btn4').addEventListener('click', async () => {
+        await tsParticles.load({
+            id: 'bg',
+            url: './json/snow-shape.json'
+        })
     })
 
 
