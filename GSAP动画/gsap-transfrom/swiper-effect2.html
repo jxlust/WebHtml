@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../gsap-plugins/GSDevTools3.min.js"></script>
+
+    <style>
+        .motion {
+            padding: 0 24px;
+            height: 240px;
+            position: relative;
+            overflow: hidden;
+            perspective: 1200px;
+            transform-style: preserve-3d;
+            /* border: 1px solid var(--color-outline-variant) */
+        }
+
+        .motion * {
+            transform-style: preserve-3d
+        }
+
+        .page {
+            background: #fff;
+            width: 320px;
+            height: 100%;
+            position: relative;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0 16px;
+            overflow: hidden
+        }
+
+        .swiper {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%
+        }
+
+        .swiper .wrapper {
+            /* transform: translateX(calc(-80px - 16px - 16px)); */
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start
+        }
+
+        .swiper-slide {
+            height: 200px;
+            width: 160px;
+            margin-right: 16px;
+            flex-shrink: 0
+        }
+
+        .swiper-slide-bg {
+            background: #e9eefa;
+            border-radius: 16px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+
+        }
+
+        .motion {
+            border: none;
+            padding: 0;
+            height: 100%
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        .motion-coverflow .swiper {
+            perspective: 1200px
+        }
+
+        .test {
+            margin-top: 100px;
+            width: 40px;
+            height: 20px;
+            background-color: skyblue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="motion motion-coverflow">
+        <div class="page">
+            <div class="swiper">
+                <div class="wrapper" id="myWraper">
+                    <div class="swiper-slide" id="s1">
+                        <div class="swiper-slide-bg">1</div>
+                    </div>
+                    <div class="swiper-slide" id="s2">
+                        <div class="swiper-slide-bg">2</div>
+                    </div>
+                    <div class="swiper-slide" id="s3">
+                        <div class="swiper-slide-bg">3</div>
+                    </div>
+                    <div class="swiper-slide" id="s4">
+                        <div class="swiper-slide-bg">4</div>
+                    </div>
+                    <div class="swiper-slide" id="s5">
+                        <div class="swiper-slide-bg">1</div>
+                    </div>
+                    <div class="swiper-slide" id="s6">
+                        <div class="swiper-slide-bg">2</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="test">1</div>
+
+</body>
+
+<script>
+    gsap.registerPlugin(GSDevTools);
+    const tl = gsap.timeline({
+        id: 'swiper'
+    });
+
+    gsap.set('#myWraper', {
+        x: -112,
+    })
+
+    const xPercentList = [];
+    for (let i = 0; i < 6; i++) {
+        xPercentList.push(-55.6 * i);
+    }
+    console.log(xPercentList)
+    tl.to('#myWraper', {
+        duration: 4,
+        // repeat: -1,
+        // ease: "steps(4)",
+        keyframes: {
+            // (688-288) /288= 1.38 = 138%
+            // [0, -34.5, -69, -103.5, -138, ]
+            xPercent: xPercentList,
+            // ease: 'none',
+            // easeEach: 'power2.inOut'
+            ease: 'power2.inOut',
+            easeEach: 'none'
+        },
+        delay: 1,
+        // repeatDelay: 1,
+    })
+
+    //     x: 16,
+    //     opacity: 0.33,
+    //     z: -164,
+    //     rotationY: 45,
+    //     duration: 1,
+    //     stagger: 1
+    // }, 0)
+
+
+
+
+
+
+    GSDevTools.create();
+
+
+</script>
+
+</html>

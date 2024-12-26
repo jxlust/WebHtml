@@ -1,0 +1,181 @@
+// Settings -------------------
+@coin_diam: 160px;
+@coin_depth: (@coin_diam * 0.1);
+@spin_speed: 2s;
+
+// Wrapper --------------------
+.purse {
+  height: @coin_diam;
+  width: @coin_diam;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: (@coin_diam * -0.5);
+  margin-left: (@coin_diam * -0.5);
+
+  -webkit-perspective: 1000;
+  -webkit-box-reflect: below 0
+    linear-gradient(
+      hsla(0, 0%, 100%, 0),
+      hsla(0, 0%, 100%, 0) 45%,
+      hsla(0, 0%, 100%, 0.2)
+    );
+  -webkit-filter: ~"saturate(1.45) hue-rotate(2deg)";
+}
+
+// The Coin -------------------
+.coin {
+  height: @coin_diam;
+  width: @coin_diam;
+  position: absolute;
+
+  -webkit-transform-style: preserve-3d;
+  -webkit-transform-origin: 50%;
+
+  -webkit-animation: spin @spin_speed infinite;
+  -webkit-animation-timing-function: linear;
+
+  // Faces --------------------
+  .front,
+  .back {
+    position: absolute;
+
+    height: @coin_diam;
+    width: @coin_diam;
+
+    border-radius: 50%;
+    background-size: cover;
+  }
+
+  .front {
+    -webkit-transform: translateZ((@coin_depth / 2));
+    // Images are included at the end...
+  }
+
+  .back {
+    -webkit-transform: translateZ((@coin_depth / -2)) rotateY(180deg);
+    // Images are included at the end...
+  }
+
+  // The Side -----------------
+  // Reveal the ‘secret’ by adding
+  // .skeleton to the coin element.
+  .side {
+    // How many facets you want
+    @facets: 32;
+    // How many spokes you need
+    @spokes: (@facets / 2);
+    // Help figure out the length of each facet
+    @degs: sin(pi() / (@facets));
+    // Get the length
+    @facet_length: (@coin_diam * @degs);
+
+    -webkit-transform: translateX((@coin_diam * 0.45));
+    -webkit-transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+
+    // Structural Component
+    .spoke {
+      height: (@coin_diam);
+      width: (@coin_depth);
+      position: absolute;
+
+      -webkit-transform-style: preserve-3d;
+      -webkit-backface-visibility: hidden;
+
+      // The Facets
+      &:before,
+      &:after {
+        content: "";
+        display: block;
+        height: @facet_length;
+        width: (@coin_depth);
+        position: absolute;
+        -webkit-transform: rotateX(
+          ((180deg - (360 / @facets)) / 2)
+        ); // Get the right angle
+
+        background: hsl(42, 52%, 68%);
+        background: linear-gradient(
+          to bottom,
+          hsl(42, 60%, 75%) 0%,
+          hsl(42, 60%, 75%) 74%,
+          hsl(42, 40%, 60%) 75%,
+          hsl(42, 40%, 60%) 100%
+        );
+        background-size: 100% ((@facets * @facet_length) / 144);
+      }
+
+      // One at each end
+      &:before {
+        -webkit-transform-origin: top center;
+      }
+
+      &:after {
+        bottom: 0;
+        -webkit-transform-origin: center bottom;
+      }
+    }
+
+    // This is a loop that positions the spokes
+    .make_sides(@index) when (@index > 0) {
+      .spoke:nth-child(@{index}) {
+        -webkit-transform: rotateY(90deg) rotateX((180deg / (@spokes)) * @index);
+      }
+
+      .make_sides(@index - 1);
+    }
+
+    // This is the loop happening
+    .make_sides(@spokes);
+  }
+
+  // X Ray -------------------
+  &.skeleton {
+    .front,
+    .back {
+      display: none;
+    }
+
+    .side {
+      &,
+      .spoke,
+      .spoke:before,
+      .spoke:after {
+        -webkit-backface-visibility: visible;
+      }
+
+      .spoke {
+        background: fadeout(#aaa, 90%);
+
+        &:before {
+          background: fadeout(#faa, 80%);
+        }
+
+        &:after {
+          background: fadeout(#ccf, 80%);
+        }
+      }
+    }
+  }
+}
+
+// Body, obviously
+body {
+  background-color: #000;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+// Just an animation
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotateY(0deg);
+  }
+  to {
+    -webkit-transform: rotateY(360deg);
+  }
+}
