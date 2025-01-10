@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        .card {
+            width: 287px;
+            height: 465px;
+            position: relative;
+            background-color: #000;
+        }
+
+        .box {
+            position: absolute;
+            width: 375px;
+            height: 455px;
+            opacity: 1;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .bg1 {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            width: 375px;
+            height: 288px;
+            box-sizing: border-box;
+
+            opacity: 1;
+            border: 0.5px solid rgb(31, 231, 81);
+        }
+
+        .box::before {
+            content: "";
+            display: inline-block;
+            position: absolute;
+            transform: rotate(150deg);
+            top: 118px;
+            left: -20px;
+            width: 440px;
+            height: 60px;
+            background: linear-gradient(270deg,
+                    rgba(255, 255, 255, 0) 7%,
+                    rgba(255, 254, 245, 0.56) 50%,
+                    rgba(255, 255, 255, 0) 92%);
+            filter: blur(3px);
+        }
+
+        .box::after {
+            content: "";
+            display: inline-block;
+            position: absolute;
+            transform: rotate(150deg);
+            top: 220px;
+            left: -56px;
+
+            width: 520px;
+            height: 120px;
+            background: linear-gradient(270deg,
+                    rgba(255, 255, 255, 0) 8%,
+                    rgba(255, 254, 245, 0.28) 49%,
+                    rgba(255, 255, 255, 0) 91%);
+            filter: blur(3px);
+        }
+
+        .bg2 {
+            position: absolute;
+            left: 0px;
+            top: 95px;
+            width: 375px;
+            box-sizing: border-box;
+
+            height: 360px;
+            opacity: 1;
+            border: 0.5px solid rgb(202, 133, 133);
+        }
+
+        body {
+            background-color: #000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <div class="box">
+            <div class="bg1"></div>
+            <div class="bg2"></div>
+        </div>
+    </div>
+</body>
+
+</html>
