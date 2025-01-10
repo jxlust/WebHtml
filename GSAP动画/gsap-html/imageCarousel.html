@@ -123,7 +123,7 @@
             <div class="box">
                 <img src="../images/bg1.webp" width="285" height="285">
             </div>
-            <div class="box">
+            <!-- <div class="box">
                 <img src="../images/bg1.webp" width="285" height="285">
             </div>
             <div class="box">
@@ -134,7 +134,7 @@
             </div>
             <div class="box">
                 <img src="../images/bg1.webp" width="285" height="285">
-            </div>
+            </div> -->
         </div>
     </div>
 
@@ -158,18 +158,33 @@
     boxes.forEach((el, index) => {
         gsap.set(el, {
             rotationY: index * 360 / count,
-            transformOrigin: "50% 50% -450"
+            transformOrigin: "50% 50% -450",
+            // opacity: index === 0 ? 1 : 0.1,
+            // opacity: .2,
         })
-
         gsap.to(el, {
             force3D: true,
             z: 1,
             rotationY: '+=360',
             repeat: -1,
             duration: 10,
-            ease: 'none'
+            ease: 'none',
         })
-    });
+        if (index === 0) {
+            // const tl = gsap.timeline({
+            //     repeat: -1,
+            // })
+            // tl.to(el, {
+            //     duration: 10 / count,
+            //     ease: 'none',
+            //     opacity: 0.1,
+            // }).to(el, {
+            //     duration: 10 / count,
+            //     ease: 'none',
+            //     opacity: 1,
+            // }, `<+=${10 - 10 / count}`)
+        }
+    })
 
     const imgs = gsap.utils.toArray('.cxbox')
     const tl = gsap.timeline({

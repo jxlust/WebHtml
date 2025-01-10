@@ -61,13 +61,24 @@
             will-change: transform;
             animation: var(--animation-tf);
         }
+
+        .mask-test {
+            content: '';
+            position: absolute;
+            inset: -20%;
+            background-image: linear-gradient(45deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 60%);
+            transform: translateX(-100%);
+            will-change: transform;
+            animation: var(--animation-tf);    b
+        }
     </style>
 </head>
 
 <body>
 
-    <div class="shark-wrap img-card img1">
+    <div class=" img-card img1">
         <img src="./images/img1.png" />
+        <div class="mask-test"></div>
     </div>
 
     <div class="shark-wrap img-card img1 show-shadow">

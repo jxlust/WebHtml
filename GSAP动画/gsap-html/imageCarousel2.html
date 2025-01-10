@@ -86,9 +86,10 @@
 </script>
 <script>
 
-    const count = 9;
+    const count = 3;
     const sceneWidth = 210;
-    const transitionZ = calcTranslateZ(sceneWidth, count);
+    // const transitionZ = calcTranslateZ(sceneWidth, count);
+    const transitionZ = 100
 
     const cells = [];
     const cells2 = []
@@ -101,7 +102,7 @@
 
     })
 
-    for (let i = 0; i < 9; i++) {
+    for (let i = 0; i < count; i++) {
         const div = document.createElement('div')
         div.className = 'carousel__cell'
         div.innerText = i + 1;
@@ -155,7 +156,7 @@
         z: -transitionZ
     })
 
-    for (let i = 0; i < 9; i++) {
+    for (let i = 0; i < count; i++) {
         const div = document.createElement('div')
         div.className = 'carousel__cell'
         cells2.push(div)

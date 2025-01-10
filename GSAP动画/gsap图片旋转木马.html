@@ -98,16 +98,16 @@
             `background: ${randomHsl()};transform: rotateY(${perDeg * (index+1)}deg) translateZ(${R + 20}px);`;
     })
 
-    let tween = gsap.to(imgWrapEl,{
-        force3D: true,
-        rotateY: 360,
-        // reversed: true,
-        // repeatRefresh: true,
-        duration: 3,
-        repeat: -1,
-        ease: "none",
-        // paused: true,
-    })
+    // let tween = gsap.to(imgWrapEl,{
+    //     force3D: true,
+    //     rotateY: 360,
+    //     // reversed: true,
+    //     // repeatRefresh: true,
+    //     duration: 3,
+    //     repeat: -1,
+    //     ease: "none",
+    //     // paused: true,
+    // })
 
     document.getElementById('play').addEventListener('click', function () {
         if (tween.paused()) {

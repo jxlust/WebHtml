@@ -97,6 +97,11 @@ http {
             try_files $uri $uri/ /index.html;
             index  index.html index.htm;
         }
+        location /dingtalk{
+            root /
+            try_files $uri $uri/ /index.html;
+            index  index.html index.htm;
+        }
         location /b{
             proxy_pass http://www.baidu.com/;
         }
