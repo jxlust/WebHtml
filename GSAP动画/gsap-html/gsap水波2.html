@@ -6,6 +6,7 @@
     <title>圆点扩散</title>
     <script src="../js/gsap-latest-beta.min.js"></script>
     <script src="../gsap-plugins/GSDevTools3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
     <style type="text/css">
         body {
             margin: 0;
@@ -75,7 +76,7 @@
 </head>
 
 <body>
-    <div class="box">
+    <div class="box" id="btn">
         <div class="logo">LOGO</div>
         <div class="animate-wave">
             <div class="wave-item"></div>
@@ -91,7 +92,7 @@
     gsap.registerPlugin(GSDevTools)
 
     const tl = gsap.timeline()
-    const initScale = 80/500;
+    const initScale = 80 / 500;
     gsap.set('.wave-item', {
         // scale: 0,
         scale: initScale,
@@ -120,6 +121,80 @@
     // GSDevTools.create({
     //     animation: boxtl
     // })
+</script>
+
+<script>
+
+    // 常用的 howler.js 库播放
+    function howlerPlay() {
+        var sound2 = new Howl({
+            src: ['../images/open.mp3'],
+            // autoplay: true,
+            // loop: true,
+            volume: 0.5,
+            // 音频段落
+            onend: () => {
+                console.log('Finished!');
+            },
+            onplay: () => {
+                console.log('Playing!');
+            }
+        })
+        var sound = new Howl({
+            src: ['../images/audio_coin.mp3'],
+            autoplay: true,
+            // loop: true,
+            volume: 0.5,
+            // 音频段落
+            // sprite: {
+            //     explosion: [0, 3000], // 开始位置, 结束位置
+            //     laser: [3001, 5000],
+            //     powerup: [5001, 7000]
+            // },
+            onend: () => {
+                console.log('Finished!');
+                sound2.play();
+            },
+            onplay: () => {
+                console.log('Playing!');
+            }
+        });
+        // Clear listener after first call.
+        sound.once('load', function () {
+            console.log('loaded!')
+            sound.play();
+        });
+
+        // sound.play('explosion');
+    }
+
+    howlerPlay();
+
+    // 自定义播放声音
+    function playSound() {
+        // 创建AudioContext对象
+        var audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+        // 加载音频文件
+        fetch('../images/audio_coin.mp3')
+            .then(response => response.arrayBuffer())
+            .then(arrayBuffer => audioContext.decodeAudioData(arrayBuffer))
+            .then(audioBuffer => {
+                // 创建一个SourceNode，并播放音频
+                var source = audioContext.createBufferSource();
+                source.buffer = audioBuffer;
+                source.connect(audioContext.destination); // 将声音连接到音频上下文的输出（通常是扬声器）
+                source.start(0); // 播放音频
+            })
+            .catch(error => console.log('加载或播放音频时发生错误:', error));
+    }
+
+    document.getElementById('btn').addEventListener('click', function () {
+        // audio_coin
+        console.log('click');
+        // playSound();
+
+    })
 </script>
 
 </html>
