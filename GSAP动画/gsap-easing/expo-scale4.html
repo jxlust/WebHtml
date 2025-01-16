@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <!-- <script src="../gsap-plugins/CustomEase3.min.js"></script> -->
+    <script src="../gsap-plugins/EasePack3.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        #expo {
+            flex-grow: 1;
+            overflow: hidden;
+            position: relative;
+            color: white;
+            font-size: 3em;
+        }
+
+        .screen {
+            visibility: hidden;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+        }
+
+        .bg1 {
+            background-color: #2c7ad2;
+            background-image: radial-gradient(circle at 47% 14%, rgba(205, 205, 205, 0.04) 0%, rgba(205, 205, 205, 0.04) 43%, transparent 43%, transparent 100%), radial-gradient(circle at 35% 12%, rgba(215, 215, 215, 0.04) 0%, rgba(215, 215, 215, 0.04) 4%, transparent 4%, transparent 100%), radial-gradient(circle at 1% 35%, rgba(24, 24, 24, 0.04) 0%, rgba(24, 24, 24, 0.04) 37%, transparent 37%, transparent 100%), radial-gradient(circle at 21% 1%, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0.04) 26%, transparent 26%, transparent 100%), radial-gradient(circle at 23% 82%, rgba(249, 249, 249, 0.04) 0%, rgba(249, 249, 249, 0.04) 60%, transparent 60%, transparent 100%), radial-gradient(circle at 11% 54%, rgba(251, 251, 251, 0.04) 0%, rgba(251, 251, 251, 0.04) 23%, transparent 23%, transparent 100%), radial-gradient(circle at 69% 68%, rgba(234, 234, 234, 0.04) 0%, rgba(234, 234, 234, 0.04) 10%, transparent 10%, transparent 100%), linear-gradient(90deg, #2c7ad2, #1568c6);
+
+        }
+
+        .bg2 {
+            background-color: #e77614;
+            will-change: transform;
+            background-image: radial-gradient(circle at 46% 40%, rgba(228, 228, 228, 0.06) 0%, rgba(228, 228, 228, 0.06) 13%, transparent 13%, transparent 100%), radial-gradient(circle at 11% 41%, rgba(198, 198, 198, 0.06) 0%, rgba(198, 198, 198, 0.06) 19%, transparent 19%, transparent 100%), radial-gradient(circle at 52% 23%, rgba(14, 14, 14, 0.06) 0%, rgba(14, 14, 14, 0.06) 69%, transparent 69%, transparent 100%), radial-gradient(circle at 13% 85%, rgba(148, 148, 148, 0.06) 0%, rgba(148, 148, 148, 0.06) 44%, transparent 44%, transparent 100%), radial-gradient(circle at 57% 74%, rgba(232, 232, 232, 0.06) 0%, rgba(232, 232, 232, 0.06) 21%, transparent 21%, transparent 100%), radial-gradient(circle at 59% 54%, rgba(39, 39, 39, 0.06) 0%, rgba(39, 39, 39, 0.06) 49%, transparent 49%, transparent 100%), radial-gradient(circle at 98% 38%, rgba(157, 157, 157, 0.06) 0%, rgba(157, 157, 157, 0.06) 24%, transparent 24%, transparent 100%), radial-gradient(circle at 8% 6%, rgba(60, 60, 60, 0.06) 0%, rgba(60, 60, 60, 0.06) 12%, transparent 12%, transparent 100%), linear-gradient(90deg, #ff7600, #ff7600);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="expo">
+
+            <!-- <div class="screen bg1"></div>
+            <div class="screen bg2"></div>
+            <div class="screen bg1"></div>
+            <div class="screen bg2"></div> -->
+
+            <img class="screen" src="../images/world_map.jpg" />
+
+        </div>
+    </div>
+
+</body>
+
+<script>
+    gsap.registerPlugin(EasePack);
+    gsap.set(".screen", { yPercent: -20, xPercent: -30, top: "50%", left: "50%", minWidth: "100%", position: "absolute" });
+
+
+    function zoom(config) {
+        var elements = gsap.utils.toArray(config.elements),
+            tl = gsap.timeline({ repeat: config.repeat || 0 }),
+            duration = 1,
+            fade = Math.min(0.99, (typeof (config.fade) === "number") ? config.fade : 0.5) * duration,
+            startScale = config.startScale || 1,
+            endScale = config.endScale || 2,
+            scaleDifference = endScale - startScale,
+            extendedScale = endScale + scaleDifference * 2,
+            templateEase = config.ease || "none",
+            useExpoEase = (config.useExpoEase !== false),
+            ease = useExpoEase ? `expoScale(${startScale}, ${endScale}, ${templateEase})` : "none",
+            extendedEase = useExpoEase ? ExpoScaleEase.config(endScale, extendedScale, templateEase) : gsap.parseEase("none"),
+            partialScale = endScale + extendedEase(fade / duration) * (extendedScale - endScale),
+            partialEase = useExpoEase ? `expoScale(${endScale}, ${partialScale}, ${templateEase})` : "none",
+            i;
+        console.log('fade:', fade)
+        console.log('endScale:', endScale)
+        console.log('partialScale:', partialScale)
+        console.log('partialEase:', ease, partialEase);
+        tl.set(elements, { scale: startScale }, "-=" + fade);
+        for (i = 0; i < elements.length; i++) {
+            if (i) {
+                tl.to(elements[i - 1], { duration: fade, scale: partialScale, ease: partialEase }).set(elements[i - 1], { visibility: "hidden" });
+            }
+            tl.to(elements[i], { duration: fade, autoAlpha: 1 }, "-=" + fade)
+                .to(elements[i], { duration: duration, scale: endScale, ease: ease }, "-=" + fade);
+        }
+        if (config.direction === "out") {
+            tl = tl.pause().tweenFromTo(tl.duration(), 0, { repeat: config.repeat });
+        }
+        if (config.duration) {
+            tl.duration(config.duration);
+        }
+        return tl.play(0);
+    }
+
+
+    zoom({
+        elements: ".screen",
+        repeat: 0,
+        fade: 5,
+        duration: 10,
+        direction: "in",
+        useExpoEase: true
+    })
+
+</script>
+
+</html>
