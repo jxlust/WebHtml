@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/tsparticles.bundle.min.js">
+    </script>
+    <script src="./js/tsparticles.shape.star.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #dfdcdc;
+        }
+
+        #bg {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9;
+        }
+
+        @font-face {
+            font-family: 'jxl-iconfont';
+            src: url('./webfonts/iconfont.woff2?t=1734410083464') format('woff2'),
+                url('./webfonts/iconfont.woff?t=1734410083464') format('woff'),
+                url('./webfonts/iconfont.ttf?t=1734410083464') format('truetype');
+        }
+
+        .myiconfont {
+            color: #fff;
+            font-family: "jxl-iconfont" !important;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: bold;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="bg"></div>
+</body>
+
+<script>
+
+    loadFull(tsParticles);
+
+    async function initSky() {
+        // await loadStarShape(tsParticles);
+
+        await tsParticles.load({
+            id: 'bg',
+            url: './json/star-color.json'
+
+        })
+    }
+
+    initSky();
+
+</script>
+
+</html>

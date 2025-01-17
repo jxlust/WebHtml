@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../gsap-plugins/GSDevTools3.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* background-color: #000; */
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(#16161d, #1f1f3a, #3b2f4a);
+            overflow: hidden;
+        }
+
+        .gs-dev-tools {
+            z-index: 99;
+        }
+
+        .extras,
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .stars {
+            fill: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <svg class="extras" width="100%" height="100%" preserveAspectRatio="none">
+        <defs>
+            <radialGradient id="comet-gradient" cx="0" cy=".5" r="0.5">
+                <stop offset="0%" stop-color="rgba(255,255,255,.8)"></stop>
+                <stop offset="100%" stop-color="rgba(255,255,255,0)"></stop>
+            </radialGradient>
+        </defs>
+        <g class="comet-group" id="group">
+            <ellipse class="comet" id="test" fill="url(#comet-gradient)" cx="0" cy="0" rx="150" ry="2"></ellipse>
+        </g>
+    </svg>
+
+</body>
+<script>
+
+    gsap.registerPlugin(GSDevTools)
+    // -135 20 300
+    // var random = gsap.utils.random([0, 100, 200], true);
+    // console.log('test:', gsap.utils.random(0, 100, 10));
+
+    function randomArround() {
+        // top x: [0,100] y:[0,10]
+        // right x: [90,100] y:[0,100]
+        // bottom x: [0,100] y:[90,100]
+        // left x: [0,10] y:[0,100]
+        const dir = gsap.utils.random([1, 2, 3])
+
+        switch (dir) {
+            case 1:
+                // top
+                return [gsap.utils.random(0, 100), gsap.utils.random(0, 10), gsap.utils.random([-150, -20])]
+            case 2:
+                // right
+                return [gsap.utils.random(90, 100), gsap.utils.random(0, 80), gsap.utils.random(-45, 45)]
+            case 3:
+                // left
+                return [gsap.utils.random(0, 10), gsap.utils.random(0, 80), gsap.utils.random(135, 225)]
+            default:
+                // 流星不不要从下面开始
+                return [0, 0, 0]
+            // bottom
+            // return [gsap.utils.random(0, 100), gsap.utils.random(90, 100), gsap.utils.random(45, 135)]
+        }
+
+    }
+    function initGroupPosition() {
+        const [initX, initY, initRotate] = randomArround();
+
+        gsap.set('#group', {
+            // rotation: 'random([-135, 20, 300])',
+            rotation: initRotate,
+            x: `${initX}vw`,
+            y: `${initY}vh`,
+            // rotation: '-135',
+            // opacity: 'random(0,0.2)',
+        })
+    }
+
+
+
+
+
+    initGroupPosition();
+
+    const tl = gsap.to('#test', {
+        id: 'jxl',
+        // x: '-100vmax',
+        repeat: -1,
+        repeatDelay: 3,
+        onRepeat: () => {
+            const delayV = gsap.utils.random(.1, 5, .1)
+            console.log('delayV:', delayV)
+            tl.repeatDelay(delayV)
+            initGroupPosition();
+        },
+        keyframes: {
+            x: [0, '-100vmax'],
+            opacity: [0, 1, 0, 0],
+        },
+        duration: 2,
+        ease: 'none'
+    })
+
+    // GSDevTools.create({
+    //     animation: tl
+    // })
+
+</script>
+
+<script>
+    function createStarSvg(number = 100) {
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('width', '100%');
+        svg.setAttribute('height', '100%');
+        svg.setAttribute('class', 'stars');
+        // svg.setAttribute('viewBox', '0 0 100 100');
+        svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+
+        for (let i = 0; i < number; i++) {
+            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            const radius = gsap.utils.random(0.5, 1.5, 0.1);
+            const cx = gsap.utils.random(0.1, 99, 0.01);
+            const cy = gsap.utils.random(0.1, 99, 0.01);
+            circle.setAttribute('cx', `${cx}%`);
+            circle.setAttribute('cy', `${cy}%`);
+            circle.setAttribute('r', radius);
+            svg.appendChild(circle);
+        }
+        document.body.appendChild(svg);
+    }
+    const startGroupNum = 4;
+    for (let i = 0; i < startGroupNum; i++) {
+        createStarSvg();
+    }
+
+    const startTl = gsap.timeline({
+        repeat: -1,
+    });
+    startTl.to('.stars', {
+        keyframes: {
+            opacity: [1, 0, 1],
+            // easeEach: 'sine.inOut',
+            // ease: 'expo.out'
+            ease: 'power1.out'
+        },
+        duration: 3,
+        stagger: {
+            each: 1,
+            from: 'start',
+            repeat: -1,
+        }
+    })
+</script>
+
+
+<script>
+    // gsap.to('.comet', {
+    //     // duration: 6,
+    //     repeat: -1,
+    //     ease: 'none',
+    //     // xPercent: 'random(-100, 100)',
+    //     x: '-100vmax',
+    //     opacity: 1,
+    //     stagger: {
+    //         each: 10,
+    //         from: 'start',
+    //         // stagger 里面的repeat：-1
+    //         // Repeats immediately, not waiting for the other staggered animations to finish
+    //         repeat: -1,
+    //         // ease: 'power1.out'
+    //         // ease: 'power3.int'
+    //     }
+    // })
+</script>
+
+</html>
