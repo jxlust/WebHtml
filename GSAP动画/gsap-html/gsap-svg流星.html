@@ -55,6 +55,8 @@
         </g>
     </svg>
 
+    <div class="stars-container" id="starsBox"></div>
+
 </body>
 <script>
 
@@ -133,30 +135,47 @@
 </script>
 
 <script>
+    function createCircleShape(cx, cy, r) {
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', `${cx}%`);
+        circle.setAttribute('cy', `${cy}%`);
+        circle.setAttribute('r', r);
+        return circle;
+    }
     function createStarSvg(number = 100) {
         const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        svg.setAttribute('width', '100%');
+        svg.setAttribute('width', '200%');
         svg.setAttribute('height', '100%');
         svg.setAttribute('class', 'stars');
         // svg.setAttribute('viewBox', '0 0 100 100');
         svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
 
         for (let i = 0; i < number; i++) {
-            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
             const radius = gsap.utils.random(0.5, 1.5, 0.1);
-            const cx = gsap.utils.random(0.1, 99, 0.01);
+            const cx = gsap.utils.random(0.1, 50, 0.01);
             const cy = gsap.utils.random(0.1, 99, 0.01);
-            circle.setAttribute('cx', `${cx}%`);
-            circle.setAttribute('cy', `${cy}%`);
-            circle.setAttribute('r', radius);
+            const circle = createCircleShape(cx, cy, radius);
             svg.appendChild(circle);
+            // 前面100%区域宽度的星星
+
+            // 后面100%区域宽度的星星
+            // x直接是前面偏移100%的位置
+            const cloneCircle = circle.cloneNode(true);
+            const offsetX = Math.floor((50 + cx) * 100) / 100;
+            cloneCircle.setAttribute('cx', `${offsetX}%`);
+            svg.appendChild(cloneCircle);
         }
+
         document.body.appendChild(svg);
     }
-    const startGroupNum = 4;
+
+
+    const startGroupNum = 6;
     for (let i = 0; i < startGroupNum; i++) {
-        createStarSvg();
+        createStarSvg(50);
     }
+    // copy starsBox
+
 
     const startTl = gsap.timeline({
         repeat: -1,
@@ -174,6 +193,20 @@
             from: 'start',
             repeat: -1,
         }
+    })
+
+
+    const windowWidth = window.innerWidth;
+    const moveDuration = windowWidth / 50; // Xpx/sec X像素/秒
+
+    const moveTl = gsap.timeline()
+    moveTl.to('.stars', {
+        repeat: -1,
+        // repeatDelay: 2,
+        xPercent: -50,
+        duration: moveDuration,
+        // yoyo: true,
+        ease: 'none'
     })
 </script>
 
