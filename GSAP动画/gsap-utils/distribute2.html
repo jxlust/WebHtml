@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <style>
+        body {
+            background-color: #131313;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            font-family: Kanit, sans-serif;
+        }
+
+        body,
+        html {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            font-size: 20px;
+        }
+
+        svg {
+            overflow: visible;
+            width: 650px;
+            height: 650px;
+        }
+
+        path {
+            stroke: #ff3366;
+            stroke-width: 2px;
+            fill: none;
+        }
+
+        #demo {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        rect:hover {
+            fill: #3ee;
+        }
+
+        .flex1 {
+            flex: 1;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="demo">
+        <svg id="ease-vis" viewBox="0 0 650 650"></svg>
+    </div>
+
+    <p class="flex1">
+        <button id="btn">开始缩放</button>
+    </p>
+    <p>
+        distribute 函数可以把数据按指定的方式进行分布, 比如边缘分布, 中间分布等
+    </p>
+</body>
+<script>
+
+    createEaseVis();
+
+    gsap.set("svg", { scale: 0.75 });
+    gsap.set(".bar", { transformOrigin: "50% 100%" });
+
+    let end = gsap.utils.distribute({
+        base: 0.0,
+        amount: 0.5,
+        ease: "power2.in",
+        from: "edges"
+    });
+
+    document.getElementById('btn').addEventListener('click', () => {
+        // 按边缘分布的进行缩放范围是0 ~ 0.5, 边缘都是0 中间缩放0.5
+        gsap.to(".bar", {
+            scaleY: end,
+            duration: 1,
+        });
+    })
+
+
+
+
+    function createEaseVis() {
+        let svgNS = "http://www.w3.org/2000/svg";
+        let size = 650;
+        let visualizer = document.createElementNS(svgNS, "g");
+        for (let i = 0; i < 65; i++) {
+            let rect = document.createElementNS(svgNS, "rect");
+            rect.setAttribute("width", 9);
+            rect.setAttribute("height", size);
+            rect.setAttribute("fill", "#555");
+            rect.setAttribute("x", i * 10);
+            rect.setAttribute("class", "bar");
+            visualizer.appendChild(rect);
+        }
+        //y axis
+        let markers = document.createElementNS(svgNS, "g");
+        for (let n = 0; n < 5; n++) {
+            let newLine = document.createElementNS(svgNS, "line");
+            let newText = document.createElementNS(svgNS, "text");
+            newText.setAttribute("x", 0);
+            newText.setAttribute("y", 0);
+            newText.setAttribute("fill", "#f60");
+            newText.textContent = 1 - n * 0.25;
+            newLine.setAttribute("x1", 40);
+            newLine.setAttribute("y1", 0);
+            newLine.setAttribute("x2", size);
+            newLine.setAttribute("y2", 0);
+            newLine.setAttribute("stroke", "#f96");
+            markers.appendChild(newText);
+            markers.appendChild(newLine);
+        }
+        visualizer.appendChild(markers);
+
+        document.getElementById("ease-vis").appendChild(visualizer);
+
+        gsap.set("text", {
+            y: gsap.utils.distribute({
+                base: 6,
+                amount: size
+            })
+        });
+
+        gsap.set("line", {
+            y: gsap.utils.distribute({
+                base: 0,
+                amount: size
+            }),
+            opacity: 0.8
+        });
+    }
+</script>
+
+</html>

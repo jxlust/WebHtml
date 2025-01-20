@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+
+</body>
+
+<script>
+    // minimum: Number - The minimum value
+    // maximum: Number - The maximum value
+    // snapIncrement: Number(optional) - A snapping increment.For example, a value of 5 means the random number would snap to the closest increment of 5
+    // returnFunction: Boolean(optional) - If true, a reusable function will be returned instead of a random value.This function can be called anytime to randomly choose a value from the range originally provided.
+</script>
+<script>
+    // get a random number between -100 and 100 (no snapping)
+    gsap.utils.random(-100, 100);
+
+    // a random number between 0 and 500 that's snapped to the closest increment of 5
+    gsap.utils.random(0, 500, 5);
+
+    // get a reusable function that will randomly choose a value between -200 and 500, snapping to an increment of 10
+    var random = gsap.utils.random(-200, 500, 10, true);
+    random();
+    random();
+</script>
+
+<script>
+    // get a random value from an array of colors
+    gsap.utils.random(["red", "blue", "green"]); //"red", "blue", or "green"
+
+    // get a reusable function that will randomly choose a value from the array of colors
+    var random = gsap.utils.random([0, 100, 200], true);
+
+    // now we can call it anytime:
+    console.log(random()); // 0, 100, or 200 (randomly selected)
+    console.log(random()); // 0, 100, or 200 (randomly selected again)
+</script>
+
+<script>
+
+    // get a clamping function that will always clamp to a range between 0 and 100
+    var colorizer = gsap.utils.pipe(
+        gsap.utils.random(0, 100, true),
+        // clamp between 0 and 100
+        gsap.utils.clamp(0, 100),
+
+        // normalize to a value between 0 and 1
+        gsap.utils.normalize(0, 100),
+
+        // then interpolate between red and blue
+        gsap.utils.interpolate("red", "blue")
+    );
+
+    // now we feed one value in and it gets run through ALL those transformations!:
+    // colorizer(25.874);
+    gsap.set('.box', {
+        backgroundColor: colorizer()
+    })
+</script>
+
+<script>
+    gsap.to(".box", {
+        duration: 5,
+        x: "random([0, 100, 200, 500])", //randomly selects one of the values (0, 100, 200, or 500)
+    });
+</script>
+
+</html>

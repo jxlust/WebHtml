@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+
+</head>
+
+<body>
+
+    <p>interpolate 插值，计算中间值</p>
+
+</body>
+<script>
+
+    //interpolate halfway between 0 and 500 (number)
+    gsap.utils.interpolate(0, 500, 0.5); // 250
+
+    // strings
+    gsap.utils.interpolate("20px", "40px", 0.5); // "30px"
+
+    //colors
+    gsap.utils.interpolate("red", "blue", 0.5); // "rgba(128,0,128,1)"
+
+    //objects
+    gsap.utils.interpolate(
+        { a: 0, b: 10, c: "red" },
+        { a: 100, b: 20, c: "blue" },
+        0.5
+    ); // {a: 50, b: 15, c: "rgba(128,0,128,1)"}
+</script>
+
+<script>
+    // an array of numbers
+    gsap.utils.interpolate([100, 50, 500], 0.5); // 50
+    gsap.utils.interpolate([100, 50, 500], 0.75); // 275
+
+    // colors
+    gsap.utils.interpolate(["red", "green", "blue"], 0.5); // "green"
+    gsap.utils.interpolate(["red", "green", "blue"], 0.25); // "rgba(128,64,0,1)"
+</script>
+
+<script>
+    // function 
+    // get a function that will always interpolate between 0 and 100
+    var interp = gsap.utils.interpolate(0, 100); //notice we didn't provide a progress value
+
+    // now we can reuse the function to interpolate any values:
+    console.log(interp(0.5)); // 50
+    console.log(interp(0.25)); // 25
+    console.log(interp(1)); // 100
+
+    // even works for an object with multiple properties!
+    var interp = gsap.utils.interpolate(
+        { a: 0, b: 10, c: "red" },
+        { a: 100, b: 20, c: "blue" }
+    );
+
+    interp(0.5); // {a: 50, b: 15, c: "rgba(128,0,128,1)"}
+
+</script>
+
+
+<script>
+
+    // get a clamping function that will always clamp to a range between 0 and 100
+    var colorizer = gsap.utils.pipe(
+        // clamp between 0 and 100
+        gsap.utils.clamp(0, 100),
+
+        // normalize to a value between 0 and 1
+        gsap.utils.normalize(0, 100),
+
+        // then interpolate between red and blue
+        gsap.utils.interpolate("red", "blue")
+    );
+
+    // now we feed one value in and it gets run through ALL those transformations!:
+    console.log('pipe: ', colorizer(25.874));
+</script>
+
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../gsap-plugins/GSDevTools3.min.js"></script>
+    <script src="../gsap-plugins/Flip.min.js"></script>
+    <style>
+        :root {
+            --color-shockingly-green: #0ae448;
+            --color-just-black: #0e100f;
+            --color-surface-white: #fffce1;
+            --color-pink: #fec5fb;
+            --color-shockingly-pink: #f100cb;
+            --color-orangey: #ff8709;
+            --color-lilac: #9d95ff;
+            --color-lt-green: #abff84;
+            --color-blue: #00bae2;
+            --color-grey: gray;
+            --color-surface75: #bbbaa6;
+            --color-surface50: #7c7c6f;
+            --color-surface25: #42433d;
+
+            --color-scroll-gradient: linear-gradient(317.42deg, #ffe9fe 10.4%, #ff96f9 83.03%);
+            --gradient-orange-crush: linear-gradient(111.45deg,
+                    #ff8709 19.42%,
+                    #f7bdf8 73.08%);
+            --gradient-lipstick: linear-gradient(165.72deg,
+                    #f7bdf8 21.15%,
+                    #cd237f 81.93%);
+            --gradient-purple-haze: linear-gradient(153.58deg,
+                    #f7bdf8 32.25%,
+                    #2f3cc0 92.68%);
+            --gradient-skyfall: linear-gradient(131.77deg,
+                    #0a157a 30.82%,
+                    #15bfe4 81.82%);
+            --gradient-emerald-city: linear-gradient(166.9deg,
+                    var(--color-shockingly-green) 53.19%,
+                    #0085d0 107.69%);
+        }
+
+        button {
+            display: inline-block;
+            outline: none;
+            padding: 8px 14px;
+            background: #000;
+            border: solid 2px #fff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 99px;
+            padding: 12px 25px;
+            text-transform: uppercase;
+            font-weight: 600;
+            cursor: pointer;
+            line-height: 18px;
+        }
+
+        .button {
+            user-select: none;
+        }
+
+        .app {
+            padding: 10px;
+        }
+
+        .box {
+            user-select: none;
+            font-size: 0.9rem;
+            width: 100px;
+            height: 100px;
+            margin: 0.5rem;
+
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            /* background-color: var(--green); */
+            font-weight: 600;
+            color: #000;
+            line-height: 1.2;
+            will-change: transform;
+        }
+
+        .box.exiting,
+        .box.exited {
+            display: none;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            align-content: flex-start;
+            justify-content: center;
+            flex-wrap: wrap;
+            height: 30vh;
+        }
+
+        button {
+            margin: 2rem 0.5rem;
+        }
+
+        .box.pink,
+        .gradient-pink {
+            background: var(--color-scroll-gradient), url('../images/point_bg.png');
+            background-blend-mode: color-dodge;
+        }
+
+        .box.orange,
+        .gradient-orange {
+            background: var(--gradient-orange-crush), url('../images/point_bg.png');
+            /* Replace with the path to your noise texture image */
+            background-blend-mode: color-dodge;
+            /* Blend the noise texture with the gradient */
+        }
+
+        .box.purple,
+        .gradient-purple {
+            background: var(--gradient-purple-haze),
+                url('../images/point_bg.png');
+            /* Replace with the path to your noise texture image */
+            background-blend-mode: color-dodge;
+            /* Blend the noise texture with the gradient */
+        }
+
+        .gradient-blue-2 {
+            background: var(--gradient-summer-fair),
+                url('../images/point_bg.png');
+            /* Replace with the path to your noise texture image */
+            background-blend-mode: color-dodge;
+            /* Blend the noise texture with the gradient */
+        }
+
+        .box.blue,
+        .gradient-blue {
+            background: var(--color-ui-gradient),
+                url('../images/point_bg.png');
+            /* Replace with the path to your noise texture image */
+            background-blend-mode: color-dodge;
+            /* Blend the noise texture with the gradient */
+        }
+
+        .box.red,
+        .gradient-red {
+            background: var(--gradient-lipstick),
+                url('../images/point_bg.png');
+            /* Replace with the path to your noise texture image */
+            background-blend-mode: color-dodge;
+            /* Blend the noise texture with the gradient */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="panel center">
+        <div class="text-center">
+            <div>
+                <button id="add-button" class="button">Add Box</button>
+                <button id="shuffle-button" class="button">Shuffle</button>
+            </div>
+            <div class="container"></div>
+        </div>
+    </div>
+</body>
+<script>
+    gsap.registerPlugin(Flip);
+    gsap.config({ trialWarn: false });
+
+    let container = document.querySelector(".container");
+    let addButton = document.querySelector("#add-button");
+    let shuffleButton = document.querySelector("#shuffle-button");
+    let wrapColor = gsap.utils.wrap(["gradient-orange", "gradient-pink", "gradient-purple"]);
+    let count = 0;
+    let state;
+
+    function createBox() {
+        let box = document.createElement("div");
+        box.classList.add(wrapColor(++count));
+        box.classList.add("box");
+        box.textContent = "Click Me";
+
+        function onClick() {
+            box.removeEventListener("click", onClick);
+            setState(() => box.classList.add("exiting"));
+        }
+
+        box.addEventListener("click", onClick);
+
+        return box;
+    }
+
+    // Create some initial boxes
+    container.prepend(createBox());
+    container.prepend(createBox());
+    container.prepend(createBox());
+    container.prepend(createBox());
+
+    addButton.addEventListener("click", () => {
+        setState(() => container.prepend(createBox()));
+    });
+
+    shuffleButton.addEventListener("click", () => {
+        setState(() => gsap.utils.shuffle(gsap.utils.toArray(".box")).forEach(box => container.append(box)));
+    });
+
+    function setState(action) {
+        state = Flip.getState(".box, .button");
+        action();
+        animate();
+    }
+
+    function animate() {
+
+        // get the items that are exiting in this batch
+        let exiting = gsap.utils.toArray(".exiting");
+
+        // Flip.from returns a timeline
+        let timeline = Flip.from(state, {
+            absolute: true,
+            ease: "power1.inOut",
+            targets: ".box, .button",
+            scale: true,
+            simple: true,
+            onEnter(elements) {
+                return gsap.fromTo(elements, {
+                    opacity: 0,
+                    scale: 0
+                }, {
+                    opacity: 1,
+                    scale: 1,
+                    delay: 0.2,
+                    duration: 0.3
+                });
+            },
+            onLeave(elements) {
+                return gsap.to(elements, {
+                    opacity: 0,
+                    scale: 0
+                });
+            }
+        });
+
+        // remove exited elements from the DOM
+        timeline.add(() => removeExited(exiting));
+    }
+
+    function removeExited(exited) {
+
+        gsap.utils.toArray(".box").forEach(box => {
+            if (exited.includes(box)) {
+                box.remove();
+            }
+        });
+    }
+
+</script>
+
+</html>

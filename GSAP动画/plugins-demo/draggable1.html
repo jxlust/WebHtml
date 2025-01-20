@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../gsap-plugins/GSDevTools3.min.js"></script>
+    <script src="../gsap-plugins/Draggable.min.js"></script>
+    <script src="../gsap-plugins/InertiaPlugin.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: grid;
+            place-items: center;
+            grid-template-columns: repeat(auto-fit, 300px);
+            grid-auto-rows: 300px;
+            gap: 30px;
+            padding: 30px;
+        }
+
+        .box {
+            border-radius: 10px;
+            width: 300px;
+            height: 300px;
+            border: 1px solid #999;
+        }
+
+        .circle {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: inline-block;
+            background-color: orange;
+        }
+
+        .squre {
+            width: 100px;
+            height: 30px;
+            border-radius: 10px;
+            display: inline-block;
+            background-color: skyblue;
+        }
+
+        .heart-bg {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .heart {
+            width: 100px;
+            height: 30px;
+            border-radius: 10px;
+            background-image: linear-gradient(68.7deg,
+                    rgba(29, 173, 235, 1) 13.2%,
+                    rgba(137, 149, 250, 1) 29.8%,
+                    rgba(229, 109, 212, 1) 48.9%,
+                    rgba(255, 68, 128, 1) 68.2%,
+                    rgba(255, 94, 0, 1) 86.4%);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box squre-bg">
+        <div class="squre" id="test1"></div>
+    </div>
+
+    <div class="box heart-bg">
+        <div class="heart" id="test2"></div>
+    </div>
+
+    <div class="box circle-bg">
+        <div class="circle" id="test3"></div>
+    </div>
+
+    <div class="box heart-bg">
+        <div class="heart" id="test4"></div>
+    </div>
+
+
+</body>
+<script>
+    // InertiaPlugin 惯性插件
+    gsap.registerPlugin(GSDevTools, Draggable, InertiaPlugin)
+
+
+
+    Draggable.create("#test1", {
+        type: "x",
+        bounds: ".squre-bg"
+    });
+
+    Draggable.create("#test2", {
+        type: "rotation",
+        // 是否开启惯性
+        inertia: true,
+    });
+
+    Draggable.create("#test4", {
+        type: "rotation",
+        // 是否开启惯性
+        inertia: true,
+        snap: function (value) {
+            //this function gets called by InertiaPlugin when the mouse/finger is released and it plots where rotation
+            //should normally end and we can alter that value and return a new one instead. This gives us an easy way to
+            //apply custom snapping behavior with any logic we want. In this case, we'll just make sure the end value snaps
+            //to 90-degree increments but only when the "snap" checkbox is selected.
+            return Math.round(value / 90) * 90;
+        },
+    });
+
+    Draggable.create("#test3", {
+        bounds: ".circle-bg",
+        inertia: true,
+        onClick: function () {
+            console.log("clicked");
+        },
+        onDragEnd: function () {
+            console.log("drag ended");
+        },
+    });
+</script>
+
+</html>

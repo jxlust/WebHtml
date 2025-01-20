@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+
+</head>
+
+<body>
+
+</body>
+<script>
+    let q = gsap.utils.selector(myElement); // or use selector text like ".class"
+    let boxes = q(".box"); // finds only elements with the class "box" that are INSIDE myElement
+    // or plug directly into animations
+    gsap.to(q(".circle"), { x: 100 });
+</script>
+
+<script>
+    gsap.utils.shuffle(array); // returns the same array, but shuffled like [2, 5, 3, 1, 4]
+
+
+</script>
+
+<script>
+    gsap.utils.snap(10, 23.5); // 20
+
+</script>
+
+</html>

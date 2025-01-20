@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+</head>
+
+<body>
+
+</body>
+<script>
+
+    // set the clamping range to between 0 and 100, and clamp 105
+    gsap.utils.clamp(0, 100, 105); // returns 100
+
+    // in the same range, clamp -50
+    gsap.utils.clamp(0, 100, -50); // returns 0
+
+    // and clamp 20
+    gsap.utils.clamp(0, 100, 20); // returns 20
+</script>
+
+<script>
+    // get a clamping function that will always clamp to a range between 0 and 100
+    var clamper = gsap.utils.clamp(0, 100); // notice we didn't provide a valueToClamp
+
+    // now we can reuse the function to clamp any values:
+    console.log(clamper(105)); // 100
+    console.log(clamper(-50)); // 0
+    console.log(clamper(20)); // 20
+</script>
+
+</html>

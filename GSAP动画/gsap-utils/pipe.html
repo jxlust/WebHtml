@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+
+</head>
+
+<body>
+
+</body>
+<script>
+    // without pipe()
+    var value1 = func1(input);
+    var value2 = func2(value1);
+    var output = func3(value2);
+
+    // or multi-level wrapping (awkward)
+    var output = func1(func2(func3(input)));
+
+    // cleaner with pipe()
+    var transfrom = gsap.utils.pipe(func1, func2, func3);
+    var output = transform(input);
+</script>
+
+<script>
+    // get a clamping function that will always clamp to a range between 0 and 100
+    var transformer = gsap.utils.pipe(
+        // clamp between 0 and 100
+        gsap.utils.clamp(0, 100),
+
+        // then map to the corresponding position on the width of the screen
+        gsap.utils.mapRange(0, 100, 0, window.innerWidth),
+
+        // then snap to the closest increment of 20
+        gsap.utils.snap(20)
+    );
+
+    // now we feed one value in and it gets run through ALL those transformations!:
+    console.log(transformer(25.874));
+</script>
+
+<script>
+    var clamper = gsap.utils.normalize(0, 100); // notice we didn't provide a valueToNormalize
+    // now we can reuse the function to normalize any values:
+    console.log(clamper(50)); // 0.5
+    console.log(clamper(10)); // 0.1
+    console.log(clamper(75)); // 0.75
+</script>
+
+</html>

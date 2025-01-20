@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+
+</head>
+
+<body>
+
+</body>
+<script>
+    // with a snapping increment of 10, snap the number 23.5
+    gsap.utils.snap(10, 23.5); // 20
+
+    // with a snapping increment of 2, snap the number 9.3
+    gsap.utils.snap(2, 9.3); // 10
+
+
+</script>
+<script>
+
+    // get a function that will always snap to the closest increment of 5
+    var snap = gsap.utils.snap(5); //notice we didn't provide a valueToSnap
+
+    // now we can reuse the function to snap any values:
+    console.log(snap(0.5)); // 0
+    console.log(snap(4)); // 5
+    console.log(snap(21)); // 20
+</script>
+
+<script>
+    // find the closest number in the array
+    gsap.utils.snap([100, 50, 500], 65); // 50
+    gsap.utils.snap([100, 50, 500], 305); // 500
+
+
+    // get a reusable function that will snap to the closest value in the provided array
+    var snap = gsap.utils.snap([100, 50, 500]); //notice we didn't provide a valueToSnap
+
+    // now we can reuse the function to snap any values:
+    console.log(snap(65)); // 50
+    console.log(snap(415)); // 500
+</script>
+
+
+<script>
+    // snapping only occurs when the provided value is within a radius of 20 from one of the values in the array
+    // not within  30.5-20 ~ 30.5+20 
+    gsap.utils.snap({ values: [0, 100, 300], radius: 20 }, 30.5); // 30.5 (because it's not within 20 of any values)
+
+    // this will snap because it's within the radius:
+    gsap.utils.snap({ values: [0, 100, 300], radius: 20 }, 85); // 100
+
+    // also works with points (objects with "x" and "y" properties):
+    var point = { x: 8, y: 8 };
+    gsap.utils.snap(
+        {
+            values: [
+                { x: 0, y: 0 },
+                { x: 10, y: 10 },
+                { x: 20, y: 20 },
+            ],
+            radius: 5,
+        },
+        point
+    ); // {x:10, y:10}
+
+    // snapping only occurs when the provided value is within a radius of 150 from any increment of 500
+    gsap.utils.snap({ increment: 500, radius: 150 }, 975); // 1000 (because it's within 150 of an increment of 500)
+</script>
+
+<script>
+    // get a reusable function that will snap only when the provided value is within a radius of 20 from one of the values in the array
+    var snap = gsap.utils.snap({ values: [0, 100, 300], radius: 20 }); // notice we didn't provide a valueToSnap
+
+    // now we can reuse the function to snap any values:
+    console.log(snap(50)); // 50 (not within radius)
+    console.log(snap(86)); // 100 (within radius)
+    console.log(snap(315)); // 300 (within radius)
+
+    // also works with points (objects with "x" and "y" properties):
+    var snap = gsap.utils.snap({
+        values: [
+            { x: 0, y: 0 },
+            { x: 10, y: 10 },
+            { x: 20, y: 20 },
+        ],
+        radius: 5,
+    });
+
+    // now we can reuse the function to snap points:
+    console.log(snap({ x: 8, y: 8 })); // {x:10, y:10} (within radius)
+    console.log(snap({ x: 40, y: 40 })); // {x:40, y:40} (outside radius)
+    console.log(snap({ x: -5, y: -10 })); // {x:-5, y:-10} (outside radius)
+
+    // or a simple increment:
+    var snap = gsap.utils.snap({ increment: 500, radius: 150 }); // notice we didn't provide a valueToSnap
+
+    // now we can reuse the function to snap any values:
+    console.log(snap(310)); // 310 (not within radius)
+    console.log(snap(480)); // 500 (within radius)
+    console.log(snap(610)); // 500 (within radius)
+</script>
+
+</html>

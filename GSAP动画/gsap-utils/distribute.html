@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, 100px);
+            gap: 20px;
+            grid-auto-rows: 200px;
+        }
+
+        .box {
+            border-radius: 10px;
+            background-color: skyblue;
+        }
+
+        .test {
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="grid">
+
+        <div class="box"></div>
+        <div class="box">
+            <div class="test"></div>
+        </div>
+        <div class="box">
+
+            <div class="test"></div>
+        </div>
+    </div>
+
+
+    <p>
+        理解这个工具方法，其实就是gsap stagger属性的内部实现
+    </p>
+</body>
+
+<script>
+    // get a function that, when fed an index value, will return a value according to the configuration options
+    let distributor = gsap.utils.distribute({
+        // the base value to start from (default:0)
+        base: 50,
+
+        // total amount to distribute across the targets (this amount gets added to the "base" when returned)
+        amount: 100,
+
+        // position in the targets array to begin from (can be an index number, a keyword like "start", "center",
+        // "edges", "random", or "end", or an array of ratios along the x-axis and y-axis like [0.25, 0.75]) (default: 0)
+        from: "center",
+
+        // bases distribution on the element's position in a grid [rows, columns] instead of a flat array.
+        // You can also define the rows and columns in array format like [5, 10]
+        grid: "auto",
+
+        // for grid-based distributing, you can limit measurements to one axis ("x" or "y")
+        axis: "y",
+
+        // distributes based on an ease curve!
+        ease: "power1.inOut",
+    });
+
+    // get an array of all the elements with the class ".box" applied
+    let targets = gsap.utils.toArray(".box");
+
+    // Now for any target element, we can just feed in its index from the targets array (along with the target
+    // and array) and it'll do all the calculations and return the appropriate amount:
+    let distributedValue = distributor(1, targets[1], targets);
+    console.log(distributedValue)
+</script>
+
+
+<script>
+
+    // animate the scale of all ".class" elements so that the ones in the middle are 0.5 and the ones on
+    // the outer edges are 3
+    gsap.to(".test", {
+        scale: gsap.utils.distribute({
+            base: 0.5,
+            amount: 1,
+            from: "start",
+            // from : [Number | String | Array] - The position in the targets array to begin from (can be an index number, a keyword like "start", "center", "edges", "random", or "end", or an array of ratios along the x-axis and y-axis like [0.25, 0.75]). The default is 0.
+            // from: "center",
+        }),
+        duration: 2,
+    });
+</script>
+
+</html>

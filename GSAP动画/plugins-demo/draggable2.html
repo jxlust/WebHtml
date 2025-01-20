@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../gsap-plugins/GSDevTools3.min.js"></script>
+    <script src="../gsap-plugins/Draggable.min.js"></script>
+    <script src="../gsap-plugins/InertiaPlugin.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .grid {
+            display: grid;
+            place-items: center;
+            grid-template-columns: repeat(auto-fit, 300px);
+            grid-auto-rows: 300px;
+            gap: 30px;
+            padding: 30px;
+        }
+
+        .box {
+            position: relative;
+            border-radius: 10px;
+            width: 300px;
+            height: 300px;
+            border: 1px solid #999;
+        }
+
+        .flex-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: inline-block;
+            background-image: linear-gradient(101.5deg,
+                    rgba(221, 91, 190, 1) 4.7%,
+                    rgba(253, 96, 135, 1) 38.2%,
+                    rgba(249, 172, 35, 1) 69.2%,
+                    rgba(246, 249, 35, 1) 100.2%);
+        }
+
+        .squre {
+            width: 100px;
+            height: 30px;
+            border-radius: 10px;
+            display: inline-block;
+            background-color: skyblue;
+        }
+
+        .heart-bg {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .heart {
+            width: 100px;
+            height: 30px;
+            border-radius: 10px;
+            background-image: linear-gradient(68.7deg,
+                    rgba(29, 173, 235, 1) 13.2%,
+                    rgba(137, 149, 250, 1) 29.8%,
+                    rgba(229, 109, 212, 1) 48.9%,
+                    rgba(255, 68, 128, 1) 68.2%,
+                    rgba(255, 94, 0, 1) 86.4%);
+        }
+
+        #test1 {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #test2,
+        #test3,
+        #test4 {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="grid">
+        <div class="box circle-bg1 ">
+            <div class="circle" id="test1"></div>
+        </div>
+
+
+        <div class="box circle-bg2 ">
+            <div class="circle" id="test2"></div>
+        </div>
+
+
+        <div class="box circle-bg3 ">
+            <div class="circle" id="test3"></div>
+        </div>
+
+
+
+        <div class="box circle-bg4 ">
+            <div class="circle" id="test4"></div>
+        </div>
+
+    </div>
+    <div>
+        <a href="https://gsap.com/docs/v3/Plugins/Draggable/">https://gsap.com/docs/v3/Plugins/Draggable/</a>
+    </div>
+</body>
+<script>
+    // https://gsap.com/docs/v3/Plugins/Draggable/
+    // InertiaPlugin 惯性插件
+    gsap.registerPlugin(GSDevTools, Draggable, InertiaPlugin)
+
+
+
+    Draggable.create("#test1", {
+        type: "x,y",
+        bounds: ".circle-bg1",
+        inertia: true,
+        liveSnap: {
+            // snaps to the closest point in the array, but only when it's within 15px (new in GSAP 1.20.0 release):
+            points: [
+                // { x: 0, y: 0 },
+                // { x: 50, y: 60 },
+                { x: 150 - 25, y: 150 - 25 },
+            ],
+            radius: 50,
+        },
+    });
+
+
+    const gapV = 10;
+    const maxMove = -300 + 50 + 20
+
+    Draggable.create("#test2", {
+        type: "x,y",
+        bounds: ".circle-bg2",
+        // inertia: true,
+        liveSnap: {
+            points: function (point) {
+                //if it's within 100px, snap exactly to 500,250
+                console.log(point)
+                let { x, y } = point
+                if (x > 0) {
+                    x = 0;
+                }
+                if (y > 0) {
+                    y = 0
+                }
+                if (x < maxMove) {
+                    x = maxMove
+                }
+                if (y < maxMove) {
+                    y = maxMove
+                }
+                return {
+                    x, y
+                }
+                // return point; //otherwise don't change anything.
+            },
+        },
+    });
+
+
+    // 计算四边的值
+    // [-300 + 50 + 20, 0]
+    const arroundX = [-230, 0]
+    const arroundY = [-230, 0]
+
+    function getMinDistanceValue(x, list) {
+        let minDist = Number.MAX_VALUE
+        let result = x;
+        for (let l of list) {
+            let dist = Math.abs(l - x)
+            if (dist < minDist) {
+                minDist = dist
+                result = l;
+            }
+        }
+        return result
+    }
+    Draggable.create("#test3", {
+        // type: "x,y", defaults to "x,y"
+        bounds: ".circle-bg3",
+        inertia: true,
+        minDuration: 0.5,
+        maxDuration: 2,
+        onClick: (e) => {
+            console.log('click..', e)
+        },
+        snap: {
+            points: function (point) {
+                //if it's within 100px, snap exactly to 500,250
+                console.log(point)
+                const { x, y } = point
+
+                let toX = getMinDistanceValue(x, arroundX);
+                // let toY = getMinDistanceValue(y, arroundY);
+                let toY = y;
+                if (y > arroundY[1]) {
+                    toY = arroundY[1]
+                    toX = x > arroundX[1] || x < arroundX[0] ? toX : x;
+                } else if (y < arroundY[0]) {
+                    toY = arroundY[0]
+                    toX = x > arroundX[1] || x < arroundX[0] ? toX : x;
+                }
+                return {
+                    x: toX, y: toY
+                }
+                // return point; //otherwise don't change anything.
+            },
+        },
+    });
+
+    Draggable.create("#test4", {
+        // type: "x,y", defaults to "x,y"
+        bounds: ".circle-bg4",
+        inertia: true,
+        minDuration: 0.5,
+        maxDuration: 2,
+        minX: -40,
+        maxX: 0,
+        maxY: 0,
+        snap: true,
+
+    });
+
+</script>
+
+</html>
