@@ -228,13 +228,41 @@
     Draggable.create("#test4", {
         // type: "x,y", defaults to "x,y"
         bounds: ".circle-bg4",
+        // minDuration: 0.5,
+        // maxDuration: 2,
+        // minX: -40,
+        // maxX: 0,
+        // maxY: 0,
+        // snap: true,
         inertia: true,
         minDuration: 0.5,
         maxDuration: 2,
-        minX: -40,
-        maxX: 0,
-        maxY: 0,
-        snap: true,
+        onClick: (e) => {
+            console.log('click..', e)
+        },
+        snap: {
+            points: function (point) {
+                console.log(point)
+                const { x, y } = point
+
+                let toY = y, toX = x;
+
+                if (y > arroundY[1] || y < arroundY[0]) {
+                    // 如果y不在arroundY范围内,y取最靠近的值
+                    toY = gsap.utils.snap(arroundY, y); // 50
+                    // x 取范围里面的值
+                    toX = gsap.utils.clamp(...arroundX, x)
+                } else {
+                    // y在范围内，x取两边最靠近的值即可，y不变
+                    toX = gsap.utils.snap(arroundX, x)
+                }
+
+                return {
+                    x: toX,
+                    y: toY
+                }
+            }
+        }
 
     });
 

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <style>
+        .svg-block {
+            width: 50%;
+        }
+
+        .item {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            width: 100vw;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #ball2,
+        #ball1 {
+            background-color: skyblue;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 20px;
+        }
+
+        .df-v {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .test {
+            width: 200px;
+            height: 100px;
+            border-radius: 20px;
+        }
+
+
+
+        .wrapper {
+            width: 450px;
+            height: 50px;
+            position: relative;
+            margin: auto;
+            background: #ccc;
+            overflow: hidden;
+        }
+
+        .wrapper::after {
+            width: 448px;
+            height: 48px;
+            content: "";
+            position: absolute;
+            border: solid 1px rgb(101, 43, 43);
+        }
+
+        .box {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            background: red;
+            font-size: 25px;
+            line-height: 50px;
+            text-align: center;
+            color: #000;
+
+        }
+
+
+
+        .boxes {
+            position: relative;
+            left: -50px;
+        }
+
+        .nav {
+            position: relative;
+            text-align: center;
+
+            color: white;
+            font-size: 20px;
+            margin: 20px 0;
+        }
+
+        #md-boxs {
+            left: 0;
+        }
+
+        .md-text {
+            width: 100%;
+            height: 50px;
+            position: absolute;
+            background: red;
+            font-size: 25px;
+            line-height: 50px;
+            text-align: center;
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <div class="item">
+
+        <svg class="svg-block">
+            <rect id="rect" x="0" y="0" width="50" height="50"></rect>
+        </svg>
+
+        <svg viewBox='0 0 24 24' width="100" height="100" fill="skyblue" id="arrow">
+            <path
+                d="M7.07615 16.6173C7.23093 16.2436 7.59557 16 8.00003 16H10.5V3C10.5 2.44772 10.9477 2 11.5 2H12.5C13.0523 2 13.5 2.44772 13.5 3V16H16C16.4045 16 16.7691 16.2436 16.9239 16.6173C17.0787 16.991 16.9931 17.4211 16.7071 17.7071L12.7071 21.7071C12.3166 22.0976 11.6834 22.0976 11.2929 21.7071L7.29292 17.7071C7.00692 17.4211 6.92137 16.991 7.07615 16.6173Z">
+            </path>
+        </svg>
+    </div>
+
+    <div class="item df-v">
+        <div id="ball1"></div>
+        <div id="ball2"></div>
+    </div>
+
+    <div class="item df-v">
+        <div id="test1" class="test">123</div>
+        <div id="test2" class="test">456</div>
+    </div>
+    <div class="item">
+
+        <div class="wrapper">
+            <div class="boxes">
+                <div class="box">10</div>
+                <div class="box">1</div>
+                <div class="box">2</div>
+                <div class="box">3</div>
+                <div class="box">4</div>
+                <div class="box">5</div>
+                <div class="box">6</div>
+                <div class="box">7</div>
+                <div class="box">8</div>
+                <div class="box">9</div>
+                <!-- <div class="box">10</div> -->
+            </div>
+        </div>
+
+    </div>
+
+    <div class="item">
+        <div class="wrapper">
+            <div class="boxes" id="md-boxs">
+                <div class="md-text">我是偏偏碰上对方，时代峰峻理解！</div>
+                <div class="md-text">我是偏偏碰上对方，时代峰峻理解！</div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+<script>
+    gsap.to("#rect", {
+        duration: 1,
+        // x here refers to the x attribute
+        attr: { x: 100, y: 50, width: 100, height: 100 },
+        ease: "none",
+        x: 200 // animate translateX() transform
+    });
+</script>
+<script>
+    var degrees = 45;
+    // const testUnit = gsap.utils.unitize((r) => {
+    //     console.log('r:', r) // 10 
+    //     return 2 * r;
+    // },'xxxx')
+    // const v = testUnit('10deg')
+    // console.log('v:', v) // 20xxxx
+
+    const rotationUnit = gsap.utils.unitize((rotation) => {
+        //snap to 45 degree increments
+        return Math.round(rotation / degrees) * degrees;
+    })
+    gsap.to('#arrow', {
+        duration: 4,
+        rotation: 360,
+        modifiers: {
+            // rotation: (rotation) => {
+            //     // console.log(1, rotation)
+            //     return rotation;
+            // }
+            rotation: rotationUnit
+
+        },
+        // in GSAP 3 you can do this instead:
+        // snap: {rotation: degrees},
+        ease: "none",
+        repeat: -1,
+    })
+
+</script>
+
+<script>
+
+    // gsap.defaults({ duration: 20, ease: "none" });
+    const tl = gsap.timeline({
+        defaults: {
+            duration: 20,
+            ease: "none"
+        }
+    });
+    var windowWrap = gsap.utils.wrap(0, window.innerWidth),
+        windowYoyo = gsap.utils.wrapYoyo(0, window.innerWidth);
+
+    tl.to("#ball1", {
+        x: 10000,
+        // duration: 20,
+        modifiers: {
+            x: x => windowWrap(parseFloat(x)) + "px"
+        }
+    }, 0);
+
+    tl.to("#ball2", {
+        x: 10000,
+        modifiers: {
+            x: x => windowYoyo(parseFloat(x)) + "px"
+        }
+    }, '<');
+</script>
+
+
+<script>
+
+    //  snap all of the properties in the comma-delimited list ("x,y" in this case) to the closest whole number:
+    // gsap.to("#test1", {
+    //     x: 1000,
+    //     y: 250,
+    //     duration: 10,
+    //     snap: "x,y",
+    // });
+
+    // gsap.to("#test1", {
+    //     x: 1000,
+    //     duration: 10,
+    //     snap: {
+    //         x: 20, // x snaps to the closest increment of 20 (0, 20, 40, 60, etc.)
+    //     },
+    // });
+
+    gsap.to("#test2", {
+        x: 1000,
+        duration: 10,
+        snap: {
+            x: [0, 50, 150, 500], // x snaps to the closest value in this array
+        },
+    });
+
+    gsap.to("#test1", {
+        x: 1000,
+        duration: 10,
+        snap: {
+            x: { values: [0, 50, 150, 500], radius: 20 }, // x snaps to the closest value in the array but only when it's within 20 pixels of it.
+        },
+    });
+</script>
+
+<script>
+
+    var colors = ["#0ae448", "#ff8709", "#9d95ff", "#00bae2"];
+
+    //initially colorize each box and position in a row
+    gsap.set(".box", {
+        backgroundColor: (i) => colors[i % colors.length],
+        x: (i) => i * 50
+    });
+
+
+
+    // move -50 -> +50 
+    // 0 500 这个两个点是被隐藏了看不见的
+    gsap.to(".box", {
+        duration: 5,
+        ease: "none",
+        x: "+=500", //move each box 500px to right
+        modifiers: {
+            x: gsap.utils.unitize(x => parseFloat(x) % 500) //force x value to be between 0 and 500 using modulus
+        },
+        repeat: -1,
+        // yoyo: true
+    });
+
+
+    //toggle overflow
+    // const overflow = document.querySelector("#overflow");
+    // overflow.addEventListener("change", applyOverflow);
+
+    // function applyOverflow() {
+    //     if (overflow.checked) {
+    //         gsap.set(".wrapper", { overflow: "visible" });
+    //     } else {
+    //         gsap.set(".wrapper", { overflow: "hidden" });
+    //     }
+    // }
+</script>
+
+<script>
+    var colors = ["#0ae448", "#ff8709", "#9d95ff", "#00bae2"];
+
+    //initially colorize each box and position in a row
+    gsap.set(".md-text", {
+        backgroundColor: '#ff8709',
+        x: (i) => i === 0 ? 0 : '100%'
+
+    });
+
+    gsap.to('#md-boxs', {
+        duration: 5,
+        xPercent: -100,
+        ease: 'none',
+        repeat: -1
+    })
+
+
+</script>
+
+</html>

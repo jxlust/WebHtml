@@ -29,5 +29,40 @@
     gsap.utils.snap(10, 23.5); // 20
 
 </script>
+<script>
+    gsap.utils.splitColor("#6fb936"); // [111, 185, 54]
+
+
+
+</script>
+<script>
+    let targets1 = gsap.utils.toArray(".class");
+    // Array of selector text (same result as ".class1, .class2")
+    let targets2 = gsap.utils.toArray([".class1", ".class2"]);
+
+    // Only descendant elements of myElement
+    let targets3 = gsap.utils.toArray(".class", myElement);
+</script>
+
+<script>
+    //returns the corresponding value in the array (wrapping back to the beginning when necessary)
+    let color = gsap.utils.wrap(["red", "green", "yellow"], 5); // "yellow" (index 5 maps to index 2 in a 3-element Array)
+
+    //or use a range
+    let num = gsap.utils.wrap(5, 10, 12); // 7 (12 is two more than the max of 10, so it wraps around to the start and goes two up from there)
+
+    //if we don't provide an index, we get a function that's ready to do wrapping accordingly
+    let wrapper = gsap.utils.wrap(["red", "green", "yellow"]);
+
+    //now we just feed an index number into the function we got back from the line above and we'll get the corresponding value from the wrapped Array
+    let color2 = wrapper(5) // "yellow"
+
+</script>
+<script>
+    let colorx = gsap.utils.wrapYoyo(["red", "green", "yellow"], 5); // "red" (index 5 maps to index 0 in a 3-element Array)
+    //or use a range
+    let numx = gsap.utils.wrapYoyo(5, 10, 12); // 8 (12 is two past the max of 10, thus the yoyo would go backward to 8)
+
+</script>
 
 </html>
