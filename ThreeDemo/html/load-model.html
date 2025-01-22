@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.172.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.172.0/examples/jsm/"
+            }
+        }
+        
+    </script>
+    <script type="module">
+        import * as THREE from 'three';
+        import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+        camera.position.set(40, 40, 40)
+        camera.lookAt(scene.position) // 0,0,0
+
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+
+        const dirLight = new THREE.DirectionalLight(0xffffff, 0.4);
+        dirLight.position.set(0, 0, 1).normalize();
+        scene.add(dirLight);
+
+        const pointLight = new THREE.PointLight(0xffffff, 4.5, 0, 0);
+        pointLight.color.setHSL(Math.random(), 1, 0.5);
+        pointLight.position.set(0, 100, 90);
+        scene.add(pointLight);
+
+        const loader = new GLTFLoader();
+
+        loader.load('../model/test1.glb', function (gltf) {
+            console.log(gltf);
+            scene.add(gltf.scene);
+            renderer.render(scene, camera);
+        }, undefined, function (error) {
+            console.error(1, error);
+        });
+
+        renderer.render(scene, camera);
+    </script>
+
+</body>
+
+</html>

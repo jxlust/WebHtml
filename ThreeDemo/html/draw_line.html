@@ -12,9 +12,10 @@
     <script type="importmap">
         {
             "imports": {
-                "three": "../js/three.module.js"
+                "three": "https://cdn.jsdelivr.net/npm/three@0.172.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.172.0/examples/jsm/"
             }
-        }
+        }    
     </script>
     <script type="module">
         import * as THREE from 'three';
@@ -29,12 +30,14 @@
 
             camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 500);
 
-            camera.position.set(0, 0, 100)
+            // 照相机放置的位置,如果你需要看2D的话，就只要把照相机放到（0，0，x）的位置，x代表z轴上视距 x越大，看的越远
+            // camera.position.set(100, 100, 100)
+            camera.position.set(0, 0, 50)
             camera.lookAt(0, 0, 0)
 
             scene = new THREE.Scene();
 
-            const material = new THREE.LineBasicMaterial({ color: 0x0000ff });
+            const material = new THREE.LineBasicMaterial({ color: 0x00f0ff });
 
             const points = [];
             points.push(new THREE.Vector3(- 10, 0, 0));

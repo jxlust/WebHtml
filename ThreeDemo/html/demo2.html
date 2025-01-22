@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="container"></div>
+
+    <!-- "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@<version>/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@<version>/examples/jsm/"
+     } -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.172.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.172.0/examples/jsm/"
+        }
+    }
+    
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import WebGL from 'three/addons/capabilities/WebGL.js';
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+
+        const geometry = new THREE.BoxGeometry(1, 1, 1);
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+
+        camera.position.z = 5;
+
+
+        let startTime = 0;
+        function animate(timestamp) {
+            if (!startTime) {
+                startTime = timestamp;
+            }
+            if (timestamp - startTime > 5000) {
+                console.log('5000ms end')
+                return;
+            }
+            requestAnimationFrame(animate);
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+            cube.rotation.z += 0.01;
+            renderer.render(scene, camera);
+        }
+
+
+
+
+        if (WebGL.isWebGL2Available()) {
+
+            // Initiate function or other initializations here
+            requestAnimationFrame(animate);
+            console.log('WebGL2 is available');
+
+        } else {
+
+            const warning = WebGL.getWebGL2ErrorMessage();
+            document.getElementById('container').appendChild(warning);
+
+        }
+
+    </script>
+
+</body>
+
+</html>
