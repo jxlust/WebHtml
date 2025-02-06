@@ -22,6 +22,13 @@
             overflow: hidden;
         }
 
+        .stars-container {
+            position: relative;
+            width: 200vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
         .gs-dev-tools {
             z-index: 99;
         }
@@ -65,6 +72,7 @@
     // var random = gsap.utils.random([0, 100, 200], true);
     // console.log('test:', gsap.utils.random(0, 100, 10));
 
+    const startContainer = document.getElementById('starsBox')
     function randomArround() {
         // top x: [0,100] y:[0,10]
         // right x: [90,100] y:[0,100]
@@ -144,7 +152,7 @@
     }
     function createStarSvg(number = 100) {
         const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        svg.setAttribute('width', '200%');
+        svg.setAttribute('width', '100%');
         svg.setAttribute('height', '100%');
         svg.setAttribute('class', 'stars');
         // svg.setAttribute('viewBox', '0 0 100 100');
@@ -166,17 +174,16 @@
             svg.appendChild(cloneCircle);
         }
 
-        document.body.appendChild(svg);
+        // document.body.appendChild(svg);
+        startContainer.appendChild(svg);
     }
 
 
     const startGroupNum = 6;
     for (let i = 0; i < startGroupNum; i++) {
-        createStarSvg(50);
+        createStarSvg(30);
     }
     // copy starsBox
-
-
     const startTl = gsap.timeline({
         repeat: -1,
     });
@@ -197,10 +204,10 @@
 
 
     const windowWidth = window.innerWidth;
-    const moveDuration = windowWidth / 50; // Xpx/sec X像素/秒
+    const moveDuration = windowWidth / 20; // 50 is speed, Xpx/sec X像素/秒
 
     const moveTl = gsap.timeline()
-    moveTl.to('.stars', {
+    moveTl.to(startContainer, {
         repeat: -1,
         // repeatDelay: 2,
         xPercent: -50,
