@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/gsap-latest-beta.min.js"></script>
+    <script src="../gsap-plugins/GSDevTools3.min.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #container {
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+        }
+
+        .graph {
+
+            display: grid;
+            grid-template-columns: repeat(auto-fit, 30px);
+            grid-template-rows: repeat(auto-fit, 30px);
+            grid-auto-rows: 30px;
+            /* grid-template-columns: repeat(, 25px); */
+        }
+
+        .cell {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            background-color: #888;
+        }
+
+        .cell.empty {
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container"></div>
+
+</body>
+
+
+<script>
+
+
+
+    class MinHeapCompare {
+        constructor(compare) {
+            this.heap = [];
+            this.compare = (typeof compare === 'function') ? compare : this.defaultCompare
+        }
+
+        defaultCompare(a, b) {
+            return a < b;
+        }
+        isEmpty() {
+            return this.heap.length === 0;
+        }
+        size() {
+            return this.heap.length;
+        }
+        getParentIndex(index) {
+            // index > 0
+            return Math.floor((index - 1) / 2);
+        }
+        getLeftIndex(index) {
+            return index * 2 + 1;
+        }
+        getRightIndex(index) {
+            return index * 2 + 2;
+        }
+        // 新增元素
+        insert(v) {
+            this.heap.push(v);
+            // 上浮维持最小堆
+            this.heapifyUp();
+        }
+
+        // 获取堆顶元素
+        peek() {
+            return this.heap[0];
+        }
+        // 删除堆顶元素
+        pop() {
+            if (this.heap.length === 1) {
+                return this.heap.pop();
+            }
+            const res = this.heap[0];
+            // 将最后一个元素放到堆顶
+            this.heap[0] = this.heap.pop();
+            // 下沉维持最小堆
+            this.heapifyDown(0);
+            return res;
+        }
+
+        swap(i, j) {
+            [this.heap[i], this.heap[j]] = [this.heap[j], this.heap[i]];
+        }
+        // 上浮维持最小堆
+        heapifyUp() {
+            let index = this.heap.length - 1;
+            while (index > 0) {
+                const parentIndex = this.getParentIndex(index);
+                if (this.compare(this.heap[parentIndex], this.heap[index])) break;
+                // 交换父子节点
+                this.swap(index, parentIndex);
+                index = parentIndex;
+            }
+        }
+        // 下沉维持最小堆
+        heapifyDown(index) {
+            while (this.getLeftIndex(index) < this.size()) {
+                let minIndex = this.getLeftIndex(index);
+                // 取到子节点的最小值来和当前节点比较
+                if (minIndex + 1 < this.size() && this.compare(this.heap[minIndex + 1], this.heap[minIndex])) {
+                    minIndex = minIndex + 1;
+                }
+                // 和当前节点比较，如果子节点都更大，则结束循环，比当前节点小，则交换            
+                // 因为之前最小堆都维护了，所以如果子节点都比当前节点大的话，下面的节点也都会比当前节点大，所以结束循环
+                if (!this.compare(this.heap[minIndex], this.heap[index])) break;
+                this.swap(index, minIndex);
+                // 继续下沉，维持最小堆
+                index = minIndex;
+            }
+        }
+        getData() {
+            return this.heap
+        }
+    }
+
+    /**
+     * 
+     * @param {*} graph 邻接矩阵
+     * @param {*} start 
+     */
+    function dijkstraV1(graph, start) {
+
+        const distance = new Array(graph.length).fill(Infinity);
+        const visited = new Set();
+        const priorityQueue = new MinHeapCompare((a, b) => a[1] < b[1]);
+        console.log(priorityQueue)
+        // 起点距离为0
+        distance[start] = 0;
+        priorityQueue.insert([start, 0]);
+        // visited.add(start);
+
+        // 记录最短路径的上一次节点，方便后续计算路径
+        const prevPath = new Map();
+        prevPath.set(start, null);
+
+        while (!priorityQueue.isEmpty()) {
+            // 最小值
+            const [node, weight] = priorityQueue.pop();
+            if (visited.has(node)) continue;
+            visited.add(node);
+
+            const neighbors = graph[node];
+            for (let i = 0, len = neighbors.length; i < len; i++) {
+                let cur = neighbors[i];
+                if (cur === Infinity) continue;
+
+                if (distance[i] > distance[node] + cur) {
+                    // 更新距离
+                    distance[i] = distance[node] + cur;
+                    priorityQueue.insert([i, distance[i]])
+                    // node -> i 是最短
+                    prevPath.set(i, node)
+                }
+
+            }
+        }
+        console.log('d:', distance)
+        console.log('prevPath:', prevPath)
+        return {
+            distance,
+            prevPath,
+        }
+
+    }
+    /**
+     * 根据prevMap计算路径
+     * @param {*} prevMap 
+     * @param {*} start 
+     * @param {*} end 
+     */
+    function buildPath(prevMap, start, end) {
+        let path = [];
+        let cur = end;
+        while (cur !== null && cur !== undefined) {
+            if (cur === start) {
+                // 如果到达了起点，则结束
+                path.push(cur);
+                break;
+            }
+            path.push(cur);
+            cur = prevMap.get(cur)
+        }
+        // 因为是从后往前推，所以需要把路径翻转一下
+        path.reverse()
+        //   判断一下第一个是否是开始位置点，如果不是，则没找到路径，返回空数组
+        return path[0] !== start ? [] : path;
+    }
+
+
+
+
+</script>
+
+<script>
+    const container = document.getElementById("container");
+    function createItem(num) {
+        let item = document.createElement("div");
+        item.className = num != Infinity ? "cell empty" : 'cell';
+        item.innerText = num != Infinity ? num : "";
+        return item;
+    }
+    function buildViews(graph) {
+        let fragment = document.createDocumentFragment();
+
+        const n = graph.length;
+        for (let i = 0; i < n; i++) {
+            for (let j = 0; j < n; j++) {
+                fragment.appendChild(createItem(graph[i][j]));
+            }
+        }
+
+        container.style.gridTemplateColumns = `repeat(${n}, 30px)`;
+        container.style.gridTemplateRows = `repeat(${n}, 30px)`;
+        container.appendChild(fragment);
+
+    }
+
+</script>
+
+<script type="module">
+    import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+    function getColor() {
+        const dd = gsap.utils.random(125, 255, true)
+        return `rgba(${dd()},${dd()},${dd()},1)`
+    }
+    function createGraphData(svg, graph) {
+        // 假设我们有一些节点和边数据
+        var nodes = [];
+        var links = [];
+        for (let i = 0; i < graph.length; i++) {
+            nodes.push(
+                { id: i }
+            )
+            for (let j = 0; j < graph.length; j++) {
+                if (graph[i][j] != Infinity) {
+                    links.push({ source: i, target: j })
+                }
+            }
+        }
+
+
+
+        // 添加节点到SVG
+        var nodeElements = svg.selectAll(".node")
+            .data(nodes)
+            .enter().append("circle")
+            .attr("class", "node")
+            .attr("cx", 1) // 初始位置，稍后通过力模拟调整
+            .attr("cy", 1) // 初始位置，稍后通过力模拟调整
+            .attr("r", 5)
+            .attr("fill", (d) => getColor())
+
+
+        // 添加边到SVG
+        // var linkElements = svg.selectAll(".link")
+        //     .data(links)
+        //     .enter().append("line")
+        //     .attr('stroke-width', '1px')
+        //     .attr("class", "link").attr('stroke', 'red');
+
+        // 创建力模拟
+        var simulation = d3.forceSimulation(nodes)
+            // .force("link", d3.forceLink(links).id(d => d.id))
+            .force("charge", d3.forceManyBody())
+            .force("center", d3.forceCenter(0, 0));
+
+        // 应用力模拟到节点和边
+        simulation.nodes(nodes);
+        simulation.on("tick", () => {
+            nodeElements.attr("cx", d => d.x)
+                .attr("cy", d => d.y);
+            // linkElements.attr("x1", d => d.source.x)
+            //     .attr("y1", d => d.source.y)
+            //     .attr("x2", d => d.target.x)
+            //     .attr("y2", d => d.target.y);
+        });
+
+    }
+
+    function addCircle(svg, graph, distance, prevMap) {
+        const circles = []
+        for (let i = 0; i < graph.length; i++) {
+            // { id: 1, x: 20, y: 20, color: getColor() }
+            const x = gsap.utils.random(13, 80, 13);
+            const y = gsap.utils.random(13, 80, 13);
+            circles.push({ id: i, x, y, color: getColor() })
+        }
+        console.log('c:', circles)
+
+        // 画圆
+        svg.selectAll('circle')
+            .data(circles)
+            .enter()
+            .append('circle')
+            .attr('class', 'circle')
+            .attr('id', d => `circle${d.id}`)
+            .attr("cx", d => d.x)
+            .attr("cy", d => d.y)
+            .attr("r", 5)
+            .attr("fill", (d) => d.color);
+
+        svg.selectAll('text')
+            .data(circles)
+            .enter()
+            .append('text')
+            .attr("x", d => d.x - 1.5) // 设置文本x坐标为圆心x坐标
+            .attr("y", d => d.y + 1) // 设置文本y坐标稍微高于圆心y坐标，以避免与圆重叠，并考虑文本的基线位置
+            // .attr("text-anchor", "middle") // 文本对齐方式为中间对齐
+            // .attr("dominant-baseline", "middle") // 文本基线对齐方式为中间对齐
+            .attr('stroke', 'none')
+            .attr('font-size', '5px')
+            .text(d => d.id); // 设置文本内容
+
+        var linksData = [];
+        for (let i = 0; i < graph.length; i++) {
+            for (let j = 0; j < graph.length; j++) {
+                if (graph[i][j] != Infinity && graph[i][j] != 0) {
+                    linksData.push({ source: i, target: j })
+                }
+            }
+        }
+        console.log('linksData:', linksData)
+        var links = svg.selectAll("line")
+            .data(linksData)
+            .enter()
+            .append("line")
+            .attr("x1", function (d) { return circles[d.source].x; })
+            .attr("y1", function (d) { return circles[d.source].y; })
+            .attr("x2", function (d) { return circles[d.target].x })
+            .attr("y2", function (d) { return circles[d.target].y })
+            .style("stroke", "yellow")
+            .style("stroke-width", 1);
+
+    }
+
+    // const MAX = Number.MAX_SAFE_INTEGER;
+    function generateData(svg) {
+        // 或者使用邻接矩阵
+        // n
+        const n = 8;
+        const graph = []
+        for (let i = 0; i < n; i++) {
+            const item = new Array(n).fill(Infinity);
+            item[i] = 0;
+            graph.push(item);
+        }
+        console.log(graph);
+        graph[0][1] = 2;
+        graph[0][2] = 4;
+        graph[1][2] = 3;
+        graph[1][3] = 5;
+        graph[2][4] = 1;
+        graph[3][4] = 2;
+        graph[3][7] = 6;
+        graph[4][7] = 3;
+        graph[3][5] = 1;
+
+        // buildViews(graph)
+        const { distance, prevPath } = dijkstraV1(graph, 0)
+        const path = buildPath(prevPath, 1, 6)
+        console.log('path:', path)
+
+        addCircle(svg, graph, distance, prevPath);
+        // createGraphData(svg, graph)
+
+    }
+
+
+    // path.moveTo(0, 0);
+    const svg = d3.create("svg")
+        .attr("width", "100%")
+        .attr("height", "100%")
+        .attr('viewBox', '0 0 100 100');
+
+    generateData(svg);
+
+
+    container.appendChild(svg.node());
+
+</script>
+
+</html>
