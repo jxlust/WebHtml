@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .list {
+            width: 500px;
+            overflow: auto;
+            background-color: #f8f8f8;
+            height: 700px;
+        }
+
+        .item {
+            background-color: skyblue;
+            height: 100px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="list" id="list"></div>
+
+</body>
+<script>
+
+    const listEl = document.getElementById('list');
+
+    let count = 0;
+
+    const observer = new MutationObserver((mutationsList, ob) => {
+        // console.log('mutations:', mutationsList);
+        // console.log('ob:', ob);
+
+        if (listEl.scrollTop + listEl.clientHeight >= listEl.scrollHeight) {
+            console.log('mobserver 到底了');
+            loadMore();
+        }
+
+    });
+    observer.observe(listEl, {
+        childList: true,
+        subtree: true,
+    });
+
+    function initData() {
+        for (let i = 0; i < 2; i++) {
+            const itemEl = document.createElement('div');
+            itemEl.className = 'item';
+            itemEl.innerText = 'item' + count++;
+            listEl.appendChild(itemEl);
+        }
+    }
+    function renderData() {
+        for (let i = 0; i < 2; i++) {
+            const itemEl = document.createElement('div');
+            itemEl.className = 'item';
+            itemEl.innerText = 'item' + count++;
+            listEl.appendChild(itemEl);
+        }
+    }
+    function loadMore() {
+        setTimeout(() => {
+            renderData();
+        }, 10);
+    }
+    listEl.addEventListener('scroll', function (e) {
+        if (e.target.scrollTop + e.target.clientHeight >= e.target.scrollHeight) {
+            console.log('scroll到底了');
+            loadMore();
+        }
+    })
+    initData();
+
+</script>
+
+</html>
