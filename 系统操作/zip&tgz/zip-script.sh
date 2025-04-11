@@ -29,3 +29,11 @@ done
 
 echo "打包完成，已生成文件：$output_file"
 echo 'dist.zip created'
+
+
+# 解决不要父级目录问题
+# 要解决这个问题，得到 dist/ 结果。需要
+
+# 先去到对应文件夹下
+# cd dist
+# zip -r -q ../dist.zip ./

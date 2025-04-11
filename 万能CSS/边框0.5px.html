@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .border-line {
+            width: 100%;
+            border-top: 1px solid red;
+            transform: scaleY(0.5);
+            transform-origin: top;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: skyblue;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .box1 {
+            background-color: #fff;
+        }
+
+        .box1::after {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            box-sizing: border-box;
+            /* z-index: -1; */
+            width: 200%;
+            height: 200%;
+            content: '';
+            display: block;
+            border: 1px solid red;
+            border-radius: 10px;
+            transform: scale(0.5);
+            transform-origin: left bottom;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="border-line"></div>
+    </div>
+    <div class="box box1"></div>
+
+</body>
+
+</html>

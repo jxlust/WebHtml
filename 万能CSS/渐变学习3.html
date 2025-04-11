@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 30px;
+        }
+
+        .card {
+            border-radius: 8px;
+            height: 400px;
+            background-color: #3f5eb3;
+            position: relative;
+            overflow: hidden;
+            /* #6486d5 */
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            width: calc(200% - 20px);
+            height: calc(200% - 60px);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            /* background-color: skyblue; */
+            background: linear-gradient(135deg, transparent 60%, rgba(255, 255, 255, 0.05));
+        }
+
+        .cardbg {
+            border-radius: 8px;
+            background-color: #3f5eb3;
+            background-image: radial-gradient(circle at 5% 1%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.03) 70%, transparent 70%, transparent 100%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="grid">
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="cardbg"></div>
+    </div>
+
+</body>
+
+</html>
