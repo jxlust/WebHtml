@@ -49,8 +49,8 @@
 
       .cardsvg {
         border-radius: 8px;
-
-        height: 600px;
+        /* width: 1031px; */
+        height: 300px;
         background-color: #3f5eb3;
         position: relative;
         overflow: hidden;
@@ -74,9 +74,9 @@
       <div class="cardsvg" id="box">
         <svg>
           <defs>
-            <linearGradient x1=".5" y1="0" x2=".5" y2="1" id="maskBg">
-              <stop offset="0" stop-color="#ffffff" stop-opacity="0.1"></stop>
-              <stop offset="1" stop-color="#ffffff" stop-opacity="0.01"></stop>
+            <linearGradient x1="1" y1="0.1" x2="0" y2="1" id="maskBg">
+              <stop offset="0" stop-color="#fff" stop-opacity="0.05"></stop>
+              <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
             </linearGradient>
           </defs>
           <path d="" id="myPath" fill="url(#maskBg)"></path>
@@ -285,8 +285,9 @@
     const boxW = box.clientWidth;
     const boxH = box.clientHeight;
     const p1 = { x: 0.9 * boxW, y: 0 };
-    const p2 = { x: 0.45 * boxW, y: 0.87 * boxH };
-    const p3 = { x: 0, y: 0.73 * boxH };
+    // const p2 = { x: 0.45 * boxW, y: 0.87 * boxH };
+    const p2 = { x: 0, y: 0.9 * boxH };
+    const p3 = { x: -0.9 * boxW, y: -0.02 * boxH };
 
     // const p1 = [0, 94]
     // const p2 = [73, 0]
@@ -300,8 +301,9 @@
       const pointsList = [
         [0, 0],
         [0.95 * boxW, 0],
-        [0.35 * boxW, 0.9 * boxH],
-        [0, 0.90 * boxH],
+        // [0.35 * boxW, 0.9 * boxH],
+        [0, 0.9 * boxH],
+        [-1 * boxW, 0],
       ];
       const ccr = new CurveCatmullRom(pointsList);
       const curvePath = ccr.generatePath();
