@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html {
+        /* overflow: auto;
+        scrollbar-gutter: stable; */
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .box {
+        margin: 20px auto auto;
+        width: 500px;
+        height: 500px;
+        background-color: #f8f8f8;
+        border-radius: 10px;
+        position: relative;
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-gutter: stable;
+        scrollbar-width: 10px;
+        scrollbar-color: red;
+      }
+      .item {
+        width: 100%;
+        height: 300px;
+        background-color: #ccc;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .item:nth-child(2n) {
+        background-color: skyblue;
+      }
+
+      ::-webkit-scrollbar,
+      ::-webkit-scrollbar-button {
+        /* width: 10px;
+        height: 0; */
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+        border: none;
+      }
+      ::-webkit-scrollbar-track-piece {
+        background: transparent;
+        border: none;
+        width: 10px;
+      }
+      ::-webkit-scrollbar-thumb {
+        min-height: 28px;
+        background-clip: padding-box;
+        border-radius: 10px;
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="item">
+        <span class="right">8</span>
+      </div>
+      <div class="item">2<span class="right">8</span></div>
+      <div class="item">3<span class="right">8</span></div>
+      <div class="item">4<span class="right">8</span></div>
+    </div>
+  </body>
+</html>
