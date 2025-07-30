@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        background-color: #000;
+        display: flex;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+        justify-content: center;
+        flex-direction: column;
+      }
+      .box {
+        width: 889px;
+        background: linear-gradient(
+          135deg,
+          rgb(0, 0, 0) 0%,
+          rgb(44, 54, 58) 100%
+        );
+
+        background-blend-mode: normal;
+        height: 300px;
+        backdrop-filter: blur(8px);
+        border: 1px solid oklab(0.999994 0.0000455678 0.0000200868 / 0.1);
+        border-radius: 12px;
+      }
+      .box:hover {
+        border-color: orange;
+        background: url("./images/texture.png"),
+          linear-gradient(135deg, rgb(0, 0, 0) 0%, rgb(44, 54, 58) 100%);
+        background-blend-mode: overlay;
+      }
+
+      .bg {
+        margin-top: 50px;
+        width: 500px;
+        height: 50px;
+        background-color: oklab(0.999994 0.0000455678 0.0000200868 / 0.1);
+      }
+      .bg2 {
+        margin-top: 50px;
+        width: 500px;
+        height: 50px;
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+    <div class="bg"></div>
+    <div class="bg2"></div>
+  </body>
+</html>
