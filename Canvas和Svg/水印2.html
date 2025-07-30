@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas水印生成器 - 旋转交错布局</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+        color: white;
+        min-height: 100vh;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .container {
+        max-width: 1200px;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: center;
+        margin: 20px 0;
+      }
+      .header {
+        text-align: center;
+        padding: 20px;
+        width: 100%;
+      }
+      .header h1 {
+        font-size: 2.8rem;
+        margin-bottom: 10px;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      }
+      .header p {
+        font-size: 1.2rem;
+        max-width: 700px;
+        margin: 0 auto;
+        opacity: 0.9;
+      }
+      .canvas-container {
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(5px);
+        flex: 1;
+        min-width: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .controls {
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(5px);
+        width: 320px;
+      }
+      canvas {
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        /* max-width: 600px;
+        height: 400px; */
+      }
+      .controls h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 1.8rem;
+        color: #ffcc00;
+      }
+      .control-group {
+        margin-bottom: 20px;
+      }
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+      }
+      input,
+      textarea,
+      select {
+        width: 100%;
+        padding: 10px 15px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: rgba(0, 0, 0, 0.2);
+        color: white;
+        font-size: 1rem;
+      }
+      textarea {
+        min-height: 80px;
+        resize: vertical;
+      }
+      button {
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(to right, #ff8a00, #da1b60);
+        border: none;
+        border-radius: 8px;
+        color: white;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+      }
+      button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+      .feature-list {
+        margin-top: 30px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 15px;
+        padding: 25px;
+        width: 100%;
+        max-width: 900px;
+      }
+      .feature-list h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #ffcc00;
+        font-size: 2rem;
+      }
+      .features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+      }
+      .feature {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 20px;
+        width: 250px;
+      }
+      .feature h3 {
+        color: #4dabf7;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .feature h3:before {
+        content: "✓";
+        font-weight: bold;
+        color: #4dabf7;
+      }
+      .footer {
+        text-align: center;
+        padding: 30px 0 20px;
+        width: 100%;
+        opacity: 0.8;
+      }
+      @media (max-width: 900px) {
+        .container {
+          flex-direction: column;
+          align-items: center;
+        }
+        .canvas-container,
+        .controls {
+          width: 100%;
+          min-width: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Canvas 水印生成器</h1>
+      <p>旋转-45度的交错布局水印，适用于文档、图片保护</p>
+    </div>
+
+    <div class="container">
+      <div class="canvas-container">
+        <h2>水印效果预览</h2>
+        <canvas id="watermarkCanvas"></canvas>
+      </div>
+
+      <div class="controls">
+        <h2>水印设置</h2>
+        <div class="control-group">
+          <label for="text">水印文字</label>
+          <textarea id="text">机密文件 请勿外泄</textarea>
+        </div>
+
+        <div class="control-group">
+          <label for="fontSize">字体大小 (px)</label>
+          <input type="range" id="fontSize" min="10" max="50" value="16" />
+          <span id="fontSizeValue">16</span>
+        </div>
+
+        <div class="control-group">
+          <label for="color">水印颜色</label>
+          <select id="color">
+            <option value="rgba(0,0,0,0.15)">浅黑色</option>
+            <option value="rgba(255,0,0,0.15)">浅红色</option>
+            <option value="rgba(0,0,255,0.15)">浅蓝色</option>
+            <option value="rgba(0,128,0,0.15)">浅绿色</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="spacing">水印间距</label>
+          <input type="range" id="spacing" min="80" max="200" value="130" />
+          <span id="spacingValue">130</span>
+        </div>
+
+        <div class="control-group">
+          <label for="rotation">旋转角度</label>
+          <input type="range" id="rotation" min="-90" max="90" value="-45" />
+          <span id="rotationValue">-45°</span>
+        </div>
+
+        <button id="downloadBtn">下载水印图片</button>
+        <button id="generateBtn">生成水印</button>
+      </div>
+    </div>
+
+    <div class="feature-list">
+      <h2>功能特点</h2>
+      <div class="features">
+        <div class="feature">
+          <h3>旋转布局</h3>
+          <p>水印文字旋转-45度排列，美观且不影响内容阅读</p>
+        </div>
+        <div class="feature">
+          <h3>交错设计</h3>
+          <p>奇数排和偶数排水印错开排列，形成密集覆盖效果</p>
+        </div>
+        <div class="feature">
+          <h3>完全覆盖</h3>
+          <p>水印填充满整个Canvas区域，不留空白死角</p>
+        </div>
+        <div class="feature">
+          <h3>自定义设置</h3>
+          <p>可调整文字、大小、颜色、间距和旋转角度</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>Canvas 水印生成器 &copy; 2023 | 旋转交错布局技术</p>
+    </div>
+
+    <script>
+      function rotateOrigin(x, y, theta) {
+        const y1 = Math.cos(theta) * y - Math.sin(theta) * x;
+        const x1 = Math.sin(theta) * y + Math.cos(theta) * x;
+        //   const x1 = 0.707 * (x + offsetX - y);
+        //   const y1 = 0.707 * (x + offsetX + y);
+        return { x1, y1 };
+      }
+      document.addEventListener("DOMContentLoaded", function () {
+        const canvas = document.getElementById("watermarkCanvas");
+        const ctx = canvas.getContext("2d");
+
+        // 设置Canvas尺寸
+        canvas.width = 820;
+        canvas.height = 1260;
+
+        // 获取控件元素
+        const textInput = document.getElementById("text");
+        const fontSizeInput = document.getElementById("fontSize");
+        const fontSizeValue = document.getElementById("fontSizeValue");
+        const colorInput = document.getElementById("color");
+        const spacingInput = document.getElementById("spacing");
+        const spacingValue = document.getElementById("spacingValue");
+        const rotationInput = document.getElementById("rotation");
+        const rotationValue = document.getElementById("rotationValue");
+        const generateBtn = document.getElementById("generateBtn");
+        const downloadBtn = document.getElementById("downloadBtn");
+
+        // 初始值显示
+        fontSizeValue.textContent = fontSizeInput.value;
+        spacingValue.textContent = spacingInput.value;
+        rotationValue.textContent = rotationInput.value + "°";
+
+        // 绘制水印
+        function drawWatermark() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+          const text = textInput.value || "机密文件";
+          const fontSize = parseInt(fontSizeInput.value);
+          const color = colorInput.value;
+          const spacing = parseInt(spacingInput.value);
+          const rotation = parseInt(rotationInput.value);
+
+          //   ctx.font = `bold ${fontSize}px Arial`;
+          ctx.font = `${fontSize}px Arial`;
+          ctx.fillStyle = color;
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+
+          // 测量文本宽度
+          const textWidth = ctx.measureText(text).width;
+
+          // 计算水印单元尺寸
+          const unitSize =
+            Math.sqrt(textWidth * textWidth + fontSize * fontSize) + 20;
+
+          // 计算水平和垂直步长
+          const angle = (rotation * Math.PI) / 180;
+          const stepX = spacing;
+          const stepY = spacing * 0.8;
+
+          console.log("unitSize:", unitSize);
+          ctx.save();
+          ctx.rotate(angle);
+          // 绘制水印（覆盖整个Canvas）
+          for (let y = -unitSize; y < canvas.height + unitSize; y += stepY) {
+            for (let x = -unitSize; x < canvas.width + unitSize; x += stepX) {
+              // 奇数排和偶数排错开
+              const offsetX = Math.floor(y / stepY) % 2 === 0 ? stepX * 2 : 0;
+              console.log("pos:", x + offsetX, y);
+              //   ctx.save();
+              //   ctx.translate(x + offsetX, y);
+              const { x1, y1 } = rotateOrigin(x + offsetX, y, angle);
+              ctx.fillText(text, x1, y1);
+              //   ctx.restore();
+            }
+          }
+          ctx.restore();
+        }
+
+        // 初始绘制
+        drawWatermark();
+
+        // 事件监听
+        fontSizeInput.addEventListener("input", function () {
+          fontSizeValue.textContent = this.value;
+          drawWatermark();
+        });
+
+        spacingInput.addEventListener("input", function () {
+          spacingValue.textContent = this.value;
+          drawWatermark();
+        });
+
+        rotationInput.addEventListener("input", function () {
+          rotationValue.textContent = this.value + "°";
+          drawWatermark();
+        });
+
+        textInput.addEventListener("input", drawWatermark);
+        colorInput.addEventListener("change", drawWatermark);
+        generateBtn.addEventListener("click", drawWatermark);
+
+        // 下载功能
+        downloadBtn.addEventListener("click", function () {
+          const link = document.createElement("a");
+          link.download = "watermark.png";
+          link.href = canvas.toDataURL("image/png");
+          link.click();
+        });
+      });
+    </script>
+  </body>
+</html>

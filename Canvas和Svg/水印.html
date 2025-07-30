@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        width: 100vw;
+        height: 100vh;
+        padding: 20px 0;
+        box-sizing: border-box;
+        display: grid;
+        place-items: center;
+        background-color: #f8f8f8;
+      }
+      .box {
+        width: 500px;
+        height: 900px;
+        background-color: #000;
+        position: relative;
+      }
+      canvas {
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <canvas width="500" height="900"></canvas>
+    </div>
+  </body>
+</html>
+
+<script>
+  function rotatePostion(x, y, cx, cy, theta) {
+    const x1 = (x - cx) * Math.cos(theta) - (y - cy) * Math.sin(theta) + cx;
+    const y1 = (x - cx) * Math.sin(theta) + (y - cy) * Math.cos(theta) + cy;
+    return { x1, y1 };
+  }
+  const canvas = document.querySelector("canvas");
+  const width = canvas.offsetWidth;
+  const height = canvas.offsetHeight;
+  console.log("size:", width, height);
+  const ctx = canvas.getContext("2d");
+  ctx.font = "16px Arial";
+  ctx.fillStyle = "red";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.rotate((-45 * Math.PI) / 180); // 旋转-45度
+  //   ctx.fillText("Hello World", 0, 16);
+
+  const stepX = 100;
+  const stepY = 50;
+  for (let i = 0; i < width; i += stepX) {
+    for (let j = 0; j < height; j += stepY) {
+      //   ctx.beginPath();
+      //   console.log(i, j);
+      const x1 = 0.707 * (i - j);
+      const y1 = 0.707 * (i + j);
+      //   ctx.arc(x, y, 2, 0, 2 * Math.PI, false);
+      //   ctx.stroke();
+      //   ctx.fill();
+
+      //   const { x1, y1 } = rotatePostion(i, j, 250, 450, (-45 * Math.PI) / 180);
+      //   console.log(x1, y1);
+      ctx.fillText("Hello World", x1, y1);
+    }
+  }
+  //   x1 =  0.707 * (x-cx) + 0.707 * (y-cy) + cx
+  //   y1 =  -0.707 * (x-cx) + 0.707 * (y-cy) + cy
+  console.log(
+    "原点旋转后:",
+    0.707 * (0 - 250) + 0.707 * (0 - 450) + 250,
+    -0.707 * (0 - 250) + 0.707 * (0 - 450) + 450
+  );
+
+  console.log(rotatePostion(0, 0, 250, 450, (-45 * Math.PI) / 180));
+
+  //   x = R * cos(theta) + cx
+  //   y = R * sin(theta) + cy
+</script>
