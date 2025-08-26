@@ -8,100 +8,100 @@
 -->
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>利用iframe监听内容变化</title>
     <style>
-        body,
-        html {
-            padding: 0;
-            margin: 0;
-        }
+      body,
+      html {
+        padding: 0;
+        margin: 0;
+      }
 
-        .main {
-            width: 100vw;
-            height: 100vh;
-        }
+      .main {
+        width: 100vw;
+        height: 100vh;
+      }
 
-        .main-wrapper {
-            position: relative;
-        }
+      .main-wrapper {
+        position: relative;
+      }
 
-        .main-content {}
+      .main-content {
+      }
 
-        .main-wrapper iframe {
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            opacity: 0;
-            visibility: hidden;
-        }
+      .main-wrapper iframe {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        visibility: hidden;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="main">
+      <div class="main-wrapper">
+        <div class="main-content" id="mainContent">test data...</div>
+        <iframe
+          title="domChangeIframe"
+          id="myHackIframe"
+          src=""
+          frameborder="0"
+        ></iframe>
+      </div>
 
-        <div class="main-wrapper">
+      <div class="button" id="button">change</div>
 
-            <div class="main-content" id="mainContent">
-                test data...
-            </div>
-            <iframe title="domChangeIframe" id="myHackIframe" src="" frameborder="0"></iframe>
-        </div>
-
-        <div class="button" id="button">change</div>
-
-
-        <div class="box-test">
-            <span style="display: inline-block;" id="boxText">box test</span>
-            <img class="box-img" id="boxImg"
-                src="https://img1.baidu.com/it/u=2005056479,139681251&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1710262800&t=1a506a44501eab4cf76b7c97a73c05e1" />
-        </div>
+      <div class="box-test">
+        <span style="display: inline-block" id="boxText">box test</span>
+        <img
+          class="box-img"
+          id="boxImg"
+          src="https://img1.baidu.com/it/u=2005056479,139681251&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1710262800&t=1a506a44501eab4cf76b7c97a73c05e1"
+        />
+      </div>
     </div>
+  </body>
 
-
-</body>
-
-<script>
-    const boxText = document.getElementById('boxText')
-    const boxImg = document.getElementById('boxImg')
+  <script>
+    const boxText = document.getElementById("boxText");
+    const boxImg = document.getElementById("boxImg");
     const resizeObserver1 = new ResizeObserver((entries) => {
-        console.log(entries)
-        for (let e of entries) {
-            // const w = e.target.offsetWidth;
-            const w = e.target.clientWidth;
-            console.log('resizeObserver1 width:', w)
-        }
-        console.log('resizeObserver1 change ...');
-    })
-    resizeObserver1.observe(boxImg)
-    resizeObserver1.observe(boxText)
-</script>
+      console.log(entries);
+      for (let e of entries) {
+        console.error("e:", e);
 
+        // const w = e.target.offsetWidth;
+        const w = e.target.clientWidth;
+        console.log("resizeObserver1 width:", w);
+      }
+      console.log("resizeObserver1 change ...");
+    });
+    resizeObserver1.observe(boxImg);
+    resizeObserver1.observe(boxText);
+  </script>
 
-<script>
+  <script>
     // 这里用iframe resize来监听 兼容性较好
     // 其他方案：intersectionObserver mutationObserver
-    const myHackIframeDom = document.getElementById('myHackIframe');
+    const myHackIframeDom = document.getElementById("myHackIframe");
     myHackIframeDom.contentWindow.onresize = (e) => {
-        console.log('dom change:', e)
-    }
-    const buttonEl = document.getElementById('button');
-    const mainContentEl = document.getElementById('mainContent')
-    buttonEl.addEventListener('click', () => {
-        let str = '';
-        for (let i = 0; i < 10; i++) {
-            str += '测试数据，我是一段测试数据，我是一段测试数据，我是一段测试数据，我是一段测试数据，';
-        }
-        mainContentEl.innerText = str;
-        boxText.innerText = '设法了解收到了发，收费的爱上';
-    })
-
-</script>
-
-
+      console.log("dom change:", e);
+    };
+    const buttonEl = document.getElementById("button");
+    const mainContentEl = document.getElementById("mainContent");
+    buttonEl.addEventListener("click", () => {
+      let str = "";
+      for (let i = 0; i < 10; i++) {
+        str +=
+          "测试数据，我是一段测试数据，我是一段测试数据，我是一段测试数据，我是一段测试数据，";
+      }
+      mainContentEl.innerText = str;
+      boxText.innerText = "设法了解收到了发，收费的爱上";
+    });
+  </script>
 </html>

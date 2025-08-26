@@ -17,7 +17,7 @@
       #app {
         width: 600px;
         height: 600px;
-        background-color: #000;
+        /* background-color: #000; */
       }
     </style>
   </head>
@@ -30,13 +30,15 @@
   <script>
     function main() {
       const canvas = document.getElementById("app");
-      const gl = canvas.getContext("webgl");
+      // const gl = canvas.getContext("webgl");
+      const gl = canvas.getContext("webgl2");
+       
       if (!gl) {
         console.error("浏览器不支持WebGL！");
         return;
       }
       // 设置清空颜色（黑色）并清空画布
-      gl.clearColor(0.0, 0.0, 0.0, 1.0);
+      gl.clearColor(0.0, 0.0, 0.0, 0.3);
       gl.clear(gl.COLOR_BUFFER_BIT);
 
       // 3. 定义顶点数据
