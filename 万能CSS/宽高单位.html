@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      .box {
+        height: 100px;
+        margin: 10px auto;
+        border-radius: 10px;
+        background-color: skyblue;
+      }
+      .box1 {
+        width: clamp(500px, 90%, 1200px);
+      }
+
+      .box2 {
+        width: max(50vh, 200px);
+      }
+      .box3 {
+        width: 90%;
+        font-size: clamp(1.5rem, 4vw, 3rem);
+        background-color: #fff;
+        border: 1px solid #333;
+        color: #333;
+        text-align: center;
+        line-height: 100px;
+      }
+      .rect {
+        width: 100vmax;
+        height: 100vmax;
+        background-color: rgb(249, 233, 233);
+        border-radius: 6px;
+      }
+      .box4 {
+        width: 50lvw;
+        height: 50lvh;
+      }
+      .box5 {
+        width: 50svw;
+        height: 50svh;
+      }
+      .box6 {
+        width: 50vw;
+        height: 50vh;
+      }
+      .box7 {
+        width: 100vw;
+        height: 100dvh;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="rect">
+      <div class="box box1"></div>
+      <div class="box box2"></div>
+      <div class="box box3">我是一个适配文字</div>
+      <div class="box box4">lvw * lvh</div>
+      <div class="box box5">svw * svh</div>
+      <div class="box box6">vw * vh</div>
+      <div class="box box7">移动端适配动态视口高度</div>
+    </div>
+  </body>
+</html>
