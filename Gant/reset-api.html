@@ -48,5 +48,18 @@
           break;
       }
     });
+
+    // 远程加载json数据
+    // gantt.load("../common/data_start_end_dates.json");
+
+    gantt.attachEvent("onAjaxError", function (request) {
+      if (!request.status || !request.response) {
+        gantt.message({
+          text: webserverWarningText,
+          expire: -1,
+        });
+      }
+      return true;
+    });
   </script>
 </html>

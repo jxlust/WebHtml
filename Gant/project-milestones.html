@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/jgant.css" />
+    <script src="./js/jgantt.js"></script>
+    <script src="./js/test-data.js"></script>
+    <style>
+      body,
+      html {
+        padding: 0;
+        margin: 0;
+      }
+      .container {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="container"></div>
+  </body>
+  <script>
+    gantt.config.scale_height = 50;
+
+    gantt.config.types["customType"] = "type_id";
+    // gantt.locale.labels["type_" + "customType"] = "New Type";
+    gantt.config.lightbox["customType" + "_sections"] = [
+      {
+        name: "description",
+        height: 70,
+        map_to: "text",
+        type: "textarea",
+        focus: true,
+      },
+      { name: "type", type: "typeselect", map_to: "type" },
+    ];
+
+    gantt.config.scales = [
+      { unit: "month", format: "%Y年%F" },
+      { unit: "day", step: 1, format: "%j %D" },
+    ];
+
+    gantt.templates.rightside_text = function (start, end, task) {
+      if (task.type == gantt.config.types.milestone) {
+        return task.text;
+      }
+      return "";
+    };
+    gantt.config.lightbox.sections = [
+      {
+        name: "description",
+        height: 70,
+        map_to: "text",
+        type: "textarea",
+        focus: true,
+      },
+      { name: "type", type: "typeselect", map_to: "type" },
+      { name: "time", type: "duration", map_to: "auto" },
+    ];
+    gantt.init("app");
+
+    gantt.parse(projects_with_milestones);
+  </script>
+</html>

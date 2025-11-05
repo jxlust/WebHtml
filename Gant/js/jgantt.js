@@ -17667,7 +17667,7 @@ https://docs.dhtmlx.com/gantt/faq.html#theganttchartisntrenderedcorrectly`);
         day_short: ["日", "一", "二", "三", "四", "五", "六"],
       },
       labels: {
-        new_task: "新任務",
+        new_task: "新任务",
         icon_save: "保存",
         icon_cancel: "关闭",
         icon_details: "详细",
@@ -17698,7 +17698,7 @@ https://docs.dhtmlx.com/gantt/faq.html#theganttchartisntrenderedcorrectly`);
         weeks: "周",
         months: "月",
         years: "年",
-        message_ok: "OK",
+        message_ok: "确认",
         message_cancel: "关闭",
         section_constraint: "约束",
         constraint_type: "约束类型",
