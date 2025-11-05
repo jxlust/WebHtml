@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/jgant.css" />
+    <script src="./js/jgantt.js"></script>
+    <script src="./js/test-data.js"></script>
+    <style>
+      body,
+      html {
+        padding: 0;
+        margin: 0;
+      }
+      .container {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="container"></div>
+  </body>
+  <script>
+    // gantt.i18n.setLocale("cn");
+    gantt.init("app");
+    gantt.parse(DemoTasks);
+
+    gantt.attachEvent("onLinkClick", function (id) {
+      var link = this.getLink(id),
+        src = this.getTask(link.source),
+        trg = this.getTask(link.target),
+        types = this.config.links;
+
+      var first = "",
+        second = "";
+      switch (link.type) {
+        case types.finish_to_start:
+          first = "finish";
+          second = "start";
+          break;
+        case types.start_to_start:
+          first = "start";
+          second = "start";
+          break;
+        case types.finish_to_finish:
+          first = "finish";
+          second = "finish";
+          break;
+      }
+
+      gantt.message(
+        "Must " +
+          first +
+          " <b>" +
+          src.text +
+          "</b> to " +
+          second +
+          " <b>" +
+          trg.text +
+          "</b>"
+      );
+    });
+  </script>
+</html>

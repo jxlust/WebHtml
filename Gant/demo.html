@@ -22,8 +22,12 @@
     <div id="app" class="container"></div>
   </body>
   <script>
-    gantt.i18n.setLocale("cn");
-    gantt.config.date_format = "%Y-%m-%d %H:%i:%s";
+    function changeLocale(lang) {
+      gantt.i18n.setLocale(lang);
+      gantt.render();
+    }
+    // gantt.i18n.setLocale("cn");
+    // gantt.config.date_format = "%Y-%m-%d %H:%i:%s";
     gantt.init("app");
     gantt.parse(DemoTasks);
   </script>
