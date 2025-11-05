@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/jgant.css" />
+    <script src="./js/jgantt.js"></script>
+    <script src="./js/test-data.js"></script>
+    <style>
+      body,
+      html {
+        padding: 0;
+        margin: 0;
+      }
+      .container {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="container"></div>
+  </body>
+  <script>
+    // gantt.i18n.setLocale("cn");
+    gantt.init("app");
+    gantt.parse(DemoTasks);
+
+    gantt.attachEvent("onTaskDblClick", function (id) {
+      // gantt.message("onTaskDblClick", id);
+      const taskItem = this.getTask(id);
+      console.log("onTaskDblClick:", id);
+      console.log("taskItem:", taskItem);
+      // true 就是继续调用默认事件，默认弹框展示了
+      // return true;
+      // false 就是阻止默认事件，不弹框展示了,可以实现一些自定义弹框逻辑
+      return false;
+    });
+    
+    gantt.attachEvent("onTaskClick", function (id) {
+      // gantt.message("onTaskClick", id);
+      console.log("onTaskClick:", id);
+    });
+  </script>
+</html>

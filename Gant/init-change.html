@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/jgant.css" />
+    <script src="./js/jgantt.js"></script>
+    <script src="./js/test-data.js"></script>
+    <style>
+      body,
+      html {
+        padding: 10px;
+        margin: 0;
+      }
+      .container {
+        margin-top: 10px;
+        width: 90vw;
+        height: 45vh;
+      }
+      .control {
+        display: flex;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="control">
+      <input type="button" value="切换渲染的容器" onclick="reinit()" />
+    </div>
+    <div id="app" class="container"></div>
+    <div id="app2" class="container"></div>
+  </body>
+  <script>
+    gantt.init("app");
+
+    gantt.parse({
+      data: [
+        {
+          id: 1,
+          text: "Project #2",
+          start_date: "01-04-2023",
+          duration: 18,
+          progress: 0.4,
+          open: true,
+        },
+        {
+          id: 2,
+          text: "Task #1",
+          start_date: "02-04-2023",
+          duration: 8,
+          progress: 0.6,
+          parent: 1,
+        },
+        {
+          id: 3,
+          text: "Task #2",
+          start_date: "11-04-2023",
+          duration: 8,
+          progress: 0.6,
+          parent: 1,
+        },
+      ],
+      links: [
+        { id: 1, source: 1, target: 2, type: "1" },
+        { id: 2, source: 2, target: 3, type: "0" },
+      ],
+    });
+
+    let currentContainer = "app";
+    function reinit() {
+      if (currentContainer === "app") {
+        currentContainer = "app2";
+      } else {
+        currentContainer = "app";
+      }
+      gantt.init(currentContainer);
+    }
+  </script>
+</html>
