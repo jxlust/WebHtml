@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/jgant.css" />
+    <script src="./js/jgantt.js"></script>
+    <script src="./js/test-data.js"></script>
+    <style>
+      body,
+      html {
+        padding: 0;
+        margin: 0;
+      }
+      .container {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="container"></div>
+  </body>
+  <script>
+    gantt.config.date_format = "%Y-%m-%d %H:%i:%s";
+    gantt.init("app");
+    setTimeout(() => {
+      gantt.parse(DemoTasks);
+      //   gantt.render();
+    }, 1000);
+    // gantt.load("/gantt/backend/data");
+    // https://docs.dhtmlx.com/gantt/desktop__server_side.html#technique
+    // var dp = gantt.createDataProcessor({
+    //   url: "/gantt/backend/data",
+    //   mode: "REST",
+    // });
+    const server = "/test";
+    const dp = gantt.createDataProcessor((entity, action, data, id) => {
+      switch (action) {
+        case "create":
+          return gantt.ajax.post(server + "/" + entity, data);
+          break;
+        case "update":
+          return gantt.ajax.put(server + "/" + entity + "/" + id, data);
+          break;
+        case "delete":
+          return gantt.ajax.del(server + "/" + entity + "/" + id);
+          break;
+      }
+    });
+  </script>
+</html>

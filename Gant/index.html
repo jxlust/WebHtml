@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        grid-auto-rows: 90px;
+        gap: 10px;
+        background-color: #fff;
+        padding: 10px;
+      }
+      .item {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        font-size: 13px;
+        color: #333;
+        border-radius: 10px;
+        background-color: #f8f8f8;
+        overflow: hidden;
+      }
+      a {
+        text-decoration: none;
+        color: #527cf1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid"></div>
+  </body>
+  <script>
+    const grid = document.querySelector(".grid");
+    const pageList = [
+      { url: "./baseline-demo.html", name: "Baseline Demo" },
+      { url: "./reset-api.html", name: "Reset Api Demo" },
+    ];
+    for (let i = 0; i < pageList.length; i++) {
+      const item = document.createElement("div");
+      item.classList.add("item");
+      item.innerHTML = `<a target="_blank" href="${pageList[i].url}">${pageList[i].name}</a>`;
+      grid.appendChild(item);
+    }
+  </script>
+</html>

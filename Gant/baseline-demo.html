@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/jgant.css" />
+    <script src="./js/jgantt.js"></script>
+    <script src="./js/test-data.js"></script>
+    <style>
+      body,
+      html {
+        padding: 0;
+        margin: 0;
+      }
+      .container {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="container"></div>
+  </body>
+
+  <script>
+    function changeBaselineRender(value) {
+      gantt.config.baselines.render_mode = value;
+      gantt.batchUpdate(function () {
+        gantt.eachTask(function (task) {
+          // function to recalculate row height
+          gantt.adjustTaskHeightForBaselines(task);
+        });
+      });
+    }
+
+    function changeBarHeight(value) {
+      const id = gantt.getSelectedId();
+      if (!id) {
+        gantt.message("Select a task!");
+        return;
+      }
+      const task = gantt.getTask(id);
+      task.bar_height = +value;
+      gantt.adjustTaskHeightForBaselines(task);
+      gantt.render();
+    }
+
+    gantt.i18n.setLocale("cn");
+    gantt.config.date_format = "%Y-%m-%d %H:%i:%s";
+    gantt.templates.progress_text = function (start, end, task) {
+      return (
+        "<span style='text-align:left;'>" +
+        Math.round(task.progress * 100) +
+        "% </span>"
+      );
+    };
+    gantt.config.lightbox.milestone_sections = gantt.config.lightbox.sections =
+      [
+        {
+          name: "description",
+          height: 38,
+          map_to: "text",
+          type: "textarea",
+          focus: true,
+        },
+        { name: "time", type: "duration", map_to: "auto" },
+        {
+          name: "baselines",
+          height: 100,
+          type: "baselines",
+          map_to: "baselines",
+        },
+      ];
+
+    gantt.config.resize_rows = true;
+    gantt.config.row_height = 30;
+    gantt.config.min_task_grid_row_height = 10;
+    gantt.config.open_split_tasks = true;
+
+    gantt.config.baselines.render_mode = "separateRow";
+
+    gantt.templates.task_class = function (start, end, task) {
+      if (task.planned_end) {
+        const classes = ["has-baseline"];
+        if (end.getTime() > task.planned_end.getTime()) {
+          classes.push("overdue");
+        }
+        return classes.join(" ");
+      }
+    };
+
+    gantt.templates.rightside_text = function (start, end, task) {
+      if (task.planned_end) {
+        if (end.getTime() > task.planned_end.getTime()) {
+          const overdue = Math.ceil(
+            Math.abs(
+              (end.getTime() - task.planned_end.getTime()) /
+                (24 * 60 * 60 * 1000)
+            )
+          );
+          const text = "<b>Overdue: " + overdue + " days</b>";
+          return text;
+        }
+      }
+    };
+
+    gantt.init("app");
+    gantt.parse(baseLineTaskData);
+    //   gantt.clearAll();
+  </script>
+</html>

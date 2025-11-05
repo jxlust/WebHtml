@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/jgant.css" />
+    <script src="./js/jgantt.js"></script>
+    <script src="./js/test-data.js"></script>
+    <style>
+      body,
+      html {
+        padding: 0;
+        margin: 0;
+      }
+      .container {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="container"></div>
+  </body>
+  <script>
+    gantt.i18n.setLocale("cn");
+    gantt.config.date_format = "%Y-%m-%d %H:%i:%s";
+    gantt.init("app");
+    gantt.parse(DemoTasks);
+  </script>
+</html>
