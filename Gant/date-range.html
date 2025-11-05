@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/jgant.css" />
+    <script src="./js/jgantt.js"></script>
+    <script src="./js/test-data.js"></script>
+    <style>
+      body,
+      html {
+        padding: 0;
+        margin: 0;
+      }
+      .container {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="container"></div>
+  </body>
+  <script>
+    function changeDates() {
+      const startDateEl = document.querySelector(".start_date");
+      const endDateEl = document.querySelector(".end_date");
+      const startDate = new Date(startDateEl.value);
+      const endDate = new Date(endDateEl.value);
+
+      if (!+startDate || !+endDate) {
+        return;
+      }
+
+      gantt.config.start_date = startDate;
+      gantt.config.end_date = endDate;
+      gantt.render();
+    }
+    gantt.i18n.setLocale("cn");
+
+    gantt.config.scales = [
+      { unit: "month", step: 1, format: "%M" },
+      { unit: "year", step: 1, format: "%Y年" },
+      { unit: "day", format: "%M%d日" },
+    ];
+    gantt.config.scale_height = 3 * 28;
+    gantt.init("app", new Date(2023, 2, 10), new Date(2023, 3, 20));
+    gantt.parse(DemoTasks);
+  </script>
+</html>

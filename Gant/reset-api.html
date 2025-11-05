@@ -22,11 +22,11 @@
     <div id="app" class="container"></div>
   </body>
   <script>
-    gantt.config.date_format = "%Y-%m-%d %H:%i:%s";
+    // gantt.config.date_format = "%Y-%m-%d %H:%i:%s";
+    gantt.config.touch = "force";
     gantt.init("app");
     setTimeout(() => {
       gantt.parse(DemoTasks);
-      //   gantt.render();
     }, 1000);
     // gantt.load("/gantt/backend/data");
     // https://docs.dhtmlx.com/gantt/desktop__server_side.html#technique
