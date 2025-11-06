@@ -42,341 +42,341 @@
   src: url("./Inter800.ttf") format("truetype");
 }
 :root {
-  --dhx-gantt-theme: terrace;
-  --dhx-gantt-font-family: Inter, Helvetica, Arial, sans-serif;
-  --dhx-gantt-font-size: 14px;
-  --dhx-gantt-heading-font-size: calc(var(--dhx-gantt-font-size) + 2px);
-  --dhx-gantt-heading-font-weight: 600;
-  --dhx-gantt-important-font-size: var(--dhx-gantt-font-size);
-  --dhx-gantt-important-line-height: 142%;
-  --dhx-gantt-important-font-weight: 500;
-  --dhx-gantt-regular-font-size: var(--dhx-gantt-font-size);
-  --dhx-gantt-regular-font-weight: 400;
-  --dhx-gantt-regular-line-height: 142%;
-  --dhx-gantt-caption-font-size: calc(var(--dhx-gantt-font-size) - 2px);
-  --dhx-gantt-caption-font-weight: 400;
-  --dhx-gantt-caption-line-height: 132%;
-  --dhx-gantt-base-colors-white: #ffffff;
-  --dhx-gantt-base-colors-select: #eff3ff;
-  --dhx-gantt-base-colors-hover-color: #e0e0e0;
-  --dhx-gantt-base-colors-border-light: #f0f0f0;
-  --dhx-gantt-base-colors-border: #dfe0e1;
-  --dhx-gantt-base-colors-icons: #a1a4a6;
-  --dhx-gantt-base-colors-icons-active: #8b8e90;
-  --dhx-gantt-base-colors-icons-active: color-mix(
+  --jm-gantt-theme: terrace;
+  --jm-gantt-font-family: Inter, Helvetica, Arial, sans-serif;
+  --jm-gantt-font-size: 14px;
+  --jm-gantt-heading-font-size: calc(var(--jm-gantt-font-size) + 2px);
+  --jm-gantt-heading-font-weight: 600;
+  --jm-gantt-important-font-size: var(--jm-gantt-font-size);
+  --jm-gantt-important-line-height: 142%;
+  --jm-gantt-important-font-weight: 500;
+  --jm-gantt-regular-font-size: var(--jm-gantt-font-size);
+  --jm-gantt-regular-font-weight: 400;
+  --jm-gantt-regular-line-height: 142%;
+  --jm-gantt-caption-font-size: calc(var(--jm-gantt-font-size) - 2px);
+  --jm-gantt-caption-font-weight: 400;
+  --jm-gantt-caption-line-height: 132%;
+  --jm-gantt-base-colors-white: #ffffff;
+  --jm-gantt-base-colors-select: #eff3ff;
+  --jm-gantt-base-colors-hover-color: #e0e0e0;
+  --jm-gantt-base-colors-border-light: #f0f0f0;
+  --jm-gantt-base-colors-border: #dfe0e1;
+  --jm-gantt-base-colors-icons: #a1a4a6;
+  --jm-gantt-base-colors-icons-active: #8b8e90;
+  --jm-gantt-base-colors-icons-active: color-mix(
     in hsl increasing hue,
-    var(--dhx-gantt-base-colors-icons) 100%,
+    var(--jm-gantt-base-colors-icons) 100%,
     #000000 12.6%
   );
-  --dhx-gantt-base-colors-icons-hover: #76787a;
-  --dhx-gantt-base-colors-icons-hover: color-mix(
+  --jm-gantt-base-colors-icons-hover: #76787a;
+  --jm-gantt-base-colors-icons-hover: color-mix(
     in hsl increasing hue,
-    var(--dhx-gantt-base-colors-icons) 100%,
+    var(--jm-gantt-base-colors-icons) 100%,
     #000000 28.5%
   );
-  --dhx-gantt-base-colors-disabled: #e9e9e9;
-  --dhx-gantt-base-colors-select: #e0e5f3;
-  --dhx-gantt-base-colors-readonly: var(--dhx-gantt-base-colors-icons);
-  --dhx-gantt-base-colors-text-light: #555d63;
-  --dhx-gantt-base-colors-text-base: #23272a;
-  --dhx-gantt-base-colors-text-on-fill: rgba(255, 255, 255, 0.9);
-  --dhx-gantt-base-colors-background: #ffffff;
-  --dhx-gantt-base-colors-background-alt: #f2f2f2;
-  --dhx-gantt-base-colors-primary: #537cfa;
-  --dhx-gantt-base-colors-primary-hover: #4269e0;
-  --dhx-gantt-base-colors-primary-hover: color-mix(
+  --jm-gantt-base-colors-disabled: #e9e9e9;
+  --jm-gantt-base-colors-select: #e0e5f3;
+  --jm-gantt-base-colors-readonly: var(--jm-gantt-base-colors-icons);
+  --jm-gantt-base-colors-text-light: #555d63;
+  --jm-gantt-base-colors-text-base: #23272a;
+  --jm-gantt-base-colors-text-on-fill: rgba(255, 255, 255, 0.9);
+  --jm-gantt-base-colors-background: #ffffff;
+  --jm-gantt-base-colors-background-alt: #f2f2f2;
+  --jm-gantt-base-colors-primary: #537cfa;
+  --jm-gantt-base-colors-primary-hover: #4269e0;
+  --jm-gantt-base-colors-primary-hover: color-mix(
     in hsl increasing hue,
-    var(--dhx-gantt-base-colors-primary) 100%,
+    var(--jm-gantt-base-colors-primary) 100%,
     #000000 6%
   );
-  --dhx-gantt-base-colors-primary-active: #3365fb;
-  --dhx-gantt-base-colors-primary-active: color-mix(
+  --jm-gantt-base-colors-primary-active: #3365fb;
+  --jm-gantt-base-colors-primary-active: color-mix(
     in hsl increasing hue,
-    var(--dhx-gantt-base-colors-primary) 100%,
+    var(--jm-gantt-base-colors-primary) 100%,
     #000000 16.6%
   );
-  --dhx-gantt-base-colors-primary-lighter: #537cfa33;
-  --dhx-gantt-base-colors-primary-lighter: color-mix(
+  --jm-gantt-base-colors-primary-lighter: #537cfa33;
+  --jm-gantt-base-colors-primary-lighter: color-mix(
     in hsl increasing hue,
-    var(--dhx-gantt-base-colors-primary) 20%,
+    var(--jm-gantt-base-colors-primary) 20%,
     rgba(0, 0, 0, 0) 100%
   );
-  --dhx-gantt-base-colors-warning: #fab936;
-  --dhx-gantt-base-colors-error: #e3334e;
-  --dhx-gantt-base-colors-error-hover: #d3233e;
-  --dhx-gantt-base-colors-error-hover: color-mix(
+  --jm-gantt-base-colors-warning: #fab936;
+  --jm-gantt-base-colors-error: #e3334e;
+  --jm-gantt-base-colors-error-hover: #d3233e;
+  --jm-gantt-base-colors-error-hover: color-mix(
     in hsl increasing hue,
-    var(--dhx-gantt-base-colors-error) 100%,
+    var(--jm-gantt-base-colors-error) 100%,
     #000000 6%
   );
-  --dhx-gantt-base-colors-error-active: #c3132e;
-  --dhx-gantt-base-colors-error-active: color-mix(
+  --jm-gantt-base-colors-error-active: #c3132e;
+  --jm-gantt-base-colors-error-active: color-mix(
     in hsl increasing hue,
-    var(--dhx-gantt-base-colors-error) 100%,
+    var(--jm-gantt-base-colors-error) 100%,
     #000000 16.6%
   );
-  --dhx-gantt-base-colors-error-lighter: #e3334e33;
-  --dhx-gantt-base-colors-error-lighter: color-mix(
+  --jm-gantt-base-colors-error-lighter: #e3334e33;
+  --jm-gantt-base-colors-error-lighter: color-mix(
     in hsl increasing hue,
-    var(--dhx-gantt-base-colors-error) 20%,
+    var(--jm-gantt-base-colors-error) 20%,
     rgba(0, 0, 0, 0) 100%
   );
-  --dhx-gantt-base-colors-error-text: var(--dhx-gantt-base-colors-text-on-fill);
-  --dhx-gantt-base-colors-success: #1bc297;
-  --dhx-gantt-container-background: var(--dhx-gantt-base-colors-background);
-  --dhx-gantt-container-color: var(--dhx-gantt-base-colors-text-base);
-  --dhx-gantt-offtime-background: var(--dhx-gantt-base-colors-background-alt);
-  --dhx-gantt-scale-background: var(--dhx-gantt-container-background);
-  --dhx-gantt-scale-border-vertical: 1px solid
-    var(--dhx-gantt-base-colors-border-light);
-  --dhx-gantt-scale-border-horizontal: 1px solid
-    var(--dhx-gantt-base-colors-border);
-  --dhx-gantt-scale-color: var(--dhx-gantt-base-colors-text-light);
-  --dhx-gantt-grid-body-background: transparent;
-  --dhx-gantt-grid-scale-background: var(--dhx-gantt-scale-background);
-  --dhx-gantt-grid-scale-color: var(--dhx-gantt-scale-color);
-  --dhx-gantt-grid-scale-border-vertical: var(
-    --dhx-gantt-scale-border-vertical
+  --jm-gantt-base-colors-error-text: var(--jm-gantt-base-colors-text-on-fill);
+  --jm-gantt-base-colors-success: #1bc297;
+  --jm-gantt-container-background: var(--jm-gantt-base-colors-background);
+  --jm-gantt-container-color: var(--jm-gantt-base-colors-text-base);
+  --jm-gantt-offtime-background: var(--jm-gantt-base-colors-background-alt);
+  --jm-gantt-scale-background: var(--jm-gantt-container-background);
+  --jm-gantt-scale-border-vertical: 1px solid
+    var(--jm-gantt-base-colors-border-light);
+  --jm-gantt-scale-border-horizontal: 1px solid
+    var(--jm-gantt-base-colors-border);
+  --jm-gantt-scale-color: var(--jm-gantt-base-colors-text-light);
+  --jm-gantt-grid-body-background: transparent;
+  --jm-gantt-grid-scale-background: var(--jm-gantt-scale-background);
+  --jm-gantt-grid-scale-color: var(--jm-gantt-scale-color);
+  --jm-gantt-grid-scale-border-vertical: var(
+    --jm-gantt-scale-border-vertical
   );
-  --dhx-gantt-timeline-scale-background: var(--dhx-gantt-scale-background);
-  --dhx-gantt-timeline-scale-color: var(--dhx-gantt-scale-color);
-  --dhx-gantt-timeline-scale-border-vertical: var(
-    --dhx-gantt-scale-border-vertical
+  --jm-gantt-timeline-scale-background: var(--jm-gantt-scale-background);
+  --jm-gantt-timeline-scale-color: var(--jm-gantt-scale-color);
+  --jm-gantt-timeline-scale-border-vertical: var(
+    --jm-gantt-scale-border-vertical
   );
-  --dhx-gantt-grid-cell-border: 1px solid transparent;
-  --dhx-gantt-grid-row-border: var(--dhx-gantt-scale-border-horizontal);
-  --dhx-gantt-base-transition: 0.2s ease;
-  --dhx-gantt-box-shadow-s: 0px 4px 24px 0px rgba(44, 47, 60, 0.08);
-  --dhx-gantt-box-shadow-m: 0px 4px 24px 0px rgba(44, 47, 60, 0.36);
-  --dhx-gantt-box-shadow-l: 0px 4px 24px 0px rgba(44, 47, 60, 0.56);
-  --dhx-gantt-icon-size: 1.5em;
-  --dhx-gantt-base-module: 4px;
-  --dhx-gantt-base-padding: 4px;
-  --dhx-gantt-border-radius: var(--dhx-gantt-base-module);
-  --dhx-gantt-transition: all 0.3s;
-  --dhx-gantt-default-border: 1px solid var(--dhx-gantt-base-colors-border);
-  --dhx-gantt-header-border: var(--dhx-gantt-default-border);
-  --dhx-gantt-task-blue: var(--dhx-gantt-base-colors-primary);
-  --dhx-gantt-task-green: #20b56d;
-  --dhx-gantt-task-violet: #d071ef;
-  --dhx-gantt-task-yellow: linear-gradient(
+  --jm-gantt-grid-cell-border: 1px solid transparent;
+  --jm-gantt-grid-row-border: var(--jm-gantt-scale-border-horizontal);
+  --jm-gantt-base-transition: 0.2s ease;
+  --jm-gantt-box-shadow-s: 0px 4px 24px 0px rgba(44, 47, 60, 0.08);
+  --jm-gantt-box-shadow-m: 0px 4px 24px 0px rgba(44, 47, 60, 0.36);
+  --jm-gantt-box-shadow-l: 0px 4px 24px 0px rgba(44, 47, 60, 0.56);
+  --jm-gantt-icon-size: 1.5em;
+  --jm-gantt-base-module: 4px;
+  --jm-gantt-base-padding: 4px;
+  --jm-gantt-border-radius: var(--jm-gantt-base-module);
+  --jm-gantt-transition: all 0.3s;
+  --jm-gantt-default-border: 1px solid var(--jm-gantt-base-colors-border);
+  --jm-gantt-header-border: var(--jm-gantt-default-border);
+  --jm-gantt-task-blue: var(--jm-gantt-base-colors-primary);
+  --jm-gantt-task-green: #20b56d;
+  --jm-gantt-task-violet: #d071ef;
+  --jm-gantt-task-yellow: linear-gradient(
     180deg,
     #ffb725 0%,
     #ffbb25 31.25%,
     #faea27 100%
   );
-  --dhx-gantt-baseline-background-0: #00b4ff;
-  --dhx-gantt-baseline-background-1: #df6de3;
-  --dhx-gantt-baseline-background-2: #ff957d;
-  --dhx-gantt-baseline-background-3: #25c79d;
-  --dhx-gantt-baseline-background-4: #ff6fb0;
-  --dhx-gantt-baseline-background-5: #ffc470;
-  --dhx-gantt-baseline-background-6: #fde720;
-  --dhx-gantt-baseline-background-7: #47afd0;
-  --dhx-gantt-baseline-background-8: #da9dff;
-  --dhx-gantt-baseline-background-9: #bee964;
-  --dhx-gantt-task-font-size: var(--dhx-gantt-regular-font-size);
-  --dhx-gantt-task-line-height: var(--dhx-gantt-regular-line-height);
-  --dhx-gantt-task-font-weight: var(--dhx-gantt-regular-font-weight);
-  --dhx-gantt-task-background-primary: var(--dhx-gantt-base-colors-primary);
-  --dhx-gantt-task-border-radius: var(--dhx-gantt-border-radius);
-  --dhx-gantt-task-background: var(--dhx-gantt-task-blue);
-  --dhx-gantt-task-border: none;
-  --dhx-gantt-task-color: var(--dhx-gantt-base-colors-text-on-fill);
-  --dhx-gantt-project-color: var(--dhx-gantt-task-color);
-  --dhx-gantt-task-line-text: var(--dhx-gantt-container-color);
-  --dhx-gantt-task-row-border: 1px solid var(--dhx-gantt-base-colors-border);
-  --dhx-gantt-task-row-background: var(--dhx-gantt-container-background);
-  --dhx-gantt-task-row-background--odd: var(--dhx-gantt-container-background);
-  --dhx-gantt-task-progress-color: rgba(0, 0, 0, 0.15);
-  --dhx-gantt-project-progress-color: var(--dhx-gantt-task-progress-color);
-  --dhx-gantt-project-background: var(--dhx-gantt-task-green);
-  --dhx-gantt-milestone-background: var(--dhx-gantt-task-violet);
-  --dhx-gantt-task-marker-color: var(--dhx-gantt-task-background);
-  --dhx-gantt-popup-background: var(--dhx-gantt-container-background);
-  --dhx-gantt-popup-color: var(--dhx-gantt-container-color);
-  --dhx-gantt-popup-border: none;
-  --dhx-gantt-popup-border-radius: var(--dhx-gantt-border-radius);
-  --dhx-gantt-tooltip-background: var(--dhx-gantt-base-colors-text-base);
-  --dhx-gantt-tooltip-color: var(--dhx-gantt-container-background);
-  --dhx-gantt-tooltip-border: none;
-  --dhx-gantt-tooltip-border-radius: var(--dhx-gantt-popup-border-radius);
-  --dhx-gantt-link-background: var(--dhx-gantt-base-colors-icons);
-  --dhx-gantt-link-background-hover: var(--dhx-gantt-base-colors-text-light);
-  --dhx-gantt-link-critical-background: var(--dhx-gantt-base-colors-error);
-  --dhx-gantt-link-handle-offset: 8px;
-  --dhx-gantt-link-handle-size: 10px;
-  --dhx-gantt-link-handle-border: var(--dhx-gantt-base-colors-icons);
-  --dhx-gantt-link-handle-border-hover: var(--dhx-gantt-base-colors-border);
-  --dhx-gantt-link-handle-background: var(--dhx-gantt-base-colors-border);
-  --dhx-gantt-link-handle-background-hover: var(
-    --dhx-gantt-base-colors-text-light
+  --jm-gantt-baseline-background-0: #00b4ff;
+  --jm-gantt-baseline-background-1: #df6de3;
+  --jm-gantt-baseline-background-2: #ff957d;
+  --jm-gantt-baseline-background-3: #25c79d;
+  --jm-gantt-baseline-background-4: #ff6fb0;
+  --jm-gantt-baseline-background-5: #ffc470;
+  --jm-gantt-baseline-background-6: #fde720;
+  --jm-gantt-baseline-background-7: #47afd0;
+  --jm-gantt-baseline-background-8: #da9dff;
+  --jm-gantt-baseline-background-9: #bee964;
+  --jm-gantt-task-font-size: var(--jm-gantt-regular-font-size);
+  --jm-gantt-task-line-height: var(--jm-gantt-regular-line-height);
+  --jm-gantt-task-font-weight: var(--jm-gantt-regular-font-weight);
+  --jm-gantt-task-background-primary: var(--jm-gantt-base-colors-primary);
+  --jm-gantt-task-border-radius: var(--jm-gantt-border-radius);
+  --jm-gantt-task-background: var(--jm-gantt-task-blue);
+  --jm-gantt-task-border: none;
+  --jm-gantt-task-color: var(--jm-gantt-base-colors-text-on-fill);
+  --jm-gantt-project-color: var(--jm-gantt-task-color);
+  --jm-gantt-task-line-text: var(--jm-gantt-container-color);
+  --jm-gantt-task-row-border: 1px solid var(--jm-gantt-base-colors-border);
+  --jm-gantt-task-row-background: var(--jm-gantt-container-background);
+  --jm-gantt-task-row-background--odd: var(--jm-gantt-container-background);
+  --jm-gantt-task-progress-color: rgba(0, 0, 0, 0.15);
+  --jm-gantt-project-progress-color: var(--jm-gantt-task-progress-color);
+  --jm-gantt-project-background: var(--jm-gantt-task-green);
+  --jm-gantt-milestone-background: var(--jm-gantt-task-violet);
+  --jm-gantt-task-marker-color: var(--jm-gantt-task-background);
+  --jm-gantt-popup-background: var(--jm-gantt-container-background);
+  --jm-gantt-popup-color: var(--jm-gantt-container-color);
+  --jm-gantt-popup-border: none;
+  --jm-gantt-popup-border-radius: var(--jm-gantt-border-radius);
+  --jm-gantt-tooltip-background: var(--jm-gantt-base-colors-text-base);
+  --jm-gantt-tooltip-color: var(--jm-gantt-container-background);
+  --jm-gantt-tooltip-border: none;
+  --jm-gantt-tooltip-border-radius: var(--jm-gantt-popup-border-radius);
+  --jm-gantt-link-background: var(--jm-gantt-base-colors-icons);
+  --jm-gantt-link-background-hover: var(--jm-gantt-base-colors-text-light);
+  --jm-gantt-link-critical-background: var(--jm-gantt-base-colors-error);
+  --jm-gantt-link-handle-offset: 8px;
+  --jm-gantt-link-handle-size: 10px;
+  --jm-gantt-link-handle-border: var(--jm-gantt-base-colors-icons);
+  --jm-gantt-link-handle-border-hover: var(--jm-gantt-base-colors-border);
+  --jm-gantt-link-handle-background: var(--jm-gantt-base-colors-border);
+  --jm-gantt-link-handle-background-hover: var(
+    --jm-gantt-base-colors-text-light
   );
-  --dhx-gantt-progress-handle-border: var(--dhx-gantt-base-colors-border);
-  --dhx-gantt-progress-handle-background: var(--dhx-gantt-base-colors-icons);
-  --dhx-gantt-progress-handle-background-hover: var(
-    --dhx-gantt-base-colors-icons-hover
+  --jm-gantt-progress-handle-border: var(--jm-gantt-base-colors-border);
+  --jm-gantt-progress-handle-background: var(--jm-gantt-base-colors-icons);
+  --jm-gantt-progress-handle-background-hover: var(
+    --jm-gantt-base-colors-icons-hover
   );
-  --dhx-gantt-control-height: 32px;
-  --dhx-gantt-checkbox-height: 20px;
-  --dhx-gantt-lightbox_font-family: var(--dhx-gantt-font-family);
-  --dhx-gantt-lightbox-font-size: var(--dhx-gantt-important-font-size);
-  --dhx-gantt-lightbox-font-weight: var(--dhx-gantt-important-font-weight);
-  --dhx-gantt-lightbox-background: var(--dhx-gantt-popup-background);
-  --dhx-gantt-lightbox-border: var(--dhx-gantt-popup-border);
-  --dhx-gantt-lightbox-control-border: var(--dhx-gantt-default-border);
-  --dhx-gantt-lightbox-color: var(--dhx-gantt-popup-color);
-  --dhx-gantt-lightbox-padding: 12px;
-  --dhx-gantt-lightbox-title-background: var(--dhx-gantt-base-colors-select);
-  --dhx-gantt-lightbox-title-color: var(--dhx-gantt-lightbox-color);
-  --dhx-gantt-lightbox-title-font-size: var(--dhx-gantt-heading-font-size);
-  --dhx-gantt-lightbox-max-width: 622px;
-  --dhx-gantt-lightbox-wide-max-width: 738px;
-  --dhx-gantt-lightbox-width: 560px;
-  --dhx-gantt-btn-order: row-reverse;
-  --dhx-gantt-btn-background: var(--dhx-gantt-base-colors-primary);
-  --dhx-gantt-btn-color: var(--dhx-gantt-base-colors-text-on-fill);
-  --dhx-gantt-btn-border-color: var(--dhx-gantt-base-colors-primary);
-  --dhx-gantt-btn-color-hover: var(--dhx-gantt-base-colors-text-on-fill);
-  --dhx-gantt-btn-background-hover: var(--dhx-gantt-base-colors-primary-hover);
-  --dhx-gantt-btn-border-hover: var(--dhx-gantt-base-colors-primary-hover);
-  --dhx-gantt-btn-color-active: var(--dhx-gantt-base-colors-text-on-fill);
-  --dhx-gantt-btn-background-active: var(
-    --dhx-gantt-base-colors-primary-active
+  --jm-gantt-control-height: 32px;
+  --jm-gantt-checkbox-height: 20px;
+  --jm-gantt-lightbox_font-family: var(--jm-gantt-font-family);
+  --jm-gantt-lightbox-font-size: var(--jm-gantt-important-font-size);
+  --jm-gantt-lightbox-font-weight: var(--jm-gantt-important-font-weight);
+  --jm-gantt-lightbox-background: var(--jm-gantt-popup-background);
+  --jm-gantt-lightbox-border: var(--jm-gantt-popup-border);
+  --jm-gantt-lightbox-control-border: var(--jm-gantt-default-border);
+  --jm-gantt-lightbox-color: var(--jm-gantt-popup-color);
+  --jm-gantt-lightbox-padding: 12px;
+  --jm-gantt-lightbox-title-background: var(--jm-gantt-base-colors-select);
+  --jm-gantt-lightbox-title-color: var(--jm-gantt-lightbox-color);
+  --jm-gantt-lightbox-title-font-size: var(--jm-gantt-heading-font-size);
+  --jm-gantt-lightbox-max-width: 622px;
+  --jm-gantt-lightbox-wide-max-width: 738px;
+  --jm-gantt-lightbox-width: 560px;
+  --jm-gantt-btn-order: row-reverse;
+  --jm-gantt-btn-background: var(--jm-gantt-base-colors-primary);
+  --jm-gantt-btn-color: var(--jm-gantt-base-colors-text-on-fill);
+  --jm-gantt-btn-border-color: var(--jm-gantt-base-colors-primary);
+  --jm-gantt-btn-color-hover: var(--jm-gantt-base-colors-text-on-fill);
+  --jm-gantt-btn-background-hover: var(--jm-gantt-base-colors-primary-hover);
+  --jm-gantt-btn-border-hover: var(--jm-gantt-base-colors-primary-hover);
+  --jm-gantt-btn-color-active: var(--jm-gantt-base-colors-text-on-fill);
+  --jm-gantt-btn-background-active: var(
+    --jm-gantt-base-colors-primary-active
   );
-  --dhx-gantt-btn-border-active: var(--dhx-gantt-base-colors-primary-active);
-  --dhx-gantt-btn-background-disabled: var(--dhx-gantt-base-colors-disabled);
-  --dhx-gantt-btn-color-disabled: var(--dhx-gantt-base-colors-icons);
-  --dhx-gantt-btn-border-color-disabled: var(--dhx-gantt-base-colors-disabled);
-  --dhx-gantt-btn-outline-background: transparent;
-  --dhx-gantt-btn-outline-color: var(--dhx-gantt-base-colors-primary);
-  --dhx-gantt-btn-outline-border-color: var(--dhx-gantt-base-colors-primary);
-  --dhx-gantt-btn-outline-background-hover: var(
-    --dhx-gantt-base-colors-primary-lighter
+  --jm-gantt-btn-border-active: var(--jm-gantt-base-colors-primary-active);
+  --jm-gantt-btn-background-disabled: var(--jm-gantt-base-colors-disabled);
+  --jm-gantt-btn-color-disabled: var(--jm-gantt-base-colors-icons);
+  --jm-gantt-btn-border-color-disabled: var(--jm-gantt-base-colors-disabled);
+  --jm-gantt-btn-outline-background: transparent;
+  --jm-gantt-btn-outline-color: var(--jm-gantt-base-colors-primary);
+  --jm-gantt-btn-outline-border-color: var(--jm-gantt-base-colors-primary);
+  --jm-gantt-btn-outline-background-hover: var(
+    --jm-gantt-base-colors-primary-lighter
   );
-  --dhx-gantt-btn-outline-color-hover: var(
-    --dhx-gantt-base-colors-primary-hover
+  --jm-gantt-btn-outline-color-hover: var(
+    --jm-gantt-base-colors-primary-hover
   );
-  --dhx-gantt-btn-outline-border-hover: var(
-    --dhx-gantt-base-colors-primary-hover
+  --jm-gantt-btn-outline-border-hover: var(
+    --jm-gantt-base-colors-primary-hover
   );
-  --dhx-gantt-btn-outline-background-active: var(
-    --dhx-gantt-base-colors-primary-active
+  --jm-gantt-btn-outline-background-active: var(
+    --jm-gantt-base-colors-primary-active
   );
-  --dhx-gantt-btn-outline-color-active: var(
-    --dhx-gantt-base-colors-text-on-fill
+  --jm-gantt-btn-outline-color-active: var(
+    --jm-gantt-base-colors-text-on-fill
   );
-  --dhx-gantt-btn-outline-border-active: var(
-    --dhx-gantt-base-colors-primary-active
+  --jm-gantt-btn-outline-border-active: var(
+    --jm-gantt-base-colors-primary-active
   );
-  --dhx-gantt-btn-outline-background-disabled: transparent;
-  --dhx-gantt-btn-outline-color-disabled: var(--dhx-gantt-base-colors-icons);
-  --dhx-gantt-btn-outline-border-color-disabled: var(
-    --dhx-gantt-base-colors-icons
+  --jm-gantt-btn-outline-background-disabled: transparent;
+  --jm-gantt-btn-outline-color-disabled: var(--jm-gantt-base-colors-icons);
+  --jm-gantt-btn-outline-border-color-disabled: var(
+    --jm-gantt-base-colors-icons
   );
-  --dhx-gantt-btn-text-transform: none;
-  --dhx-gantt-info-background: var(--dhx-gantt-popup-background);
-  --dhx-gantt-info-color: var(--dhx-gantt-popup-color);
-  --dhx-gantt-info-border: var(--dhx-gantt-popup-border);
-  --dhx-gantt-info-shadow: var(--dhx-gantt-box-shadow-m);
-  --dhx-gantt-modal-background: var(--dhx-gantt-popup-background);
-  --dhx-gantt-modal-color: var(--dhx-gantt-popup-color);
-  --dhx-gantt-modal-border: var(--dhx-gantt-popup-border);
-  --dhx-gantt-modal-padding: 16px;
-  --dhx-gantt-modal-width: 320px;
-  --dhx-gantt-modal-border-radius: var(--dhx-gantt-popup-border-radius);
-  --dhx-gantt-undo-delete-background: var(--dhx-gantt-base-colors-text-base);
-  --dhx-gantt-undo-delete-color: var(--dhx-gantt-task-color);
+  --jm-gantt-btn-text-transform: none;
+  --jm-gantt-info-background: var(--jm-gantt-popup-background);
+  --jm-gantt-info-color: var(--jm-gantt-popup-color);
+  --jm-gantt-info-border: var(--jm-gantt-popup-border);
+  --jm-gantt-info-shadow: var(--jm-gantt-box-shadow-m);
+  --jm-gantt-modal-background: var(--jm-gantt-popup-background);
+  --jm-gantt-modal-color: var(--jm-gantt-popup-color);
+  --jm-gantt-modal-border: var(--jm-gantt-popup-border);
+  --jm-gantt-modal-padding: 16px;
+  --jm-gantt-modal-width: 320px;
+  --jm-gantt-modal-border-radius: var(--jm-gantt-popup-border-radius);
+  --jm-gantt-undo-delete-background: var(--jm-gantt-base-colors-text-base);
+  --jm-gantt-undo-delete-color: var(--jm-gantt-task-color);
 }
 :root[data-gantt-theme="dark"] {
-  --dhx-gantt-theme: dark;
-  --dhx-gantt-base-colors-disabled: #3d3d3d;
-  --dhx-gantt-base-colors-text-light: #aaa;
-  --dhx-gantt-base-colors-text-base: rgba(255, 255, 255, 0.9);
-  --dhx-gantt-base-colors-background: #141414;
-  --dhx-gantt-base-colors-background-alt: #383838;
-  --dhx-gantt-base-colors-border: #4b4b4b;
-  --dhx-gantt-base-colors-border-light: #4b4b4b;
-  --dhx-gantt-navline-font-color: var(--dhx-gantt-base-colors-text-base);
-  --dhx-gantt-base-colors-primary: #3b72f8;
-  --dhx-gantt-base-colors-error: #eb284f;
-  --dhx-gantt-base-colors-select: #2a2a2a;
-  --dhx-gantt-base-colors-hover-color: #2a2a2a;
-  --dhx-gantt-base-colors-icons: #aaaaaa;
-  --dhx-gantt-scale-color: var(--dhx-gantt-base-colors-text-light);
-  --dhx-gantt-popup-background: #1b1b1c;
-  --dhx-gantt-popup-border: 1px solid #4b4b4b;
-  --dhx-gantt-btn-font-weight: 600;
-  --dhx-gantt-undo-delete-background: var(--dhx-gantt-popup-background);
-  --dhx-gantt-link-handle-border: var(--dhx-gantt-base-colors-border);
-  --dhx-gantt-link-handle-background: var(--dhx-gantt-base-colors-background);
+  --jm-gantt-theme: dark;
+  --jm-gantt-base-colors-disabled: #3d3d3d;
+  --jm-gantt-base-colors-text-light: #aaa;
+  --jm-gantt-base-colors-text-base: rgba(255, 255, 255, 0.9);
+  --jm-gantt-base-colors-background: #141414;
+  --jm-gantt-base-colors-background-alt: #383838;
+  --jm-gantt-base-colors-border: #4b4b4b;
+  --jm-gantt-base-colors-border-light: #4b4b4b;
+  --jm-gantt-navline-font-color: var(--jm-gantt-base-colors-text-base);
+  --jm-gantt-base-colors-primary: #3b72f8;
+  --jm-gantt-base-colors-error: #eb284f;
+  --jm-gantt-base-colors-select: #2a2a2a;
+  --jm-gantt-base-colors-hover-color: #2a2a2a;
+  --jm-gantt-base-colors-icons: #aaaaaa;
+  --jm-gantt-scale-color: var(--jm-gantt-base-colors-text-light);
+  --jm-gantt-popup-background: #1b1b1c;
+  --jm-gantt-popup-border: 1px solid #4b4b4b;
+  --jm-gantt-btn-font-weight: 600;
+  --jm-gantt-undo-delete-background: var(--jm-gantt-popup-background);
+  --jm-gantt-link-handle-border: var(--jm-gantt-base-colors-border);
+  --jm-gantt-link-handle-background: var(--jm-gantt-base-colors-background);
 }
 :root[data-gantt-theme="meadow"] {
-  --dhx-gantt-theme: meadow;
-  --dhx-gantt-font-family: Segoe UI, Arial, san-serif;
-  --dhx-gantt-base-colors-primary: #0288d1;
-  --dhx-gantt-base-colors-select: #ffebbc;
-  --dhx-gantt-task-background: var(--dhx-gantt-base-colors-primary);
-  --dhx-gantt-base-colors-border: #cecece;
-  --dhx-gantt-task-text-font-size: 14px;
-  --dhx-gantt-task-text-font-weight: 500;
-  --dhx-gantt-heading-font-size: 22px;
-  --dhx-gantt-heading-font-weight: 300;
-  --dhx-gantt-caption-font-size: 14px;
-  --dhx-gantt-caption-font-weight: 400;
-  --dhx-gantt-scale-color: #767676;
-  --dhx-gantt-container-color: #3f3f3f;
-  --dhx-gantt-border-radius: 0;
-  --dhx-gantt-box-shadow-s: 0 3px 5px 0 rgba(0, 0, 0, 0.1);
-  --dhx-gantt-box-shadow-m: 0px 4px 24px 0px rgba(44, 47, 60, 0.36);
-  --dhx-gantt-box-shadow-l: 0px 4px 24px 0px rgba(44, 47, 60, 0.56);
-  --dhx-gantt-scale-background: #f4f2ea;
-  --dhx-gantt-scale-color: #42464b;
-  --dhx-gantt-task-color: #1e2022;
-  --dhx-gantt-project-background: #c7d8f7;
-  --dhx-gantt-milestone-background: #db7dc5;
-  --dhx-gantt-task-background: #e1ffd4;
-  --dhx-gantt-task-border: 1px solid #3588c5;
-  --dhx-gantt-task-progress-color: #a7d991;
-  --dhx-gantt-project-progress-color: #9ab9f1;
-  --dhx-gantt-link-background: #ffb96d;
-  --dhx-gantt-lightbox-title-background: #f4f2ea;
-  --dhx-gantt-popup-background: #fcfaf3;
-  --dhx-gantt-popup-color: var(--dhx-gantt-container-color);
-  --dhx-gantt-popup-border: 1px solid #cac8bd;
+  --jm-gantt-theme: meadow;
+  --jm-gantt-font-family: Segoe UI, Arial, san-serif;
+  --jm-gantt-base-colors-primary: #0288d1;
+  --jm-gantt-base-colors-select: #ffebbc;
+  --jm-gantt-task-background: var(--jm-gantt-base-colors-primary);
+  --jm-gantt-base-colors-border: #cecece;
+  --jm-gantt-task-text-font-size: 14px;
+  --jm-gantt-task-text-font-weight: 500;
+  --jm-gantt-heading-font-size: 22px;
+  --jm-gantt-heading-font-weight: 300;
+  --jm-gantt-caption-font-size: 14px;
+  --jm-gantt-caption-font-weight: 400;
+  --jm-gantt-scale-color: #767676;
+  --jm-gantt-container-color: #3f3f3f;
+  --jm-gantt-border-radius: 0;
+  --jm-gantt-box-shadow-s: 0 3px 5px 0 rgba(0, 0, 0, 0.1);
+  --jm-gantt-box-shadow-m: 0px 4px 24px 0px rgba(44, 47, 60, 0.36);
+  --jm-gantt-box-shadow-l: 0px 4px 24px 0px rgba(44, 47, 60, 0.56);
+  --jm-gantt-scale-background: #f4f2ea;
+  --jm-gantt-scale-color: #42464b;
+  --jm-gantt-task-color: #1e2022;
+  --jm-gantt-project-background: #c7d8f7;
+  --jm-gantt-milestone-background: #db7dc5;
+  --jm-gantt-task-background: #e1ffd4;
+  --jm-gantt-task-border: 1px solid #3588c5;
+  --jm-gantt-task-progress-color: #a7d991;
+  --jm-gantt-project-progress-color: #9ab9f1;
+  --jm-gantt-link-background: #ffb96d;
+  --jm-gantt-lightbox-title-background: #f4f2ea;
+  --jm-gantt-popup-background: #fcfaf3;
+  --jm-gantt-popup-color: var(--jm-gantt-container-color);
+  --jm-gantt-popup-border: 1px solid #cac8bd;
 }
 :root[data-gantt-theme="skyblue"] {
-  --dhx-gantt-theme: skyblue;
-  --dhx-gantt-font-family: Segoe UI, Arial, san-serif;
-  --dhx-gantt-base-colors-primary: #0288d1;
-  --dhx-gantt-task-background: var(--dhx-gantt-base-colors-primary);
-  --dhx-gantt-base-colors-border: #cecece;
-  --dhx-gantt-task-text-font-size: 14px;
-  --dhx-gantt-task-text-font-weight: 500;
-  --dhx-gantt-heading-font-size: 22px;
-  --dhx-gantt-heading-font-weight: 300;
-  --dhx-gantt-caption-font-size: 14px;
-  --dhx-gantt-caption-font-weight: 400;
-  --dhx-gantt-scale-color: #767676;
-  --dhx-gantt-border-radius: 0;
-  --dhx-gantt-box-shadow-s: 0 3px 5px 0 rgba(0, 0, 0, 0.1);
-  --dhx-gantt-box-shadow-m: 0px 4px 24px 0px rgba(44, 47, 60, 0.36);
-  --dhx-gantt-box-shadow-l: 0px 4px 24px 0px rgba(44, 47, 60, 0.56);
-  --dhx-gantt-scale-background: #dfedff;
-  --dhx-gantt-scale-color: #42464b;
-  --dhx-gantt-task-color: #1e2022;
-  --dhx-gantt-project-background: #eff6fb;
-  --dhx-gantt-task-background: #eff6fb;
-  --dhx-gantt-milestone-background: #db7dc5;
-  --dhx-gantt-task-border: 1px solid #3588c5;
-  --dhx-gantt-task-progress-color: linear-gradient(
+  --jm-gantt-theme: skyblue;
+  --jm-gantt-font-family: Segoe UI, Arial, san-serif;
+  --jm-gantt-base-colors-primary: #0288d1;
+  --jm-gantt-task-background: var(--jm-gantt-base-colors-primary);
+  --jm-gantt-base-colors-border: #cecece;
+  --jm-gantt-task-text-font-size: 14px;
+  --jm-gantt-task-text-font-weight: 500;
+  --jm-gantt-heading-font-size: 22px;
+  --jm-gantt-heading-font-weight: 300;
+  --jm-gantt-caption-font-size: 14px;
+  --jm-gantt-caption-font-weight: 400;
+  --jm-gantt-scale-color: #767676;
+  --jm-gantt-border-radius: 0;
+  --jm-gantt-box-shadow-s: 0 3px 5px 0 rgba(0, 0, 0, 0.1);
+  --jm-gantt-box-shadow-m: 0px 4px 24px 0px rgba(44, 47, 60, 0.36);
+  --jm-gantt-box-shadow-l: 0px 4px 24px 0px rgba(44, 47, 60, 0.56);
+  --jm-gantt-scale-background: #dfedff;
+  --jm-gantt-scale-color: #42464b;
+  --jm-gantt-task-color: #1e2022;
+  --jm-gantt-project-background: #eff6fb;
+  --jm-gantt-task-background: #eff6fb;
+  --jm-gantt-milestone-background: #db7dc5;
+  --jm-gantt-task-border: 1px solid #3588c5;
+  --jm-gantt-task-progress-color: linear-gradient(
     0deg,
     #abcee8 0,
     #5aa0d3 36%,
     #bfdaee
   );
-  --dhx-gantt-link-background: #4a8f43;
-  --dhx-gantt-lightbox-title-background: #eff6fb;
+  --jm-gantt-link-background: #4a8f43;
+  --jm-gantt-lightbox-title-background: #eff6fb;
 }
 :root[data-gantt-theme="skyblue"] .gantt_grid_scale,
 :root[data-gantt-theme="skyblue"] .gantt_task_scale,
@@ -385,97 +385,97 @@
   background-image: linear-gradient(to bottom, #e4f0ff, #dfedff, #d5e8ff);
 }
 :root[data-gantt-theme="broadway"] {
-  --dhx-gantt-theme: broadway;
-  --dhx-gantt-font-family: Segoe UI, Arial, san-serif;
-  --dhx-gantt-base-colors-primary: #0288d1;
-  --dhx-gantt-base-colors-select: #fff3a1;
-  --dhx-gantt-task-background: var(--dhx-gantt-base-colors-primary);
-  --dhx-gantt-base-colors-border: #cecece;
-  --dhx-gantt-halfhour-border: 1px solid #e8e8e8;
-  --dhx-gantt-task-title-font-size: 12px;
-  --dhx-gantt-task-text-font-size: 14px;
-  --dhx-gantt-task-text-font-weight: 500;
-  --dhx-gantt-heading-font-size: 22px;
-  --dhx-gantt-heading-font-weight: 300;
-  --dhx-gantt-caption-font-size: 14px;
-  --dhx-gantt-caption-font-weight: 400;
-  --dhx-gantt-scale-color: #767676;
-  --dhx-gantt-border-radius: 0;
-  --dhx-gantt-box-shadow-s: 0 3px 5px 0 rgba(0, 0, 0, 0.1);
-  --dhx-gantt-box-shadow-m: 0px 4px 24px 0px rgba(44, 47, 60, 0.36);
-  --dhx-gantt-box-shadow-l: 0px 4px 24px 0px rgba(44, 47, 60, 0.56);
-  --dhx-gantt-grid-scale-background: #4f4f4f;
-  --dhx-gantt-grid-scale-border-vertical: 1px solid #c1c1c1;
-  --dhx-gantt-grid-scale-color: #e1e1e1;
-  --dhx-gantt-timeline-scale-background: #dbdbdb;
-  --dhx-gantt-timeline-scale-border-vertical: 1px solid #ebebeb;
-  --dhx-gantt-timeline-scale-color: #494949;
-  --dhx-gantt-grid-body-background: #dbdbdb;
-  --dhx-gantt-lightbox-title-background: #4f4f4f;
-  --dhx-gantt-lightbox-title-color: #e1e1e1;
-  --dhx-gantt-task-color: #fff;
-  --dhx-gantt-link-background: #ffb96d;
-  --dhx-gantt-project-background: #65c16f;
-  --dhx-gantt-project-progress-color: #46ad51;
-  --dhx-gantt-task-progress-color: #04a4f0;
-  --dhx-gantt-task-background: #17b2fb;
-  --dhx-gantt-milestone-background: #db7dc5;
+  --jm-gantt-theme: broadway;
+  --jm-gantt-font-family: Segoe UI, Arial, san-serif;
+  --jm-gantt-base-colors-primary: #0288d1;
+  --jm-gantt-base-colors-select: #fff3a1;
+  --jm-gantt-task-background: var(--jm-gantt-base-colors-primary);
+  --jm-gantt-base-colors-border: #cecece;
+  --jm-gantt-halfhour-border: 1px solid #e8e8e8;
+  --jm-gantt-task-title-font-size: 12px;
+  --jm-gantt-task-text-font-size: 14px;
+  --jm-gantt-task-text-font-weight: 500;
+  --jm-gantt-heading-font-size: 22px;
+  --jm-gantt-heading-font-weight: 300;
+  --jm-gantt-caption-font-size: 14px;
+  --jm-gantt-caption-font-weight: 400;
+  --jm-gantt-scale-color: #767676;
+  --jm-gantt-border-radius: 0;
+  --jm-gantt-box-shadow-s: 0 3px 5px 0 rgba(0, 0, 0, 0.1);
+  --jm-gantt-box-shadow-m: 0px 4px 24px 0px rgba(44, 47, 60, 0.36);
+  --jm-gantt-box-shadow-l: 0px 4px 24px 0px rgba(44, 47, 60, 0.56);
+  --jm-gantt-grid-scale-background: #4f4f4f;
+  --jm-gantt-grid-scale-border-vertical: 1px solid #c1c1c1;
+  --jm-gantt-grid-scale-color: #e1e1e1;
+  --jm-gantt-timeline-scale-background: #dbdbdb;
+  --jm-gantt-timeline-scale-border-vertical: 1px solid #ebebeb;
+  --jm-gantt-timeline-scale-color: #494949;
+  --jm-gantt-grid-body-background: #dbdbdb;
+  --jm-gantt-lightbox-title-background: #4f4f4f;
+  --jm-gantt-lightbox-title-color: #e1e1e1;
+  --jm-gantt-task-color: #fff;
+  --jm-gantt-link-background: #ffb96d;
+  --jm-gantt-project-background: #65c16f;
+  --jm-gantt-project-progress-color: #46ad51;
+  --jm-gantt-task-progress-color: #04a4f0;
+  --jm-gantt-task-background: #17b2fb;
+  --jm-gantt-milestone-background: #db7dc5;
 }
 :root[data-gantt-theme="broadway"] .gantt_grid_data {
-  --dhx-gantt-task-row-background: var(--dhx-gantt-grid-body-background);
-  --dhx-gantt-task-row-background--odd: var(--dhx-gantt-grid-body-background);
+  --jm-gantt-task-row-background: var(--jm-gantt-grid-body-background);
+  --jm-gantt-task-row-background--odd: var(--jm-gantt-grid-body-background);
 }
 :root[data-gantt-theme="material"] {
-  --dhx-gantt-theme: material;
-  --dhx-gantt-font-family: Roboto, Inter, Helvetica, Arial, sans-serif;
-  --dhx-gantt-base-colors-primary: #448aff;
-  --dhx-gantt-task-background: var(--dhx-gantt-base-colors-primary);
-  --dhx-gantt-project-background: #1de9b6;
-  --dhx-gantt-milestone-background: #ffc107;
-  --dhx-gantt-task-progress-color: rgba(0, 0, 0, 0.2);
-  --dhx-gantt-project-color: rgba(0, 0, 0, 0.6);
-  --dhx-gantt-base-colors-border: #e0e0e0;
-  --dhx-gantt-task-title-font-size: calc(var(--dhx-gantt-font-size) - 2px);
-  --dhx-gantt-task-text-font-size: var(--dhx-gantt-font-size);
-  --dhx-gantt-task-text-font-weight: 500;
-  --dhx-gantt-heading-font-size: 20px;
-  --dhx-gantt-caption-font-size: var(--dhx-gantt-font-size);
-  --dhx-gantt-caption-font-weight: 500;
-  --dhx-gantt-btn-font-weight: 500;
-  --dhx-gantt-heading-font-weight: 500;
-  --dhx-gantt-hours-font-size: calc(var(--dhx-gantt-font-size) - 2px);
-  --dhx-gantt-base-colors-text-base: rgba(0, 0, 0, 0.75);
-  --dhx-gantt-base-transition: 0.15s ease;
-  --dhx-gantt-header-border: 1px solid transparent;
-  --dhx-gantt-scale-color: rgba(0, 0, 0, 0.54);
-  --dhx-gantt-base-colors-select: rgba(0, 199, 181, 0.2);
-  --dhx-gantt-base-colors-hover-color: var(--dhx-gantt-base-colors-select);
-  --dhx-gantt-border-radius: 0;
-  --dhx-gantt-task-border-radius: 18px;
-  --dhx-gantt-btn-text-transform: uppercase;
-  --dhx-gantt-btn-padding: 1px 20px 0;
-  --dhx-gantt-link-handle-size: 16px;
-  --dhx-gantt-progress-handle-background: #fff;
-  --dhx-gantt-progress-handle-border: var(--dhx-gantt-base-colors-border);
-  --dhx-gantt-box-shadow-s: 0 3px 5px 0 rgba(0, 0, 0, 0.1);
-  --dhx-gantt-box-shadow-m: 0px 4px 24px 0px rgba(44, 47, 60, 0.36);
-  --dhx-gantt-box-shadow-l: 0px 4px 24px 0px rgba(44, 47, 60, 0.56);
-  --dhx-gantt-lightbox-title-background: var(--dhx-gantt-container-background);
-  --dhx-gantt-lightbox-title-color: var(--dhx-gantt-base-colors-text-base);
-  --dhx-gantt-lightbox-title-font-size: calc(var(--dhx-gantt-font-size) + 2px);
-  --dhx-gantt-lightbox-padding: 30px;
-  --dhx-gantt-lightbox-width: 610px;
-  --dhx-gantt-lightbox-wide-max-width: 640px;
-  --dhx-gantt-btn-order: row;
-  --dhx-gantt-btn-outline-border-color: transparent;
-  --dhx-gantt-btn-outline-border-hover: transparent;
-  --dhx-gantt-btn-outline-border-active: transparent;
-  --dhx-gantt-btn-outline-border-color-disabled: transparent;
+  --jm-gantt-theme: material;
+  --jm-gantt-font-family: Roboto, Inter, Helvetica, Arial, sans-serif;
+  --jm-gantt-base-colors-primary: #448aff;
+  --jm-gantt-task-background: var(--jm-gantt-base-colors-primary);
+  --jm-gantt-project-background: #1de9b6;
+  --jm-gantt-milestone-background: #ffc107;
+  --jm-gantt-task-progress-color: rgba(0, 0, 0, 0.2);
+  --jm-gantt-project-color: rgba(0, 0, 0, 0.6);
+  --jm-gantt-base-colors-border: #e0e0e0;
+  --jm-gantt-task-title-font-size: calc(var(--jm-gantt-font-size) - 2px);
+  --jm-gantt-task-text-font-size: var(--jm-gantt-font-size);
+  --jm-gantt-task-text-font-weight: 500;
+  --jm-gantt-heading-font-size: 20px;
+  --jm-gantt-caption-font-size: var(--jm-gantt-font-size);
+  --jm-gantt-caption-font-weight: 500;
+  --jm-gantt-btn-font-weight: 500;
+  --jm-gantt-heading-font-weight: 500;
+  --jm-gantt-hours-font-size: calc(var(--jm-gantt-font-size) - 2px);
+  --jm-gantt-base-colors-text-base: rgba(0, 0, 0, 0.75);
+  --jm-gantt-base-transition: 0.15s ease;
+  --jm-gantt-header-border: 1px solid transparent;
+  --jm-gantt-scale-color: rgba(0, 0, 0, 0.54);
+  --jm-gantt-base-colors-select: rgba(0, 199, 181, 0.2);
+  --jm-gantt-base-colors-hover-color: var(--jm-gantt-base-colors-select);
+  --jm-gantt-border-radius: 0;
+  --jm-gantt-task-border-radius: 18px;
+  --jm-gantt-btn-text-transform: uppercase;
+  --jm-gantt-btn-padding: 1px 20px 0;
+  --jm-gantt-link-handle-size: 16px;
+  --jm-gantt-progress-handle-background: #fff;
+  --jm-gantt-progress-handle-border: var(--jm-gantt-base-colors-border);
+  --jm-gantt-box-shadow-s: 0 3px 5px 0 rgba(0, 0, 0, 0.1);
+  --jm-gantt-box-shadow-m: 0px 4px 24px 0px rgba(44, 47, 60, 0.36);
+  --jm-gantt-box-shadow-l: 0px 4px 24px 0px rgba(44, 47, 60, 0.56);
+  --jm-gantt-lightbox-title-background: var(--jm-gantt-container-background);
+  --jm-gantt-lightbox-title-color: var(--jm-gantt-base-colors-text-base);
+  --jm-gantt-lightbox-title-font-size: calc(var(--jm-gantt-font-size) + 2px);
+  --jm-gantt-lightbox-padding: 30px;
+  --jm-gantt-lightbox-width: 610px;
+  --jm-gantt-lightbox-wide-max-width: 640px;
+  --jm-gantt-btn-order: row;
+  --jm-gantt-btn-outline-border-color: transparent;
+  --jm-gantt-btn-outline-border-hover: transparent;
+  --jm-gantt-btn-outline-border-active: transparent;
+  --jm-gantt-btn-outline-border-color-disabled: transparent;
 }
 :root[data-gantt-theme="material"] .dhx_cal_ltitle {
   font-weight: 400;
   text-transform: uppercase;
-  padding: 18px var(--dhx-gantt-lightbox-padding) 8px;
+  padding: 18px var(--jm-gantt-lightbox-padding) 8px;
   border-bottom-color: transparent;
 }
 :root[data-gantt-theme="material"]
@@ -490,14 +490,14 @@
   text-transform: uppercase;
 }
 :root[data-gantt-theme="material"] .dhx_cal_ltitle_controls {
-  --dhx-gantt-base-colors-icons: var(--dhx-gantt-lightbox-title-color);
+  --jm-gantt-base-colors-icons: var(--jm-gantt-lightbox-title-color);
 }
 :root[data-gantt-theme="material"] .gantt_cal_lsection {
   margin-top: 12px;
   margin-bottom: 4px;
 }
 :root[data-gantt-theme="material"] .gantt_cal_ltitle {
-  padding: 18px var(--dhx-gantt-lightbox-padding);
+  padding: 18px var(--jm-gantt-lightbox-padding);
   border-bottom-color: transparent;
 }
 :root[data-gantt-theme="material"] .gantt_cal_lcontrols {
@@ -506,41 +506,41 @@
 }
 :root[data-gantt-theme="material"] .gantt_add,
 :root[data-gantt-theme="material"] .gantt_grid_head_add {
-  --dhx-gantt-base-colors-icons: #70d0c2;
-  --dhx-gantt-base-colors-icons-active: color-mix(
+  --jm-gantt-base-colors-icons: #70d0c2;
+  --jm-gantt-base-colors-icons-active: color-mix(
     in hsl increasing hue,
-    var(--dhx-gantt-base-colors-icons) 100%,
+    var(--jm-gantt-base-colors-icons) 100%,
     #000000 12.6%
   );
-  --dhx-gantt-base-colors-icons-hover: color-mix(
+  --jm-gantt-base-colors-icons-hover: color-mix(
     in hsl increasing hue,
-    var(--dhx-gantt-base-colors-icons) 100%,
+    var(--jm-gantt-base-colors-icons) 100%,
     #000000 28.5%
   );
 }
 :root[data-gantt-theme="material"] .gantt_grid_data .gantt_row,
 :root[data-gantt-theme="material"] .gantt_grid_data .gantt_row.odd {
-  transition: background var(--dhx-gantt-base-transition);
+  transition: background var(--jm-gantt-base-transition);
 }
 :root[data-gantt-theme="material"] .gantt_grid_head_cell {
-  transition: border-color ground var(--dhx-gantt-base-transition);
+  transition: border-color ground var(--jm-gantt-base-transition);
   border-right: 1px solid transparent;
 }
 :root[data-gantt-theme="material"]
   .gantt_grid_scale:hover
   .gantt_grid_head_cell {
-  border-right: var(--dhx-gantt-grid-scale-border-vertical);
+  border-right: var(--jm-gantt-grid-scale-border-vertical);
 }
 :root[data-gantt-theme="material"]
   .gantt_grid_column_resize_wrap
   .gantt_grid_column_resize {
-  transition: background var(--dhx-gantt-base-transition);
+  transition: background var(--jm-gantt-base-transition);
   background-color: transparent;
 }
 :root[data-gantt-theme="material"]
   .gantt_grid_column_resize_wrap:hover
   .gantt_grid_column_resize {
-  background-color: var(--dhx-gantt-base-colors-border);
+  background-color: var(--jm-gantt-base-colors-border);
 }
 :root[data-gantt-theme="material"] div.gantt_grid_scale:after,
 :root[data-gantt-theme="material"] div.gantt_scale_line:last-child:after {
@@ -557,94 +557,94 @@
   bottom: -1px;
 }
 :root[data-gantt-theme="material"] .gantt_link_control {
-  --dhx-gantt-link-handle-border: var(--dhx-gantt-task-background);
-  --dhx-gantt-link-handle-background: #fff;
-  --dhx-gantt-link-handle-border-hover: var(--dhx-gantt-task-background);
-  --dhx-gantt-link-handle-background-hover: #fff;
+  --jm-gantt-link-handle-border: var(--jm-gantt-task-background);
+  --jm-gantt-link-handle-background: #fff;
+  --jm-gantt-link-handle-border-hover: var(--jm-gantt-task-background);
+  --jm-gantt-link-handle-background-hover: #fff;
 }
 :root[data-gantt-theme="material"] .gantt_task_line.gantt_milestone {
   margin-top: -1px;
-  --dhx-gantt-task-border-radius: 2px;
+  --jm-gantt-task-border-radius: 2px;
 }
 :root[data-gantt-theme="contrast-white"] {
-  --dhx-gantt-theme: contrast-white;
-  --dhx-gantt-base-colors-disabled: #c2c2c2;
-  --dhx-gantt-base-colors-text-light: #303030;
-  --dhx-gantt-base-colors-text-base: #303030;
-  --dhx-gantt-base-colors-background: #ffffff;
-  --dhx-gantt-base-colors-background-alt: #929292;
-  --dhx-gantt-base-colors-border: #4d595b;
-  --dhx-gantt-base-colors-border-light: #4d595b;
-  --dhx-gantt-base-colors-text-on-fill: #fff;
-  --dhx-gantt-base-colors-primary: #0a47cd;
-  --dhx-gantt-base-colors-text-on-fill: rgba(255, 255, 255, 0.9);
-  --dhx-gantt-task-background: #0a47cd;
-  --dhx-gantt-task-border: 1px solid rgba(0, 0, 0, 0.1);
-  --dhx-gantt-project-background: #157949;
-  --dhx-gantt-base-colors-warning: #fcba2e;
-  --dhx-gantt-base-colors-success: #77d257;
-  --dhx-gantt-base-colors-error: #d01e11;
-  --dhx-gantt-base-colors-error-text: #141414;
-  --dhx-gantt-btn-color: #ffffff;
-  --dhx-gantt-btn-color-hover: #ffffff;
-  --dhx-gantt-btn-color-active: #ffffff;
-  --dhx-gantt-base-colors-select: #e7e5e5;
-  --dhx-gantt-base-colors-hover-color: #e7e5e5;
-  --dhx-gantt-base-colors-icons: #303030;
-  --dhx-gantt-scale-color: var(--dhx-gantt-base-colors-text-light);
-  --dhx-gantt-popup-background: #fff;
-  --dhx-gantt-popup-border: 1px solid #4d595b;
-  --dhx-gantt-font-size: 16px;
-  --dhx-gantt-heading-font-size: 24px;
-  --dhx-gantt-important-font-size: 16px;
-  --dhx-gantt-regular-font-size: 16px;
-  --dhx-gantt-caption-font-size: 16px;
-  --dhx-gantt-btn-outline-color-hover: #212121;
-  --dhx-gantt-btn-outline-color-active: #ffffff;
+  --jm-gantt-theme: contrast-white;
+  --jm-gantt-base-colors-disabled: #c2c2c2;
+  --jm-gantt-base-colors-text-light: #303030;
+  --jm-gantt-base-colors-text-base: #303030;
+  --jm-gantt-base-colors-background: #ffffff;
+  --jm-gantt-base-colors-background-alt: #929292;
+  --jm-gantt-base-colors-border: #4d595b;
+  --jm-gantt-base-colors-border-light: #4d595b;
+  --jm-gantt-base-colors-text-on-fill: #fff;
+  --jm-gantt-base-colors-primary: #0a47cd;
+  --jm-gantt-base-colors-text-on-fill: rgba(255, 255, 255, 0.9);
+  --jm-gantt-task-background: #0a47cd;
+  --jm-gantt-task-border: 1px solid rgba(0, 0, 0, 0.1);
+  --jm-gantt-project-background: #157949;
+  --jm-gantt-base-colors-warning: #fcba2e;
+  --jm-gantt-base-colors-success: #77d257;
+  --jm-gantt-base-colors-error: #d01e11;
+  --jm-gantt-base-colors-error-text: #141414;
+  --jm-gantt-btn-color: #ffffff;
+  --jm-gantt-btn-color-hover: #ffffff;
+  --jm-gantt-btn-color-active: #ffffff;
+  --jm-gantt-base-colors-select: #e7e5e5;
+  --jm-gantt-base-colors-hover-color: #e7e5e5;
+  --jm-gantt-base-colors-icons: #303030;
+  --jm-gantt-scale-color: var(--jm-gantt-base-colors-text-light);
+  --jm-gantt-popup-background: #fff;
+  --jm-gantt-popup-border: 1px solid #4d595b;
+  --jm-gantt-font-size: 16px;
+  --jm-gantt-heading-font-size: 24px;
+  --jm-gantt-important-font-size: 16px;
+  --jm-gantt-regular-font-size: 16px;
+  --jm-gantt-caption-font-size: 16px;
+  --jm-gantt-btn-outline-color-hover: #212121;
+  --jm-gantt-btn-outline-color-active: #ffffff;
 }
 :root[data-gantt-theme="contrast-black"] {
-  --dhx-gantt-theme: contrast-black;
-  --dhx-gantt-base-colors-disabled: #3d3d3d;
-  --dhx-gantt-base-colors-text-light: #cfcfcf;
-  --dhx-gantt-base-colors-text-base: #ffffff;
-  --dhx-gantt-base-colors-background: #141414;
-  --dhx-gantt-base-colors-background-alt: #4f4f4f;
-  --dhx-gantt-base-colors-border: rgba(255, 255, 255, 0.8);
-  --dhx-gantt-base-colors-border-light: rgba(255, 255, 255, 0.8);
-  --dhx-gantt-base-colors-text-on-fill: #141414;
-  --dhx-gantt-base-colors-primary: #a395ff;
-  --dhx-gantt-task-background: var(--dhx-gantt-base-colors-primary);
-  --dhx-gantt-project-background: #77d257;
-  --dhx-gantt-milestone-background: #fcba2e;
-  --dhx-gantt-task-background: #a395ff;
-  --dhx-gantt-task-border: 1px solid rgba(0, 0, 0, 0.1);
-  --dhx-gantt-base-colors-warning: #694e02;
-  --dhx-gantt-base-colors-success: #115700;
-  --dhx-gantt-base-colors-error: #ffa7a0;
-  --dhx-gantt-base-colors-error-text: #141414;
-  --dhx-gantt-base-colors-select: #2a2a2a;
-  --dhx-gantt-base-colors-hover-color: #2a2a2a;
-  --dhx-gantt-base-colors-icons: #aaaaaa;
-  --dhx-gantt-scale-color: var(--dhx-gantt-base-colors-text-light);
-  --dhx-gantt-popup-background: #1b1b1c;
-  --dhx-gantt-undo-delete-background: var(--dhx-gantt-popup-background);
-  --dhx-gantt-undo-delete-color: var(--dhx-gantt-base-colors-text-base);
-  --dhx-gantt-popup-border: 1px solid #4b4b4b;
-  --dhx-gantt-font-size: 16px;
-  --dhx-gantt-heading-font-size: 24px;
-  --dhx-gantt-important-font-size: 16px;
-  --dhx-gantt-regular-font-size: 16px;
-  --dhx-gantt-caption-font-size: 16px;
-  --dhx-gantt-btn-outline-color-hover: var(--dhx-gantt-base-colors-text-light);
-  --dhx-gantt-btn-outline-color-active: var(--dhx-gantt-base-colors-text-light);
+  --jm-gantt-theme: contrast-black;
+  --jm-gantt-base-colors-disabled: #3d3d3d;
+  --jm-gantt-base-colors-text-light: #cfcfcf;
+  --jm-gantt-base-colors-text-base: #ffffff;
+  --jm-gantt-base-colors-background: #141414;
+  --jm-gantt-base-colors-background-alt: #4f4f4f;
+  --jm-gantt-base-colors-border: rgba(255, 255, 255, 0.8);
+  --jm-gantt-base-colors-border-light: rgba(255, 255, 255, 0.8);
+  --jm-gantt-base-colors-text-on-fill: #141414;
+  --jm-gantt-base-colors-primary: #a395ff;
+  --jm-gantt-task-background: var(--jm-gantt-base-colors-primary);
+  --jm-gantt-project-background: #77d257;
+  --jm-gantt-milestone-background: #fcba2e;
+  --jm-gantt-task-background: #a395ff;
+  --jm-gantt-task-border: 1px solid rgba(0, 0, 0, 0.1);
+  --jm-gantt-base-colors-warning: #694e02;
+  --jm-gantt-base-colors-success: #115700;
+  --jm-gantt-base-colors-error: #ffa7a0;
+  --jm-gantt-base-colors-error-text: #141414;
+  --jm-gantt-base-colors-select: #2a2a2a;
+  --jm-gantt-base-colors-hover-color: #2a2a2a;
+  --jm-gantt-base-colors-icons: #aaaaaa;
+  --jm-gantt-scale-color: var(--jm-gantt-base-colors-text-light);
+  --jm-gantt-popup-background: #1b1b1c;
+  --jm-gantt-undo-delete-background: var(--jm-gantt-popup-background);
+  --jm-gantt-undo-delete-color: var(--jm-gantt-base-colors-text-base);
+  --jm-gantt-popup-border: 1px solid #4b4b4b;
+  --jm-gantt-font-size: 16px;
+  --jm-gantt-heading-font-size: 24px;
+  --jm-gantt-important-font-size: 16px;
+  --jm-gantt-regular-font-size: 16px;
+  --jm-gantt-caption-font-size: 16px;
+  --jm-gantt-btn-outline-color-hover: var(--jm-gantt-base-colors-text-light);
+  --jm-gantt-btn-outline-color-active: var(--jm-gantt-base-colors-text-light);
 }
 .dhx_gantt_button--mixin {
-  background: var(--dhx-gantt-btn-background);
-  color: var(--dhx-gantt-btn-color);
-  border: 1px solid var(--dhx-gantt-btn-border-color);
-  border-radius: var(--dhx-gantt-border-radius);
-  height: var(--dhx-gantt-control-height);
-  padding: var(--dhx-gantt-btn-padding, 0 20px);
+  background: var(--jm-gantt-btn-background);
+  color: var(--jm-gantt-btn-color);
+  border: 1px solid var(--jm-gantt-btn-border-color);
+  border-radius: var(--jm-gantt-border-radius);
+  height: var(--jm-gantt-control-height);
+  padding: var(--jm-gantt-btn-padding, 0 20px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -652,139 +652,139 @@
   gap: 4px;
   flex-shrink: 0;
   font-weight: 500;
-  font-size: var(--dhx-gantt-font-size);
-  font-family: var(--dhx-gantt-font-family);
-  font-weight: var(--dhx-gantt-btn-font-weight, normal);
+  font-size: var(--jm-gantt-font-size);
+  font-family: var(--jm-gantt-font-family);
+  font-weight: var(--jm-gantt-btn-font-weight, normal);
   line-height: 142%;
-  text-transform: var(--dhx-gantt-btn-text-transform);
+  text-transform: var(--jm-gantt-btn-text-transform);
   cursor: pointer;
-  --dhx-gantt-icon-size: 18px;
+  --jm-gantt-icon-size: 18px;
 }
 .dhx_gantt_button--mixin:hover {
-  background: var(--dhx-gantt-btn-background-hover);
-  color: var(--dhx-gantt-btn-color-hover);
-  border-color: var(--dhx-gantt-btn-border-hover);
+  background: var(--jm-gantt-btn-background-hover);
+  color: var(--jm-gantt-btn-color-hover);
+  border-color: var(--jm-gantt-btn-border-hover);
 }
 .dhx_gantt_button--mixin:active {
-  background: var(--dhx-gantt-btn-background-active);
-  color: var(--dhx-gantt-btn-color-active);
-  border-color: var(--dhx-gantt-btn-border-active);
+  background: var(--jm-gantt-btn-background-active);
+  color: var(--jm-gantt-btn-color-active);
+  border-color: var(--jm-gantt-btn-border-active);
 }
 .dhx_gantt_button--mixin:disabled {
-  background: var(--dhx-gantt-btn-background-disabled);
-  color: var(--dhx-gantt-btn-color-disabled);
-  border-color: var(--dhx-gantt-btn-border-disabled);
+  background: var(--jm-gantt-btn-background-disabled);
+  color: var(--jm-gantt-btn-color-disabled);
+  border-color: var(--jm-gantt-btn-border-disabled);
 }
 .dhx_gantt_button_outline--mixin {
-  --dhx-gantt-icon-size: 18px;
-  --dhx-gantt-base-colors-icons: var(--dhx-gantt-btn-color);
-  --dhx-gantt-btn-background: var(--dhx-gantt-btn-outline-background);
-  --dhx-gantt-btn-color: var(--dhx-gantt-btn-outline-color);
-  --dhx-gantt-btn-border-color: var(--dhx-gantt-btn-outline-border-color);
-  --dhx-gantt-btn-background-hover: var(
-    --dhx-gantt-btn-outline-background-hover
+  --jm-gantt-icon-size: 18px;
+  --jm-gantt-base-colors-icons: var(--jm-gantt-btn-color);
+  --jm-gantt-btn-background: var(--jm-gantt-btn-outline-background);
+  --jm-gantt-btn-color: var(--jm-gantt-btn-outline-color);
+  --jm-gantt-btn-border-color: var(--jm-gantt-btn-outline-border-color);
+  --jm-gantt-btn-background-hover: var(
+    --jm-gantt-btn-outline-background-hover
   );
-  --dhx-gantt-btn-color-hover: var(--dhx-gantt-btn-outline-color-hover);
-  --dhx-gantt-btn-border-hover: var(--dhx-gantt-btn-outline-border-hover);
-  --dhx-gantt-btn-background-active: var(
-    --dhx-gantt-btn-outline-background-active
+  --jm-gantt-btn-color-hover: var(--jm-gantt-btn-outline-color-hover);
+  --jm-gantt-btn-border-hover: var(--jm-gantt-btn-outline-border-hover);
+  --jm-gantt-btn-background-active: var(
+    --jm-gantt-btn-outline-background-active
   );
-  --dhx-gantt-btn-color-active: var(--dhx-gantt-btn-outline-color-active);
-  --dhx-gantt-btn-border-active: var(--dhx-gantt-btn-outline-border-active);
-  --dhx-gantt-btn-background-disabled: var(
-    --dhx-gantt-btn-outline-background-disabled
+  --jm-gantt-btn-color-active: var(--jm-gantt-btn-outline-color-active);
+  --jm-gantt-btn-border-active: var(--jm-gantt-btn-outline-border-active);
+  --jm-gantt-btn-background-disabled: var(
+    --jm-gantt-btn-outline-background-disabled
   );
-  --dhx-gantt-btn-color-disabled: var(--dhx-gantt-btn-outline-color-disabled);
-  --dhx-gantt-btn-border-color-disabled: var(
-    --dhx-gantt-btn-outline-border-color-disabled
+  --jm-gantt-btn-color-disabled: var(--jm-gantt-btn-outline-color-disabled);
+  --jm-gantt-btn-border-color-disabled: var(
+    --jm-gantt-btn-outline-border-color-disabled
   );
 }
 .dhx_gantt_button_danger--mixin {
-  --dhx-gantt-icon-size: 18px;
-  --dhx-gantt-btn-background: var(--dhx-gantt-base-colors-error);
-  --dhx-gantt-btn-color: var(--dhx-gantt-base-colors-error-text);
-  --dhx-gantt-btn-border-color: var(--dhx-gantt-base-colors-error);
-  --dhx-gantt-btn-background-hover: var(--dhx-gantt-base-colors-error-hover);
-  --dhx-gantt-btn-border-hover: var(--dhx-gantt-base-colors-error-hover);
-  --dhx-gantt-btn-background-active: var(--dhx-gantt-base-colors-error-active);
-  --dhx-gantt-btn-border-active: var(--dhx-gantt-base-colors-error-active);
+  --jm-gantt-icon-size: 18px;
+  --jm-gantt-btn-background: var(--jm-gantt-base-colors-error);
+  --jm-gantt-btn-color: var(--jm-gantt-base-colors-error-text);
+  --jm-gantt-btn-border-color: var(--jm-gantt-base-colors-error);
+  --jm-gantt-btn-background-hover: var(--jm-gantt-base-colors-error-hover);
+  --jm-gantt-btn-border-hover: var(--jm-gantt-base-colors-error-hover);
+  --jm-gantt-btn-background-active: var(--jm-gantt-base-colors-error-active);
+  --jm-gantt-btn-border-active: var(--jm-gantt-base-colors-error-active);
 }
 .dhx_gantt_button_danger_outline--mixin {
-  --dhx-gantt-icon-size: 18px;
-  --dhx-gantt-base-colors-icons: var(--dhx-gantt-btn-color);
-  --dhx-gantt-btn-background: transparent;
-  --dhx-gantt-btn-color: var(--dhx-gantt-base-colors-error);
-  --dhx-gantt-btn-border-color: var(--dhx-gantt-base-colors-error);
-  --dhx-gantt-btn-background-hover: var(--dhx-gantt-base-colors-error-lighter);
-  --dhx-gantt-btn-color-hover: var(--dhx-gantt-base-colors-error-hover);
-  --dhx-gantt-btn-border-hover: var(--dhx-gantt-base-colors-error-hover);
-  --dhx-gantt-btn-background-active: var(--dhx-gantt-base-colors-error-active);
-  --dhx-gantt-btn-color-active: var(--dhx-gantt-base-colors-error-active);
-  --dhx-gantt-btn-border-active: var(--dhx-gantt-base-colors-error-active);
-  --dhx-gantt-btn-background-disabled: transparent;
-  --dhx-gantt-btn-color-disabled: var(--dhx-gantt-base-colors-icons);
-  --dhx-gantt-btn-border-color-disabled: var(--dhx-gantt-base-colors-icons);
+  --jm-gantt-icon-size: 18px;
+  --jm-gantt-base-colors-icons: var(--jm-gantt-btn-color);
+  --jm-gantt-btn-background: transparent;
+  --jm-gantt-btn-color: var(--jm-gantt-base-colors-error);
+  --jm-gantt-btn-border-color: var(--jm-gantt-base-colors-error);
+  --jm-gantt-btn-background-hover: var(--jm-gantt-base-colors-error-lighter);
+  --jm-gantt-btn-color-hover: var(--jm-gantt-base-colors-error-hover);
+  --jm-gantt-btn-border-hover: var(--jm-gantt-base-colors-error-hover);
+  --jm-gantt-btn-background-active: var(--jm-gantt-base-colors-error-active);
+  --jm-gantt-btn-color-active: var(--jm-gantt-base-colors-error-active);
+  --jm-gantt-btn-border-active: var(--jm-gantt-base-colors-error-active);
+  --jm-gantt-btn-background-disabled: transparent;
+  --jm-gantt-btn-color-disabled: var(--jm-gantt-base-colors-icons);
+  --jm-gantt-btn-border-color-disabled: var(--jm-gantt-base-colors-icons);
 }
 .dhx_gantt_button_danger_link--mixin {
-  --dhx-gantt-icon-size: 18px;
+  --jm-gantt-icon-size: 18px;
   padding: 6px 0;
-  --dhx-gantt-base-colors-icons: var(--dhx-gantt-base-colors-error);
-  --dhx-gantt-btn-background: transparent;
-  --dhx-gantt-btn-color: var(--dhx-gantt-base-colors-error);
-  --dhx-gantt-btn-border-color: transparent;
-  --dhx-gantt-btn-background-hover: transparent;
-  --dhx-gantt-btn-color-hover: var(--dhx-gantt-base-colors-error-hover);
-  --dhx-gantt-btn-border-hover: transparent;
-  --dhx-gantt-btn-background-active: transparent;
-  --dhx-gantt-btn-color-active: var(--dhx-gantt-base-colors-error-active);
-  --dhx-gantt-btn-border-active: transparent;
-  --dhx-gantt-btn-background-disabled: transparent;
-  --dhx-gantt-btn-color-disabled: var(--dhx-gantt-base-colors-icons);
-  --dhx-gantt-btn-border-color-disabled: transparent;
+  --jm-gantt-base-colors-icons: var(--jm-gantt-base-colors-error);
+  --jm-gantt-btn-background: transparent;
+  --jm-gantt-btn-color: var(--jm-gantt-base-colors-error);
+  --jm-gantt-btn-border-color: transparent;
+  --jm-gantt-btn-background-hover: transparent;
+  --jm-gantt-btn-color-hover: var(--jm-gantt-base-colors-error-hover);
+  --jm-gantt-btn-border-hover: transparent;
+  --jm-gantt-btn-background-active: transparent;
+  --jm-gantt-btn-color-active: var(--jm-gantt-base-colors-error-active);
+  --jm-gantt-btn-border-active: transparent;
+  --jm-gantt-btn-background-disabled: transparent;
+  --jm-gantt-btn-color-disabled: var(--jm-gantt-base-colors-icons);
+  --jm-gantt-btn-border-color-disabled: transparent;
 }
 .dhx_gantt_button_link--mixin {
   padding: 6px 0;
-  --dhx-gantt-icon-size: 18px;
-  --dhx-gantt-btn-background: transparent;
-  --dhx-gantt-btn-color: var(--dhx-gantt-base-colors-primary);
-  --dhx-gantt-btn-border-color: transparent;
-  --dhx-gantt-btn-background-hover: transparent;
-  --dhx-gantt-btn-color-hover: var(--dhx-gantt-base-colors-primary-hover);
-  --dhx-gantt-btn-border-hover: transparent;
-  --dhx-gantt-btn-background-active: transparent;
-  --dhx-gantt-btn-color-active: var(--dhx-gantt-base-colors-primary-active);
-  --dhx-gantt-btn-border-active: transparent;
-  --dhx-gantt-btn-background-disabled: transparent;
-  --dhx-gantt-btn-color-disabled: var(--dhx-gantt-base-colors-icons);
-  --dhx-gantt-btn-border-color-disabled: transparent;
+  --jm-gantt-icon-size: 18px;
+  --jm-gantt-btn-background: transparent;
+  --jm-gantt-btn-color: var(--jm-gantt-base-colors-primary);
+  --jm-gantt-btn-border-color: transparent;
+  --jm-gantt-btn-background-hover: transparent;
+  --jm-gantt-btn-color-hover: var(--jm-gantt-base-colors-primary-hover);
+  --jm-gantt-btn-border-hover: transparent;
+  --jm-gantt-btn-background-active: transparent;
+  --jm-gantt-btn-color-active: var(--jm-gantt-base-colors-primary-active);
+  --jm-gantt-btn-border-active: transparent;
+  --jm-gantt-btn-background-disabled: transparent;
+  --jm-gantt-btn-color-disabled: var(--jm-gantt-base-colors-icons);
+  --jm-gantt-btn-border-color-disabled: transparent;
 }
 .dhx_gantt_button_icon--mixin {
   min-width: 32px;
   height: 32px;
   border-radius: 50%;
   padding: 6px 0;
-  --dhx-gantt-icon-size: 18px;
-  --dhx-gantt-btn-background: transparent;
-  --dhx-gantt-btn-color: var(--dhx-gantt-base-colors-primary);
-  --dhx-gantt-btn-border-color: transparent;
-  --dhx-gantt-btn-background-hover: transparent;
-  --dhx-gantt-btn-color-hover: var(--dhx-gantt-base-colors-primary-hover);
-  --dhx-gantt-btn-border-hover: transparent;
-  --dhx-gantt-btn-background-active: transparent;
-  --dhx-gantt-btn-color-active: var(--dhx-gantt-base-colors-primary-active);
-  --dhx-gantt-btn-border-active: transparent;
-  --dhx-gantt-btn-background-disabled: transparent;
-  --dhx-gantt-btn-color-disabled: var(--dhx-gantt-base-colors-icons);
-  --dhx-gantt-btn-border-color-disabled: transparent;
+  --jm-gantt-icon-size: 18px;
+  --jm-gantt-btn-background: transparent;
+  --jm-gantt-btn-color: var(--jm-gantt-base-colors-primary);
+  --jm-gantt-btn-border-color: transparent;
+  --jm-gantt-btn-background-hover: transparent;
+  --jm-gantt-btn-color-hover: var(--jm-gantt-base-colors-primary-hover);
+  --jm-gantt-btn-border-hover: transparent;
+  --jm-gantt-btn-background-active: transparent;
+  --jm-gantt-btn-color-active: var(--jm-gantt-base-colors-primary-active);
+  --jm-gantt-btn-border-active: transparent;
+  --jm-gantt-btn-background-disabled: transparent;
+  --jm-gantt-btn-color-disabled: var(--jm-gantt-base-colors-icons);
+  --jm-gantt-btn-border-color-disabled: transparent;
 }
 .dhx_gantt_button_icon--mixin:hover {
-  --dhx-gantt-base-colors-icons: var(--dhx-gantt-base-colors-icons-hover);
+  --jm-gantt-base-colors-icons: var(--jm-gantt-base-colors-icons-hover);
 }
 .dhx_gantt_button_icon--mixin:active {
-  --dhx-gantt-base-colors-icons: var(--dhx-gantt-base-colors-icons-active);
+  --jm-gantt-base-colors-icons: var(--jm-gantt-base-colors-icons-active);
 }
 .dhx_gantt_button_icon--mixin:disabled {
-  --dhx-gantt-base-colors-icons: var(--dhx-gantt-btn-color-disabled);
+  --jm-gantt-base-colors-icons: var(--jm-gantt-btn-color-disabled);
 }
 .dhx_gantt_btn,
 .dhx_gantt_btn_danger,
@@ -793,12 +793,12 @@
 .dhx_gantt_btn_danger_link,
 .gantt_qi_big_icon,
 .gantt_btn_set {
-  background: var(--dhx-gantt-btn-background);
-  color: var(--dhx-gantt-btn-color);
-  border: 1px solid var(--dhx-gantt-btn-border-color);
-  border-radius: var(--dhx-gantt-border-radius);
-  height: var(--dhx-gantt-control-height);
-  padding: var(--dhx-gantt-btn-padding, 0 20px);
+  background: var(--jm-gantt-btn-background);
+  color: var(--jm-gantt-btn-color);
+  border: 1px solid var(--jm-gantt-btn-border-color);
+  border-radius: var(--jm-gantt-border-radius);
+  height: var(--jm-gantt-control-height);
+  padding: var(--jm-gantt-btn-padding, 0 20px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -806,13 +806,13 @@
   gap: 4px;
   flex-shrink: 0;
   font-weight: 500;
-  font-size: var(--dhx-gantt-font-size);
-  font-family: var(--dhx-gantt-font-family);
-  font-weight: var(--dhx-gantt-btn-font-weight, normal);
+  font-size: var(--jm-gantt-font-size);
+  font-family: var(--jm-gantt-font-family);
+  font-weight: var(--jm-gantt-btn-font-weight, normal);
   line-height: 142%;
-  text-transform: var(--dhx-gantt-btn-text-transform);
+  text-transform: var(--jm-gantt-btn-text-transform);
   cursor: pointer;
-  --dhx-gantt-icon-size: 18px;
+  --jm-gantt-icon-size: 18px;
 }
 .dhx_gantt_btn:hover,
 .dhx_gantt_btn_danger:hover,
@@ -821,9 +821,9 @@
 .dhx_gantt_btn_danger_link:hover,
 .gantt_qi_big_icon:hover,
 .gantt_btn_set:hover {
-  background: var(--dhx-gantt-btn-background-hover);
-  color: var(--dhx-gantt-btn-color-hover);
-  border-color: var(--dhx-gantt-btn-border-hover);
+  background: var(--jm-gantt-btn-background-hover);
+  color: var(--jm-gantt-btn-color-hover);
+  border-color: var(--jm-gantt-btn-border-hover);
 }
 .dhx_gantt_btn:active,
 .dhx_gantt_btn_danger:active,
@@ -832,9 +832,9 @@
 .dhx_gantt_btn_danger_link:active,
 .gantt_qi_big_icon:active,
 .gantt_btn_set:active {
-  background: var(--dhx-gantt-btn-background-active);
-  color: var(--dhx-gantt-btn-color-active);
-  border-color: var(--dhx-gantt-btn-border-active);
+  background: var(--jm-gantt-btn-background-active);
+  color: var(--jm-gantt-btn-color-active);
+  border-color: var(--jm-gantt-btn-border-active);
 }
 .dhx_gantt_btn:disabled,
 .dhx_gantt_btn_danger:disabled,
@@ -843,17 +843,17 @@
 .dhx_gantt_btn_danger_link:disabled,
 .gantt_qi_big_icon:disabled,
 .gantt_btn_set:disabled {
-  background: var(--dhx-gantt-btn-background-disabled);
-  color: var(--dhx-gantt-btn-color-disabled);
-  border-color: var(--dhx-gantt-btn-border-disabled);
+  background: var(--jm-gantt-btn-background-disabled);
+  color: var(--jm-gantt-btn-color-disabled);
+  border-color: var(--jm-gantt-btn-border-disabled);
 }
 .gantt_popup_button {
-  background: var(--dhx-gantt-btn-background);
-  color: var(--dhx-gantt-btn-color);
-  border: 1px solid var(--dhx-gantt-btn-border-color);
-  border-radius: var(--dhx-gantt-border-radius);
-  height: var(--dhx-gantt-control-height);
-  padding: var(--dhx-gantt-btn-padding, 0 20px);
+  background: var(--jm-gantt-btn-background);
+  color: var(--jm-gantt-btn-color);
+  border: 1px solid var(--jm-gantt-btn-border-color);
+  border-radius: var(--jm-gantt-border-radius);
+  height: var(--jm-gantt-control-height);
+  padding: var(--jm-gantt-btn-padding, 0 20px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -861,125 +861,125 @@
   gap: 4px;
   flex-shrink: 0;
   font-weight: 500;
-  font-size: var(--dhx-gantt-font-size);
-  font-family: var(--dhx-gantt-font-family);
-  font-weight: var(--dhx-gantt-btn-font-weight, normal);
+  font-size: var(--jm-gantt-font-size);
+  font-family: var(--jm-gantt-font-family);
+  font-weight: var(--jm-gantt-btn-font-weight, normal);
   line-height: 142%;
-  text-transform: var(--dhx-gantt-btn-text-transform);
+  text-transform: var(--jm-gantt-btn-text-transform);
   cursor: pointer;
-  --dhx-gantt-icon-size: 18px;
+  --jm-gantt-icon-size: 18px;
 }
 .gantt_popup_button:hover {
-  background: var(--dhx-gantt-btn-background-hover);
-  color: var(--dhx-gantt-btn-color-hover);
-  border-color: var(--dhx-gantt-btn-border-hover);
+  background: var(--jm-gantt-btn-background-hover);
+  color: var(--jm-gantt-btn-color-hover);
+  border-color: var(--jm-gantt-btn-border-hover);
 }
 .gantt_popup_button:active {
-  background: var(--dhx-gantt-btn-background-active);
-  color: var(--dhx-gantt-btn-color-active);
-  border-color: var(--dhx-gantt-btn-border-active);
+  background: var(--jm-gantt-btn-background-active);
+  color: var(--jm-gantt-btn-color-active);
+  border-color: var(--jm-gantt-btn-border-active);
 }
 .gantt_popup_button:disabled {
-  background: var(--dhx-gantt-btn-background-disabled);
-  color: var(--dhx-gantt-btn-color-disabled);
-  border-color: var(--dhx-gantt-btn-border-disabled);
+  background: var(--jm-gantt-btn-background-disabled);
+  color: var(--jm-gantt-btn-color-disabled);
+  border-color: var(--jm-gantt-btn-border-disabled);
 }
 .gantt_popup_button:not(.gantt_ok_button) {
-  --dhx-gantt-icon-size: 18px;
-  --dhx-gantt-base-colors-icons: var(--dhx-gantt-btn-color);
-  --dhx-gantt-btn-background: var(--dhx-gantt-btn-outline-background);
-  --dhx-gantt-btn-color: var(--dhx-gantt-btn-outline-color);
-  --dhx-gantt-btn-border-color: var(--dhx-gantt-btn-outline-border-color);
-  --dhx-gantt-btn-background-hover: var(
-    --dhx-gantt-btn-outline-background-hover
+  --jm-gantt-icon-size: 18px;
+  --jm-gantt-base-colors-icons: var(--jm-gantt-btn-color);
+  --jm-gantt-btn-background: var(--jm-gantt-btn-outline-background);
+  --jm-gantt-btn-color: var(--jm-gantt-btn-outline-color);
+  --jm-gantt-btn-border-color: var(--jm-gantt-btn-outline-border-color);
+  --jm-gantt-btn-background-hover: var(
+    --jm-gantt-btn-outline-background-hover
   );
-  --dhx-gantt-btn-color-hover: var(--dhx-gantt-btn-outline-color-hover);
-  --dhx-gantt-btn-border-hover: var(--dhx-gantt-btn-outline-border-hover);
-  --dhx-gantt-btn-background-active: var(
-    --dhx-gantt-btn-outline-background-active
+  --jm-gantt-btn-color-hover: var(--jm-gantt-btn-outline-color-hover);
+  --jm-gantt-btn-border-hover: var(--jm-gantt-btn-outline-border-hover);
+  --jm-gantt-btn-background-active: var(
+    --jm-gantt-btn-outline-background-active
   );
-  --dhx-gantt-btn-color-active: var(--dhx-gantt-btn-outline-color-active);
-  --dhx-gantt-btn-border-active: var(--dhx-gantt-btn-outline-border-active);
-  --dhx-gantt-btn-background-disabled: var(
-    --dhx-gantt-btn-outline-background-disabled
+  --jm-gantt-btn-color-active: var(--jm-gantt-btn-outline-color-active);
+  --jm-gantt-btn-border-active: var(--jm-gantt-btn-outline-border-active);
+  --jm-gantt-btn-background-disabled: var(
+    --jm-gantt-btn-outline-background-disabled
   );
-  --dhx-gantt-btn-color-disabled: var(--dhx-gantt-btn-outline-color-disabled);
-  --dhx-gantt-btn-border-color-disabled: var(
-    --dhx-gantt-btn-outline-border-color-disabled
+  --jm-gantt-btn-color-disabled: var(--jm-gantt-btn-outline-color-disabled);
+  --jm-gantt-btn-border-color-disabled: var(
+    --jm-gantt-btn-outline-border-color-disabled
   );
 }
 .gantt_ok_button {
-  --dhx-gantt-icon-size: 18px;
-  --dhx-gantt-btn-background: var(--dhx-gantt-base-colors-error);
-  --dhx-gantt-btn-color: var(--dhx-gantt-base-colors-error-text);
-  --dhx-gantt-btn-border-color: var(--dhx-gantt-base-colors-error);
-  --dhx-gantt-btn-background-hover: var(--dhx-gantt-base-colors-error-hover);
-  --dhx-gantt-btn-border-hover: var(--dhx-gantt-base-colors-error-hover);
-  --dhx-gantt-btn-background-active: var(--dhx-gantt-base-colors-error-active);
-  --dhx-gantt-btn-border-active: var(--dhx-gantt-base-colors-error-active);
+  --jm-gantt-icon-size: 18px;
+  --jm-gantt-btn-background: var(--jm-gantt-base-colors-error);
+  --jm-gantt-btn-color: var(--jm-gantt-base-colors-error-text);
+  --jm-gantt-btn-border-color: var(--jm-gantt-base-colors-error);
+  --jm-gantt-btn-background-hover: var(--jm-gantt-base-colors-error-hover);
+  --jm-gantt-btn-border-hover: var(--jm-gantt-base-colors-error-hover);
+  --jm-gantt-btn-background-active: var(--jm-gantt-base-colors-error-active);
+  --jm-gantt-btn-border-active: var(--jm-gantt-base-colors-error-active);
 }
 .dhx_gantt_btn_outline,
 .dhx_gantt_btn_danger_outline {
-  --dhx-gantt-icon-size: 18px;
-  --dhx-gantt-base-colors-icons: var(--dhx-gantt-btn-color);
-  --dhx-gantt-btn-background: var(--dhx-gantt-btn-outline-background);
-  --dhx-gantt-btn-color: var(--dhx-gantt-btn-outline-color);
-  --dhx-gantt-btn-border-color: var(--dhx-gantt-btn-outline-border-color);
-  --dhx-gantt-btn-background-hover: var(
-    --dhx-gantt-btn-outline-background-hover
+  --jm-gantt-icon-size: 18px;
+  --jm-gantt-base-colors-icons: var(--jm-gantt-btn-color);
+  --jm-gantt-btn-background: var(--jm-gantt-btn-outline-background);
+  --jm-gantt-btn-color: var(--jm-gantt-btn-outline-color);
+  --jm-gantt-btn-border-color: var(--jm-gantt-btn-outline-border-color);
+  --jm-gantt-btn-background-hover: var(
+    --jm-gantt-btn-outline-background-hover
   );
-  --dhx-gantt-btn-color-hover: var(--dhx-gantt-btn-outline-color-hover);
-  --dhx-gantt-btn-border-hover: var(--dhx-gantt-btn-outline-border-hover);
-  --dhx-gantt-btn-background-active: var(
-    --dhx-gantt-btn-outline-background-active
+  --jm-gantt-btn-color-hover: var(--jm-gantt-btn-outline-color-hover);
+  --jm-gantt-btn-border-hover: var(--jm-gantt-btn-outline-border-hover);
+  --jm-gantt-btn-background-active: var(
+    --jm-gantt-btn-outline-background-active
   );
-  --dhx-gantt-btn-color-active: var(--dhx-gantt-btn-outline-color-active);
-  --dhx-gantt-btn-border-active: var(--dhx-gantt-btn-outline-border-active);
-  --dhx-gantt-btn-background-disabled: var(
-    --dhx-gantt-btn-outline-background-disabled
+  --jm-gantt-btn-color-active: var(--jm-gantt-btn-outline-color-active);
+  --jm-gantt-btn-border-active: var(--jm-gantt-btn-outline-border-active);
+  --jm-gantt-btn-background-disabled: var(
+    --jm-gantt-btn-outline-background-disabled
   );
-  --dhx-gantt-btn-color-disabled: var(--dhx-gantt-btn-outline-color-disabled);
-  --dhx-gantt-btn-border-color-disabled: var(
-    --dhx-gantt-btn-outline-border-color-disabled
+  --jm-gantt-btn-color-disabled: var(--jm-gantt-btn-outline-color-disabled);
+  --jm-gantt-btn-border-color-disabled: var(
+    --jm-gantt-btn-outline-border-color-disabled
   );
 }
 .dhx_gantt_button_danger,
 .dhx_gantt_button_danger_outline {
-  --dhx-gantt-icon-size: 18px;
-  --dhx-gantt-btn-background: var(--dhx-gantt-base-colors-error);
-  --dhx-gantt-btn-color: var(--dhx-gantt-base-colors-error-text);
-  --dhx-gantt-btn-border-color: var(--dhx-gantt-base-colors-error);
-  --dhx-gantt-btn-background-hover: var(--dhx-gantt-base-colors-error-hover);
-  --dhx-gantt-btn-border-hover: var(--dhx-gantt-base-colors-error-hover);
-  --dhx-gantt-btn-background-active: var(--dhx-gantt-base-colors-error-active);
-  --dhx-gantt-btn-border-active: var(--dhx-gantt-base-colors-error-active);
+  --jm-gantt-icon-size: 18px;
+  --jm-gantt-btn-background: var(--jm-gantt-base-colors-error);
+  --jm-gantt-btn-color: var(--jm-gantt-base-colors-error-text);
+  --jm-gantt-btn-border-color: var(--jm-gantt-base-colors-error);
+  --jm-gantt-btn-background-hover: var(--jm-gantt-base-colors-error-hover);
+  --jm-gantt-btn-border-hover: var(--jm-gantt-base-colors-error-hover);
+  --jm-gantt-btn-background-active: var(--jm-gantt-base-colors-error-active);
+  --jm-gantt-btn-border-active: var(--jm-gantt-base-colors-error-active);
 }
 .dhx_gantt_button_link,
 .gantt_qi_big_icon {
   padding: 6px 0;
-  --dhx-gantt-icon-size: 18px;
-  --dhx-gantt-btn-background: transparent;
-  --dhx-gantt-btn-color: var(--dhx-gantt-base-colors-primary);
-  --dhx-gantt-btn-border-color: transparent;
-  --dhx-gantt-btn-background-hover: transparent;
-  --dhx-gantt-btn-color-hover: var(--dhx-gantt-base-colors-primary-hover);
-  --dhx-gantt-btn-border-hover: transparent;
-  --dhx-gantt-btn-background-active: transparent;
-  --dhx-gantt-btn-color-active: var(--dhx-gantt-base-colors-primary-active);
-  --dhx-gantt-btn-border-active: transparent;
-  --dhx-gantt-btn-background-disabled: transparent;
-  --dhx-gantt-btn-color-disabled: var(--dhx-gantt-base-colors-icons);
-  --dhx-gantt-btn-border-color-disabled: transparent;
+  --jm-gantt-icon-size: 18px;
+  --jm-gantt-btn-background: transparent;
+  --jm-gantt-btn-color: var(--jm-gantt-base-colors-primary);
+  --jm-gantt-btn-border-color: transparent;
+  --jm-gantt-btn-background-hover: transparent;
+  --jm-gantt-btn-color-hover: var(--jm-gantt-base-colors-primary-hover);
+  --jm-gantt-btn-border-hover: transparent;
+  --jm-gantt-btn-background-active: transparent;
+  --jm-gantt-btn-color-active: var(--jm-gantt-base-colors-primary-active);
+  --jm-gantt-btn-border-active: transparent;
+  --jm-gantt-btn-background-disabled: transparent;
+  --jm-gantt-btn-color-disabled: var(--jm-gantt-base-colors-icons);
+  --jm-gantt-btn-border-color-disabled: transparent;
 }
 @font-face {
-  font-family: dhx-gantt-icons;
+  font-family: jm-gantt-icons;
   src: url(data:font/woff;base64,d09GRgABAAAAAAc4AAsAAAAADHgAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABHU1VCAAABCAAAADsAAABUIIslek9TLzIAAAFEAAAAQQAAAGA9+EtyY21hcAAAAYgAAACQAAACQhPM9m5nbHlmAAACGAAAAm8AAANwLSc+hmhlYWQAAASIAAAALgAAADZYjaBKaGhlYQAABLgAAAAbAAAAJAJRAT1obXR4AAAE1AAAABcAAABEEgYAAGxvY2EAAATsAAAAJAAAACQGPgcwbWF4cAAABRAAAAAfAAAAIAEfADxuYW1lAAAFMAAAAT4AAAJqJkdDzHBvc3QAAAZwAAAAxgAAAgGDb/LgeJxjYGRgYOBiMGCwY2BycfMJYeDLSSzJY5BiYGGAAJA8MpsxJzM9kYEDxgPKsYBpDiBmg4gCACY7BUgAeJxjYGHkZ5zAwMrAwPCc4RKQ1ILSExj4GHwZGJgYWJkZsIKANNcUhgMfGT8KMOoAudKM7gzcQJoRRRETADUhCewAAAB4nO2R2Q0DIQwFh132vigkRaSgfKXStEIFGz9eyoil8QjLIGQDA9AHjyBDepNQvKKaWr1nbfXMs/Vk1Wu578hJOc655S56c7w4MjGzxL2NnYOTixINI//YW/78TkUzNG2qnUHujbZTs9Gc62C0uToa5MkgzwZ5Mcir0UbrZpB3o9/VwyCfBvkyyMVQvigJKT14nG2SPWzTQBSA37k4rm3ZFzt2jKlbgS/KVWpJJTuuaVDjCpoIFCSKFIkNCTUSC3MlhLJ0QpWgnbIwdkRVmFiAsStTYWRhpIroAEUFFZ7dRLTA3ene6b3v/dy9AwLpOMI5DhCHduxIPHY23GVzddVsHPUamQQYcd8zjkUpJfFtN7MvB39x+/AFVOS4xCVHcmIn5p/NZsNsNs1G02x+HB1wIS0A/PoGPwmFHCjoFYVRmsAx+KP19RtUUZLaZO3mE+X4QIExZL8SgcxmrH6GDg1mPNzcvKOq6sF+c+ni0kpPPd5TyezxXpbjkBSx/mEOhn5YmM3frq1d12R5IZqIrj2WD2U4yYH1nMoxpA3OjNDobW2t/C/HWHb3AZFABg1s9LOKcRjMLxLmhDaLOZOYHUYtqnQU2nM7nXtaXZvpJyolutpzu681zXUBhnFeZj0x4ALGCYpWzi9X5/899BRKLYpvdFp00s2irTNiGJcwwuAcULAwriOxKPYpceL56hwpU2KH8Sv6TN/NiV5tUhRLYrJzdWeXPtX3xcmaJ2qoCVAz6vN76Kcvi/29m9T7STLSv0EL6hPCu0mCppF+ANtpFfh/wkG/v+H+0Q+y/8Jslj11aIeDltvCtZFurRH3iZzP+jFFcpTkKmSRVOvE+SDlctLzcVPTzPEXYj4vPhAFXXmn6IKIN03HD+xlHjjMwBx6+xWhWheCKcHShYSUuVQhzNcFa0oIgzqJqmUJvxTWEnYLpQlKJ0rlE3G7oMhWfrroVlihwCquX7ukdz3vSrtdQitnHqUe48j2LVW2NB2Z4HKp4C/4xelb7fseFvIbSFeZnQB4nGNgZGBgAOLHyUwC8fw2Xxm4GXWAIgw1qhsaEPT/r4zKYHEOBiaQKAABDwkjAAB4nGNgZGBg1GFggJD//zMqMzAyoAJBADfFApAAeJxjYGBgYNRBw4xoNA7M8AuCAVayBBUAAAAAAAAUACgAQgBYAHQAigCmAMoA9gEcASgBNAFAAVQBcAG4eJxjYGRgYBBkMGBgYQABJiDmAkIGhv9gPgMADyEBXAB4nIWRPU7DQBSEx/lDJBIgIVFG24CQkJ0fUaWhSzqKFOkdZ+04snctexMlDSfgJJyAE3AETsIBGC9buSD7JO/3Zt7sKwzgBl/wUB8P1/ZbnxYu2P1xm3TnuEO+d9zFAM+Oe9RfHPfxhFfHA9zixBe8ziWVId4dt3CFD8dt6p+OO+Rvx11u/XHcw9DrO+5j5T06HuDBe9tsj34SKmP8NNKqWspkn4VlQ220K1lWqVZiEowbzkIqWYZGbsT6JKpDMjUmFnGpczHXysgs06Io9U5GJtgaU8xGo9jpQaRzbLDFET4ShFAwLB8pImh2FZaQdPbI6JZnZv93V3yp5J3aXmCCAOMzmQUzyuZCOpLTAmv+H0HvwMzUJmL2MWc0ctLcZuvpjKWpFNbbUYmoB9xYpwrMMGLFjfnAbs9/AdxXcxgAAHichZDbTsMwEEQ9baEXrr2pIPUJAb9lRfG2teR4I3tN+HyqFF5WAfbxzOisNGZkLjc2w7fECGNMcIVrTDHDHAvc4BZ3uMcDHrHEyjy706c9VlHE+pqjrVLizjru4m4wKe1G8TpwpjcNOWZJlY9iAx3kLBQh9/pPK3Pw7v33UvLH04/rj4+XWi/bqpajQEJ7TVmy/aAkvq7CWoUHTs2TYg3F0o+k5+uD/r+eqfGxZO1uQ8kviiUu0ZH73nvQJb6hZMwXQc6zQAAA)
       format("woff"),
     url(data:font/woff2;base64,d09GMgABAAAAAAVgAAsAAAAADHgAAAUSAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHFQGYACEQgqGcIV9ATYCJANECyQABCAFhGoHhAEbGwsjEXaDUZpA9o+E7LTkMj3uJ6P42UJ6Z4Ln+XfLzk2CvYeOpONCV4Ua1JQhX1URmFVluib+pVo1AmBTZxn2J/LjFhx7e7s/rSHL0LOlnKzQ/7+fq5uXLMxKJUVK+qL33Y+qJLHEIRInHVGNYiGPUMhUL60DAmPTWQn6KmyefREEUFxCDCPes3+S4LTR82ZQgoUYLzCvLNMmTxyN1wvDqqgseBHcTTeVkOzCBfzJl0DL+M13BRkABi4TcajBExLjeP2wHA5LFCiVXmh9zYgzQG++CUQPLELmVMdNw5zmRTFRqjiLrubcFgKHw7kch2XIHvZsIBiYWLi8f/M8ePGh0PgJECREGMSNIH70n+eH4bAUwBgNANAEAC0A0AUAugFADwDoBQB9AKACADUA6AcAAwBgEAAMAYBhNMRBZLhBDVAJ/A9yMUJZZhGRcQZmwWEUB8vn83ssYg2SleX1iRO7tMs0LX8o0smyHI3TnEy1tjlKki1OW1PKaVlMbmpLNvuq1hjRopqcKjTsMEebynCoqqXNKcTmczJsZWrDWZXupLe2i6hmjXJsVaDQ4mxNr9q3JbO6fXKawqQSZ0tB05DW9tV2LDM4iXacIcOcYUMdrVQRhtIu6013lU7vK0jueyAjsrr9wUInzy3PZu9YfWfHc1ufefj2Vbc99LTTmrGbMs+qLc+/vH/VI6+8oLd+9pasviO537M6Cr35dHGmRzwyRhSLxOPcc+miPk5ZNfnn+0giEU9ECmpAQ0//coJFsevWlK+5rlfv4MabQzczNdF1Z9XOroMHqXQ2mj0c/S/Ky9dcuaB0wZXdu/mXbDq5KZ3ouqtqV9dBlefsG9MHdo1T/+tMZtO45eOGv/hx7OPW4seKSY9VBwrkIL6+5s555u0D27cFg2//646/fPNH8UD88vjP+/dff32xKqlHD/zAstSB//l/82PFjw0T+/Urzl8H32THjRw57pYJ8yKfqE/VJ5F5LKvNj2V/bfylI9YQ6/il8ddsbOCjtbdsuvzccrv4y5rOl0Vrvyyu2e2tsb9b1q8sWXb1qCR5rMitEvIZyY21p2b7D5pDkDvBOQkZpuNiSDThpNhVcQfEAz7eJVhqJUvcNzxmyS9PKwIc4F4oygL8KkUknJXoW/t9+GqsER4ZuuG4V0sUYFn946ugd6upTcOL4cYLNGGGU+VyUvtO5p8mpqJl0ZuM2wN7KgxEtCiXfHGWNACFAnKIhDDv7jZBCDWuCAYeQnPZnCo2aktfb3WhucLqJkQXq6KVgZtr8lmMiVg+hAq2GVaDIFmrSQXPqy39t1YXNsesbipEWRUpafpImgu/ZIV2W257FMn9SJi+wc6hZ0Vrma/+gZMnVHVRKZ/iBAjcC2g17CotthExyjBFdSQUCIHUxHSGUQonMh3K0ri3VIwUM+22HNujSI4fCdM34J059NysAxV1/4GTT7yjqCmomqtPBLs49wI6ZtiHMWkxSePGGFXUZYqKYzemoRykTDGZ1POdYZQC1yFnOlBavZmmpNixEh/5ocCfyj6IiCGmWOISt3jEK77P6Gp+CUhQQhKWiORxd520raat1vbMtLa6GBxvlBPN06Xr4hgowac/M2ES7j1KG8AY3tEkAvqjgQcTBa+/7Ez21ukZ0GfCRv5duaohgMCjwnckqV2AxY99uCiZzhDH2zgtAs5nqM+7jeyue72MVL7XpDegKczprSLTjBr0pW5bT2nxETjLAAA=)
       format("woff2");
 }
 .dhx_gantt_icon:before {
-  font-family: dhx-gantt-icons !important;
+  font-family: jm-gantt-icons !important;
   font-style: normal;
   font-weight: 400 !important;
   font-variant: normal;
@@ -989,8 +989,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--dhx-gantt-base-colors-icons);
-  font-size: var(--dhx-gantt-icon-size, 1.5em);
+  color: var(--jm-gantt-base-colors-icons);
+  font-size: var(--jm-gantt-icon-size, 1.5em);
 }
 .dhx_gantt_icon.dhx_gantt_icon_arrow_down:before {
   content: "";
@@ -1044,11 +1044,11 @@
   font-size: 1em;
 }
 .gantt_container {
-  background: var(--dhx-gantt-container-background);
-  color: var(--dhx-gantt-container-color);
-  font-family: var(--dhx-gantt-font-family);
-  font-size: var(--dhx-gantt-font-size);
-  border: 1px solid var(--dhx-gantt-base-colors-border);
+  background: var(--jm-gantt-container-background);
+  color: var(--jm-gantt-container-color);
+  font-family: var(--jm-gantt-font-family);
+  font-size: var(--jm-gantt-font-size);
+  border: 1px solid var(--jm-gantt-base-colors-border);
   position: relative;
   white-space: nowrap;
   overflow-x: hidden;
@@ -1070,25 +1070,25 @@
 }
 .gantt_grid_scale,
 .gantt_task_scale {
-  font-family: var(--dhx-gantt-font-family);
-  font-size: var(--dhx-gantt-font-size);
-  border-bottom: var(--dhx-gantt-scale-border-horizontal);
+  font-family: var(--jm-gantt-font-family);
+  font-size: var(--jm-gantt-font-size);
+  border-bottom: var(--jm-gantt-scale-border-horizontal);
   box-sizing: border-box;
 }
 .gantt_grid_scale {
-  background: var(--dhx-gantt-grid-scale-background);
-  color: var(--dhx-gantt-grid-scale-color);
+  background: var(--jm-gantt-grid-scale-background);
+  color: var(--jm-gantt-grid-scale-color);
 }
 .gantt_task_scale {
-  background: var(--dhx-gantt-timeline-scale-background);
-  color: var(--dhx-gantt-timeline-scale-color);
+  background: var(--jm-gantt-timeline-scale-background);
+  color: var(--jm-gantt-timeline-scale-color);
 }
 .gantt_task_vscroll {
-  background: var(--dhx-gantt-container-background);
+  background: var(--jm-gantt-container-background);
 }
 .gantt_scale_line {
   box-sizing: border-box;
-  border-top: var(--dhx-gantt-scale-border-horizontal);
+  border-top: var(--jm-gantt-scale-border-horizontal);
 }
 .gantt_scale_line:first-child {
   border-top: none;
@@ -1096,7 +1096,7 @@
 .gantt_grid_head_cell {
   display: inline-block;
   vertical-align: top;
-  border-right: var(--dhx-gantt-grid-scale-border-vertical);
+  border-right: var(--jm-gantt-grid-scale-border-vertical);
   text-align: center;
   position: relative;
   cursor: default;
@@ -1111,7 +1111,7 @@
   width: 100%;
   overflow: hidden;
   position: relative;
-  background: var(--dhx-gantt-grid-body-background);
+  background: var(--jm-gantt-grid-body-background);
 }
 .gantt_row {
   position: relative;
@@ -1128,7 +1128,7 @@
 }
 .gantt_add:before,
 .gantt_grid_head_add:before {
-  font-family: dhx-gantt-icons !important;
+  font-family: jm-gantt-icons !important;
   font-style: normal;
   font-weight: 400 !important;
   font-variant: normal;
@@ -1138,8 +1138,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--dhx-gantt-base-colors-icons);
-  font-size: var(--dhx-gantt-icon-size, 1.5em);
+  color: var(--jm-gantt-base-colors-icons);
+  font-size: var(--jm-gantt-icon-size, 1.5em);
 }
 .gantt_add:before,
 .gantt_grid_head_add:before {
@@ -1154,19 +1154,19 @@
 }
 .gantt_grid_data .gantt_row:hover,
 .gantt_grid_data .gantt_row.odd:hover {
-  background-color: var(--dhx-gantt-base-colors-hover-color);
+  background-color: var(--jm-gantt-base-colors-hover-color);
 }
 .gantt_grid_data .gantt_row:hover .gantt_add {
   opacity: 1;
 }
 .gantt_task_row,
 .gantt_row {
-  border-bottom: var(--dhx-gantt-task-row-border);
-  background: var(--dhx-gantt-task-row-background);
+  border-bottom: var(--jm-gantt-task-row-border);
+  background: var(--jm-gantt-task-row-background);
 }
 .gantt_row.odd,
 .gantt_task_row.odd {
-  background: var(--dhx-gantt-task-row-background--odd);
+  background: var(--jm-gantt-task-row-background--odd);
 }
 .gantt_row,
 .gantt_cell,
@@ -1187,7 +1187,7 @@
   margin-left: -7px;
 }
 .gantt_grid_column_resize_wrap .gantt_grid_column_resize {
-  background-color: var(--dhx-gantt-base-colors-border);
+  background-color: var(--jm-gantt-base-colors-border);
   height: 100%;
   width: 1px;
   margin: 0 auto;
@@ -1201,7 +1201,7 @@
   width: 100%;
 }
 .gantt_task_grid_row_resize_wrap .gantt_task_grid_row_resize {
-  background-color: var(--dhx-gantt-base-colors-border-light);
+  background-color: var(--jm-gantt-base-colors-border-light);
   top: 6px;
   height: 1px;
   width: 100%;
@@ -1218,12 +1218,12 @@
   width: 100%;
 }
 .gantt_drag_marker.gantt_grid_resize_area {
-  border-left: var(--dhx-gantt-scale-border-vertical);
-  border-right: var(--dhx-gantt-scale-border-vertical);
+  border-left: var(--jm-gantt-scale-border-vertical);
+  border-right: var(--jm-gantt-scale-border-vertical);
 }
 .gantt_drag_marker.gantt_row_grid_resize_area {
-  border-top: var(--dhx-gantt-scale-border-horizontal);
-  border-bottom: var(--dhx-gantt-scale-border-horizontal);
+  border-top: var(--jm-gantt-scale-border-horizontal);
+  border-bottom: var(--jm-gantt-scale-border-horizontal);
 }
 .gantt_row {
   display: flex;
@@ -1234,7 +1234,7 @@
 }
 .gantt_cell {
   vertical-align: top;
-  border-right: var(--dhx-gantt-grid-cell-border);
+  border-right: var(--jm-gantt-grid-cell-border);
   padding-left: 6px;
   padding-right: 6px;
   height: 100%;
@@ -1263,14 +1263,14 @@
   display: inline-block;
   white-space: nowrap;
   overflow: hidden;
-  border-right: var(--dhx-gantt-grid-scale-border-vertical);
+  border-right: var(--jm-gantt-grid-scale-border-vertical);
   text-align: center;
   height: 100%;
 }
 .gantt_task_cell {
   display: inline-block;
   height: 100%;
-  border-right: var(--dhx-gantt-timeline-scale-border-vertical);
+  border-right: var(--jm-gantt-timeline-scale-border-vertical);
 }
 .gantt_layout_cell.gantt_ver_scroll {
   width: 0px;
@@ -1335,7 +1335,7 @@
 }
 .gantt_tree_icon.gantt_open:before,
 .gantt_tree_icon.gantt_close:before {
-  font-family: dhx-gantt-icons !important;
+  font-family: jm-gantt-icons !important;
   font-style: normal;
   font-weight: 400 !important;
   font-variant: normal;
@@ -1345,8 +1345,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--dhx-gantt-base-colors-icons);
-  font-size: var(--dhx-gantt-icon-size, 1.5em);
+  color: var(--jm-gantt-base-colors-icons);
+  font-size: var(--jm-gantt-icon-size, 1.5em);
 }
 .gantt_tree_icon.gantt_open:before {
   content: "";
@@ -1370,7 +1370,7 @@
   height: 13px;
 }
 .gantt_grid_head_cell .gantt_sort.gantt_asc:before {
-  font-family: dhx-gantt-icons !important;
+  font-family: jm-gantt-icons !important;
   font-style: normal;
   font-weight: 400 !important;
   font-variant: normal;
@@ -1380,14 +1380,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--dhx-gantt-base-colors-icons);
-  font-size: var(--dhx-gantt-icon-size, 1.5em);
+  color: var(--jm-gantt-base-colors-icons);
+  font-size: var(--jm-gantt-icon-size, 1.5em);
 }
 .gantt_grid_head_cell .gantt_sort.gantt_asc:before {
   content: "";
 }
 .gantt_grid_head_cell .gantt_sort.gantt_desc:before {
-  font-family: dhx-gantt-icons !important;
+  font-family: jm-gantt-icons !important;
   font-style: normal;
   font-weight: 400 !important;
   font-variant: normal;
@@ -1397,8 +1397,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--dhx-gantt-base-colors-icons);
-  font-size: var(--dhx-gantt-icon-size, 1.5em);
+  color: var(--jm-gantt-base-colors-icons);
+  font-size: var(--jm-gantt-icon-size, 1.5em);
 }
 .gantt_grid_head_cell .gantt_sort.gantt_desc:before {
   content: "";
@@ -1414,7 +1414,7 @@
   background-color: #ffe0e0;
 }
 .gantt_error {
-  color: var(--dhx-gantt-base-colors-error);
+  color: var(--jm-gantt-base-colors-error);
 }
 .gantt_status {
   right: 1px;
@@ -1437,12 +1437,12 @@
   opacity: 1;
 }
 .gantt_column_drag_marker {
-  border: var(--dhx-gantt-grid-scale-border-vertical);
+  border: var(--jm-gantt-grid-scale-border-vertical);
   opacity: 0.8;
   pointer-events: none;
 }
 .gantt_grid_head_cell_dragged {
-  border: var(--dhx-gantt-grid-scale-border-vertical);
+  border: var(--jm-gantt-grid-scale-border-vertical);
   opacity: 0.3;
 }
 .gantt_grid_target_marker {
@@ -1450,7 +1450,7 @@
   top: 0;
   width: 2px;
   height: 100%;
-  background-color: var(--dhx-gantt-base-colors-primary);
+  background-color: var(--jm-gantt-base-colors-primary);
   transform: translate(-1px);
 }
 .gantt_grid_target_marker:before,
@@ -1464,11 +1464,11 @@
   border: 6px solid transparent;
 }
 .gantt_grid_target_marker:before {
-  border-top-color: var(--dhx-gantt-base-colors-primary);
+  border-top-color: var(--jm-gantt-base-colors-primary);
 }
 .gantt_grid_target_marker:after {
   bottom: 0;
-  border-bottom-color: var(--dhx-gantt-base-colors-primary);
+  border-bottom-color: var(--jm-gantt-base-colors-primary);
 }
 .gantt_message_area {
   position: fixed;
@@ -1479,18 +1479,18 @@
 .gantt-info {
   min-width: 120px;
   padding: 12px;
-  font-family: var(--dhx-gantt-font-family);
-  font-size: var(--dhx-gantt-regular-font-size);
-  font-weight: var(--dhx-gantt-regular-font-weight);
-  line-height: var(--dhx-gantt-regular-line-height);
+  font-family: var(--jm-gantt-font-family);
+  font-size: var(--jm-gantt-regular-font-size);
+  font-weight: var(--jm-gantt-regular-font-weight);
+  line-height: var(--jm-gantt-regular-line-height);
   z-index: 14;
   overflow: hidden;
   margin: 5px 5px 10px;
   transition: all 0.5s ease;
-  background: var(--dhx-gantt-info-background);
-  color: var(--dhx-gantt-info-color);
-  border: var(--dhx-gantt-info-border);
-  box-shadow: var(--dhx-gantt-info-shadow);
+  background: var(--jm-gantt-info-background);
+  color: var(--jm-gantt-info-color);
+  border: var(--jm-gantt-info-border);
+  box-shadow: var(--jm-gantt-info-shadow);
 }
 .gantt-info.hidden {
   height: 0px;
@@ -1503,39 +1503,39 @@
   overflow: hidden;
   position: fixed;
   min-width: 300px;
-  width: var(--dhx-gantt-modal-width);
-  background: var(--dhx-gantt-modal-background);
-  box-shadow: var(--dhx-gantt-box-shadow-l);
-  border: var(--dhx-gantt-modal-border);
+  width: var(--jm-gantt-modal-width);
+  background: var(--jm-gantt-modal-background);
+  box-shadow: var(--jm-gantt-box-shadow-l);
+  border: var(--jm-gantt-modal-border);
   z-index: 18;
-  border-radius: var(--dhx-gantt-modal-border-radius);
-  font-family: var(--dhx-gantt-font-family);
-  font-size: var(--dhx-gantt-font-size);
-  color: var(--dhx-gantt-popup-color);
+  border-radius: var(--jm-gantt-modal-border-radius);
+  font-family: var(--jm-gantt-font-family);
+  font-size: var(--jm-gantt-font-size);
+  color: var(--jm-gantt-popup-color);
   line-height: 150%;
 }
 .gantt_popup_title {
-  border-top-left-radius: var(--dhx-gantt-modal-border-radius);
-  border-top-right-radius: var(--dhx-gantt-modal-border-radius);
+  border-top-left-radius: var(--jm-gantt-modal-border-radius);
+  border-top-right-radius: var(--jm-gantt-modal-border-radius);
   text-transform: uppercase;
-  font-weight: var(--dhx-gantt-heading-font-weight);
-  padding: calc(var(--dhx-gantt-modal-padding) / 2)
-    var(--dhx-gantt-modal-padding);
+  font-weight: var(--jm-gantt-heading-font-weight);
+  padding: calc(var(--jm-gantt-modal-padding) / 2)
+    var(--jm-gantt-modal-padding);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .gantt_popup_text {
-  padding: var(--dhx-gantt-modal-padding);
+  padding: var(--jm-gantt-modal-padding);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .gantt_popup_controls {
   display: flex;
-  flex-direction: var(--dhx-gantt-btn-order);
-  padding: calc(var(--dhx-gantt-modal-padding) / 2)
-    var(--dhx-gantt-modal-padding);
+  flex-direction: var(--jm-gantt-btn-order);
+  padding: calc(var(--jm-gantt-modal-padding) / 2)
+    var(--jm-gantt-modal-padding);
   align-items: center;
   gap: 12px;
 }
@@ -1561,15 +1561,15 @@ div.dhx_modal_cover {
   border: none;
 }
 .gantt_popup_controls {
-  border-radius: var(--dhx-gantt-border-radius);
+  border-radius: var(--jm-gantt-border-radius);
 }
 .gantt_message_area .gantt-error {
-  --dhx-gantt-info-background: var(--dhx-gantt-base-colors-error);
-  --dhx-gantt-info-color: var(--dhx-gantt-base-colors-text-on-fill);
+  --jm-gantt-info-background: var(--jm-gantt-base-colors-error);
+  --jm-gantt-info-color: var(--jm-gantt-base-colors-text-on-fill);
 }
 .gantt_message_area .gantt-warning {
-  --dhx-gantt-info-background: var(--dhx-gantt-base-colors-warning);
-  --dhx-gantt-info-color: var(--dhx-gantt-base-colors-text-on-fill);
+  --jm-gantt-info-background: var(--jm-gantt-base-colors-warning);
+  --jm-gantt-info-color: var(--jm-gantt-base-colors-text-on-fill);
 }
 .gantt_grid div,
 .gantt_data_area div {
@@ -1596,8 +1596,8 @@ div.dhx_modal_cover {
   height: 100%;
 }
 .gantt_task_content {
-  font-size: var(--dhx-gantt-task-font-size);
-  color: var(--dhx-gantt-task-color);
+  font-size: var(--jm-gantt-task-font-size);
+  color: var(--jm-gantt-task-color);
   width: 100%;
   padding-top: 1px;
   top: 0;
@@ -1609,7 +1609,7 @@ div.dhx_modal_cover {
 .gantt_task_progress {
   text-align: center;
   z-index: 0;
-  background: var(--dhx-gantt-task-progress-color);
+  background: var(--jm-gantt-task-progress-color);
 }
 .gantt_task_progress_wrapper {
   border-radius: inherit;
@@ -1619,11 +1619,11 @@ div.dhx_modal_cover {
   overflow: hidden;
 }
 .gantt_task_line {
-  border-radius: var(--dhx-gantt-task-border-radius);
+  border-radius: var(--jm-gantt-task-border-radius);
   position: absolute;
   box-sizing: border-box;
-  background: var(--dhx-gantt-task-background);
-  border: var(--dhx-gantt-task-border);
+  background: var(--jm-gantt-task-background);
+  border: var(--jm-gantt-task-border);
   -webkit-user-select: none;
   user-select: none;
 }
@@ -1644,17 +1644,17 @@ div.dhx_modal_cover {
 .gantt_side_content {
   position: absolute;
   white-space: nowrap;
-  color: var(--dhx-gantt-base-colors-text-light);
+  color: var(--jm-gantt-base-colors-text-light);
   top: 0;
-  font-size: calc(var(--dhx-gantt-task-font-size) - 1px);
+  font-size: calc(var(--jm-gantt-task-font-size) - 1px);
 }
 .gantt_side_content.gantt_left {
   right: 100%;
-  padding-right: var(--dhx-gantt-base-padding);
+  padding-right: var(--jm-gantt-base-padding);
 }
 .gantt_side_content.gantt_right {
   left: 100%;
-  padding-left: var(--dhx-gantt-base-padding);
+  padding-left: var(--jm-gantt-base-padding);
 }
 .gantt_side_content.gantt_link_crossing {
   margin-top: -6px;
@@ -1666,25 +1666,25 @@ div.dhx_modal_cover {
   cursor: pointer;
 }
 .gantt_line_wrapper div {
-  background-color: var(--dhx-gantt-link-background);
+  background-color: var(--jm-gantt-link-background);
 }
 .gantt_link_corner {
   box-sizing: content-box !important;
-  border-color: var(--dhx-gantt-link-background);
+  border-color: var(--jm-gantt-link-background);
   background-color: transparent;
 }
 .gantt_task_link:hover {
-  --dhx-gantt-link-background: var(--dhx-gantt-link-background-hover);
+  --jm-gantt-link-background: var(--jm-gantt-link-background-hover);
 }
 .gantt_task_link:hover > div {
   z-index: 1;
 }
 .gantt_task_link div.gantt_link_arrow {
-  color: var(--dhx-gantt-link-background);
+  color: var(--jm-gantt-link-background);
   line-height: normal;
 }
 .gantt_task_link div.gantt_link_arrow:before {
-  font-family: dhx-gantt-icons !important;
+  font-family: jm-gantt-icons !important;
   font-style: normal;
   font-weight: 400 !important;
   font-variant: normal;
@@ -1694,8 +1694,8 @@ div.dhx_modal_cover {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--dhx-gantt-base-colors-icons);
-  font-size: var(--dhx-gantt-icon-size, 1.5em);
+  color: var(--jm-gantt-base-colors-icons);
+  font-size: var(--jm-gantt-icon-size, 1.5em);
 }
 .gantt_task_link div.gantt_link_arrow:before {
   content: "";
@@ -1703,29 +1703,29 @@ div.dhx_modal_cover {
 .gantt_link_control {
   position: absolute;
   width: calc(
-    var(--dhx-gantt-link-handle-offset) + var(--dhx-gantt-link-handle-size)
+    var(--jm-gantt-link-handle-offset) + var(--jm-gantt-link-handle-size)
   );
   top: 50%;
   display: flex;
   align-items: center;
-  transition: all var(--dhx-gantt-base-transition);
+  transition: all var(--jm-gantt-base-transition);
 }
 .gantt_link_control div {
   display: none;
   cursor: pointer;
   box-sizing: border-box;
   position: relative;
-  border: 2px solid var(--dhx-gantt-link-handle-border);
+  border: 2px solid var(--jm-gantt-link-handle-border);
   border-radius: 50%;
-  height: var(--dhx-gantt-link-handle-size);
-  width: var(--dhx-gantt-link-handle-size);
-  background: var(--dhx-gantt-link-handle-background);
+  height: var(--jm-gantt-link-handle-size);
+  width: var(--jm-gantt-link-handle-size);
+  background: var(--jm-gantt-link-handle-background);
 }
 .gantt_link_control div:hover {
-  --dhx-gantt-link-handle-background: var(
-    --dhx-gantt-link-handle-background-hover
+  --jm-gantt-link-handle-background: var(
+    --jm-gantt-link-handle-background-hover
   );
-  --dhx-gantt-link-handle-border: var(--dhx-gantt-link-handle-border-hover);
+  --jm-gantt-link-handle-border: var(--jm-gantt-link-handle-border-hover);
 }
 .gantt_link_control.task_left {
   transform: translate(-100%, -50%);
@@ -1759,27 +1759,27 @@ div.dhx_modal_cover {
 }
 .gantt_link_source,
 .gantt_link_target {
-  box-shadow: 0 0 3px var(--dhx-gantt-base-colors-primary);
+  box-shadow: 0 0 3px var(--jm-gantt-base-colors-primary);
 }
 .gantt_link_target.link_start_allow,
 .gantt_link_target.link_finish_allow {
-  box-shadow: 0 0 3px var(--dhx-gantt-base-colors-success);
+  box-shadow: 0 0 3px var(--jm-gantt-base-colors-success);
 }
 .gantt_link_target.link_start_deny,
 .gantt_link_target.link_finish_deny {
-  box-shadow: 0 0 3px var(--dhx-gantt-base-colors-error);
+  box-shadow: 0 0 3px var(--jm-gantt-base-colors-error);
 }
 .gantt_link_from_start .gantt_link_control.task_start_date div,
 .gantt_link_from_end .gantt_link_control.task_end_date div,
 .link_start_allow .gantt_link_control.task_start_date div,
 .link_finish_allow .gantt_link_control.task_end_date div {
-  --dhx-gantt-link-handle-border: var(--dhx-gantt-link-handle-border-hover);
-  --dhx-gantt-link-handle-background: var(--dhx-gantt-base-colors-primary);
+  --jm-gantt-link-handle-border: var(--jm-gantt-link-handle-border-hover);
+  --jm-gantt-link-handle-background: var(--jm-gantt-base-colors-primary);
 }
 .link_start_deny .gantt_link_control.task_start_date div,
 .link_finish_deny .gantt_link_control.task_end_date div {
-  --dhx-gantt-link-handle-border: var(--dhx-gantt-link-handle-border-hover);
-  --dhx-gantt-link-handle-background: var(--dhx-gantt-base-colors-error);
+  --jm-gantt-link-handle-border: var(--jm-gantt-link-handle-border-hover);
+  --jm-gantt-link-handle-background: var(--jm-gantt-base-colors-error);
 }
 .gantt_link_arrow_left {
   transform: rotate(180deg);
@@ -1818,23 +1818,23 @@ div.dhx_modal_cover {
   align-items: flex-end;
 }
 .gantt_task_progress_drag:hover {
-  --dhx-gantt-base-colors-icons: var(--dhx-gantt-base-colors-icons-hover);
+  --jm-gantt-base-colors-icons: var(--jm-gantt-base-colors-icons-hover);
 }
 .gantt_link_tooltip {
   box-shadow: 3px 3px 3px #0003;
-  background-color: var(--dhx-gantt-popup-background);
-  border-left: 1px solid var(--dhx-gantt-base-colors-border);
-  border-top: 1px solid var(--dhx-gantt-base-colors-border);
-  font-family: var(--dhx-gantt-font-family);
-  font-size: var(--dhx-gantt-regular-font-size);
-  color: var(--dhx-gantt-popup-color);
-  padding: var(--dhx-gantt-base-padding);
-  line-height: var(--dhx-gantt-regular-line-height);
+  background-color: var(--jm-gantt-popup-background);
+  border-left: 1px solid var(--jm-gantt-base-colors-border);
+  border-top: 1px solid var(--jm-gantt-base-colors-border);
+  font-family: var(--jm-gantt-font-family);
+  font-size: var(--jm-gantt-regular-font-size);
+  color: var(--jm-gantt-popup-color);
+  padding: var(--jm-gantt-base-padding);
+  line-height: var(--jm-gantt-regular-line-height);
 }
 .gantt_link_direction {
   height: 0px;
   border: none;
-  border-bottom: 2px dashed var(--dhx-gantt-base-colors-primary);
+  border-bottom: 2px dashed var(--jm-gantt-base-colors-primary);
   transform-origin: 0% 0%;
   z-index: 2;
   margin-left: 1px;
@@ -1842,29 +1842,29 @@ div.dhx_modal_cover {
 }
 .gantt_grid_data .gantt_row.gantt_selected,
 .gantt_grid_data .gantt_row.odd.gantt_selected {
-  background-color: var(--dhx-gantt-base-colors-select);
+  background-color: var(--jm-gantt-base-colors-select);
 }
 .gantt_row_project {
   font-weight: 500;
 }
 .gantt_task_row.odd.gantt_selected,
 .gantt_task_row.gantt_selected {
-  background-color: var(--dhx-gantt-base-colors-select);
+  background-color: var(--jm-gantt-base-colors-select);
 }
 .gantt_task_line.gantt_selected {
-  box-shadow: var(--dhx-gantt-box-shadow-s);
+  box-shadow: var(--jm-gantt-box-shadow-s);
 }
 .gantt_cal_quick_info.gantt_project,
 .gantt_task_line.gantt_project {
-  --dhx-gantt-task-color: var(--dhx-gantt-project-color);
-  --dhx-gantt-task-background: var(--dhx-gantt-project-background);
-  --dhx-gantt-task-progress-color: var(--dhx-gantt-project-progress-color);
+  --jm-gantt-task-color: var(--jm-gantt-project-color);
+  --jm-gantt-task-background: var(--jm-gantt-project-background);
+  --jm-gantt-task-progress-color: var(--jm-gantt-project-progress-color);
 }
 .gantt_task_line.gantt_project.gantt_task_line_planned {
-  --dhx-gantt-task-background: var(--dhx-gantt-base-colors-text-light);
+  --jm-gantt-task-background: var(--jm-gantt-base-colors-text-light);
 }
 .gantt_task_line_planned {
-  --dhx-gantt-scheduled-summary-bracket-size: 8px;
+  --jm-gantt-scheduled-summary-bracket-size: 8px;
 }
 .gantt_task_line_planned:before,
 .gantt_task_line_planned:after {
@@ -1877,30 +1877,30 @@ div.dhx_modal_cover {
   border-color: transparent;
 }
 .gantt_task_line_planned:before {
-  border-width: var(--dhx-gantt-scheduled-summary-bracket-size)
-    var(--dhx-gantt-scheduled-summary-bracket-size) 0 0;
-  border-right-color: var(--dhx-gantt-task-background);
+  border-width: var(--jm-gantt-scheduled-summary-bracket-size)
+    var(--jm-gantt-scheduled-summary-bracket-size) 0 0;
+  border-right-color: var(--jm-gantt-task-background);
   transform: rotate(180deg);
 }
 .gantt_task_line_planned:after {
-  border-width: 0 var(--dhx-gantt-scheduled-summary-bracket-size)
-    var(--dhx-gantt-scheduled-summary-bracket-size) 0;
-  border-right-color: var(--dhx-gantt-task-background);
+  border-width: 0 var(--jm-gantt-scheduled-summary-bracket-size)
+    var(--jm-gantt-scheduled-summary-bracket-size) 0;
+  border-right-color: var(--jm-gantt-task-background);
   right: 0;
 }
 .gantt_task_line_actual {
   opacity: 0.3;
-  --dhx-gantt-task-border-radius: 2px;
+  --jm-gantt-task-border-radius: 2px;
 }
 .gantt_task_line.gantt_project.gantt_project_scheduling_conflict
   .gantt_task_line_actual {
-  --dhx-gantt-task-background: var(--dhx-gantt-base-colors-error);
+  --jm-gantt-task-background: var(--jm-gantt-base-colors-error);
 }
 .gantt_task_line.gantt_project.gantt_selected {
-  box-shadow: var(--dhx-gantt-box-shadow-s);
+  box-shadow: var(--jm-gantt-box-shadow-s);
 }
 .gantt_task_line.gantt_milestone {
-  --dhx-gantt-task-background: var(--dhx-gantt-milestone-background);
+  --jm-gantt-task-background: var(--jm-gantt-milestone-background);
   visibility: hidden;
   border: none;
   box-sizing: content-box;
@@ -1917,16 +1917,16 @@ div.dhx_modal_cover {
   transform: rotate(45deg);
 }
 .gantt_critical_task {
-  --dhx-gantt-task-background: var(--dhx-gantt-link-critical-background);
+  --jm-gantt-task-background: var(--jm-gantt-link-critical-background);
 }
 .gantt_critical_task .gantt_task_progress {
-  --dhx-gantt-task-progress: rgba(0, 0, 0, 0.4);
+  --jm-gantt-task-progress: rgba(0, 0, 0, 0.4);
 }
 .gantt_critical_link {
-  --dhx-gantt-link-background: var(--dhx-gantt-link-critical-background);
+  --jm-gantt-link-background: var(--jm-gantt-link-critical-background);
 }
 .gantt_link_arrow {
-  --dhx-gantt-base-colors-icons: var(--dhx-gantt-link-background);
+  --jm-gantt-base-colors-icons: var(--jm-gantt-link-background);
 }
 .gantt_row:focus,
 .gantt_cell:focus,
@@ -1934,7 +1934,7 @@ div.dhx_modal_cover {
 .gantt_qi_big_icon:focus,
 .gantt_popup_button:focus,
 .gantt_grid_head_cell:focus {
-  box-shadow: inset 0 0 1px 1px var(--dhx-gantt-base-colors-primary);
+  box-shadow: inset 0 0 1px 1px var(--jm-gantt-base-colors-primary);
 }
 .gantt_split_parent,
 .gantt_split_subproject {
@@ -1952,10 +1952,10 @@ div.dhx_modal_cover {
 }
 .gantt_common_input {
   border-radius: 2px;
-  background-color: var(--dhx-gantt-lightbox-background);
-  color: var(--dhx-gantt-lightbox-color);
-  border: var(--dhx-gantt-lightbox-control-border);
-  font-size: var(--dhx-gantt-lightbox-font-size);
+  background-color: var(--jm-gantt-lightbox-background);
+  color: var(--jm-gantt-lightbox-color);
+  border: var(--jm-gantt-lightbox-control-border);
+  font-size: var(--jm-gantt-lightbox-font-size);
   padding: 6px 8px;
   box-sizing: border-box;
   margin-top: 0;
@@ -1963,15 +1963,15 @@ div.dhx_modal_cover {
 }
 .gantt_common_input:focus,
 .gantt_common_input:focus-visible {
-  border-color: var(--dhx-gantt-base-colors-primary);
+  border-color: var(--jm-gantt-base-colors-primary);
   outline: none;
 }
 .gantt_common_input:disabled {
-  background-color: var(--dhx-gantt-base-colors-disabled);
-  color: var(--dhx-gantt-base-colors-icons);
+  background-color: var(--jm-gantt-base-colors-disabled);
+  color: var(--jm-gantt-base-colors-icons);
 }
 .gantt_one_line_input {
-  height: var(--dhx-gantt-control-height);
+  height: var(--jm-gantt-control-height);
 }
 .gantt_cal_cover,
 .gantt_cal_cover * {
@@ -1980,34 +1980,34 @@ div.dhx_modal_cover {
 .gantt_cal_light {
   margin-top: auto;
   margin-bottom: auto;
-  min-width: var(--dhx-gantt-lightbox-width);
+  min-width: var(--jm-gantt-lightbox-width);
   width: max-content;
-  max-width: var(--dhx-gantt-lightbox-max-width);
+  max-width: var(--jm-gantt-lightbox-max-width);
   height: auto;
   -webkit-tap-highlight-color: transparent;
-  background-color: var(--dhx-gantt-lightbox-background);
-  color: var(--dhx-gantt-lightbox-color);
+  background-color: var(--jm-gantt-lightbox-background);
+  color: var(--jm-gantt-lightbox-color);
   position: absolute;
   z-index: 15;
-  font-family: var(--dhx-gantt-lightbox_font-family);
-  font-size: var(--dhx-gantt-lightbox-font-size);
-  font-weight: var(--dhx-gantt-lightbox-font-weight);
+  font-family: var(--jm-gantt-lightbox_font-family);
+  font-size: var(--jm-gantt-lightbox-font-size);
+  font-weight: var(--jm-gantt-lightbox-font-weight);
   line-height: 142%;
-  border: var(--dhx-gantt-lightbox-border);
-  border-radius: var(--dhx-gantt-popup-border-radius);
+  border: var(--jm-gantt-lightbox-border);
+  border-radius: var(--jm-gantt-popup-border-radius);
 }
 .gantt_cal_light.gantt_cal_light_wide {
-  --dhx-gantt-lightbox-width: var(--dhx-gantt-lightbox-wide-max-width);
-  --dhx-gantt-lightbox-max-width: var(--dhx-gantt-lightbox-wide-max-width);
+  --jm-gantt-lightbox-width: var(--jm-gantt-lightbox-wide-max-width);
+  --jm-gantt-lightbox-max-width: var(--jm-gantt-lightbox-wide-max-width);
 }
 .gantt_cal_light textarea,
 .gantt_cal_light input,
 .gantt_cal_light select {
   border-radius: 2px;
-  background-color: var(--dhx-gantt-lightbox-background);
-  color: var(--dhx-gantt-lightbox-color);
-  border: var(--dhx-gantt-lightbox-control-border);
-  font-size: var(--dhx-gantt-lightbox-font-size);
+  background-color: var(--jm-gantt-lightbox-background);
+  color: var(--jm-gantt-lightbox-color);
+  border: var(--jm-gantt-lightbox-control-border);
+  font-size: var(--jm-gantt-lightbox-font-size);
   padding: 6px 8px;
   box-sizing: border-box;
   margin-top: 0;
@@ -2019,43 +2019,43 @@ div.dhx_modal_cover {
 .gantt_cal_light textarea:focus-visible,
 .gantt_cal_light input:focus-visible,
 .gantt_cal_light select:focus-visible {
-  border-color: var(--dhx-gantt-base-colors-primary);
+  border-color: var(--jm-gantt-base-colors-primary);
   outline: none;
 }
 .gantt_cal_light textarea:disabled,
 .gantt_cal_light input:disabled,
 .gantt_cal_light select:disabled {
-  background-color: var(--dhx-gantt-base-colors-disabled);
-  color: var(--dhx-gantt-base-colors-icons);
+  background-color: var(--jm-gantt-base-colors-disabled);
+  color: var(--jm-gantt-base-colors-icons);
 }
 .gantt_cal_light input,
 .gantt_cal_light select {
-  height: var(--dhx-gantt-control-height);
+  height: var(--jm-gantt-control-height);
 }
 .gantt_cal_light input[type="select"],
 .gantt_cal_light input[type="checkbox"] {
-  height: var(--dhx-gantt-checkbox-height);
+  height: var(--jm-gantt-checkbox-height);
 }
 .gantt_cal_light .gantt_time {
   display: none;
 }
 .gantt_cal_ltitle {
-  font-size: var(--dhx-gantt-lightbox-title-font-size);
-  font-weight: var(--dhx-gantt-heading-font-weight);
+  font-size: var(--jm-gantt-lightbox-title-font-size);
+  font-weight: var(--jm-gantt-heading-font-weight);
   line-height: 142%;
-  background: var(--dhx-gantt-lightbox-title-background);
-  color: var(--dhx-gantt-lightbox-title-color);
-  border-bottom: var(--dhx-gantt-default-border);
-  padding: calc(var(--dhx-gantt-base-padding) * 3)
-    var(--dhx-gantt-lightbox-padding);
+  background: var(--jm-gantt-lightbox-title-background);
+  color: var(--jm-gantt-lightbox-title-color);
+  border-bottom: var(--jm-gantt-default-border);
+  padding: calc(var(--jm-gantt-base-padding) * 3)
+    var(--jm-gantt-lightbox-padding);
   overflow: hidden;
   white-space: nowrap;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  gap: calc(var(--dhx-gantt-base-padding) * 2);
-  border-top-right-radius: var(--dhx-gantt-popup-border-radius);
-  border-top-left-radius: var(--dhx-gantt-popup-border-radius);
+  gap: calc(var(--jm-gantt-base-padding) * 2);
+  border-top-right-radius: var(--jm-gantt-popup-border-radius);
+  border-top-left-radius: var(--jm-gantt-popup-border-radius);
 }
 .gantt_cal_ltitle .gantt_mark {
   display: none;
@@ -2066,24 +2066,24 @@ div.dhx_modal_cover {
 }
 .gantt_cal_ltitle .gantt_cal_ltitle_controls {
   cursor: pointer;
-  --dhx-gantt-icon-size: 18px;
+  --jm-gantt-icon-size: 18px;
 }
 .gantt_cal_light_rtl {
   direction: rtl;
 }
 .gantt_cal_light_wide.gantt_cal_light_rtl .gantt_custom_button {
   right: auto;
-  left: calc(var(--dhx-gantt-base-padding) * 2);
+  left: calc(var(--jm-gantt-base-padding) * 2);
 }
 .gantt_section_constraint [data-constraint-time-select] {
   margin-left: 20px;
 }
 .gantt_cal_larea {
   border: none;
-  padding: 0 var(--dhx-gantt-lightbox-padding) 4px;
+  padding: 0 var(--jm-gantt-lightbox-padding) 4px;
   overflow: hidden;
   height: auto;
-  gap: calc(var(--dhx-gantt-base-padding) * 2);
+  gap: calc(var(--jm-gantt-base-padding) * 2);
 }
 .gantt_cal_cover {
   width: 100%;
@@ -2136,7 +2136,7 @@ div.dhx_modal_cover {
 .gantt_cal_light_wide .gantt_custom_button {
   position: absolute;
   left: auto;
-  right: calc(var(--dhx-gantt-base-padding) * 2);
+  right: calc(var(--jm-gantt-base-padding) * 2);
 }
 .gantt_cal_light_wide .gantt_cal_ltext {
   flex: 1;
@@ -2154,17 +2154,17 @@ div.dhx_modal_cover {
   gap: 4px;
 }
 .gantt_duration .gantt_duration_end_date {
-  color: var(--dhx-gantt-base-colors-text-light);
+  color: var(--jm-gantt-base-colors-text-light);
   min-width: 130px;
 }
 .gantt_duration .gantt_duration_value,
 .gantt_duration .gantt_duration_dec,
 .gantt_duration .gantt_duration_inc {
   border-radius: 2px;
-  background-color: var(--dhx-gantt-lightbox-background);
-  color: var(--dhx-gantt-lightbox-color);
-  border: var(--dhx-gantt-lightbox-control-border);
-  font-size: var(--dhx-gantt-lightbox-font-size);
+  background-color: var(--jm-gantt-lightbox-background);
+  color: var(--jm-gantt-lightbox-color);
+  border: var(--jm-gantt-lightbox-control-border);
+  font-size: var(--jm-gantt-lightbox-font-size);
   padding: 6px 8px;
   box-sizing: border-box;
   margin-top: 0;
@@ -2177,14 +2177,14 @@ div.dhx_modal_cover {
 .gantt_duration .gantt_duration_value:focus-visible,
 .gantt_duration .gantt_duration_dec:focus-visible,
 .gantt_duration .gantt_duration_inc:focus-visible {
-  border-color: var(--dhx-gantt-base-colors-primary);
+  border-color: var(--jm-gantt-base-colors-primary);
   outline: none;
 }
 .gantt_duration .gantt_duration_value:disabled,
 .gantt_duration .gantt_duration_dec:disabled,
 .gantt_duration .gantt_duration_inc:disabled {
-  background-color: var(--dhx-gantt-base-colors-disabled);
-  color: var(--dhx-gantt-base-colors-icons);
+  background-color: var(--jm-gantt-base-colors-disabled);
+  color: var(--jm-gantt-base-colors-icons);
 }
 .gantt_duration_inputs {
   display: flex;
@@ -2203,9 +2203,9 @@ div.dhx_modal_cover {
 .gantt_duration .gantt_duration_inc {
   width: 26px;
   padding: 1px 4px;
-  color: var(--dhx-gantt-base-colors-primary);
+  color: var(--jm-gantt-base-colors-primary);
   font-size: 18px;
-  border-radius: var(--dhx-gantt-border-radius);
+  border-radius: var(--jm-gantt-border-radius);
   cursor: pointer;
 }
 .gantt_duration .gantt_duration_dec {
@@ -2227,7 +2227,7 @@ div.dhx_modal_cover {
 .gantt_resource_row {
   display: block;
   padding: 10px 0;
-  border-bottom: 1px solid var(--dhx-gantt-base-colors-border-light);
+  border-bottom: 1px solid var(--jm-gantt-base-colors-border-light);
   cursor: pointer;
 }
 .gantt_resource_row input[type="checkbox"]:not(:checked),
@@ -2297,62 +2297,62 @@ div.dhx_modal_cover {
 }
 .gantt_cal_lcontrols {
   display: flex;
-  flex-direction: var(--dhx-gantt-btn-order);
-  gap: calc(var(--dhx-gantt-base-padding) * 2);
-  padding: 12px var(--dhx-gantt-lightbox-padding);
+  flex-direction: var(--jm-gantt-btn-order);
+  gap: calc(var(--jm-gantt-base-padding) * 2);
+  padding: 12px var(--jm-gantt-lightbox-padding);
 }
 .gantt_cal_lcontrols .gantt_btn_set {
   display: flex;
   flex-direction: row;
-  gap: var(--dhx-gantt-base-padding);
+  gap: var(--jm-gantt-base-padding);
 }
 .gantt_cal_lcontrols .gantt_btn_set.gantt_delete_btn_set {
-  --dhx-gantt-icon-size: 18px;
+  --jm-gantt-icon-size: 18px;
   padding: 6px 0;
-  --dhx-gantt-base-colors-icons: var(--dhx-gantt-base-colors-error);
-  --dhx-gantt-btn-background: transparent;
-  --dhx-gantt-btn-color: var(--dhx-gantt-base-colors-error);
-  --dhx-gantt-btn-border-color: transparent;
-  --dhx-gantt-btn-background-hover: transparent;
-  --dhx-gantt-btn-color-hover: var(--dhx-gantt-base-colors-error-hover);
-  --dhx-gantt-btn-border-hover: transparent;
-  --dhx-gantt-btn-background-active: transparent;
-  --dhx-gantt-btn-color-active: var(--dhx-gantt-base-colors-error-active);
-  --dhx-gantt-btn-border-active: transparent;
-  --dhx-gantt-btn-background-disabled: transparent;
-  --dhx-gantt-btn-color-disabled: var(--dhx-gantt-base-colors-icons);
-  --dhx-gantt-btn-border-color-disabled: transparent;
+  --jm-gantt-base-colors-icons: var(--jm-gantt-base-colors-error);
+  --jm-gantt-btn-background: transparent;
+  --jm-gantt-btn-color: var(--jm-gantt-base-colors-error);
+  --jm-gantt-btn-border-color: transparent;
+  --jm-gantt-btn-background-hover: transparent;
+  --jm-gantt-btn-color-hover: var(--jm-gantt-base-colors-error-hover);
+  --jm-gantt-btn-border-hover: transparent;
+  --jm-gantt-btn-background-active: transparent;
+  --jm-gantt-btn-color-active: var(--jm-gantt-base-colors-error-active);
+  --jm-gantt-btn-border-active: transparent;
+  --jm-gantt-btn-background-disabled: transparent;
+  --jm-gantt-btn-color-disabled: var(--jm-gantt-base-colors-icons);
+  --jm-gantt-btn-border-color-disabled: transparent;
 }
 .gantt_cal_lcontrols
   .gantt_btn_set:not(.gantt_save_btn_set, .gantt_delete_btn_set) {
-  --dhx-gantt-icon-size: 18px;
-  --dhx-gantt-base-colors-icons: var(--dhx-gantt-btn-color);
-  --dhx-gantt-btn-background: var(--dhx-gantt-btn-outline-background);
-  --dhx-gantt-btn-color: var(--dhx-gantt-btn-outline-color);
-  --dhx-gantt-btn-border-color: var(--dhx-gantt-btn-outline-border-color);
-  --dhx-gantt-btn-background-hover: var(
-    --dhx-gantt-btn-outline-background-hover
+  --jm-gantt-icon-size: 18px;
+  --jm-gantt-base-colors-icons: var(--jm-gantt-btn-color);
+  --jm-gantt-btn-background: var(--jm-gantt-btn-outline-background);
+  --jm-gantt-btn-color: var(--jm-gantt-btn-outline-color);
+  --jm-gantt-btn-border-color: var(--jm-gantt-btn-outline-border-color);
+  --jm-gantt-btn-background-hover: var(
+    --jm-gantt-btn-outline-background-hover
   );
-  --dhx-gantt-btn-color-hover: var(--dhx-gantt-btn-outline-color-hover);
-  --dhx-gantt-btn-border-hover: var(--dhx-gantt-btn-outline-border-hover);
-  --dhx-gantt-btn-background-active: var(
-    --dhx-gantt-btn-outline-background-active
+  --jm-gantt-btn-color-hover: var(--jm-gantt-btn-outline-color-hover);
+  --jm-gantt-btn-border-hover: var(--jm-gantt-btn-outline-border-hover);
+  --jm-gantt-btn-background-active: var(
+    --jm-gantt-btn-outline-background-active
   );
-  --dhx-gantt-btn-color-active: var(--dhx-gantt-btn-outline-color-active);
-  --dhx-gantt-btn-border-active: var(--dhx-gantt-btn-outline-border-active);
-  --dhx-gantt-btn-background-disabled: var(
-    --dhx-gantt-btn-outline-background-disabled
+  --jm-gantt-btn-color-active: var(--jm-gantt-btn-outline-color-active);
+  --jm-gantt-btn-border-active: var(--jm-gantt-btn-outline-border-active);
+  --jm-gantt-btn-background-disabled: var(
+    --jm-gantt-btn-outline-background-disabled
   );
-  --dhx-gantt-btn-color-disabled: var(--dhx-gantt-btn-outline-color-disabled);
-  --dhx-gantt-btn-border-color-disabled: var(
-    --dhx-gantt-btn-outline-border-color-disabled
+  --jm-gantt-btn-color-disabled: var(--jm-gantt-btn-outline-color-disabled);
+  --jm-gantt-btn-border-color-disabled: var(
+    --jm-gantt-btn-outline-border-color-disabled
   );
 }
 .gantt_cal_lcontrols .gantt_btn_set .gantt_btn_inner {
   display: none;
 }
 .gantt_cal_lcontrols .gantt_btn_set .gantt_delete_btn:before {
-  font-family: dhx-gantt-icons !important;
+  font-family: jm-gantt-icons !important;
   font-style: normal;
   font-weight: 400 !important;
   font-variant: normal;
@@ -2362,8 +2362,8 @@ div.dhx_modal_cover {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--dhx-gantt-base-colors-icons);
-  font-size: var(--dhx-gantt-icon-size, 1.5em);
+  color: var(--jm-gantt-base-colors-icons);
+  font-size: var(--jm-gantt-icon-size, 1.5em);
 }
 .gantt_cal_lcontrols .gantt_btn_set .gantt_delete_btn:before {
   content: "";
@@ -2375,9 +2375,9 @@ div.dhx_modal_cover {
   width: 100%;
   height: 100%;
   resize: none;
-  font-family: var(--dhx-gantt-lightbox_font-family);
-  font-size: var(--dhx-gantt-lightbox-font-size);
-  font-weight: var(--dhx-gantt-lightbox-font-weight);
+  font-family: var(--jm-gantt-lightbox_font-family);
+  font-size: var(--jm-gantt-lightbox-font-size);
+  font-weight: var(--jm-gantt-lightbox-font-weight);
   line-height: 142%;
 }
 .gantt_section_time_spacer,
@@ -2387,22 +2387,22 @@ div.dhx_modal_cover {
   flex-basis: 100%;
 }
 .gantt_section_time {
-  --dhx-gantt-lightbox-time-font-size: var(--dhx-gantt-important-font-size);
-  --dhx-gantt-lightbox-time-font-weight: var(--dhx-gantt-important-font-weight);
-  font-size: var(--dhx-gantt-lightbox-time-font-size);
-  font-weight: var(--dhx-gantt-lightbox-time-font-weight);
+  --jm-gantt-lightbox-time-font-size: var(--jm-gantt-important-font-size);
+  --jm-gantt-lightbox-time-font-weight: var(--jm-gantt-important-font-weight);
+  font-size: var(--jm-gantt-lightbox-time-font-size);
+  font-weight: var(--jm-gantt-lightbox-time-font-weight);
   line-height: 142%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: calc(var(--dhx-gantt-base-padding) * 2);
-  row-gap: var(--dhx-gantt-base-padding);
+  gap: calc(var(--jm-gantt-base-padding) * 2);
+  row-gap: var(--jm-gantt-base-padding);
 }
 .gantt_section_time .gantt_section_time_icon {
-  width: calc(var(--dhx-gantt-base-module) * 2);
-  height: calc(var(--dhx-gantt-base-module) * 2);
+  width: calc(var(--jm-gantt-base-module) * 2);
+  height: calc(var(--jm-gantt-base-module) * 2);
   border-radius: 2px;
-  background: var(--dhx-gantt-base-colors-primary);
+  background: var(--jm-gantt-base-colors-primary);
 }
 .gantt_section_duration {
   gap: 16px;
@@ -2415,7 +2415,7 @@ div.dhx_modal_cover {
   margin-right: auto;
 }
 .gantt_cal_lsection label {
-  font-weight: var(--dhx-gantt-heading-font-weight);
+  font-weight: var(--jm-gantt-heading-font-weight);
   display: flex;
   align-items: center;
   gap: 4px;
@@ -2427,12 +2427,12 @@ div.dhx_modal_cover {
   margin-bottom: 4px;
 }
 .gantt_cal_lsection .gantt_custom_button {
-  background: var(--dhx-gantt-btn-background);
-  color: var(--dhx-gantt-btn-color);
-  border: 1px solid var(--dhx-gantt-btn-border-color);
-  border-radius: var(--dhx-gantt-border-radius);
-  height: var(--dhx-gantt-control-height);
-  padding: var(--dhx-gantt-btn-padding, 0 20px);
+  background: var(--jm-gantt-btn-background);
+  color: var(--jm-gantt-btn-color);
+  border: 1px solid var(--jm-gantt-btn-border-color);
+  border-radius: var(--jm-gantt-border-radius);
+  height: var(--jm-gantt-control-height);
+  padding: var(--jm-gantt-btn-padding, 0 20px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2440,52 +2440,52 @@ div.dhx_modal_cover {
   gap: 4px;
   flex-shrink: 0;
   font-weight: 500;
-  font-size: var(--dhx-gantt-font-size);
-  font-family: var(--dhx-gantt-font-family);
-  font-weight: var(--dhx-gantt-btn-font-weight, normal);
+  font-size: var(--jm-gantt-font-size);
+  font-family: var(--jm-gantt-font-family);
+  font-weight: var(--jm-gantt-btn-font-weight, normal);
   line-height: 142%;
-  text-transform: var(--dhx-gantt-btn-text-transform);
+  text-transform: var(--jm-gantt-btn-text-transform);
   cursor: pointer;
-  --dhx-gantt-icon-size: 18px;
-  --dhx-gantt-base-colors-icons: var(--dhx-gantt-btn-color);
-  --dhx-gantt-btn-background: var(--dhx-gantt-btn-outline-background);
-  --dhx-gantt-btn-color: var(--dhx-gantt-btn-outline-color);
-  --dhx-gantt-btn-border-color: var(--dhx-gantt-btn-outline-border-color);
-  --dhx-gantt-btn-background-hover: var(
-    --dhx-gantt-btn-outline-background-hover
+  --jm-gantt-icon-size: 18px;
+  --jm-gantt-base-colors-icons: var(--jm-gantt-btn-color);
+  --jm-gantt-btn-background: var(--jm-gantt-btn-outline-background);
+  --jm-gantt-btn-color: var(--jm-gantt-btn-outline-color);
+  --jm-gantt-btn-border-color: var(--jm-gantt-btn-outline-border-color);
+  --jm-gantt-btn-background-hover: var(
+    --jm-gantt-btn-outline-background-hover
   );
-  --dhx-gantt-btn-color-hover: var(--dhx-gantt-btn-outline-color-hover);
-  --dhx-gantt-btn-border-hover: var(--dhx-gantt-btn-outline-border-hover);
-  --dhx-gantt-btn-background-active: var(
-    --dhx-gantt-btn-outline-background-active
+  --jm-gantt-btn-color-hover: var(--jm-gantt-btn-outline-color-hover);
+  --jm-gantt-btn-border-hover: var(--jm-gantt-btn-outline-border-hover);
+  --jm-gantt-btn-background-active: var(
+    --jm-gantt-btn-outline-background-active
   );
-  --dhx-gantt-btn-color-active: var(--dhx-gantt-btn-outline-color-active);
-  --dhx-gantt-btn-border-active: var(--dhx-gantt-btn-outline-border-active);
-  --dhx-gantt-btn-background-disabled: var(
-    --dhx-gantt-btn-outline-background-disabled
+  --jm-gantt-btn-color-active: var(--jm-gantt-btn-outline-color-active);
+  --jm-gantt-btn-border-active: var(--jm-gantt-btn-outline-border-active);
+  --jm-gantt-btn-background-disabled: var(
+    --jm-gantt-btn-outline-background-disabled
   );
-  --dhx-gantt-btn-color-disabled: var(--dhx-gantt-btn-outline-color-disabled);
-  --dhx-gantt-btn-border-color-disabled: var(
-    --dhx-gantt-btn-outline-border-color-disabled
+  --jm-gantt-btn-color-disabled: var(--jm-gantt-btn-outline-color-disabled);
+  --jm-gantt-btn-border-color-disabled: var(
+    --jm-gantt-btn-outline-border-color-disabled
   );
   order: 1;
   margin-left: auto;
   margin-right: unset;
 }
 .gantt_cal_lsection .gantt_custom_button:hover {
-  background: var(--dhx-gantt-btn-background-hover);
-  color: var(--dhx-gantt-btn-color-hover);
-  border-color: var(--dhx-gantt-btn-border-hover);
+  background: var(--jm-gantt-btn-background-hover);
+  color: var(--jm-gantt-btn-color-hover);
+  border-color: var(--jm-gantt-btn-border-hover);
 }
 .gantt_cal_lsection .gantt_custom_button:active {
-  background: var(--dhx-gantt-btn-background-active);
-  color: var(--dhx-gantt-btn-color-active);
-  border-color: var(--dhx-gantt-btn-border-active);
+  background: var(--jm-gantt-btn-background-active);
+  color: var(--jm-gantt-btn-color-active);
+  border-color: var(--jm-gantt-btn-border-active);
 }
 .gantt_cal_lsection .gantt_custom_button:disabled {
-  background: var(--dhx-gantt-btn-background-disabled);
-  color: var(--dhx-gantt-btn-color-disabled);
-  border-color: var(--dhx-gantt-btn-border-disabled);
+  background: var(--jm-gantt-btn-background-disabled);
+  color: var(--jm-gantt-btn-color-disabled);
+  border-color: var(--jm-gantt-btn-border-disabled);
 }
 .gantt_cal_light_rtl .gantt_custom_button {
   margin-left: unset;
@@ -2493,17 +2493,17 @@ div.dhx_modal_cover {
 }
 .gantt_cal_checkbox {
   display: flex;
-  gap: var(--dhx-gantt-base-padding);
+  gap: var(--jm-gantt-base-padding);
 }
 .gantt_cal_wide_checkbox {
   padding: 4px 0;
 }
 .gantt_cal_radio input {
-  margin: var(--dhx-gantt-base-padding);
+  margin: var(--jm-gantt-base-padding);
 }
 .gantt_cal_radio_item {
   display: flex;
-  gap: var(--dhx-gantt-base-padding);
+  gap: var(--jm-gantt-base-padding);
   align-items: center;
 }
 .gantt_cal_radio {
@@ -2513,7 +2513,7 @@ div.dhx_modal_cover {
 .gantt_cal_radio_vertical {
   flex-direction: column;
   overflow: auto;
-  --dhx-gantt-control-height: 20px;
+  --jm-gantt-control-height: 20px;
 }
 .gantt_cal_lcheckbox,
 .gantt_cal_lradio {
@@ -2533,23 +2533,23 @@ div.dhx_modal_cover {
   padding-bottom: 4px;
 }
 .gantt_cal_light .gantt_readonly {
-  color: var(--dhx-gantt-base-colors-readonly);
+  color: var(--jm-gantt-base-colors-readonly);
 }
 .gantt_cal_quick_info {
-  --dhx-gantt-quick-info-font-size: var(--dhx-gantt-font-size);
+  --jm-gantt-quick-info-font-size: var(--jm-gantt-font-size);
   position: absolute;
   z-index: 8;
-  font-size: var(--dhx-gantt-quick-info-font-size);
-  background: var(--dhx-gantt-popup-background);
-  color: var(--dhx-gantt-popup-color);
-  border: var(--dhx-gantt-popup-border);
-  padding: calc(var(--dhx-gantt-base-padding) * 2)
-    calc(var(--dhx-gantt-base-padding) * 3);
-  border-radius: var(--dhx-gantt-border-radius);
+  font-size: var(--jm-gantt-quick-info-font-size);
+  background: var(--jm-gantt-popup-background);
+  color: var(--jm-gantt-popup-color);
+  border: var(--jm-gantt-popup-border);
+  padding: calc(var(--jm-gantt-base-padding) * 2)
+    calc(var(--jm-gantt-base-padding) * 3);
+  border-radius: var(--jm-gantt-border-radius);
   width: 300px;
   display: flex;
   flex-direction: column;
-  box-shadow: var(--dhx-gantt-box-shadow-s);
+  box-shadow: var(--jm-gantt-box-shadow-s);
   transition: left 0.5s ease, right 0.5s ease;
 }
 .gantt_cal_qi_tcontrols {
@@ -2561,19 +2561,19 @@ div.dhx_modal_cover {
   min-width: 32px;
   height: 32px;
   border-radius: 50%;
-  --dhx-gantt-icon-size: 18px;
-  --dhx-gantt-btn-background: transparent;
-  --dhx-gantt-btn-color: var(--dhx-gantt-base-colors-primary);
-  --dhx-gantt-btn-border-color: transparent;
-  --dhx-gantt-btn-background-hover: transparent;
-  --dhx-gantt-btn-color-hover: var(--dhx-gantt-base-colors-primary-hover);
-  --dhx-gantt-btn-border-hover: transparent;
-  --dhx-gantt-btn-background-active: transparent;
-  --dhx-gantt-btn-color-active: var(--dhx-gantt-base-colors-primary-active);
-  --dhx-gantt-btn-border-active: transparent;
-  --dhx-gantt-btn-background-disabled: transparent;
-  --dhx-gantt-btn-color-disabled: var(--dhx-gantt-base-colors-icons);
-  --dhx-gantt-btn-border-color-disabled: transparent;
+  --jm-gantt-icon-size: 18px;
+  --jm-gantt-btn-background: transparent;
+  --jm-gantt-btn-color: var(--jm-gantt-base-colors-primary);
+  --jm-gantt-btn-border-color: transparent;
+  --jm-gantt-btn-background-hover: transparent;
+  --jm-gantt-btn-color-hover: var(--jm-gantt-base-colors-primary-hover);
+  --jm-gantt-btn-border-hover: transparent;
+  --jm-gantt-btn-background-active: transparent;
+  --jm-gantt-btn-color-active: var(--jm-gantt-base-colors-primary-active);
+  --jm-gantt-btn-border-active: transparent;
+  --jm-gantt-btn-background-disabled: transparent;
+  --jm-gantt-btn-color-disabled: var(--jm-gantt-base-colors-icons);
+  --jm-gantt-btn-border-color-disabled: transparent;
   width: unset;
   min-width: unset;
   padding: 2px;
@@ -2584,18 +2584,18 @@ div.dhx_modal_cover {
   z-index: 1;
 }
 .gantt_cal_qi_tcontrols .gantt_cal_qi_close_btn:hover {
-  --dhx-gantt-base-colors-icons: var(--dhx-gantt-base-colors-icons-hover);
+  --jm-gantt-base-colors-icons: var(--jm-gantt-base-colors-icons-hover);
 }
 .gantt_cal_qi_tcontrols .gantt_cal_qi_close_btn:active {
-  --dhx-gantt-base-colors-icons: var(--dhx-gantt-base-colors-icons-active);
+  --jm-gantt-base-colors-icons: var(--jm-gantt-base-colors-icons-active);
 }
 .gantt_cal_qi_tcontrols .gantt_cal_qi_close_btn:disabled {
-  --dhx-gantt-base-colors-icons: var(--dhx-gantt-btn-color-disabled);
+  --jm-gantt-base-colors-icons: var(--jm-gantt-btn-color-disabled);
 }
 .gantt_cal_qi_title,
 .gantt_cal_qi_controls,
 .gantt_cal_qi_content {
-  padding: 0 calc(var(--dhx-gantt-base-padding) * 3);
+  padding: 0 calc(var(--jm-gantt-base-padding) * 3);
 }
 .gantt_cal_qi_title {
   display: flex;
@@ -2604,8 +2604,8 @@ div.dhx_modal_cover {
   padding-right: 14px;
 }
 .gantt_cal_qi_tcontent {
-  font-size: var(--dhx-gantt-heading-font-size);
-  font-weight: var(--dhx-gantt-heading-font-weight);
+  font-size: var(--jm-gantt-heading-font-size);
+  font-weight: var(--jm-gantt-heading-font-weight);
   line-height: 150%;
   position: relative;
   display: flex;
@@ -2623,18 +2623,18 @@ div.dhx_modal_cover {
   overflow: hidden;
 }
 .gantt_cal_qi_tcontent:before {
-  display: var(--dhx-gantt-quick-info-dot-display, block);
+  display: var(--jm-gantt-quick-info-dot-display, block);
   content: "";
   flex-shrink: 0;
   width: 8px;
   height: 8px;
   border-radius: 2px;
-  background: var(--dhx-gantt-task-background);
+  background: var(--jm-gantt-task-background);
 }
 .gantt_cal_qi_tdate {
-  font-size: var(--dhx-gantt-important-font-size);
-  font-weight: var(--dhx-gantt-important-font-weight);
-  line-height: var(--dhx-gantt-important-line-height);
+  font-size: var(--jm-gantt-important-font-size);
+  font-weight: var(--jm-gantt-important-font-weight);
+  line-height: var(--jm-gantt-important-line-height);
 }
 .gantt_cal_qi_content {
   padding-top: 16px;
@@ -2647,7 +2647,7 @@ div.dhx_modal_cover {
   align-items: center;
   padding-top: 8px;
   gap: 12px;
-  color: var(--dhx-gantt-base-colors-primary);
+  color: var(--jm-gantt-base-colors-primary);
 }
 .gantt_cal_qi_controls > div:first-child {
   margin-left: -3px;
@@ -2658,11 +2658,11 @@ div.dhx_modal_cover {
   display: flex;
   align-items: center;
   justify-content: center;
-  --dhx-gantt-base-colors-icons: var(--dhx-gantt-btn-color);
+  --jm-gantt-base-colors-icons: var(--jm-gantt-btn-color);
 }
 .dhx_gantt_icon.dhx_gantt_icon_edit,
 .dhx_menu_icon.dhx_gantt_icon_edit {
-  --dhx-gantt-icon-size: var(--dhx-gantt-font-size);
+  --jm-gantt-icon-size: var(--jm-gantt-font-size);
 }
 .gantt_cal_quick_info.gantt_qi_hidden {
   display: none;
@@ -2672,15 +2672,15 @@ div.dhx_modal_cover {
   position: absolute;
   z-index: 50;
   white-space: nowrap;
-  box-shadow: var(--dhx-gantt-box-shadow-m);
-  background: var(--dhx-gantt-tooltip-background);
-  color: var(--dhx-gantt-tooltip-color);
-  border: var(--dhx-gantt-tooltip-border);
-  font-family: var(--dhx-gantt-font-family);
-  font-size: var(--dhx-gantt-regular-font-size);
-  line-height: var(--dhx-gantt-regular-line-height);
-  font-weight: var(--dhx-gantt-regular-font-weight);
-  border-radius: var(--dhx-gantt-tooltip-border-radius);
+  box-shadow: var(--jm-gantt-box-shadow-m);
+  background: var(--jm-gantt-tooltip-background);
+  color: var(--jm-gantt-tooltip-color);
+  border: var(--jm-gantt-tooltip-border);
+  font-family: var(--jm-gantt-font-family);
+  font-size: var(--jm-gantt-regular-font-size);
+  line-height: var(--jm-gantt-regular-line-height);
+  font-weight: var(--jm-gantt-regular-font-weight);
+  border-radius: var(--jm-gantt-tooltip-border-radius);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -2689,14 +2689,14 @@ div.dhx_modal_cover {
 .gantt_resource_marker {
   position: absolute;
   text-align: center;
-  font-size: var(--dhx-gantt-font-size);
+  font-size: var(--jm-gantt-font-size);
   color: #fff;
 }
 .gantt_resource_marker_ok {
-  background: var(--dhx-gantt-base-colors-success);
+  background: var(--jm-gantt-base-colors-success);
 }
 .gantt_resource_marker_overtime {
-  background: var(--dhx-gantt-base-colors-error);
+  background: var(--jm-gantt-base-colors-error);
 }
 .gantt_histogram_label {
   width: 100%;
@@ -2704,13 +2704,13 @@ div.dhx_modal_cover {
   position: absolute;
   z-index: 1;
   font-weight: 700;
-  font-size: var(--dhx-gantt-font-size);
+  font-size: var(--jm-gantt-font-size);
 }
 .gantt_histogram_fill {
   background-color: #537cfa4d;
   background-color: color-mix(
     in srgb,
-    var(--dhx-gantt-base-colors-primary),
+    var(--jm-gantt-base-colors-primary),
     transparent 60%
   );
   width: 100%;
@@ -2720,20 +2720,20 @@ div.dhx_modal_cover {
 .gantt_histogram_hor_bar {
   height: 1px;
   position: absolute;
-  background: var(--dhx-gantt-base-colors-primary);
+  background: var(--jm-gantt-base-colors-primary);
   margin-top: -1px;
   margin-left: -1px;
 }
 .gantt_histogram_vert_bar {
   width: 1px;
   position: absolute;
-  background: var(--dhx-gantt-base-colors-primary);
+  background: var(--jm-gantt-base-colors-primary);
   margin-left: -1px;
 }
 .gantt_histogram_cell {
   position: absolute;
   text-align: center;
-  font-size: var(--dhx-gantt-font-size);
+  font-size: var(--jm-gantt-font-size);
 }
 .gantt_marker {
   height: 100%;
@@ -2741,16 +2741,16 @@ div.dhx_modal_cover {
   top: 0;
   position: absolute;
   text-align: center;
-  background-color: var(--dhx-gantt-base-colors-error);
+  background-color: var(--jm-gantt-base-colors-error);
 }
 .gantt_marker .gantt_marker_content {
   padding: 2px;
   background: inherit;
-  color: var(--dhx-gantt-base-colors-white);
+  color: var(--jm-gantt-base-colors-white);
   position: absolute;
-  font-size: var(--dhx-gantt-caption-font-size);
-  line-height: var(--dhx-gantt-caption-line-height);
-  font-weight: var(--dhx-gantt-caption-line-weight);
+  font-size: var(--jm-gantt-caption-font-size);
+  line-height: var(--jm-gantt-caption-line-height);
+  font-weight: var(--jm-gantt-caption-line-weight);
 }
 .gantt_marker_area {
   position: absolute;
@@ -2781,14 +2781,14 @@ div.dhx_modal_cover {
 .gantt_grid_dnd_marker_line {
   height: 4px;
   width: 100%;
-  background-color: var(--dhx-gantt-base-colors-primary);
+  background-color: var(--jm-gantt-base-colors-primary);
 }
 .gantt_grid_dnd_marker_line:before {
-  background: var(--dhx-gantt-base-colors-white);
+  background: var(--jm-gantt-base-colors-white);
   width: 12px;
   height: 12px;
   box-sizing: border-box;
-  border: 3px solid var(--dhx-gantt-base-colors-primary);
+  border: 3px solid var(--jm-gantt-base-colors-primary);
   border-radius: 6px;
   content: "";
   line-height: 1px;
@@ -2804,7 +2804,7 @@ div.dhx_modal_cover {
   position: absolute;
   pointer-events: none;
   box-sizing: border-box;
-  box-shadow: 0 0 0 2px var(--dhx-gantt-base-colors-primary) inset;
+  box-shadow: 0 0 0 2px var(--jm-gantt-base-colors-primary) inset;
   background: transparent;
 }
 .gantt_overlay_area {
@@ -2826,8 +2826,8 @@ div.dhx_modal_cover {
   position: absolute;
   left: 0;
   top: 0;
-  outline: 1px solid var(--dhx-gantt-base-colors-primary);
-  background-color: var(--dhx-gantt-base-colors-primary-lighter);
+  outline: 1px solid var(--jm-gantt-base-colors-primary);
+  background-color: var(--jm-gantt-base-colors-primary-lighter);
 }
 .gantt_timeline_move_available,
 .gantt_timeline_move_available * {
@@ -2836,7 +2836,7 @@ div.dhx_modal_cover {
 .gantt_constraint_marker {
   position: absolute;
   pointer-events: none;
-  --dhx-gantt-base-colors-icons: var(--dhx-gantt-base-colors-text-light);
+  --jm-gantt-base-colors-icons: var(--jm-gantt-base-colors-text-light);
 }
 .gantt_constraint_marker.gantt_constraint_marker_snlt,
 .gantt_constraint_marker.gantt_constraint_marker_fnlt,
@@ -2962,16 +2962,16 @@ div.dhx_modal_cover {
   background: #cd5c5c !important;
 }
 .gantt_layout_cell_border_left {
-  border-left: var(--dhx-gantt-default-border);
+  border-left: var(--jm-gantt-default-border);
 }
 .gantt_layout_cell_border_right {
-  border-right: var(--dhx-gantt-default-border);
+  border-right: var(--jm-gantt-default-border);
 }
 .gantt_layout_cell_border_top {
-  border-top: var(--dhx-gantt-default-border);
+  border-top: var(--jm-gantt-default-border);
 }
 .gantt_layout_cell_border_bottom {
-  border-bottom: var(--dhx-gantt-default-border);
+  border-bottom: var(--jm-gantt-default-border);
 }
 .gantt_layout_cell_border_transparent {
   border-color: transparent;
@@ -3054,7 +3054,7 @@ div.dhx_modal_cover {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: var(--dhx-gantt-font-family);
+  font-family: var(--jm-gantt-font-family);
 }
 .gantt_container,
 .gantt_container * {
@@ -3072,11 +3072,11 @@ div.dhx_modal_cover {
   position: absolute;
   top: -1000px;
   left: -1000px;
-  font-family: var(--dhx-gantt-font-family);
-  font-size: var(--dhx-gantt-font-size);
+  font-family: var(--jm-gantt-font-family);
+  font-size: var(--jm-gantt-font-size);
   z-index: 1;
   white-space: nowrap;
-  background: var(--dhx-gantt-base-colors-select);
+  background: var(--jm-gantt-base-colors-select);
 }
 .gantt_drag_marker .gantt_tree_indent,
 .gantt_drag_marker .gantt_tree_icon.gantt_blank,
@@ -3118,25 +3118,25 @@ div.dhx_modal_cover {
   text-align: center;
 }
 .gantt_empty_state_text_link {
-  color: var(--dhx-gantt-base-colors-primary);
+  color: var(--jm-gantt-base-colors-primary);
   background: none;
   opacity: 1;
   height: unset;
   cursor: pointer;
 }
 .gantt_drag_marker .gantt_row.odd {
-  background-color: var(--dhx-gantt-base-colors-select);
+  background-color: var(--jm-gantt-base-colors-select);
 }
 .gantt_drag_marker .gantt_row {
-  border-left: var(--dhx-gantt-scale-border-vertical);
-  border-top: var(--dhx-gantt-scale-border-horizontal);
+  border-left: var(--jm-gantt-scale-border-vertical);
+  border-top: var(--jm-gantt-scale-border-horizontal);
 }
 .gantt_drag_marker .gantt_cell {
-  border-color: var(--dhx-gantt-base-colors-border);
+  border-color: var(--jm-gantt-base-colors-border);
 }
 .gantt_row.gantt_over,
 .gantt_task_row.gantt_over {
-  background-color: var(--dhx-gantt-base-colors-primary-active);
+  background-color: var(--jm-gantt-base-colors-primary-active);
 }
 .gantt_row.gantt_transparent .gantt_cell {
   opacity: 0.7;
@@ -3160,11 +3160,11 @@ div.dhx_modal_cover {
 .gantt_task_deadline {
   position: absolute;
   z-index: 5;
-  --dhx-gantt-base-colors-icons: var(--dhx-gantt-base-colors-error);
+  --jm-gantt-base-colors-icons: var(--jm-gantt-base-colors-error);
   pointer-events: none;
 }
 .gantt_task_deadline:before {
-  font-family: dhx-gantt-icons !important;
+  font-family: jm-gantt-icons !important;
   font-style: normal;
   font-weight: 400 !important;
   font-variant: normal;
@@ -3174,8 +3174,8 @@ div.dhx_modal_cover {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--dhx-gantt-base-colors-icons);
-  font-size: var(--dhx-gantt-icon-size, 1.5em);
+  color: var(--jm-gantt-base-colors-icons);
+  font-size: var(--jm-gantt-icon-size, 1.5em);
 }
 .gantt_task_deadline:before {
   content: "";
@@ -3195,34 +3195,34 @@ div.dhx_modal_cover {
   transform: rotate(45deg);
 }
 .gantt_task_baseline.gantt_task_baseline_0 {
-  background: var(--dhx-gantt-baseline-background-0);
+  background: var(--jm-gantt-baseline-background-0);
 }
 .gantt_task_baseline.gantt_task_baseline_1 {
-  background: var(--dhx-gantt-baseline-background-1);
+  background: var(--jm-gantt-baseline-background-1);
 }
 .gantt_task_baseline.gantt_task_baseline_2 {
-  background: var(--dhx-gantt-baseline-background-2);
+  background: var(--jm-gantt-baseline-background-2);
 }
 .gantt_task_baseline.gantt_task_baseline_3 {
-  background: var(--dhx-gantt-baseline-background-3);
+  background: var(--jm-gantt-baseline-background-3);
 }
 .gantt_task_baseline.gantt_task_baseline_4 {
-  background: var(--dhx-gantt-baseline-background-4);
+  background: var(--jm-gantt-baseline-background-4);
 }
 .gantt_task_baseline.gantt_task_baseline_5 {
-  background: var(--dhx-gantt-baseline-background-5);
+  background: var(--jm-gantt-baseline-background-5);
 }
 .gantt_task_baseline.gantt_task_baseline_6 {
-  background: var(--dhx-gantt-baseline-background-6);
+  background: var(--jm-gantt-baseline-background-6);
 }
 .gantt_task_baseline.gantt_task_baseline_7 {
-  background: var(--dhx-gantt-baseline-background-7);
+  background: var(--jm-gantt-baseline-background-7);
 }
 .gantt_task_baseline.gantt_task_baseline_8 {
-  background: var(--dhx-gantt-baseline-background-8);
+  background: var(--jm-gantt-baseline-background-8);
 }
 .gantt_task_baseline.gantt_task_baseline_9 {
-  background: var(--dhx-gantt-baseline-background-9);
+  background: var(--jm-gantt-baseline-background-9);
 }
 .gantt_section_baselines {
   overflow-y: auto;

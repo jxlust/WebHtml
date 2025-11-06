@@ -26604,7 +26604,7 @@ https://docs.dhtmlx.com/gantt/faq.html#theganttchartisntrenderedcorrectly`);
                 (B.style.left = H + "px"),
                 (B.className = "gantt_task_progress_drag"),
                 (B.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="9" viewBox="0 0 12 9" fill="none">
-<path d="M5.58397 1.52543C5.78189 1.22856 6.21811 1.22856 6.41602 1.52543L10.5475 7.72265C10.769 8.05493 10.5308 8.5 10.1315 8.5L1.86852 8.5C1.46917 8.5 1.23097 8.05493 1.45249 7.72265L5.58397 1.52543Z" fill="var(--dhx-gantt-progress-handle-background)" stroke="var(--dhx-gantt-progress-handle-border)"/>
+<path d="M5.58397 1.52543C5.78189 1.22856 6.21811 1.22856 6.41602 1.52543L10.5475 7.72265C10.769 8.05493 10.5308 8.5 10.1315 8.5L1.86852 8.5C1.46917 8.5 1.23097 8.05493 1.45249 7.72265L5.58397 1.52543Z" fill="var(--jm-gantt-progress-handle-background)" stroke="var(--jm-gantt-progress-handle-border)"/>
 </svg>`),
                 M.appendChild(B),
                 E.appendChild(B);
@@ -26686,12 +26686,12 @@ https://docs.dhtmlx.com/gantt/faq.html#theganttchartisntrenderedcorrectly`);
         "width:" + g + "px",
       ];
       (b.style.cssText = k.join(";")),
-        r.color && b.style.setProperty("--dhx-gantt-task-background", r.color),
+        r.color && b.style.setProperty("--jm-gantt-task-background", r.color),
         r.textColor &&
-          b.style.setProperty("--dhx-gantt-task-color", r.textColor),
+          b.style.setProperty("--jm-gantt-task-color", r.textColor),
         r.progressColor &&
           b.style.setProperty(
-            "--dhx-gantt-task-progress-color",
+            "--jm-gantt-task-progress-color",
             r.progressColor
           );
       var w = (function (T, E, C, D) {
@@ -26888,7 +26888,7 @@ https://docs.dhtmlx.com/gantt/faq.html#theganttchartisntrenderedcorrectly`);
         "width:" + p.width + "px",
       ].join(";")),
         m.style.setProperty(
-          "--dhx-gantt-scheduled-summary-bracket-size",
+          "--jm-gantt-scheduled-summary-bracket-size",
           "10px"
         ),
         b.appendChild(m);
@@ -27007,12 +27007,12 @@ https://docs.dhtmlx.com/gantt/faq.html#theganttchartisntrenderedcorrectly`);
         (b.className = x),
         (b.style.top = f + l.top + "px"),
         (b.style.height = (u == d.types.milestone ? l.height : h) + "px"),
-        r.color && b.style.setProperty("--dhx-gantt-task-background", r.color),
+        r.color && b.style.setProperty("--jm-gantt-task-background", r.color),
         r.textColor &&
-          b.style.setProperty("--dhx-gantt-task-color", r.textColor),
+          b.style.setProperty("--jm-gantt-task-color", r.textColor),
         r.progressColor &&
           b.style.setProperty(
-            "--dhx-gantt-task-progress-color",
+            "--jm-gantt-task-progress-color",
             r.progressColor
           );
       var $ = (function (T, E, C, D) {
@@ -27396,7 +27396,7 @@ https://docs.dhtmlx.com/gantt/faq.html#theganttchartisntrenderedcorrectly`);
             o = a.y,
             l = a.x,
             d = r.link_arrow_size;
-          s.style.setProperty("--dhx-gantt-icon-size", `${d}px`);
+          s.style.setProperty("--jm-gantt-icon-size", `${d}px`);
           var c = "gantt_link_arrow gantt_link_arrow_" + a.direction;
           return (
             (s.style.top = o + "px"),
@@ -27686,7 +27686,7 @@ https://docs.dhtmlx.com/gantt/faq.html#theganttchartisntrenderedcorrectly`);
             (_.setAttribute(r.$config.link_attribute, a.id),
             _.setAttribute("link_id", a.id)),
           a.color &&
-            _.style.setProperty("--dhx-gantt-link-background", a.color),
+            _.style.setProperty("--jm-gantt-link-background", a.color),
           t._waiAria.linkAttr(a, _),
           _
         );
@@ -31056,7 +31056,7 @@ https://docs.dhtmlx.com/gantt/faq.html#theganttchartisntrenderedcorrectly`);
     },
   };
   function Je(t, n) {
-    const e = getComputedStyle(n.$root).getPropertyValue("--dhx-gantt-theme");
+    const e = getComputedStyle(n.$root).getPropertyValue("--jm-gantt-theme");
     let i,
       a = !!e;
     if (a) i = e;
@@ -34064,7 +34064,7 @@ https://docs.dhtmlx.com/gantt/faq.html#theganttchartisntrenderedcorrectly`);
               s &&
                 (a = setInterval(() => {
                   const o =
-                    getComputedStyle(s).getPropertyValue("--dhx-gantt-theme");
+                    getComputedStyle(s).getPropertyValue("--jm-gantt-theme");
                   o && o !== i.skin && i.setSkin(o);
                 }, 100));
           }

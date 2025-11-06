@@ -39,7 +39,8 @@
 
     gantt.config.scales = [
       { unit: "month", format: "%Y年%F" },
-      { unit: "day", step: 1, format: "%j %D" },
+      // date: "%M %d"  format: "%j %D" date: "%d %D"
+      { unit: "day", step: 1, format: "%d %D" },
     ];
 
     gantt.templates.rightside_text = function (start, end, task) {
