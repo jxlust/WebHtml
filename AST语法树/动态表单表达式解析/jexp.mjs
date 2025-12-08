@@ -17,6 +17,25 @@ function stringDoubleValue(v) {
   return isNaN(num) ? 0.0 : num
 }
 
+// 压缩代码：将多行代码压缩为一行
+function compressCode(code) {
+  if (!code) return code
+
+  return (
+    code
+      // 移除块注释
+      .replace(/\/\*[\s\S]*?\*\//g, '')
+      // 移除行注释
+      .replace(/\/\/.*/g, '')
+      // 将多个换行和空格合并为一个空格
+      .replace(/\s+/g, ' ')
+      // 移除语句前后的空格
+      .replace(/\s*([=+\-*\/%&|^~!<>?:;{}()[\],])\s*/g, '$1')
+      // 特殊情况：保留字符串内的空格
+      .trim()
+  )
+}
+
 class ExpressionParser {
   constructor(data, customFunction) {
     this.dataSource = data
@@ -80,52 +99,60 @@ class ExpressionParser {
       return null
     }
   }
-
-  // 示例：增强的executeJsmethod方法
-  executeJsmethodEnhanced(codeString, contextId = 'default') {
-    console.log(`[jsmethod-${contextId}] 代码长度: ${codeString.length}`)
+  // 执行jsmethod代码
+  executeJsmethodSandbox(codeString) {
+    console.log(`[jsmethod] 开始执行，代码长度: ${codeString.length}`)
+    // 先压缩代码字符串
+    // const compressedCode = compressCode(codeString)
+    // console.log(`[jsmethod] 压缩后代码: ${compressedCode.substring(0, 100)}...`)
 
     try {
-      // 创建更安全的执行环境
+      // 创建安全的执行环境
       const safeContext = {
-        valueForKey: (key) => {
-          console.log(`[jsmethod-${contextId}] 访问键: ${key}`)
-          return this.valueForKey(key)
-        },
-        // 可以限制可用的全局对象
-        Math: Math,
+        valueForKey: (key) => this.valueForKey(key),
+        intValue: stringIntValue,
+        doubleValue: stringDoubleValue,
         Date: Date,
-        console: {
-          log: (...args) => console.log(`[jsmethod-${contextId}]`, ...args),
-        },
+        Math: Math,
+        parseInt: parseInt,
+        parseFloat: parseFloat,
+        isNaN: isNaN,
+        String: String,
+        Number: Number,
       }
-
       // 使用Proxy限制访问
       const handler = {
-        has: () => true,
-        get: (target, prop) => {
-          if (prop in target) return target[prop]
-          throw new Error(`禁止访问: ${prop}`)
+        has: (target, prop) => {
+          if (prop in target) {
+            return true // 允许访问全局白名单对象
+          }
+          if (!target.hasOwnProperty(prop)) {
+            throw new Error(`Invalid expression - ${prop}! You can not do that!`)
+          }
+          return true
         },
+        // has: () => true,
+        // get: (target, prop) => {
+        //   if (prop in target) return target[prop]
+        //   throw new Error(`禁止访问: ${prop}`)
+        // },
       }
-
       const sandbox = new Proxy(safeContext, handler)
 
-      // 执行代码
-      const func = new Function(
-        'sandbox',
-        `
+      const executeCode = `
       with(sandbox) {
         return (function() {
           ${codeString}
         })();
       }
-    `,
-      )
+    `
 
-      return func(sandbox)
+      const func = new Function('sandbox', executeCode)
+      const result = func(sandbox)
+      console.log(`[jsmethod] 执行结果: ${result}`)
+      return result
     } catch (error) {
-      console.error(`[jsmethod-${contextId}] 执行失败:`, error)
+      console.error(`[jsmethod] 执行错误: ${error.message}`)
       return null
     }
   }
@@ -177,10 +204,9 @@ class ExpressionParser {
           } else if (propertyName === 'intValue' || propertyName === 'doubleValue') {
             // 处理 .intValue 和 .doubleValue
             // 确定要调用的函数名
-            const handlerName = propertyName === 'intValue' ? 'stringIntValue' : 'stringDoubleValue'
-
+            // const handlerName = 'intValue'// intValue  doubleValue
             // 将 obj.property 替换为 handlerName(obj)
-            path.replaceWith(t.callExpression(t.identifier(handlerName), [node.object]))
+            path.replaceWith(t.callExpression(t.identifier(propertyName), [node.object]))
           }
         }
       },
@@ -212,10 +238,10 @@ class ExpressionParser {
       const context = {
         valueForKey: (key) => this.valueForKey(key),
         safeLength: (value) => this.safeLength(value),
-        stringIntValue, // 直接使用顶部定义的函数
-        stringDoubleValue, // 直接使用顶部定义的函数
+        intValue: stringIntValue, // 直接使用顶部定义的函数
+        doubleValue: stringDoubleValue, // 直接使用顶部定义的函数
         getAccid: () => '工号',
-        jsmethod: (codeStr) => this.executeJsmethod(codeStr),
+        jsmethod: (codeStr) => this.executeJsmethodSandbox(codeStr),
         ...this.customFunction,
       }
 
@@ -294,28 +320,31 @@ console.log('v10:', v10)
 const v11 = parserInstance.parse(`methodA('abc')`)
 console.log('v11:', v11)
 
+// v.intValue()
 const jsMethod2 = `jsmethod(\"function calculate(v) {
-  var base = v.intValue();
+  var base = parseInt(v);
   var tax = base * 0.1;
   return base + tax;
 }
 return calculate(valueForKey('order.id'));\")`
-const v12 = parserInstance.parse(jsMethod2)
+const v12 = parserInstance.parse(compressCode(jsMethod2))
 console.log('v12:', v12)
 
-// const jsMethod3 = `jsmethod("function getNextDay(time) {
-//   var day;
-//   var time = new Date(time);
-//   var time = +time - 1000 * 60 * 60 * 24;
-//   var time = new Date(time);
-//   var oneDay = time.getDate();
-//   if (oneDay < 10) {
-//     day = '0' + oneDay
-//   } else {
-//     day = oneDay
-//   }
-//   return time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + day
-// }
-// return getNextDay(valueForKey('day'));")`
-// const v13 = parserInstance.parse(jsMethod3)
-// console.log('v13:', v13)
+const jsMethod3 = `jsmethod("
+function getNextDay(time) {
+  var day;
+  var time = new Date(time);
+  time = +time - 1000 * 60 * 60 * 24;
+  time = new Date(time);
+  var oneDay = time.getDate();
+  if (oneDay < 10) {
+    day = '0' + oneDay
+  } else {
+    day = oneDay
+  }
+  return time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + day
+}
+return getNextDay(valueForKey('day'));")`
+// 对于jsmethod先进行压缩一下
+const v13 = parserInstance.parse(compressCode(jsMethod3))
+console.log('v13:', v13 === '2025-12-07')
