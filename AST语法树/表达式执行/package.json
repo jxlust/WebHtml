@@ -1,0 +1,22 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "main": "demo1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@casbin/expression-eval": "^5.3.0",
+    "jsep": "^1.4.0",
+    "acorn": "^8.15.0",
+    "@babel/parser": "^7.28.5",
+    "@babel/traverse": "^7.28.5",
+    "@babel/generator": "^7.28.5",
+    "@babel/types": "^7.28.5",
+    "estraverse": "5.3.0 ",
+    "astring": "1.9.0"
+  }
+}
